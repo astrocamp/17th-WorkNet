@@ -1,0 +1,24 @@
+{
+  "name": "WorkNet",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "concurrently 'tailwindcss -i ./src/style/style.css -o ./static/style/style.css --watch' 'esbuild esbuild src/scripts/app.js --bundle --outfile=./static/scripts/app.js --watch'"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "daisyui": "^4.12.10",
+    "esbuild": "0.23.1",
+    "tailwindcss": "^3.4.10"
+  },
+  "dependencies": {
+    "alpinejs": "^3.14.1",
+    "concurrently": "^8.2.2",
+    "htmx.org": "^2.0.2"
+  }
+}
