@@ -28,15 +28,15 @@
 
 ### Git Push
 
-1. poetry run pre-commit run --all-files
-2. git add .
-3. cz commit
+1. `poetry run pre-commit run --all-files`
+2. `git add .`
+3. `cz commit`
 
 ### Git Push(makefile)
 
-1. make lint
-2. git add .
-3. make commit
+1. `make lint`
+2. `git add .`
+3. `make commit`
 
 ### 套件清單
 
