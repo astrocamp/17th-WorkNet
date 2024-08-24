@@ -40,8 +40,8 @@
 
 ### 套件清單
 
-框架：django, AlpineJS, HTMX
+框架：[django](https://www.djangoproject.com/), [AlpineJS](https://alpinejs.dev/), [HTMX](https://htmx.org/)
 
-樣式：TailwindCSS, DaisyUI
+樣式：[TailwindCSS](https://tailwindcss.com/), [DaisyUI](https://daisyui.com/)
 
-輔助套件：Concurrently, pre-commit, commitizen, python-dotenv, django-extensions, django-debug-toolbar
+輔助套件：[concurrently](https://www.npmjs.com/package/concurrently), [pre-commit](https://pre-commit.com/), [commitizen](https://github.com/commitizen-tools/commitizen), (python-dotenv)[https://github.com/theskumar/python-dotenv], [django-extensions](https://django-extensions.readthedocs.io/en/latest/), [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/)
