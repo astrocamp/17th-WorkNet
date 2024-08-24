@@ -4,3 +4,5 @@ node_modules/
 static/styles/
 static/scripts/
 .env
+db.sqlite3
+.DS_Store
