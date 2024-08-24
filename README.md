@@ -9,25 +9,39 @@
 
 ### 安裝步驟
 
-1. `poetry shell` #進入虛擬環境
-2. `poetry install` #下載 Python 相關套件
-3. `npm i` #下載前端相關套件
-4. 建立`.env`
+1. `poetry shell` (進入虛擬環境)
+2. `poetry install` (下載 poetry 相關套件)
+3. `npm i` (下載 npm 相關套件)
+4. 建立`.env` (SECRET_KEY)
 
 ### 執行指令
 
 1. `npm run dev` #有安裝 concurrently, wins 使用者請自行修改指令
 
-### Git 指令
+### Git 指令(初次使用)
 
-1. `git init` #git 初始化(首次使用)
-2. `pre-commit run --all-files` #pre-commit 檢查格式
-3. `git add .` #git 新增所有檔案
-4. `cz commit` #cz 選擇 commit 格式
-5. `git push -u origin main` #推到 github(首次使用)
+1. `git init` (git 初始化)
+2. `pre-commit run --all-files` (pre-commit 檢查格式)
+3. `git add .` (git 新增所有檔案)
+4. `cz commit` (cz 選擇 commit 格式)
+5. `git push -u origin main` (推到 github)
+
+### Git Push
+
+1. poetry run pre-commit run --all-files
+2. git add .
+3. cz commit
+
+### Git Push(makefile)
+
+1. make lint
+2. git add .
+3. make commit
 
 ### 套件清單
 
 框架：django, AlpineJS, HTMX
+
 樣式：TailwindCSS, DaisyUI
+
 輔助套件：Concurrently, pre-commit, commitizen, python-dotenv, django-extensions, django-debug-toolbar
