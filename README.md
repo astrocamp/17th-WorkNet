@@ -1,8 +1,8 @@
 # 17th-WorkNet
 
-### 複製到本地
+### 複製專案
 
-1. `git clone https://github.com/KK-Huang86/git_practice.git` (複製一份到本地)
+1. `git clone https://github.com/astrocamp/17th-WorkNet.git` (複製到本地)
 2. `cd git_practice` (進入專案內容)
 3. `git pull origin main` (拉取最新變更)
 4. `git status` (確認狀態)
