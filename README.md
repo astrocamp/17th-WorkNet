@@ -44,4 +44,4 @@
 
 樣式：[TailwindCSS](https://tailwindcss.com/), [DaisyUI](https://daisyui.com/)
 
-輔助套件：[concurrently](https://www.npmjs.com/package/concurrently), [pre-commit](https://pre-commit.com/), [commitizen](https://github.com/commitizen-tools/commitizen), (python-dotenv)[https://github.com/theskumar/python-dotenv], [django-extensions](https://django-extensions.readthedocs.io/en/latest/), [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/)
+輔助套件：[concurrently](https://www.npmjs.com/package/concurrently), [pre-commit](https://pre-commit.com/), [commitizen](https://github.com/commitizen-tools/commitizen), [python-dotenv](https://github.com/theskumar/python-dotenv), [django-extensions](https://django-extensions.readthedocs.io/en/latest/), [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/)
