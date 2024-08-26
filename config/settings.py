@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "apps.users",
+    "social_django",
 ]
 
 if is_dev():
@@ -99,8 +100,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",  # PostgreSQL
+        "NAME": "WorkNet",  # 資料庫名稱
+        "USER": "postgres",  # 資料庫帳號
+        "PASSWORD": "eding0786",  # 資料庫密碼
+        "HOST": "localhost",  # Server(伺服器)位址
+        "PORT": "5432",  # PostgreSQL Port號
     }
 }
 
@@ -151,3 +156,27 @@ LOGIN_URL = reverse_lazy("users:sign_in")
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTHENTICATION_BACKENDS = (
+    "social_core.backends.line.LineOAuth2",
+    "django.contrib.auth.backends.ModelBackend",
+)
+
+SOCIAL_AUTH_LINE_KEY = "2006149168"
+SOCIAL_AUTH_LINE_SECRET = "e522777f8a6cec6614f3f8f75b17c102"
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/"  # 登入後的重導向 URL
+SOCIAL_AUTH_LOGIN_URL = "/"  # 登入頁面 URL
+
+SOCIAL_AUTH_PIPELINE = (
+    "social_core.pipeline.social_auth.social_details",
+    "social_core.pipeline.social_auth.social_uid",
+    "social_core.pipeline.social_auth.auth_allowed",
+    "social_core.pipeline.social_auth.social_user",
+    "social_core.pipeline.user.get_username",
+    "social_core.pipeline.user.create_user",
+    "social_core.pipeline.social_auth.associate_user",
+    "social_core.pipeline.social_auth.load_extra_data",
+    "social_core.pipeline.user.user_details",
+    "page.views.line_save_profile",  # 自定義步驟
+)
