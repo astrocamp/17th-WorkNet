@@ -6,7 +6,7 @@
     "test": "tests"
   },
   "scripts": {
-    "dev": "concurrently 'tailwindcss -i ./src/style/style.css -o ./static/style/style.css --watch' 'esbuild esbuild src/scripts/app.js --bundle --outfile=./static/scripts/app.js --watch'"
+    "dev": "concurrently 'tailwindcss -i ./src/styles/styles.css -o ./static/styles/styles.css --watch' 'esbuild esbuild src/scripts/app.js --bundle --outfile=./static/scripts/app.js --watch'"
   },
   "author": "",
   "license": "ISC",
