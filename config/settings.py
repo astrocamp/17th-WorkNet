@@ -11,9 +11,14 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import os
-import environ
 from pathlib import Path
+<<<<<<< HEAD
 from django.urls import reverse_lazy
+=======
+
+import environ
+
+>>>>>>> a8f60fd (feat: add job table crud)
 from lib.utils.env import is_dev
 
 if is_dev():
@@ -55,7 +60,11 @@ INSTALLED_APPS = [
     "apps.users",
 =======
     "apps.company_job",
+<<<<<<< HEAD
 >>>>>>> e61d9bc (add company_job table):core/settings.py
+=======
+    
+>>>>>>> a8f60fd (feat: add job table crud)
 ]
 
 if is_dev():
@@ -93,7 +102,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                
             ],
         },
     },
@@ -106,13 +114,13 @@ WSGI_APPLICATION = "config.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': env('DB_ENGINE'),
-        'NAME': env('DB_NAME'),
-        'USER': env('DB_USER'),
-        'PASSWORD': env('DB_PASSWORD'),
-        'HOST': env('DB_HOST'),
-        'PORT': env('DB_PORT'),
+    "default": {
+        "ENGINE": os.getenv("DB_ENGINE"),
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": os.getenv("DB_PORT"),
     }
 }
 
