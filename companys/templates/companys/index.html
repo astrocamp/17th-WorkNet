@@ -1,0 +1,17 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<h1>公司欄位首頁</h1>
+
+<a href="{% url 'companys:new' %}">新增</a>
+
+<ul>
+    {% for company in companys %}
+        <li>
+            <a href="{% url 'companys:show' company.id %}">{{ company.companys_title }}</a>
+            <a href="{% url 'companys:edit' company.id %}">編輯</a>
+            <a href="{% url 'companys:deleted' company.id %}">刪除</a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
