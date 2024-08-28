@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Company
 from .forms.company_form import CompanyForm
+from django.utils import timezone
+from django.http import HttpResponse
+from django.http import HttpResponseNotAllowed
 
 
 # Create your views here.
@@ -12,7 +15,7 @@ def index(req):
             form.save()
             return redirect("companys:index")
 
-    companys = Company.objects.all()
+    companys = Company.objects.filter(deleted_at=None).order_by("-id")
 
     return render(req, "companys/index.html", {"companys": companys})
 
@@ -44,5 +47,8 @@ def show(req, id):
 
 def deleted(req, id):
     company = get_object_or_404(Company, id=id)
-    company.delete()
-    return redirect("companys:index")
+    if req.method == "POST":
+        company.deleted_at = timezone.now()
+        company.save()
+        return redirect("companys:index")
+    return HttpResponseNotAllowed(["POST"])

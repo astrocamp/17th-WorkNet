@@ -13,5 +13,10 @@ class Company(models.Model):
     email = models.EmailField()
     tel = models.CharField(max_length=15)
     created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(default=None, null=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["deleted_at"]),
+        ]
