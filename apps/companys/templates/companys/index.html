@@ -10,7 +10,10 @@
         <li>
             <a href="{% url 'companys:show' company.id %}">{{ company.companys_title }}</a>
             <a href="{% url 'companys:edit' company.id %}">編輯</a>
-            <a href="{% url 'companys:deleted' company.id %}">刪除</a>
+            <form method="post" action="{% url 'companys:deleted' company.id %}">
+                {% csrf_token %}
+                <button>刪除</button>
+            </form>
         </li>
     {% endfor %}
 </ul>
