@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "users",
 ]
 
 if is_dev():
@@ -72,7 +73,7 @@ if is_dev():
     ]
 
 
-ROOT_URLCONF = "core.urls"
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
@@ -90,7 +91,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "core.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database
