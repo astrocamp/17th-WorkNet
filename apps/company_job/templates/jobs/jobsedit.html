@@ -1,0 +1,16 @@
+{% block content %}
+<h1>編輯職缺</h1>
+<form method="POST" action="{% url 'jobs:jobshow' job.id %}">
+    {% csrf_token %}
+    {% for field in form %}
+    <div>
+        {{ field.label }}
+        {{ field }}
+        {{ field.errors }}
+    </div>
+    {% endfor %}
+    <div>
+        <button>送出編輯</button>
+    </div>
+</form>
+{% endblock %}
