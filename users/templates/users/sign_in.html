@@ -1,0 +1,33 @@
+{% extends "layouts/base.html" %} {% block content %}
+<h1>登入</h1>
+
+<section>
+  <form action="{% url 'users:sign_in' %}" autocomplete="off" method="POST">
+    {% csrf_token %} {% if request.GET.next %}
+    <input type="hidden" name="next" value="{{ request.GET.next }}" />
+    {% endif %}
+
+    <div>
+      <label>帳號</label>
+      <input type="text" name="username" />
+    </div>
+
+    <div>
+      <label>密碼</label>
+      <input type="password" name="password" />
+    </div>
+
+    <div>
+      <button>登入</button>
+    </div>
+
+    <div></div>
+    <div>
+      還沒有帳號嗎？現在就<a class="link" href="{% url 'users:register' %}"
+        >註冊</a
+      >領好禮吧！
+    </div>
+  </form>
+</section>
+
+{% endblock %}
