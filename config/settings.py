@@ -12,13 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 import os
 from pathlib import Path
-<<<<<<< HEAD
 from django.urls import reverse_lazy
-=======
-
-import environ
-
->>>>>>> a8f60fd (feat: add job table crud)
 from lib.utils.env import is_dev
 
 if is_dev():
@@ -28,8 +22,6 @@ if is_dev():
 
 from lib.utils.env import is_dev
 
-env = environ.Env()
-environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -56,19 +48,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-<<<<<<< HEAD
-<<<<<<< HEAD:config/settings.py
     "apps.users",
-=======
-    "apps.company_job",
-<<<<<<< HEAD
->>>>>>> e61d9bc (add company_job table):core/settings.py
-=======
-=======
     "apps.jobs",
->>>>>>> 5ef7064 (feat: add jobs table CRUD && modularize soft delete functionality)
-    
->>>>>>> a8f60fd (feat: add job table crud)
 ]
 
 if is_dev():
@@ -106,6 +87,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                
             ],
         },
     },
