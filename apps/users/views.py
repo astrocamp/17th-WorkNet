@@ -1,8 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect, render
 from django.urls import reverse
+from apps.users.models import User
+from .forms import CustomUserCreationForm
 
 
 def home(req):
@@ -11,7 +12,7 @@ def home(req):
 
 def index(req):
     if req.method == "POST":
-        form = UserCreationForm(req.POST)
+        form = CustomUserCreationForm(req.POST)
         if form.is_valid():
             form.save()
             messages.success(req, "註冊成功")
@@ -22,7 +23,7 @@ def index(req):
 
 
 def register(req):
-    form = UserCreationForm()
+    form = CustomUserCreationForm()
     return render(req, "users/register.html", {"form": form})
 
 
@@ -54,3 +55,19 @@ def sign_out(req):
         logout(req)
         messages.success(req, "登出成功")
         return redirect("users:index")
+
+
+def line_save_profile(backend, user, response, *args, **kwargs):
+
+    social_id = response["userId"]
+
+    if backend.name == "line":
+        try:
+            u1 = User.objects.get(username=social_id)
+        except User.DoesNotExist:
+            u1 = None
+
+        if u1:
+            u1.social_userid = social_id
+            u1.username = response["displayName"]
+            u1.save()
