@@ -4,7 +4,7 @@
   <h1>會員註冊</h1>
 
   <section>
-    <form action="{% url 'users:index' %}"
+    <form action="{% url 'users:register' %}"
           autocomplete="off"
           method="POST">
       {% csrf_token %}

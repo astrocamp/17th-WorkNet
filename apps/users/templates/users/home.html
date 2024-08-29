@@ -3,15 +3,13 @@
 
 {% if request.user.is_authenticated %}
 <h2>{{ request.user }}</h2>
+<h2>你已成功登入</h2>
 <form action="{% url 'users:sign_out' %}" method="POST">
-  {% csrf_token %} 
+  {% csrf_token %}
   <button>登出</button>
 </form>
 
-{% endif %}
-
-{% if not request.user.is_authenticated %}
+{% endif %} {% if not request.user.is_authenticated %}
 <a class="link" href="{% url 'users:sign_in' %}">登入</a>
 <a class="link" href="{% url 'users:register' %}">註冊</a>
-{% endif %}
-{% endblock %}
+{% endif %} {% endblock %}
