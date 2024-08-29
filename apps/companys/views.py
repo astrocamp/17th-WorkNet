@@ -7,47 +7,49 @@ from django.http import HttpResponseNotAllowed
 
 
 # Create your views here.
-def index(req):
+def index(request):
 
-    if req.method == "POST":
-        form = CompanyForm(req.POST)
+    if request.method == "POST":
+        form = CompanyForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect("companys:index")
 
     companys = Company.objects.filter(deleted_at=None).order_by("-id")
 
-    return render(req, "companys/index.html", {"companys": companys})
+    return render(request, "companys/index.html", {"companys": companys})
 
 
-def new(req):
+def new(request):
     form = CompanyForm()
-    return render(req, "companys/new.html", {"form": form})
+    return render(request, "companys/new.html", {"form": form})
 
 
-def edit(req, id):
+def edit(request, id):
     company = get_object_or_404(Company, id=id)
     form = CompanyForm(instance=company)
-    return render(req, "companys/edit.html", {"form": form, "company": company})
+    return render(request, "companys/edit.html", {"form": form, "company": company})
 
 
-def show(req, id):
-    if req.method == "POST":
+def show(request, id):
+    if request.method == "POST":
         company = get_object_or_404(Company, id=id)
-        form = CompanyForm(req.POST, instance=company)
+        form = CompanyForm(request.POST, instance=company)
         if form.is_valid():
             form.save()
             return redirect("companys:show", company.id)
         else:
-            return render(req, "companys/edit.html", {"form": form, "company": company})
+            return render(
+                request, "companys/edit.html", {"form": form, "company": company}
+            )
 
     company = get_object_or_404(Company, id=id)
-    return render(req, "companys/show.html", {"company": company})
+    return render(request, "companys/show.html", {"company": company})
 
 
-def deleted(req, id):
+def deleted(request, id):
     company = get_object_or_404(Company, id=id)
-    if req.method == "POST":
+    if request.method == "POST":
         company.deleted_at = timezone.now()
         company.save()
         return redirect("companys:index")

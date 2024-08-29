@@ -6,24 +6,24 @@ class CompanyForm(ModelForm):
     class Meta:
         model = Company
         fields = [
-            "companys_title",
-            "companys_tel",
-            "companys_url",
-            "companys_address",
-            "companys_describe",
+            "title",
+            "tel",
+            "url",
+            "address",
+            "describe",
             "total_headcount",
             "name",
             "email",
-            "tel",
+            "owner_tel",
         ]
         labels = {
-            "companys_title": "公司名稱",
-            "companys_tel": "公司電話",
-            "companys_url": "公司網址",
-            "companys_address": "公司地址",
-            "companys_describe": "公司描述",
+            "title": "公司名稱",
+            "tel": "公司電話",
+            "url": "公司網址",
+            "address": "公司地址",
+            "describe": "公司描述",
             "total_headcount": "員工人數",
             "name": "負責人姓名",
             "email": "負責人Email",
-            "tel": "負責人電話",
+            "owner_tel": "負責人電話",
         }
