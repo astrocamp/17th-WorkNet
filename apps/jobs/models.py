@@ -36,8 +36,7 @@ class Job(SoftDeletetable, models.Model):
     salary_range = models.TextField(null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     edit_at = models.DateTimeField(auto_now=True)
-    is_deleted = models.BooleanField(default=False)
-    delete_at = models.DateTimeField(null=True, blank=True)
+    delete_at = models.DateTimeField(null=True, default=None)
     tenure = models.PositiveIntegerField()
 
     objects = SoftDeleteManager()
