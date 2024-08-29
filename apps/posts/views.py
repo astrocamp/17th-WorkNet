@@ -7,7 +7,7 @@ from .models import Post
 
 
 def index(request):
-    posts = Post.objects.filter(deleted_at__isnull=True).order_by("-created_at")
+    posts = Post.objects.order_by("-created_at")
     return render(request, "posts/index.html", {"posts": posts})
 
 
