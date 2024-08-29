@@ -4,7 +4,7 @@
 {% block content %}
 <h1>新增公司欄位</h1>
 
-<form method="post" action="{% url 'companys:index' %}">
+<form method="post" action="{% url 'companies:index' %}">
     {% csrf_token %}
     {{ form }}
     <div><button>新增</button></div>

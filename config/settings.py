@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     "apps.jobs",
     # 第三方登入新增的內容
     "social_django",
-    "apps.companys",
+    "apps.companies",
 ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_KEY")

@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Company
-from .forms.company_form import CompanyForm
+from django.http import HttpResponse, HttpResponseNotAllowed
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
-from django.http import HttpResponse
-from django.http import HttpResponseNotAllowed
+
+from .forms.company_form import CompanyForm
+from .models import Company
 
 
 # Create your views here.
@@ -13,22 +13,22 @@ def index(request):
         form = CompanyForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("companys:index")
+            return redirect("companies:index")
 
-    companys = Company.objects.filter(deleted_at=None).order_by("-id")
+    companies = Company.objects.filter(deleted_at=None).order_by("-id")
 
-    return render(request, "companys/index.html", {"companys": companys})
+    return render(request, "companies/index.html", {"companies": companies})
 
 
 def new(request):
     form = CompanyForm()
-    return render(request, "companys/new.html", {"form": form})
+    return render(request, "companies/new.html", {"form": form})
 
 
 def edit(request, id):
     company = get_object_or_404(Company, id=id)
     form = CompanyForm(instance=company)
-    return render(request, "companys/edit.html", {"form": form, "company": company})
+    return render(request, "companies/edit.html", {"form": form, "company": company})
 
 
 def show(request, id):
@@ -37,14 +37,14 @@ def show(request, id):
         form = CompanyForm(request.POST, instance=company)
         if form.is_valid():
             form.save()
-            return redirect("companys:show", company.id)
+            return redirect("companies:show", company.id)
         else:
             return render(
-                request, "companys/edit.html", {"form": form, "company": company}
+                request, "companies/edit.html", {"form": form, "company": company}
             )
 
     company = get_object_or_404(Company, id=id)
-    return render(request, "companys/show.html", {"company": company})
+    return render(request, "companies/show.html", {"company": company})
 
 
 def deleted(request, id):
@@ -52,5 +52,5 @@ def deleted(request, id):
     if request.method == "POST":
         company.deleted_at = timezone.now()
         company.save()
-        return redirect("companys:index")
+        return redirect("companies:index")
     return HttpResponseNotAllowed(["POST"])
