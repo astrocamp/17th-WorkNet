@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django.forms.widgets import NumberInput, Select, Textarea, TextInput
 
-from apps.company_job.models import Job
+from apps.jobs.models import Job
 
 
 class JobForm(ModelForm):

@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+<<<<<<< HEAD
 <<<<<<< HEAD:config/settings.py
     "apps.users",
 =======
@@ -63,6 +64,9 @@ INSTALLED_APPS = [
 <<<<<<< HEAD
 >>>>>>> e61d9bc (add company_job table):core/settings.py
 =======
+=======
+    "apps.jobs",
+>>>>>>> 5ef7064 (feat: add jobs table CRUD && modularize soft delete functionality)
     
 >>>>>>> a8f60fd (feat: add job table crud)
 ]
