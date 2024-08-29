@@ -1,0 +1,17 @@
+{% extends "layout/base.html" %}
+{% block content %}
+<h1>評論列表</h1>
+<a href="{% url 'posts:new' %}">新增評論</a>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <a href="{% url 'posts:show' post.id %}">{{ post.title }}</a>
+                <a href="{% url 'posts:edit' post.id %}">修改</a>
+                <form action="{% url 'posts:delete' post.id %}" method="POST" hx-post="{% url 'posts:delete' post.id %}" hx-confirm="確認刪除？" hx-target="body">
+                    {% csrf_token %}
+                    <button type="submit">刪除</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

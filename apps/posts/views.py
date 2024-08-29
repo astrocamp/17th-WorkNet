@@ -1,48 +1,51 @@
 from django.http import HttpResponseNotAllowed
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Post
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
+
 from .forms.forms import PostForm
+from .models import Post
 
 
-def post_list(request):
-    posts = Post.objects.filter(is_deleted=False)
-    return render(request, "posts/post_list.html", {"posts": posts})
+def index(request):
+    posts = Post.objects.filter(deleted_at__isnull=True).order_by("-created_at")
+    return render(request, "posts/index.html", {"posts": posts})
 
 
-def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    return render(request, "posts/post_detail.html", {"post": post})
+def show(request, id):
+    post = get_object_or_404(Post, id=id)
+    return render(request, "posts/show.html", {"post": post})
 
 
-def post_create(request):
+def new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("post_list")
+            return redirect("posts:index")
     else:
         form = PostForm()
-    return render(request, "posts/post_form.html", {"form": form})
+    return render(request, "posts/new.html", {"form": form})
 
 
-def post_update(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+def edit(request, id):
+    post = get_object_or_404(Post, id=id)
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
-            return redirect("post_list")
+            return redirect("posts:index")
     else:
         form = PostForm(instance=post)
-    return render(request, "posts/post_form.html", {"form": form})
+
+    return render(request, "posts/edit.html", {"form": form, "post": post})
 
 
-def post_delete(request, pk):
-    post = get_object_or_404(Post, pk=pk)
+def delete(request, id):
+    post = get_object_or_404(Post, id=id)
 
     if request.method == "POST":
-        post.is_deleted = True
+        post.deleted_at = timezone.now()
         post.save()
-        return redirect("post_list")
+        return redirect("posts:index")
 
     return HttpResponseNotAllowed(["POST"])

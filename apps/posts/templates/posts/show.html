@@ -1,0 +1,10 @@
+{% extends "layout/base.html" %}
+{% block content %}
+<h1>{{ post.title }}</h1>
+<p>Author: {{ post.author }}</p>
+<p>{{ post.content }}</p>
+<a href="{% url 'posts:edit' post.id %}">修改評論</a>
+
+<a href="{% url 'posts:index' %}">回到列表</a>
+
+{% endblock %}
