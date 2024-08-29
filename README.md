@@ -46,9 +46,11 @@ Front-end：[HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) / [CSS](ht
 
 Back-end：[Python](https://www.python.org/), [django](https://www.djangoproject.com/)
 
-packages：[concurrently](https://www.npmjs.com/package/concurrently), [pre-commit](https://pre-commit.com/), [commitizen](https://github.com/commitizen-tools/commitizen), [python-dotenv](https://github.com/theskumar/python-dotenv), [django-extensions](https://django-extensions.readthedocs.io/en/latest/), [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/)
+Packages：[concurrently](https://www.npmjs.com/package/concurrently), [pre-commit](https://pre-commit.com/), [commitizen](https://github.com/commitizen-tools/commitizen), [python-dotenv](https://github.com/theskumar/python-dotenv), [django-extensions](https://django-extensions.readthedocs.io/en/latest/), [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/)
 
-database：[postgreSQL](https://www.postgresql.org/)
+Database：[postgreSQL](https://www.postgresql.org/)
+
+Version Control：[Git](https://git-scm.com/)
 
 ## Team
 
