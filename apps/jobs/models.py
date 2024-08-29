@@ -1,10 +1,10 @@
 from django.db import models
-from django.utils import timezone
+from lib.models.soft_delete import SoftDeletetable, SoftDeleteManager
 
 # Create your models here.
 
 
-class Job(models.Model):
+class Job(SoftDeletetable, models.Model):
     LOCATION_CHOICES = [
         ("Keelung", "基隆"),
         ("Taipei", "台北"),
@@ -40,13 +40,10 @@ class Job(models.Model):
     delete_at = models.DateTimeField(null=True, blank=True)
     tenure = models.PositiveIntegerField()
 
+    objects = SoftDeleteManager()
+
     def __str__(self):
         return f"{self.title}"
-
-    def mark_delete(self):
-        self.is_deleted = True
-        self.delete_at = timezone.now()
-        self.save()
 
     class Meta:
         db_table = "job_details"
