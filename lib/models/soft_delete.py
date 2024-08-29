@@ -5,12 +5,11 @@ from django.utils import timezone
 
 class SoftDeleteManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(is_deleted=False)
+        return super().get_queryset().filter(delete_at=None)
 
 
 class SoftDeletetable:
       def mark_delete(self):
-        self.is_deleted = True
         self.delete_at = timezone.now()
         self.save()
 

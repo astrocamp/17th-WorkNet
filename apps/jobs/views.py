@@ -13,7 +13,7 @@ def index(request):
             return redirect("jobs:index")
         else:
             return render(request, "jobs/new.html", {"form": form})
-    jobs = Job.objects.filter(is_deleted=False)
+    jobs = Job.objects.filter(delete_at=None)
     return render(request, "jobs/index.html", {"jobs": jobs})
 
 

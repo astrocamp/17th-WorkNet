@@ -1,1 +1,1 @@
-from .job_form import JobForm
+from .form import JobForm
