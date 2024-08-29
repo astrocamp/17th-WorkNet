@@ -1,5 +1,6 @@
 from django.forms import ModelForm
-from apps.companys.models import Company
+
+from apps.companies.models import Company
 
 
 class CompanyForm(ModelForm):
