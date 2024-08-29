@@ -1,4 +1,5 @@
 from django.db import models
+
 from lib.models.soft_delete import PostManager
 
 
