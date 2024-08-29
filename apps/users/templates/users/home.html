@@ -1,6 +1,16 @@
 {% extends "layouts/base.html" %} {% block content %}
 <h1>首頁</h1>
 
+{% if user.is_authenticated %}
+
+<h2>你已成功登入，歡迎光臨</h2>
+<form method="post" action="{% url 'users:sign_out' %}">
+  {% csrf_token %}
+  <button class="link">登出</button>
+</form>
+
+{% else %}
+
 <a class="link" href="{% url 'users:sign_in' %}">登入</a>
 <a class="link" href="{% url 'users:register' %}">註冊</a>
-{% endblock %}
+{% endif %} {% endblock %}
