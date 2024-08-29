@@ -4,7 +4,7 @@
 
 1. `git clone https://github.com/astrocamp/17th-WorkNet.git` (複製到本地)
 2. `cd 17th-WorkNet` (進入專案內容)
-3. `git pull origin main` (拉取最新變更)
+3. `git pull origin dev` (拉取最新變更)
 4. `git status` (確認狀態)
 
 ## Install
@@ -14,7 +14,7 @@
 3. `npm i` (下載 npm 相關套件)
 4. 建立`.env` (SECRET_KEY)
 
-## npm run dev
+## Npm run dev
 
 1. `npm run dev` (有安裝 concurrently, wins 使用者請自行修改指令)
 
@@ -46,7 +46,11 @@ Front-end：[HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) / [CSS](ht
 
 Back-end：[Python](https://www.python.org/), [django](https://www.djangoproject.com/)
 
-packages：[concurrently](https://www.npmjs.com/package/concurrently), [pre-commit](https://pre-commit.com/), [commitizen](https://github.com/commitizen-tools/commitizen), [python-dotenv](https://github.com/theskumar/python-dotenv), [django-extensions](https://django-extensions.readthedocs.io/en/latest/), [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/)
+Packages：[concurrently](https://www.npmjs.com/package/concurrently), [pre-commit](https://pre-commit.com/), [commitizen](https://github.com/commitizen-tools/commitizen), [python-dotenv](https://github.com/theskumar/python-dotenv), [django-extensions](https://django-extensions.readthedocs.io/en/latest/), [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/)
+
+Database：[postgreSQL](https://www.postgresql.org/)
+
+Version Control：[Git](https://git-scm.com/)
 
 ## Team
 
