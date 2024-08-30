@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
+
 from django.urls import reverse_lazy
+
 from lib.utils.env import is_dev
 
 if is_dev():
