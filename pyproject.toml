@@ -11,6 +11,8 @@ django = "^5.1"
 psycopg2 = "^2.9.9"
 pytz = "^2024.1"
 django-htmx = "^1.19.0"
+python-dotenv = "^1.0.1"
+social-auth-app-django = "^5.4.2"
 
 
 [tool.poetry.group.dev.dependencies]

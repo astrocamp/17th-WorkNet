@@ -1,0 +1,42 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+  <h1>會員註冊</h1>
+
+  <section>
+    <form action="{% url 'users:index' %}"
+          autocomplete="off"
+          method="POST">
+      {% csrf_token %}
+
+      <div>
+        <label>帳號</label>
+        <input type="text" name="username" placeholder="輸入帳號" value="{{ username.value }}"/>
+        <div class="error">{{ form.username.errors }}</div>
+    </div>
+
+      <div>
+        <label class="label">密碼</label>
+        <input type="password" name="password1" placeholder="輸入密碼" value="{{ password1.value }}"/>
+        <div class="error">{{ form.password1.errors }}</div>
+      </div>
+
+      <div>
+        <label class="label">密碼確認</label>
+        <input type="password" name="password2" placeholder="確認密碼" value="{{ password2.value }}" />
+        <div class="error">{{ form.password2.errors }}</div>
+      </div>
+
+      <div>
+        <button>註冊</button>
+      </div>
+
+      <div></div>
+      <div>
+        已經有帳號了？<a class="link" href="{% url 'users:sign_in' %}">登入</a>
+      </div>
+    </form>
+  </section>
+
+</div>
+{% endblock %}
