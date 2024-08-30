@@ -1,6 +1,6 @@
 from django.db import models
 
-from lib.models.soft_delete import PostManager
+from lib.models.soft_delete import SoftDeleteManager
 
 
 class Post(models.Model):
@@ -10,7 +10,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(default=None, null=True)
 
-    objects = PostManager()  # 使用自定义管理器
+    objects = SoftDeleteManager()
 
     def __str__(self):
         return self.title
