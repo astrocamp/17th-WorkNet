@@ -61,9 +61,9 @@ def sign_out(req):
 
 def line_save_profile(backend, user, response, *args, **kwargs):
 
-    social_id = response["userId"]
 
     if backend.name == "line":
+        social_id = response["userId"]
         try:
             u1 = User.objects.get(username=social_id)
         except User.DoesNotExist:
