@@ -1,17 +1,56 @@
 {% extends "layouts/base.html" %} {% block content %}
-<h1>登入</h1>
+<div class="flex items-center justify-center min-h-screen">
+  <section class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+    <h1 class="mb-6 text-2xl font-bold text-center">登入</h1>
 
-<section>
-  <form action="{% url 'users:sign_in' %}" autocomplete="off" method="POST">
-    {% csrf_token %} {% if request.GET.next %}
-    <input type="hidden" name="next" value="{{ request.GET.next }}" />
-    {% endif %}
+    <form
+      action="{% url 'users:sign_in' %}"
+      autocomplete="off"
+      method="POST"
+      class="space-y-4"
+    >
+      {% csrf_token %} {% if request.GET.next %}
+      <input type="hidden" name="next" value="{{ request.GET.next }}" />
+      {% endif %}
 
-    <div>
-      <label>帳號</label>
-      <input type="text" name="username" />
+      <div>
+        <label class="block text-sm font-medium">帳號</label>
+        <input
+          class="w-full p-2 mt-1 border border-gray-300 rounded input input-bordered"
+          type="text"
+          name="username"
+          placeholder="輸入帳號"
+        />
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium">密碼</label>
+        <input
+          class="w-full p-2 mt-1 border border-gray-300 rounded input input-bordered"
+          type="password"
+          name="password"
+          placeholder="輸入密碼"
+        />
+      </div>
+
+      <div>
+        <button class="w-full btn btn-primary">登入</button>
+      </div>
+
+      <div class="mt-4 text-center">
+        還沒有帳號嗎？現在就<a
+          class="text-blue-500 link"
+          href="{% url 'users:register' %}"
+          >註冊</a
+        >領好禮吧！
+      </div>
+    </form>
+
+    <div class="mt-4 text-center">
+      <a href="{% url 'social:begin' 'line' %}" class="text-green-500 link"
+        >使用 LINE 登入</a
+      >
     </div>
-
     <div>
       <label>密碼</label>
       <input type="password" name="password" />
@@ -33,5 +72,6 @@
     >Google登入</a
   >
 </section>
+</div>
 
 {% endblock %}
