@@ -1,8 +1,6 @@
 import os
 from pathlib import Path
-
 from django.urls import reverse_lazy
-
 from lib.utils.env import is_dev
 
 if is_dev():
@@ -49,12 +47,6 @@ AUTHENTICATION_BACKENDS = [
     "social_core.backends.google.GoogleOAuth2",
     "django.contrib.auth.backends.ModelBackend",
 ]
-
-# SITE_ID = 1
-# ACCOUNT_EMAIL_VERIFICATION = "none"
-# ACCOUNT_LOGOUT_ON_GET = True
-# LOGIN_REDIRECT_URL = '/'
-
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_KEY")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("GOOGLE_SECRET")
