@@ -11,21 +11,27 @@ from .forms import CustomUserCreationForm
 def home(request):
     return render(request, "users/home.html")
 
-def index(request):
-    return render(request, "users/home.html")
-    
 
-def register(request):
+def index(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
-
         if form.is_valid():
-            user = form.save()  
-            login(request, user) 
-            messages.success(request, "註冊成功，已自動登入")
-            return redirect("users:index")  
+            user = form.save()
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password1")
+            # 登入用戶
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.success(request, "註冊成功並已登入")
+                return redirect("users:index")
+            else:
+                messages.error(request, "登入失敗")
+                return redirect("users:sign_in")
         else:
             return render(request, "users/register.html", {"form": form})
+    return render(request, "users/home.html")
+
 
 def register(request):
     form = CustomUserCreationForm()
