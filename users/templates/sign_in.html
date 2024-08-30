@@ -1,0 +1,28 @@
+{% extends "layout/base.html" %} {% block content %}
+<h1 class="heading-1">登入</h1>
+
+<form action="{% url 'users:signin' %}" autocomplete="off" method="POST">
+  {% csrf_token %}
+
+  <div>
+    <label class="label">帳號</label>
+    <input type="text" class="input input-bordered" name="username" />
+  </div>
+
+  <div>
+    <label class="label">密碼</label>
+    <input type="password" class="input input-bordered" name="password" />
+  </div>
+
+  <button class="mt-4 btn btn-primary">登入</button>
+</form>
+
+<div class="divider"></div>
+還沒有帳號嗎？現在就<a class="link" href="{% url 'users:register' %}">註冊</a
+>一個吧！
+
+<a class="btn btn-danger" href="{% url 'social:begin' 'google-oauth2' %}"
+  >Google登入</a
+>
+
+{% endblock %}

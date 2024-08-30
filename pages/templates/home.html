@@ -1,0 +1,17 @@
+{% extends "layout/base.html"%} {% block content %}
+
+<h1>歡迎光臨！</h1>
+
+{% if request.user.is_authenticated %}
+
+<h2>{{request.user.username}}</h2>
+<form method="POST" action="{%url 'users:logout' %}">
+  {%csrf_token%}
+  <button>登出</button>
+</form>
+
+{%else%}
+<a href="{% url 'users:register' %}">註冊</a>
+<a href="{% url 'users:signin' %}">登入</a>
+
+{%endif%} {% endblock %}
