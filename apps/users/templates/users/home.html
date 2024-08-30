@@ -8,10 +8,7 @@
   <button>登出</button>
 </form>
 
-{% endif %}
-
-{% if not request.user.is_authenticated %}
+{% else %}
 <a class="link" href="{% url 'users:sign_in' %}">登入</a>
 <a class="link" href="{% url 'users:register' %}">註冊</a>
-{% endif %}
-{% endblock %}
+{% endif %} {% endblock %}

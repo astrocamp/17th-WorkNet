@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "apps.posts",
     "apps.users",
     "apps.jobs",
+    # 第三方登入新增的內容
     "social_django",
 ]
 
