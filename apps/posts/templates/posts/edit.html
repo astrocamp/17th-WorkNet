@@ -1,10 +1,8 @@
-{% extends "layout/base.html" %}
-{% block content %}
+{% extends "layouts/base.html" %} {% block content %}
 <h1>修改評論</h1>
 
 <form method="post" action="{% url 'posts:edit' post.id %}">
-    {% csrf_token %}
-    {{ form }}
-    <div><button type="submit">儲存</button></div>
+  {% csrf_token %} {{ form }}
+  <div><button type="submit">儲存</button></div>
 </form>
 {% endblock %}
