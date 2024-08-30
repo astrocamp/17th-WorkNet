@@ -24,4 +24,5 @@ urlpatterns = [
     path("jobs/", include("apps.jobs.urls")),
     path("posts/", include("apps.posts.urls")),
     path("social-auth/", include("social_django.urls", namespace="social")),
+    
 ] + debug_toolbar_urls()
