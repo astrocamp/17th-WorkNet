@@ -1,0 +1,36 @@
+<nav class="flex items-center justify-between p-4 shadow navbar bg-base-100">
+  <!-- 左上角：回首頁 -->
+  <div class="flex items-center">
+    <a href="/" class="text-blue-500 hover:underline">回到首頁</a>
+  </div>
+  <!-- 中間正上方：WorkNet -->
+  <div class="flex-1 text-center">
+    <a href="{% url 'users:index' %}" class="text-xl font-bold">WorkNet</a>
+  </div>
+  <!-- 右上角：登入/註冊 或 登出 -->
+  <div class="flex items-center gap-4">
+    {% if request.user.is_authenticated %}
+    <div class="flex gap-2 text-sm">
+      <h2>{{ request.user }}</h2>
+      <h2>已成功登入</h2>
+      <form action="{% url 'users:sign_out' %}" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-primary">登出</button>
+      </form>
+    </div>
+    {% else %}
+    <ul class="flex gap-4">
+      <li>
+        <a class="link btn btn-outline" href="{% url 'users:sign_in' %}"
+          >登入</a
+        >
+      </li>
+      <li>
+        <a class="link btn btn-outline" href="{% url 'users:register' %}"
+          >註冊</a
+        >
+      </li>
+    </ul>
+    {% endif %}
+  </div>
+</nav>
