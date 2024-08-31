@@ -1,0 +1,16 @@
+{% block content %}
+<h1>新增職缺</h1>
+<form method="POST" action="{% url 'jobs:index' %}">
+    {% csrf_token %}
+    {% for field in form %}
+    <div>
+        {{ field.label }}
+        {{ field }}
+        {{ field.errors }}
+    </div>
+    {% endfor %}
+    <div>
+        <button>新增</button>
+    </div>
+</form>
+{% endblock %}
