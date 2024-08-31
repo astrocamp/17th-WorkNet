@@ -636,7 +636,6 @@ wcwidth = "*"
 name = "psycopg2"
 version = "2.9.9"
 description = "psycopg2 - Python-PostgreSQL Database Adapter"
-
 optional = false
 python-versions = ">=3.7"
 files = [
@@ -656,6 +655,9 @@ files = [
 ]
 
 [[package]]
+name = "python-dotenv"
+version = "1.0.1"
+description = "Read key-value pairs from a .env file and set them as environment variables"
 name = "pycparser"
 version = "2.22"
 description = "C parser in Python"

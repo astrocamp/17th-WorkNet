@@ -4,7 +4,7 @@
 {% if request.user.is_authenticated %}
 <h2>{{ request.user }}</h2>
 <form action="{% url 'users:sign_out' %}" method="POST">
-  {% csrf_token %} 
+  {% csrf_token %}
   <button>登出</button>
 </form>
 
