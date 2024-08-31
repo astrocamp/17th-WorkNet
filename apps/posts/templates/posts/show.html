@@ -1,9 +1,34 @@
-{% extends "layouts/base.html" %} {% block content %}
+{% extends "layouts/base.html" %}
+{% block content %}
 <h1>{{ post.title }}</h1>
 <p>Author: {{ post.author }}</p>
 <p>{{ post.content }}</p>
 <a href="{% url 'posts:edit' post.id %}">修改評論</a>
 
+<h3>留言</h3>
+{% if comments.exists %}
+    <ul>
+        {% for comment in comments %}
+            <li>
+                {{ comment.content }}<br>
+                <small>{{ comment.created_at|date:"Y/m/d H:i" }}</small>
+                <form method="post" action="{% url 'posts:comment_delete' comment.id %}">
+                    {% csrf_token %}
+                    <button type="submit">刪除留言</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+<p>尚無回覆</p>
 <a href="{% url 'posts:index' %}">回到列表</a>
+{% endif %}
+
+<h4>新增回覆</h4>
+<form method="post">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">確定</button>
+</form>
 
 {% endblock %}
