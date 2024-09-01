@@ -1,1 +1,1 @@
-from .users_form import CustomUserCreationForm
+from .form import CustomUserCreationForm, UserInfoForm
