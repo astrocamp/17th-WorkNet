@@ -1,8 +1,7 @@
 from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect, render
-from django.utils import timezone
 
-from .forms.company_form import CompanyForm
+from .forms.form import CompanyForm
 from .models import Company
 
 
@@ -15,7 +14,7 @@ def index(request):
             form.save()
             return redirect("companies:index")
 
-    companies = Company.objects.filter(deleted_at=None).order_by("-id")
+    companies = Company.objects.order_by("-id")
 
     return render(request, "companies/index.html", {"companies": companies})
 
@@ -50,7 +49,5 @@ def show(request, id):
 def deleted(request, id):
     company = get_object_or_404(Company, id=id)
     if request.method == "POST":
-        company.deleted_at = timezone.now()
-        company.save()
+        company.mark_delete()
         return redirect("companies:index")
-    return HttpResponseNotAllowed(["POST"])

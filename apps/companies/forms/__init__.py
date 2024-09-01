@@ -1,1 +1,1 @@
-from .company_form import CompanyForm
+from .form import CompanyForm
