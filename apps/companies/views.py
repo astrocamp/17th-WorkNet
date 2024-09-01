@@ -46,7 +46,7 @@ def show(request, id):
     return render(request, "companies/show.html", {"company": company})
 
 
-def deleted(request, id):
+def delete(request, id):
     company = get_object_or_404(Company, id=id)
     if request.method == "POST":
         company.mark_delete()
