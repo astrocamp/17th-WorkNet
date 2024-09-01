@@ -1,0 +1,17 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<h1>會員資訊</h1>
+<form method="post" autocomplete="off">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>更新會員資訊</button>
+</form>
+<p>
+    目前點數:{{info.points}}
+</p>
+{% if info.updated_at %}
+<p>
+    最後更新:{{info.updated_at}}
+</p>
+{% endif %}
+{% endblock %}

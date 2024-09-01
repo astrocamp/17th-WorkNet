@@ -1,11 +1,15 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import redirect, render
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+from django.utils import timezone
 
 from apps.users.models import User
 
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, UserInfoForm
+from .models import UserInfo
 
 
 def home(request):
@@ -68,6 +72,27 @@ def sign_out(request):
         return redirect("users:index")
 
 
+def info(request, id):
+
+    if request.method == "POST":
+        info = get_object_or_404(UserInfo, user_id=id, user=request.user)
+
+        form = UserInfoForm(request.POST, instance=info)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "更新成功")
+            return redirect("users:info", info.user_id)
+        else:
+            return render(request, "users/info.html", {"form": form, "info": info})
+
+    # 若該 user 沒有對應的 userinfo 需產生對應的資料表
+    info, _ = UserInfo.objects.get_or_create(user_id=id)
+    form = UserInfoForm(instance=info)
+
+    return render(request, "users/info.html", {"form": form, "info": info})
+
+
+# Line 登入後將 id 寫進 social_userid, 名稱寫進 username
 def line_save_profile(backend, user, response, *args, **kwargs):
 
     if backend.name == "line":
@@ -81,3 +106,10 @@ def line_save_profile(backend, user, response, *args, **kwargs):
             u1.social_userid = social_id
             u1.username = response["displayName"]
             u1.save()
+
+
+@receiver(post_save, sender=User)
+def create_user_info(sender, instance, created, **kwargs):
+    if created:
+        # 當 User 被創建時，創建一個對應的 UserInfo
+        UserInfo.objects.create(user=instance)
