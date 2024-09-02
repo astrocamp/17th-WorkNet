@@ -1,4 +1,3 @@
-
 {% include "layouts/base.html" %}
 {% block content %}
 <h1>職缺</h1>
@@ -9,29 +8,12 @@
         {{ job.title }}
         <a href="{% url 'jobs:show' job.id %}">{{ job.get_location_display }}</a>
         <a href="{% url 'jobs:edit' job.id %}">編輯</a>
-<<<<<<< HEAD
         <a href="{% url 'users:favorite' job.id %}">收藏</a>
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <a href="{% url 'users:favorite' job.id %}">收藏</a>
-=======
-        <a href="{% url 'jobs:favorite' job.id %}">收藏</a>
->>>>>>> e007f33 (feat: add job favorite)
-=======
-        <a href="{% url 'users:favorite' job.id %}">收藏</a>
->>>>>>> 3f05f98 (docs: favorite to users folder  Job model add ManytoMany)
->>>>>>> 24f9aa6 (docs: favorite to users folder  Job model add ManytoMany)
         <form method="POST" action="{% url 'jobs:delete' job.id %}">
             {% csrf_token %}
             <button>刪除</button>
         </form>
     </li>
     {% endfor %}
-
 </ul>
-<<<<<<< HEAD
 {% endblock %}
-=======
-{% endblock %}
->>>>>>> 24f9aa6 (docs: favorite to users folder  Job model add ManytoMany)
