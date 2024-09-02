@@ -13,7 +13,11 @@
     <div class="flex gap-2 text-sm">
       <h2>{{ request.user }}</h2>
       <h2>已成功登入</h2>
+      {%if request.user.user_type == 1 %}
       <a class="link" href="{% url 'users:info' request.user.pk %}">會員資料</a>
+      {%else%}
+      <a class="link" href="{% url 'companies:index' %}">公司資料</a>
+      {%endif%}
       <form action="{% url 'users:sign_out' %}" method="POST">
         {% csrf_token %}
         <button class="btn btn-primary">登出</button>
