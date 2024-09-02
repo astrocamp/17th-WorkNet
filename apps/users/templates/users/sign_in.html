@@ -48,29 +48,12 @@
 
     <div class="mt-4 text-center">
       <a href="{% url 'social:begin' 'line' %}" class="text-green-500 link"
-        >使用 LINE 登入</a
-      >
-    </div>
-    <div>
-      <label>密碼</label>
-      <input type="password" name="password" />
-    </div>
-
-    <div>
-      <button>登入</button>
-    </div>
-
-    <div></div>
-    <div>
-      還沒有帳號嗎？現在就<a class="link" href="{% url 'users:register' %}"
-        >註冊</a
-      >領好禮吧！
+        ><i class="fab fa-line fa-lg"></i>使用 LINE 登入</a>
+      <a class="btn btn-danger" href="{% url 'social:begin' 'google-oauth2' %}"
+      ><i class="fab fa-google fa-lg"></i> Google登入</a>
     </div>
   </form>
-  <a href="{% url 'social:begin' 'line' %}">使用 LINE 登入</a>
-  <a class="btn btn-danger" href="{% url 'social:begin' 'google-oauth2' %}"
-    >Google登入</a
-  >
+
 </section>
 </div>
 

@@ -8,28 +8,59 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0003_alter_userinfo_birth_alter_userinfo_updated_at'),
+        ("users", "0003_alter_userinfo_birth_alter_userinfo_updated_at"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='userinfo',
-            name='location',
-            field=models.CharField(blank=True, choices=[('Keelung', '基隆'), ('Taipei', '台北'), ('New Taipei', '新北'), ('Taoyuan', '桃園'), ('Hsinchu', '新竹'), ('Miaoli', '苗栗'), ('Taichung', '台中'), ('Changhua', '彰化'), ('Nantou', '南投'), ('Yunlin', '雲林'), ('Chiayi', '嘉義'), ('Tainan', '台南'), ('Kaohsiung', '高雄'), ('Pingtung', '屏東'), ('Taitung', '台東'), ('Hualien', '花蓮'), ('Yilan', '宜蘭'), ('Penghu', '澎湖'), ('Kinmen', '金門'), ('Lienchiang', '連江')], max_length=100, null=True),
+            model_name="userinfo",
+            name="location",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("Keelung", "基隆"),
+                    ("Taipei", "台北"),
+                    ("New Taipei", "新北"),
+                    ("Taoyuan", "桃園"),
+                    ("Hsinchu", "新竹"),
+                    ("Miaoli", "苗栗"),
+                    ("Taichung", "台中"),
+                    ("Changhua", "彰化"),
+                    ("Nantou", "南投"),
+                    ("Yunlin", "雲林"),
+                    ("Chiayi", "嘉義"),
+                    ("Tainan", "台南"),
+                    ("Kaohsiung", "高雄"),
+                    ("Pingtung", "屏東"),
+                    ("Taitung", "台東"),
+                    ("Hualien", "花蓮"),
+                    ("Yilan", "宜蘭"),
+                    ("Penghu", "澎湖"),
+                    ("Kinmen", "金門"),
+                    ("Lienchiang", "連江"),
+                ],
+                max_length=100,
+                null=True,
+            ),
         ),
         migrations.AlterField(
-            model_name='userinfo',
-            name='nickname',
+            model_name="userinfo",
+            name="nickname",
             field=models.CharField(blank=True, max_length=30, null=True),
         ),
         migrations.AlterField(
-            model_name='userinfo',
-            name='tel',
+            model_name="userinfo",
+            name="tel",
             field=models.CharField(blank=True, max_length=15, null=True),
         ),
         migrations.AlterField(
-            model_name='userinfo',
-            name='user',
-            field=models.ForeignKey(default='', null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="userinfo",
+            name="user",
+            field=models.ForeignKey(
+                default="",
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]
