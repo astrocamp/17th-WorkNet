@@ -70,7 +70,6 @@ def sign_out(request):
 
 def line_save_profile(backend, user, response, *args, **kwargs):
 
-
     if backend.name == "line":
         social_id = response["userId"]
         try:

@@ -181,6 +181,3 @@ SOCIAL_AUTH_PIPELINE = (
     "social_core.pipeline.user.user_details",
     "apps.users.views.line_save_profile",  # 自定義步驟
 )
-
-
-
