@@ -8,6 +8,13 @@ from lib.utils.models.update_date import TimeStampedModel
 class User(AbstractUser):
 
     social_userid = models.CharField(max_length=50, blank=True, null=True)
+    user_type_choices = (
+        (1, "user"),
+        (2, "company"),
+    )
+    user_type = models.PositiveSmallIntegerField(
+        choices=user_type_choices, default=1, null=False
+    )
 
 
 class UserInfo(TimeStampedModel):

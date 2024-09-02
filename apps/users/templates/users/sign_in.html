@@ -48,10 +48,17 @@
 
     <div class="mt-4 text-center">
       <a href="{% url 'social:begin' 'line' %}" class="text-green-500 link"
-        ><i class="fab fa-line fa-lg"></i>使用 LINE 登入</a>
-      <a class="btn btn-danger" href="{% url 'social:begin' 'google-oauth2' %}"
-      ><i class="fab fa-google fa-lg"></i> Google登入</a>
+        >使用 LINE 登入</a
+      >
+      <a class="text-blue-500 btn btn-danger link" href="{% url 'social:begin' 'google-oauth2' %}"
+      >Google登入</a
+    >
     </div>
+
+
+
+
+
   </form>
 
 </section>
