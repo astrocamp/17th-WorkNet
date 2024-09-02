@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0006_alter_user_user_type'),
+        ("users", "0006_alter_user_user_type"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='user',
-            name='user_type',
-            field=models.PositiveSmallIntegerField(blank=True, choices=[(1, 'user'), (2, 'company')], null=True),
+            model_name="user",
+            name="user_type",
+            field=models.PositiveSmallIntegerField(
+                blank=True, choices=[(1, "user"), (2, "company")], null=True
+            ),
         ),
     ]
