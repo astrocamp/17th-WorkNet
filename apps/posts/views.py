@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
 from .forms.form import CommentForm, PostForm
-from .models import Comment, Post
+from .models import Comment, Post, LikeLog
 
 
 def index(request):
@@ -24,10 +24,18 @@ def show(request, id):
             comment.save()
             return redirect("posts:show", id=post.id)
 
+    is_like, is_dislike = get_like_status(id, request.user.pk)
+
     return render(
         request,
         "posts/show.html",
-        {"post": post, "comments": comments, "comment_form": comment_form},
+        {
+            "post": post,
+            "comments": comments,
+            "comment_form": comment_form,
+            "is_like": is_like,
+            "is_dislike": is_dislike,
+        },
     )
 
 
@@ -35,7 +43,9 @@ def new(request):
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
             return redirect("posts:index")
     else:
         form = PostForm()
@@ -75,3 +85,59 @@ def comment_delete(request, id):
         return redirect("posts:show", id=comment.post.id)
 
     return HttpResponseNotAllowed(["POST"])
+
+
+def like(request, id):
+
+    user_id = request.user.pk
+    if request.method == "POST":
+        post = get_object_or_404(Post, pk=id)
+
+        if request.POST.get("type") == "like":
+            like_type = 1
+        else:
+            like_type = -1
+
+        try:
+            log = LikeLog.objects.get(post_id=id, user_id=user_id)
+            if log.like_type == like_type:
+                log.delete()
+            else:
+                log.like_type = like_type
+                log.save()
+
+        except LikeLog.DoesNotExist:
+            log = LikeLog(post_id=id, user_id=user_id, like_type=like_type)
+            log.save()
+
+        post.like_cnt = LikeLog.objects.filter(post_id=id, like_type=1).count()
+        post.dislike_cnt = LikeLog.objects.filter(post_id=id, like_type=-1).count()
+        post.save()
+
+        is_like, is_dislike = get_like_status(id, user_id)
+
+        return render(
+            request,
+            "posts/like.html",
+            {
+                "post": post,
+                "is_like": is_like,
+                "is_dislike": is_dislike,
+            },
+        )
+
+
+def get_like_status(post_id, user_id):
+    is_like = False
+    is_dislike = False
+    try:
+        log = LikeLog.objects.get(post_id=post_id, user_id=user_id)
+        if 1 == log.like_type:
+            is_like = True
+        else:
+            is_dislike = True
+
+    except LikeLog.DoesNotExist:
+        pass
+
+    return (is_like, is_dislike)

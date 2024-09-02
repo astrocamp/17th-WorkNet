@@ -1,6 +1,12 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<h1>{{ post.title }}</h1>
+
+<div class="flex gap-5">
+    <h1>{{ post.title }}</h1>
+    {% include "posts/like.html" with post=post %}
+    <!-- with resume=item isbookmark=isbookmark only -->
+</div>
+
 <p>Author: {{ post.author }}</p>
 <p>{{ post.content }}</p>
 <a href="{% url 'posts:edit' post.id %}">修改評論</a>
