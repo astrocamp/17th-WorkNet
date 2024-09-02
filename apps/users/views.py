@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, user_logged_in
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404, redirect, render
@@ -52,7 +52,8 @@ def sign_in(request):
 
         if user is not None:
             login(request, user)
-
+            if user.user_type is None or user.user_type == "":
+                return redirect("users:identity")
             messages.success(request, "登入成功")
             if next_url:
                 return redirect(next_url)
@@ -113,3 +114,7 @@ def create_user_info(sender, instance, created, **kwargs):
     if created:
         # 當 User 被創建時，創建一個對應的 UserInfo
         UserInfo.objects.create(user=instance)
+
+
+def identity_selection(request):
+    return render(request, "users/identity_selection.html")

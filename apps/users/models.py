@@ -13,7 +13,7 @@ class User(AbstractUser):
         (2, "company"),
     )
     user_type = models.PositiveSmallIntegerField(
-        choices=user_type_choices, default=1, null=False
+        choices=user_type_choices, null=True, blank=True
     )
 
 
