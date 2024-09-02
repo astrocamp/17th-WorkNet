@@ -28,7 +28,10 @@ def index(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, "註冊成功並已登入")
-                return redirect("users:index")
+                if user.user_type == 1:
+                    return redirect("users:info", user.id)
+                else:
+                    return redirect("companies:index")
             else:
                 messages.error(request, "登入失敗")
                 return redirect("users:sign_in")
@@ -107,14 +110,3 @@ def line_save_profile(backend, user, response, *args, **kwargs):
             u1.social_userid = social_id
             u1.username = response["displayName"]
             u1.save()
-
-
-@receiver(post_save, sender=User)
-def create_user_info(sender, instance, created, **kwargs):
-    if created:
-        # 當 User 被創建時，創建一個對應的 UserInfo
-        UserInfo.objects.create(user=instance)
-
-
-def identity_selection(request):
-    return render(request, "users/identity_selection.html")
