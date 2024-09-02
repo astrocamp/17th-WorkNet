@@ -13,6 +13,7 @@
     <div class="flex gap-2 text-sm">
       <h2>{{ request.user }}</h2>
       <h2>已成功登入</h2>
+      <a class="link" href="{% url 'users:info' request.user.pk %}">會員資料</a>
       <form action="{% url 'users:sign_out' %}" method="POST">
         {% csrf_token %}
         <button class="btn btn-primary">登出</button>
