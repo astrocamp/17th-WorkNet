@@ -9,6 +9,7 @@
         <a href="{% url 'jobs:show' job.id %}">{{ job.get_location_display }}</a>
         <a href="{% url 'jobs:edit' job.id %}">編輯</a>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <a href="{% url 'users:favorite' job.id %}">收藏</a>
 =======
 <<<<<<< HEAD
@@ -25,7 +26,13 @@
             {% csrf_token %}
             <button>刪除</button>
         </form>
+=======
+>>>>>>> f354019 (feat: add job favorite)
     </li>
+    <form method="POST" action="{% url 'jobs:delete' job.id %}">
+        {% csrf_token %}
+        <button>刪除</button>
+    </form>
     {% endfor %}
 </ul>
 {% endblock %}

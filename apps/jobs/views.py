@@ -1,7 +1,9 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 
 from .forms import JobForm
-from .models import Job
+from .models import Job, JobFavorite
 
 
 
@@ -45,3 +47,32 @@ def delete(request, id):
     job = get_object_or_404(Job, pk=id)
     job.mark_delete()
     return redirect("jobs:index")
+
+
+@login_required
+def favorite(request, id):
+    job = get_object_or_404(Job, pk=id)
+    user = request.user
+
+    if not JobFavorite.objects.filter(user=user, job=job).exists():
+
+        JobFavorite.objects.create(user=user, job=job, favorited_at=timezone.now())
+
+        return redirect("jobs:index")
+
+
+@login_required
+def favorites_list(request):
+    user = request.user
+    favorites = JobFavorite.objects.filter(user=user).order_by("-favorited_at")
+    return render(request, "jobs/favorites.html", {"favorites": favorites})
+
+
+@login_required
+def favorites_delete(request, id):
+    favorite = get_object_or_404(JobFavorite, pk=id)
+    if favorite.user != request.user:
+        return redirect("jobs:favorites_list")
+
+    favorite.delete()
+    return redirect("jobs:favorites_list")

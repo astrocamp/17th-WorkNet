@@ -1,0 +1,19 @@
+{% block content %}
+<h1>我的收藏</h1>
+{% if favorites %}
+<ul>
+    {% for favorite in favorites %}
+    <li>
+        <a href="{% url 'jobs:show' favorite.job.id %}">職缺名稱:{{ favorite.job.title }}</a>
+        <p>工作地點:{{ favorite.job.get_location_display }}</p>
+        <form method="POST" action="{% url 'jobs:favorites_delete' favorite.id %}">
+            {% csrf_token %}
+            <button>取消收藏</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>沒有收藏職缺? 趕快點我去<a href="{% url 'jobs:index' %}">尋找!!!</a></p>
+{% endif %}
+{% endblock %}
