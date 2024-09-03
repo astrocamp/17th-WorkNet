@@ -1092,4 +1092,8 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
+<<<<<<< HEAD
 content-hash = "1e0ec6d801b33faa6e7030c50dcee7c9ab3186f82a6b4cdfd22cf01df34415ba"
+=======
+content-hash = "2ca56a511bd7006f0e2d8f91dba45cd4fe8e701fa30dcffe557583fc2352b0f0"
+>>>>>>> 5e26f98 (docs: favorite to users folder  Job model add ManytoMany)
