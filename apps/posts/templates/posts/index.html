@@ -5,7 +5,7 @@
 <ul>
   {% for post in posts %}
   <li>
-    <a href="{% url 'posts:show' post.id %}">{{ post.title }}</a>
+    <a href="{% url 'posts:show' post.id %}">{{ post.title }} {{ post.score }}</a>
     <a href="{% url 'posts:edit' post.id %}">修改</a>
     <form
       action="{% url 'posts:delete' post.id %}"
