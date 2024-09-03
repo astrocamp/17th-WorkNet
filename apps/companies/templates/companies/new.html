@@ -1,12 +1,9 @@
-{% extends "layouts/base.html" %}
+{% extends "layouts/base.html" %} {% block content %}
 
-
-{% block content %}
 <h1>新增公司欄位</h1>
 
 <form method="post" action="{% url 'companies:index' %}">
-    {% csrf_token %}
-    {{ form }}
-    <div><button>新增</button></div>
+  {% csrf_token %} {{ form }}
+  <div><button>新增</button></div>
 </form>
 {% endblock %}
