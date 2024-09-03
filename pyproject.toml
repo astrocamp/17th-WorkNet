@@ -13,6 +13,8 @@ django-htmx = "^1.19.0"
 python-dotenv = "^1.0.1"
 psycopg2 = "^2.9.9"
 social-auth-app-django = "^5.4.2"
+boto3 = "^1.35.10"
+django-storages = "^1.14.4"
 
 [tool.poetry.group.dev.dependencies]
 django-extensions = "^3.2.3"

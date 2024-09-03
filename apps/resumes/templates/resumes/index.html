@@ -1,0 +1,16 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<h2>我的履歷</h2>
+    {% if resumes %}
+        <ul>
+            {% for resume in resumes %}
+                <li>
+                    <a href="{{ resume.file.url }}">{{ resume.file.name }}</a> - 上傳於 {{ resume.uploaded_at }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>尚無履歷</p>
+    {% endif %}
+<a href="{% url 'resumes:upload' %}">上傳履歷</a>
+{% endblock %}
