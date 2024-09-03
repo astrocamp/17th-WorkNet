@@ -1156,4 +1156,12 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
+<<<<<<< HEAD
 content-hash = "2ca56a511bd7006f0e2d8f91dba45cd4fe8e701fa30dcffe557583fc2352b0f0"
+=======
+<<<<<<< HEAD
+content-hash = "7d82f9844defe4ddf8e1672dbe5b3524daeefaf69ccbf019c1956375e0403555"
+=======
+content-hash = "3de40e0fe25192cae51d5d379189bf1e32866cbfc0d033017af350da7e56f354"
+>>>>>>> e54df6d (feat: add password_reset send mail ＆mailgun's sandbox test)
+>>>>>>> 6f6ba7d (feat: add password_reset send mail ＆mailgun's sandbox test)
