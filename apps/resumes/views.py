@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.http import HttpResponseNotAllowed
+from django.shortcuts import get_object_or_404, redirect, render
+from django.utils import timezone
 
 from .forms import ResumeForm
 from .models import Resume, User
@@ -23,3 +25,13 @@ def upload(request):
     else:
         form = ResumeForm()
     return render(request, "resumes/upload.html", {"form": form})
+
+
+@login_required
+def delete_resume(request, resume_id):
+    resume = get_object_or_404(Resume, id=resume_id)
+
+    resume.deleted_at = timezone.now()
+    resume.save()
+
+    return redirect("resumes:index")
