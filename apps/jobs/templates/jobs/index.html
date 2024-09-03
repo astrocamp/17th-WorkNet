@@ -8,31 +8,12 @@
         {{ job.title }}
         <a href="{% url 'jobs:show' job.id %}">{{ job.get_location_display }}</a>
         <a href="{% url 'jobs:edit' job.id %}">編輯</a>
-<<<<<<< HEAD
-<<<<<<< HEAD
         <a href="{% url 'users:favorite' job.id %}">收藏</a>
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <a href="{% url 'users:favorite' job.id %}">收藏</a>
-=======
-        <a href="{% url 'jobs:favorite' job.id %}">收藏</a>
->>>>>>> e007f33 (feat: add job favorite)
-=======
-        <a href="{% url 'users:favorite' job.id %}">收藏</a>
->>>>>>> 3f05f98 (docs: favorite to users folder  Job model add ManytoMany)
->>>>>>> 757f911 (docs: favorite to users folder  Job model add ManytoMany)
         <form method="POST" action="{% url 'jobs:delete' job.id %}">
             {% csrf_token %}
             <button>刪除</button>
         </form>
-=======
->>>>>>> f354019 (feat: add job favorite)
     </li>
-    <form method="POST" action="{% url 'jobs:delete' job.id %}">
-        {% csrf_token %}
-        <button>刪除</button>
-    </form>
     {% endfor %}
 </ul>
 {% endblock %}
