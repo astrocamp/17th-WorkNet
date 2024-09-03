@@ -69,3 +69,4 @@ class Migration(migrations.Migration):
             bases=(lib.models.soft_delete.SoftDeletetable, models.Model),
         ),
     ]
+
