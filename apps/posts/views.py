@@ -24,7 +24,11 @@ def show(request, id):
             comment.save()
             return redirect("posts:show", id=post.id)
 
-    is_like, is_dislike = get_like_status(id, request.user.pk)
+    if request.user.is_authenticated:
+        is_like, is_dislike = get_like_status(post, request.user)
+    else:
+        is_like = False
+        is_dislike = False
 
     return render(
         request,
@@ -46,6 +50,7 @@ def new(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
+
             return redirect("posts:index")
     else:
         form = PostForm()
@@ -89,7 +94,6 @@ def comment_delete(request, id):
 
 def like(request, id):
 
-    user_id = request.user.pk
     if request.method == "POST":
         post = get_object_or_404(Post, pk=id)
 
@@ -98,23 +102,26 @@ def like(request, id):
         else:
             like_type = -1
 
-        try:
-            log = LikeLog.objects.get(post_id=id, user_id=user_id)
+        log = post.liked_by(request.user)
+
+        if log:
             if log.like_type == like_type:
                 log.delete()
             else:
                 log.like_type = like_type
                 log.save()
+        else:
+            LikeLog.objects.create(user=request.user, post=post, like_type=like_type)
 
-        except LikeLog.DoesNotExist:
-            log = LikeLog(post_id=id, user_id=user_id, like_type=like_type)
-            log.save()
-
-        post.like_cnt = LikeLog.objects.filter(post_id=id, like_type=1).count()
-        post.dislike_cnt = LikeLog.objects.filter(post_id=id, like_type=-1).count()
+        post.like_cnt = post.liked.filter(likelog__like_type=1).count()
+        post.dislike_cnt = post.liked.filter(likelog__like_type=-1).count()
         post.save()
 
-        is_like, is_dislike = get_like_status(id, user_id)
+        if request.user.is_authenticated:
+            is_like, is_dislike = get_like_status(post, request.user)
+        else:
+            is_like = False
+            is_dislike = False
 
         return render(
             request,
@@ -127,17 +134,15 @@ def like(request, id):
         )
 
 
-def get_like_status(post_id, user_id):
+def get_like_status(post, user):
     is_like = False
     is_dislike = False
-    try:
-        log = LikeLog.objects.get(post_id=post_id, user_id=user_id)
+
+    log = post.liked_by(user)
+    if log:
         if 1 == log.like_type:
             is_like = True
         else:
             is_dislike = True
-
-    except LikeLog.DoesNotExist:
-        pass
 
     return (is_like, is_dislike)
