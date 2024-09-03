@@ -9,6 +9,8 @@ urlpatterns = [
     path("sign_in/", views.sign_in, name="sign_in"),
     path("sign_out/", views.sign_out, name="sign_out"),
     path("register/", views.register, name="register"),
-    path("<int:id>/info/", views.info, name="info"),  # 第三方登入轉址
-    path("login-redirect/", views.login_redirect, name="login_redirect"),
+    path("<int:id>/info/", views.info, name="info"),
+    path(
+        "login-redirect/", views.login_redirect, name="login_redirect"
+    ),  # 第三方登入轉址
 ]

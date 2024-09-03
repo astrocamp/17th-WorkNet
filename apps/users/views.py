@@ -115,7 +115,6 @@ def line_save_profile(backend, user, response, *args, **kwargs):
 @login_required
 def login_redirect(request):
     user = request.user
-
     if user.type == 1:
         return redirect("users:info", user.id)
     else:
