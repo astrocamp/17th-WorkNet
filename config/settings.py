@@ -12,7 +12,6 @@ if is_dev():
 
 from lib.utils.env import is_dev
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 

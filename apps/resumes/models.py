@@ -1,6 +1,7 @@
-from django.db import models
-from apps.users.models import User
 from django.core.exceptions import ValidationError
+from django.db import models
+
+from apps.users.models import User
 
 
 class Resume(models.Model):
