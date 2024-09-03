@@ -1,5 +1,6 @@
 from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout, user_logged_in
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.shortcuts import get_object_or_404, redirect, render
@@ -110,10 +111,12 @@ def line_save_profile(backend, user, response, *args, **kwargs):
             u1.save()
 
 
-# def set_type(strategy, details, user=None, *args, **kwargs):
-#     if user:
-#         # 根據需要設置用戶的類型
-#         if not user.type:  # 假設我們根據其他條件設置類型
-#             user.type = 1  # 或 2, 根據需要
-#             user.save()
-#     return {'user': user}
+# 抓第三方登入後轉址
+@login_required
+def login_redirect(request):
+    user = request.user
+
+    if user.type == 1:
+        return redirect("users:info", user.id)
+    else:
+        return redirect("companies:index")
