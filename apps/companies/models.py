@@ -18,6 +18,8 @@ class Company(SoftDeletetable, models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(default=None, null=True)
 
+    average_score = models.DecimalField(max_digits=5, decimal_places=1, default=0.0)
+
     objects = SoftDeleteManager()
 
     class Meta:

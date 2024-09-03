@@ -9,10 +9,12 @@ class PostForm(forms.ModelForm):
         fields = [
             "title",
             "content",
+            "score",
         ]
         labels = {
             "title": "標題",
             "content": "內文",
+            "score": "評分",
         }
 
 
