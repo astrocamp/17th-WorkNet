@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+import environ
 from django.urls import reverse_lazy
 
 from lib.utils.env import is_dev
@@ -11,6 +12,28 @@ if is_dev():
     load_dotenv()
 
 from lib.utils.env import is_dev
+
+env = environ.Env()
+environ.Env.read_env()
+
+MAILGUN_API_URL = env("MAILGUN_API_URL")
+MAILGUN_API_KEY = env("MAILGUN_API_KEY")
+EMAIL_FROM = env("EMAIL_FROM")
+
+# settings.py
+ANYMAIL = {
+    "MAILGUN_API_KEY": MAILGUN_API_KEY,
+    "MAILGUN_SENDER_DOMAIN": "sandbox197b26a540874c71bd2cecdc032c5e58.mailgun.org",
+}
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.mailgun.org"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "postmaster@sandbox197b26a540874c71bd2cecdc032c5e58.mailgun.org"
+EMAIL_HOST_PASSWORD = MAILGUN_API_KEY
+DEFAULT_FROM_EMAIL = "5x.worknet@gmail.com"
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,8 +67,12 @@ INSTALLED_APPS = [
     # 第三方登入新增的內容
     "social_django",
     "apps.companies",
+<<<<<<< HEAD
     "storages",
     "apps.resumes",
+=======
+    "anymail",
+>>>>>>> e54df6d (feat: add password_reset send mail ＆mailgun's sandbox test)
 ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_KEY")

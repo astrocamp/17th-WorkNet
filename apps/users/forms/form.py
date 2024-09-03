@@ -1,5 +1,7 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django.forms.widgets import DateInput, NumberInput, Select, TextInput
 
@@ -9,8 +11,12 @@ from ..models import User, UserInfo
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
+<<<<<<< HEAD
         fields = ("username", "password1", "password2", "type")
         widgets = {"type": forms.Select(choices=User.type_choices)}
+=======
+        fields = ("username", "password1", "password2", "email")  # 添加你的自訂字段
+>>>>>>> e54df6d (feat: add password_reset send mail ＆mailgun's sandbox test)
 
 
 class UserInfoForm(ModelForm):
@@ -33,3 +39,18 @@ class UserInfoForm(ModelForm):
             "location": Select(),
             "birth": DateInput(),
         }
+
+
+class PasswordResetForm(forms.Form):
+    username = forms.CharField(label="帳號", max_length=150)
+    email = forms.EmailField(label="電子郵件", max_length=254)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get("username")
+        email = cleaned_data.get("email")
+        User = get_user_model()
+
+        if not User.objects.filter(username=username, email=email).exists():
+            raise forms.ValidationError("此帳號與電子郵件不匹配")
+        return cleaned_data

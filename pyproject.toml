@@ -16,6 +16,11 @@ social-auth-app-django = "^5.4.2"
 boto3 = "^1.35.10"
 django-storages = "^1.14.4"
 
+
+django-anymail = {extras = ["mailgun"], version = "^11.1"}
+django-environ = "^0.11.2"
+
+
 [tool.poetry.group.dev.dependencies]
 django-extensions = "^3.2.3"
 pre-commit = "^3.8.0"
