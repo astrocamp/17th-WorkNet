@@ -9,8 +9,8 @@ from ..models import User, UserInfo
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ("username", "password1", "password2", "user_type")  # 添加你的自訂字段
-        widgets = {"user_type": forms.Select(choices=User.user_type_choices)}
+        fields = ("username", "password1", "password2", "type")  # 添加你的自訂字段
+        widgets = {"type": forms.Select(choices=User.type_choices)}
 
 
 class UserInfoForm(ModelForm):
