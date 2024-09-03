@@ -11,8 +11,13 @@ from ..models import User, UserInfo
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
+
         fields = ("username", "password1", "password2", "email", "type")
+
+
+        
         widgets = {"type": forms.Select(choices=User.type_choices)}
+
 
 
 class UserInfoForm(ModelForm):
