@@ -1,5 +1,6 @@
 import random
 import string
+from functools import wraps
 
 import requests
 from django.conf import settings
@@ -170,8 +171,20 @@ def login_redirect(request):
     else:
         return redirect("companies:index")
 
+def login_redirect_next(view_func):
+    @wraps(view_func)  
+    def wrapper(request, *args, **kwargs):  
+        if request.user.is_authenticated:  
+            return view_func(request, *args, **kwargs)  
+        else:
+            return redirect(
+                reverse("users:sign_in") + f"?next={request.path}"
+            )  
 
-@login_required
+    return wrapper
+
+
+@login_redirect_next
 def favorite(request, id):
     job = get_object_or_404(Job, pk=id)
     user = request.user
@@ -182,15 +195,14 @@ def favorite(request, id):
     else:
         return redirect("jobs:index")
 
-
-@login_required
+@login_redirect_next
 def favorites_list(request):
     user = request.user
     favorites = JobFavorite.objects.filter(user=user).order_by("-favorited_at")
     return render(request, "users/favorites.html", {"favorites": favorites})
 
 
-@login_required
+@login_redirect_next
 def favorites_delete(request, id):
     favorite = get_object_or_404(JobFavorite, pk=id)
  
