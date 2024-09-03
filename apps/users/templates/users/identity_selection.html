@@ -1,12 +1,14 @@
-{% extends "layouts/base.html"%}
-
-{%block content%}
+{% extends "layouts/base.html"%} {%block content%}
 
 <h2>請選擇您的身分</h2>
 <form method="post">
   {% csrf_token %}
-  <button type="submit" name="user_type" value="1" class="btn btn-primary">個人用戶</button>
-  <button type="submit" name="user_type" value="2" class="btn btn-secondary">公司用戶</button>
+  <button type="submit" name="type" value="1" class="btn btn-primary">
+    個人用戶
+  </button>
+  <button type="submit" name="type" value="2" class="btn btn-secondary">
+    公司用戶
+  </button>
 </form>
 
 {%endblock%}

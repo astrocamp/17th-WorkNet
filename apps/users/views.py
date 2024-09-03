@@ -28,7 +28,7 @@ def index(request):
             if user is not None:
                 login(request, user)
                 messages.success(request, "註冊成功並已登入")
-                if user.user_type == 1:
+                if user.type == 1:
                     return redirect("users:info", user.id)
                 else:
                     return redirect("companies:index")
@@ -55,8 +55,6 @@ def sign_in(request):
 
         if user is not None:
             login(request, user)
-            if user.user_type is None or user.user_type == "":
-                return redirect("users:identity")
             messages.success(request, "登入成功")
             if next_url:
                 return redirect(next_url)
@@ -110,3 +108,12 @@ def line_save_profile(backend, user, response, *args, **kwargs):
             u1.social_userid = social_id
             u1.username = response["displayName"]
             u1.save()
+
+
+# def set_type(strategy, details, user=None, *args, **kwargs):
+#     if user:
+#         # 根據需要設置用戶的類型
+#         if not user.type:  # 假設我們根據其他條件設置類型
+#             user.type = 1  # 或 2, 根據需要
+#             user.save()
+#     return {'user': user}
