@@ -33,9 +33,11 @@ EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.mailgun.org"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
 EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = MAILGUN_API_KEY
 DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -72,6 +74,7 @@ INSTALLED_APPS = [
     "anymail",
     "storages",
     "social_django",
+
 ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_KEY")
