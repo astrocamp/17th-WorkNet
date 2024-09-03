@@ -1,13 +1,12 @@
-{% extends "layouts/base.html" %}
 
+{% extends "layouts/base.html" %} {% block content %}
 
-{% block content %}
 <h1>詳細</h1>
 
 <ul>
-    <li>{{ company.title }}</li>
-    <li>{{ company.tel }}</li>
-    <li>{{ company.url }}</li>
+  <li>{{ company.title }}</li>
+  <li>{{ company.tel }}</li>
+  <li>{{ company.url }}</li>
 </ul>
 
 <a href="{% url 'companies:index' %}">返回列表</a>
