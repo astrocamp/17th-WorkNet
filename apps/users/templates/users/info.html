@@ -1,10 +1,27 @@
 {% extends "layouts/base.html" %} {% block content %}
-<h1>會員資訊</h1>
-<form method="post" autocomplete="off">
-  {% csrf_token %} {{ form.as_p }}
-  <button>更新會員資訊</button>
-</form>
-<p>目前點數:{{info.points}}</p>
-{% if info.updated_at %}
-<p>最後更新:{{info.updated_at}}</p>
-{% endif %} {% endblock %}
+
+<div class="flex items-center justify-center min-h-screen p-4">
+  <div class="w-full max-w-xl p-6 bg-white rounded-lg shadow-md">
+    <h1 class="mb-4 text-2xl font-bold text-gray-700">會員資訊</h1>
+    <form method="post" autocomplete="off" class="space-y-4">
+      {% csrf_token %}
+      <div>{{ form.as_p }}</div>
+      <div class="flex justify-end">
+        <button
+          type="submit"
+          class="px-4 py-2 font-bold text-white bg-blue-900 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+        >
+          更新會員資訊
+        </button>
+      </div>
+    </form>
+    <div class="mt-4 text-gray-700">
+      <p>目前點數: <span class="font-bold">{{ info.points }}</span></p>
+      {% if info.updated_at %}
+      <p>最後更新: <span class="font-bold">{{ info.updated_at }}</span></p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
