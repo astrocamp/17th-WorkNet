@@ -15,6 +15,7 @@
       <h2>已成功登入</h2>
         {% if request.user.type == 1 %}
           <a class="link" href="{% url 'users:info' request.user.pk %}">會員資料</a>
+          <a class="link" href="{% url 'users:favorites_list' %}">我的收藏</a>
         {% elif request.user.type == 2 %}
           <a class="link" href="{% url 'companies:index' %}">公司資料</a>
         {%endif%}
