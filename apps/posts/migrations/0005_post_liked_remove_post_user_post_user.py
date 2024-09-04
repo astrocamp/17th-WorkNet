@@ -8,23 +8,32 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('posts', '0004_remove_post_user_post_user'),
+        ("posts", "0004_remove_post_user_post_user"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='liked',
-            field=models.ManyToManyField(related_name='likes', through='posts.LikeLog', to=settings.AUTH_USER_MODEL),
+            model_name="post",
+            name="liked",
+            field=models.ManyToManyField(
+                related_name="likes",
+                through="posts.LikeLog",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
         migrations.RemoveField(
-            model_name='post',
-            name='user',
+            model_name="post",
+            name="user",
         ),
         migrations.AddField(
-            model_name='post',
-            name='user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='posts', to=settings.AUTH_USER_MODEL),
+            model_name="post",
+            name="user",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="posts",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

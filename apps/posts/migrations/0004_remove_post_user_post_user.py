@@ -7,18 +7,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('posts', '0003_post_dislike_cnt_post_like_cnt_post_user_likelog'),
+        ("posts", "0003_post_dislike_cnt_post_like_cnt_post_user_likelog"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='post',
-            name='user',
+            model_name="post",
+            name="user",
         ),
         migrations.AddField(
-            model_name='post',
-            name='user',
-            field=models.ManyToManyField(through='posts.LikeLog', to=settings.AUTH_USER_MODEL),
+            model_name="post",
+            name="user",
+            field=models.ManyToManyField(
+                through="posts.LikeLog", to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]
