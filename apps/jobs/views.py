@@ -1,7 +1,10 @@
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import JobForm
+
 from .models import Job
+
+
 
 
 def index(request):
@@ -12,7 +15,7 @@ def index(request):
             return redirect("jobs:index")
         else:
             return render(request, "jobs/new.html", {"form": form})
-    jobs = Job.objects.filter(deleted_at=None)
+    jobs = Job.objects.all()
     return render(request, "jobs/index.html", {"jobs": jobs})
 
 

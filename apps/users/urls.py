@@ -18,4 +18,11 @@ urlpatterns = [
         PasswordResetDoneView.as_view(),
         name="password_reset_done",
     ),
+    path("favorites/", views.favorites_list, name="favorites_list"),
+    path("<int:id>/favorite", views.favorite, name="favorite"),
+    path(
+        "favorites/<int:id>/favorites_delete",
+        views.favorites_delete,
+        name="favorites_delete",
+    ),
 ]
