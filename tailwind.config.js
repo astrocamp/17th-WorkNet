@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./**/templates/**/*.{html,js}"],
+  content: ["./**/*.{html,js}"],
   theme: {
     data: {
       active: 'active~="true"',
