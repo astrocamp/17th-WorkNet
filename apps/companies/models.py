@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 
 from apps.users.models import User
@@ -17,8 +18,14 @@ class Company(SoftDeletetable, models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(default=None, null=True)
+    favorite = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, related_name="company_favorite"
+    )
 
     objects = SoftDeleteManager()
+
+    def favorited_by(self, user):
+        return self.favorite.filter(id=user.id).exists()
 
     class Meta:
         indexes = [
