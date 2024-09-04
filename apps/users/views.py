@@ -11,7 +11,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views import View
 from django.views.generic.base import TemplateView
+from django.utils import timezone
 
+from apps.jobs.models import Job, JobFavorite
 from apps.users.models import User
 
 from .forms import CustomUserCreationForm, UserInfoForm
@@ -170,3 +172,33 @@ def login_redirect(request):
         return redirect("users:info", user.id)
     else:
         return redirect("companies:index")
+
+@login_required
+def favorite(request, id):
+    job = get_object_or_404(Job, pk=id)
+    user = request.user
+
+    if not JobFavorite.objects.filter(user=user, job=job).exists():
+        JobFavorite.objects.create(user=user, job=job, favorited_at=timezone.now())
+        return redirect("jobs:index")
+    else:
+        return redirect("jobs:index")
+
+
+@login_required
+def favorites_list(request):
+    user = request.user
+    favorites = JobFavorite.objects.filter(user=user).order_by("-favorited_at")
+    return render(request, "users/favorites.html", {"favorites": favorites})
+
+
+@login_required
+def favorites_delete(request, id):
+    favorite = get_object_or_404(JobFavorite, pk=id)
+    # 驗證是否為該用戶的收藏
+    if favorite.user != request.user:
+        # 若不是則返回收藏列表
+        return redirect("users:favorites_list")
+
+    favorite.delete()
+    return redirect("users:favorites_list")
