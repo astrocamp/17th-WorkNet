@@ -16,10 +16,9 @@ class Post(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.SET_NULL, null=True)
     company = models.ForeignKey(to=Company, on_delete=models.CASCADE, null=True)
 
-    score = models.PositiveIntegerField(
-        validators=[MinValueValidator(1), MaxValueValidator(5)], default=1
+    score = models.PositiveSmallIntegerField(
+        choices=[(i, str(i)) for i in range(1, 6)], default=1
     )
-
     objects = SoftDeleteManager()
 
     def __str__(self):
