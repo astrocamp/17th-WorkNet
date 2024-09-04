@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
@@ -9,11 +10,7 @@ from apps.posts.models import Post
 from lib.models.paginate import paginate_queryset
 
 
-
-
 from django.contrib import messages
-
-
 
 
 from apps.jobs.forms import JobForm
@@ -30,13 +27,11 @@ def index(request):
     if request.method == "POST":
         form = CompanyForm(request.POST)
         if form.is_valid():
-
             company = form.save(commit=False)
             company.user = request.user
             company.save()
 
             messages.success(request, "新增成功")
-
             return redirect("companies:index")
     companies = Company.objects.order_by("-id")
 
@@ -145,7 +140,9 @@ def jobs_index(request, id):
     jobs = Job.objects.filter(company=company).order_by("-created_at")
     page_obj = paginate_queryset(request, jobs, 10)
 
-    return render(request, "jobs/index.html", {"page_obj": page_obj, "company": company})
+    return render(
+        request, "jobs/index.html", {"page_obj": page_obj, "company": company}
+    )
 
 
 @login_required
