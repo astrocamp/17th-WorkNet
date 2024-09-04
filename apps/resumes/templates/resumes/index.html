@@ -5,7 +5,7 @@
         <ul>
             {% for resume in resumes %}
                 <li>
-                    <a href="{{ resume.file.url }}">{{ resume.file.name }}</a> - 上傳於 {{ resume.uploaded_at }}
+                    <a href="{{ resume.file.url }}" target="_blank">{{ resume.file.name }}</a> - 上傳於 {{ resume.uploaded_at }}
                     <form action="{% url 'resumes:delete' resume.id %}" method="POST" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit" onclick="return confirm('確定要刪除這份履歷嗎？');">刪除</button>
