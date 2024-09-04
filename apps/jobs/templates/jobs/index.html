@@ -1,5 +1,6 @@
 {% extends "layouts/base.html" %}
 {% block content %}
+<<<<<<< HEAD
 <div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
     <h1 class="text-3xl font-bold">職缺</h1>
 </div>
@@ -24,4 +25,31 @@
         {% endfor %}
     </ul>
 </div>
+=======
+<h1>職缺</h1>
+
+{% if request.user.is_authenticated %}
+<h2>{{ request.user }}</h2>
+<h3><a href="{% url 'jobs:favorites_list' %}">我的收藏</a></h3>
+<form action="{% url 'users:sign_out' %}" method="POST">
+  {% csrf_token %}
+  <button>登出</button>
+</form>
+<a href="{% url 'jobs:new' %}">新增職缺</a>
+<ul>
+    {% for job in jobs %}
+    <li>
+        {{ job.title }}
+        <a href="{% url 'jobs:show' job.id %}">{{ job.get_location_display }}</a>
+        <a href="{% url 'jobs:edit' job.id %}">編輯</a>
+        <a href="{% url 'users:favorite' job.id %}">收藏</a>
+        <form method="POST" action="{% url 'jobs:delete' job.id %}">
+            {% csrf_token %}
+            <button>刪除</button>
+        </form>
+    </li>
+    {% endfor %}
+
+</ul>
+>>>>>>> 06ed3b8 (feat: add job favorite)
 {% endblock %}
