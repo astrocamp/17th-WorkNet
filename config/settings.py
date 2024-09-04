@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     "apps.posts",
     "apps.users",
     "apps.resumes",
+    "apps.commons",
     "anymail",
     "storages",
     "social_django",

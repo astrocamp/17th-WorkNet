@@ -1,9 +1,8 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render, reverse
-from django.views.decorators.http import require_GET, require_http_methods, require_POST
+from django.views.decorators.http import require_http_methods, require_POST
+from django.contrib import messages
 
-from apps.companies.models import Company
 from lib.models.paginate import paginate_queryset
 
 from .forms.posts_form import CommentForm, PostForm
@@ -29,6 +28,7 @@ def show(request, id):
             comment.user = request.user
             comment.save()
 
+            messages.success(request, "新增成功")
             return render(
                 request,
                 "posts/comment.html",
@@ -51,8 +51,6 @@ def show(request, id):
     )
 
 
-@login_required
-@require_http_methods(["GET", "POST"])
 def edit(request, id):
     post = get_object_or_404(Post, id=id)
     company = post.company
@@ -61,6 +59,7 @@ def edit(request, id):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
+            messages.success(request, "更新成功")
             return redirect(reverse("posts:show", args=[post.id]))
     else:
         form = PostForm(instance=post)
@@ -74,6 +73,7 @@ def delete(request, id):
     post = get_object_or_404(Post, id=id)
     company = post.company
     post.mark_delete()
+    messages.success(request, "刪除成功")
     return redirect(reverse("companies:post_index", args=[company.id]))
 
 
@@ -82,6 +82,7 @@ def delete(request, id):
 def comment_delete(request, id):
     comment = get_object_or_404(Comment, id=id)
     comment.mark_delete()
+    messages.success(request, "刪除成功")
     return redirect("posts:show", id=comment.post.id)
 
 
