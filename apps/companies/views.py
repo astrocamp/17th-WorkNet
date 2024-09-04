@@ -51,3 +51,12 @@ def delete(request, id):
     company = get_object_or_404(Company, id=id)
     company.mark_delete()
     return redirect("companies:index")
+
+
+def favorite(requset, id):
+    company = get_object_or_404(Company, pk=id)
+    if company.favorited_by(requset.user):
+        company.favorite.remove(requset.user)
+        return render(
+            requset, "companies/favorite.html", {"company": company, "favorited": False}
+        )

@@ -7,14 +7,16 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('companies', '0002_company_average_score'),
+        ("companies", "0002_company_average_score"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='company',
-            name='favorite',
-            field=models.ManyToManyField(related_name='company_favorite', to=settings.AUTH_USER_MODEL),
+            model_name="company",
+            name="favorite",
+            field=models.ManyToManyField(
+                related_name="company_favorite", to=settings.AUTH_USER_MODEL
+            ),
         ),
     ]
