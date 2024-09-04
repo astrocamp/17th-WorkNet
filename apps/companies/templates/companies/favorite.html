@@ -1,0 +1,7 @@
+<button class="btn btn-xs" hx-swap="outerHTML" hx-post="{% url 'companies:favorite' companies.id %}">
+  {% if favorited %}
+    <button>取消收藏</button>
+  {% else %}
+   <button>收藏公司</button>
+  {% endif %}
+</button>
