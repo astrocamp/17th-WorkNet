@@ -1,4 +1,6 @@
-{% extends "layouts/base.html" %} {% block content %}
+{% extends "layouts/base.html" %}
+
+{% block content %}
 <h1>新增職缺</h1>
 <form method="POST" action="{% url 'jobs:index' %}">
   {% csrf_token %} {% for field in form %}

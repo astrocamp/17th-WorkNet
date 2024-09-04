@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms.form import CompanyForm
@@ -10,6 +11,7 @@ def index(request):
         form = CompanyForm(request.POST)
         if form.is_valid():
             form.save()
+            messages.success(request, "新增成功")
             return redirect("companies:index")
 
     companies = Company.objects.order_by("-id")
@@ -34,6 +36,7 @@ def show(request, id):
         form = CompanyForm(request.POST, instance=company)
         if form.is_valid():
             form.save()
+            messages.success(request, "更新成功")
             return redirect("companies:show", company.id)
         else:
             return render(
@@ -48,4 +51,5 @@ def delete(request, id):
     company = get_object_or_404(Company, id=id)
     if request.method == "POST":
         company.mark_delete()
+        messages.success(request, "刪除成功")
         return redirect("companies:index")

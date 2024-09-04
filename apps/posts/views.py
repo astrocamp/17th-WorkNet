@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
@@ -22,6 +23,7 @@ def show(request, id):
             comment = comment_form.save(commit=False)
             comment.post = post
             comment.save()
+            messages.success(request, "新增成功")
             return redirect("posts:show", id=post.id)
 
     is_like, is_dislike = get_reaction_status(post, request)
@@ -46,7 +48,7 @@ def new(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-
+            messages.success(request, "新增成功")
             return redirect("posts:index")
     else:
         form = PostForm()
@@ -59,6 +61,7 @@ def edit(request, id):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
+            messages.success(request, "更新成功")
             return redirect("posts:index")
     else:
         form = PostForm(instance=post)
@@ -72,6 +75,7 @@ def delete(request, id):
     if request.method == "POST":
         post.deleted_at = timezone.now()
         post.save()
+        messages.success(request, "刪除成功")
         return redirect("posts:index")
 
     return HttpResponseNotAllowed(["POST"])
@@ -83,6 +87,7 @@ def comment_delete(request, id):
     if request.method == "POST":
         comment.deleted_at = timezone.now()
         comment.save()
+        messages.success(request, "刪除成功")
         return redirect("posts:show", id=comment.post.id)
 
     return HttpResponseNotAllowed(["POST"])
