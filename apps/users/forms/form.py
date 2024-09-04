@@ -31,5 +31,5 @@ class UserInfoForm(ModelForm):
             "nickname": TextInput(attrs={"required": "required"}),
             "tel": TextInput(attrs={"pattern": r"\d{10,15}"}),
             "location": Select(),
-            "birth": DateInput(),
+            "birth": DateInput(attrs={"type": "date"}),
         }
