@@ -38,8 +38,6 @@ EMAIL_HOST_PASSWORD = MAILGUN_API_KEY
 DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
 
 
-
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -74,7 +72,6 @@ INSTALLED_APPS = [
     "storages",
     "apps.resumes",
     "anymail",
-
 ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_KEY")
@@ -195,6 +192,7 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_LINE_KEY = os.getenv("LINE_KEY")
 SOCIAL_AUTH_LINE_SECRET = os.getenv("LINE_SECRET")
+
 SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/login-redirect/"
 SOCIAL_AUTH_LOGIN_URL = "/"
 SOCIAL_AUTH_URL_NAMESPACE = "social"

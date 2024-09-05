@@ -60,10 +60,7 @@
           type="email"
           name="email"
           placeholder="輸入電子郵件"
-
-          value="{{ form.email.value|default_if_none:'' }}"
-
-          
+          value="{{ form.email.value|default_if_none:''  }}"
         />
         <div class="mt-1 text-sm text-red-500">{{ form.email.errors }}</div>
       </div>

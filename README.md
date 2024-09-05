@@ -39,7 +39,11 @@ Front-end：[HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) / [CSS](ht
 
 Back-end：[Python](https://www.python.org/), [Django](https://www.djangoproject.com/)
 
+<<<<<<< HEAD
 Packages：[Concurrently](https://www.npmjs.com/package/concurrently), [Pre-commit](https://pre-commit.com/), [Commitizen](https://github.com/commitizen-tools/commitizen), [Python-dotenv](https://github.com/theskumar/python-dotenv), [django-extensions](https://django-extensions.readthedocs.io/en/latest/), [Django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/), [Psycopg2](https://pypi.org/project/psycopg2/),[Social-auth-app-django](https://github.com/python-social-auth/social-app-django), [Boto3](https://github.com/boto/boto3), [Django-storages](https://github.com/jschneier/django-storages), [Django-anymail](https://github.com/anymail/django-anymail), [Django-environ](https://github.com/joke2k/django-environ)
+=======
+Packages：[Concurrently](https://www.npmjs.com/package/concurrently), [Pre-commit](https://pre-commit.com/), [Commitizen](https://github.com/commitizen-tools/commitizen), [Psycopg2](https://pypi.org/project/psycopg2/),[Social-auth-app-django](https://github.com/python-social-auth/social-app-django), [Boto3](https://github.com/boto/boto3), [Python-dotenv](https://github.com/theskumar/python-dotenv), [Django-extensions](https://django-extensions.readthedocs.io/en/latest/), [Django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/), [Django-storages](https://github.com/jschneier/django-storages), [Django-anymail](https://github.com/anymail/django-anymail), [Django-environ](https://github.com/joke2k/django-environ)
+>>>>>>> 94c5ff2 (refactor: resolve conflicts)
 
 Database：[PostgreSQL](https://www.postgresql.org/)
 

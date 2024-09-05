@@ -1,4 +1,9 @@
 from django.contrib.auth.decorators import login_required
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> 94c5ff2 (refactor: resolve conflicts)
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
