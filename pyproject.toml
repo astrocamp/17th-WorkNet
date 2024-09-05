@@ -14,6 +14,7 @@ python-dotenv = "^1.0.1"
 psycopg2 = "^2.9.9"
 social-auth-app-django = "^5.4.2"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 boto3 = "^1.35.10"
 django-storages = "^1.14.4"
@@ -22,13 +23,20 @@ django-environ = "^0.11.2"
 
 =======
 <<<<<<< HEAD
+=======
+
+>>>>>>> d239314 (refactor: conflict resolution)
 boto3 = "^1.35.10"
 django-storages = "^1.14.4"
-=======
+
 django-anymail = {extras = ["mailgun"], version = "^11.1"}
 django-environ = "^0.11.2"
+<<<<<<< HEAD
 >>>>>>> e54df6d (feat: add password_reset send mail ＆mailgun's sandbox test)
 >>>>>>> 6f6ba7d (feat: add password_reset send mail ＆mailgun's sandbox test)
+=======
+
+>>>>>>> d239314 (refactor: conflict resolution)
 
 [tool.poetry.group.dev.dependencies]
 django-extensions = "^3.2.3"

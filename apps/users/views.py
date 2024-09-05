@@ -5,9 +5,11 @@ import requests
 from django.conf import settings
 from django.contrib import messages
 
+
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+
 
 
 from django.shortcuts import get_object_or_404, redirect, render

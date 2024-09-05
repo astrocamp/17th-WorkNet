@@ -13,7 +13,8 @@ urlpatterns = [
     path("register/", views.register, name="register"),
     path("<int:id>/info/", views.info, name="info"),
 
-    path("login_redirect/", views.login_redirect, name="login_redirect"),
+    path("login-redirect/", views.login_redirect, name="login_redirect"),
+
     path("password_reset/", PasswordResetView.as_view(), name="password_reset"),
     path(
 
@@ -22,6 +23,7 @@ urlpatterns = [
         name="password_reset_done",
     ),
 
+
     path("favorites/", views.favorites_list, name="favorites_list"),
     path("<int:id>/favorite", views.favorite, name="favorite"),
     path(
@@ -29,5 +31,6 @@ urlpatterns = [
         views.favorites_delete,
         name="favorites_delete",
     ),
+
 
 ]
