@@ -1,8 +1,0 @@
-<form method="POST" action="{% url 'companies:favorite' company.id %}">
-  {% csrf_token %}
-  {% if favorited %}
-    <button>取消收藏</button>
-  {% else %}
-   <button>收藏公司</button>
-  {% endif %}
-</form>
