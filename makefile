@@ -1,5 +1,4 @@
-all: server, migrate, migration, shell, routes, lint, commit
-.PHONY: all
+
 
 server:
 	poetry run python manage.py runserver

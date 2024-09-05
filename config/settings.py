@@ -18,21 +18,24 @@ environ.Env.read_env()
 
 MAILGUN_API_URL = env("MAILGUN_API_URL")
 MAILGUN_API_KEY = env("MAILGUN_API_KEY")
+MAILGUN_SENDER_DOMAIN = env("MAILGUN_SENDER_DOMAIN")
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_FROM = env("EMAIL_FROM")
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 
 # settings.py
 ANYMAIL = {
     "MAILGUN_API_KEY": MAILGUN_API_KEY,
-    "MAILGUN_SENDER_DOMAIN": "sandbox197b26a540874c71bd2cecdc032c5e58.mailgun.org",
+    "MAILGUN_SENDER_DOMAIN": MAILGUN_SENDER_DOMAIN,
 }
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.mailgun.org"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "postmaster@sandbox197b26a540874c71bd2cecdc032c5e58.mailgun.org"
+EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = MAILGUN_API_KEY
-DEFAULT_FROM_EMAIL = "5x.worknet@gmail.com"
+DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -64,7 +67,6 @@ INSTALLED_APPS = [
     "apps.posts",
     "apps.users",
     "apps.jobs",
-    # 第三方登入新增的內容
     "social_django",
     "apps.companies",
     "storages",
@@ -190,8 +192,8 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_LINE_KEY = os.getenv("LINE_KEY")
 SOCIAL_AUTH_LINE_SECRET = os.getenv("LINE_SECRET")
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/login-redirect/"  # 登入後的重導向 URL
-SOCIAL_AUTH_LOGIN_URL = "/"  # 登入頁面 URL
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/login-redirect/"
+SOCIAL_AUTH_LOGIN_URL = "/"
 SOCIAL_AUTH_URL_NAMESPACE = "social"
 
 
@@ -205,10 +207,10 @@ SOCIAL_AUTH_PIPELINE = (
     "social_core.pipeline.social_auth.associate_user",
     "social_core.pipeline.social_auth.load_extra_data",
     "social_core.pipeline.user.user_details",
-    "apps.users.views.line_save_profile",  # 自定義步驟
+    "apps.users.views.line_save_profile",
 )
 
-# AWS S3 相關設定
+
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")

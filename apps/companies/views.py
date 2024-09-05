@@ -1,11 +1,9 @@
-from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms.form import CompanyForm
 from .models import Company
 
 
-# Create your views here.
 def index(request):
 
     if request.method == "POST":

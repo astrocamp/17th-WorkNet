@@ -2,7 +2,7 @@ from django.http import HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
-from .forms.forms import CommentForm, PostForm
+from .forms.form import CommentForm, PostForm
 from .models import Comment, Post
 
 

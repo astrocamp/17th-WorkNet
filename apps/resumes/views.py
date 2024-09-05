@@ -1,10 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
 from .forms import ResumeForm
-from .models import Resume, User
+from .models import Resume
 
 
 @login_required

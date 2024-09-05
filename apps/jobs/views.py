@@ -3,8 +3,6 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms import JobForm
 from .models import Job
 
-# Create your views here.
-
 
 def index(request):
     if request.method == "POST":
