@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> d239314 (refactor: conflict resolution)
 
 server:
 	poetry run python manage.py runserver
