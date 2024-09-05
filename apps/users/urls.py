@@ -1,5 +1,4 @@
 from django.urls import path
-from django.views.generic import TemplateView
 
 from . import views
 from .views import PasswordResetDoneView, PasswordResetView
@@ -15,7 +14,6 @@ urlpatterns = [
     path("login-redirect/", views.login_redirect, name="login_redirect"),
     path("password_reset/", PasswordResetView.as_view(), name="password_reset"),
     path(
-
         "password_reset_done/",
         PasswordResetDoneView.as_view(),
         name="password_reset_done",

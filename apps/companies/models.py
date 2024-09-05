@@ -3,7 +3,6 @@ from django.db import models
 from lib.models.soft_delete import SoftDeleteManager, SoftDeletetable
 
 
-# Create your models here.
 class Company(SoftDeletetable, models.Model):
     title = models.CharField(max_length=200)
     tel = models.CharField(max_length=15)

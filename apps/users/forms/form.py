@@ -21,7 +21,6 @@ class UserInfoForm(ModelForm):
         model = UserInfo
 
         fields = ["nickname", "tel", "location", "birth"]
-
         labels = {
             "nickname": "姓名",
             "tel": "手機",
