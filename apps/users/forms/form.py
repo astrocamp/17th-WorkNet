@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
-from django.forms.widgets import DateInput, NumberInput, Select, TextInput
+from django.forms.widgets import DateInput, Select, TextInput
 
 from ..models import User, UserInfo
 
@@ -20,7 +20,6 @@ class UserInfoForm(ModelForm):
         model = UserInfo
 
         fields = ["nickname", "tel", "location", "birth"]
-        
 
         labels = {
             "nickname": "姓名",

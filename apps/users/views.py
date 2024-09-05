@@ -7,11 +7,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
-from django.dispatch import receiver
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.utils import timezone
 from django.views import View
 from django.views.generic.base import TemplateView
 
@@ -40,12 +37,10 @@ class PasswordResetView(View):
                 form.add_error(None, "此帳號與電子郵件不匹配")
                 return render(request, "users/password_reset.html", {"form": form})
 
-            # 生成6位數隨機密碼
             new_password = "".join(random.choices(string.digits, k=6))
             user.set_password(new_password)
             user.save()
 
-            # 發送郵件
             self.send_reset_email(user.email, new_password)
 
             return redirect(reverse("users:password_reset_done"))
@@ -84,7 +79,6 @@ def index(request):
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password1")
 
-            # 登入用戶
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
@@ -148,14 +142,12 @@ def info(request, id):
         else:
             return render(request, "users/info.html", {"form": form, "info": info})
 
-    # 若該 user 沒有對應的 userinfo 需產生對應的資料表
     info, _ = UserInfo.objects.get_or_create(user_id=id)
     form = UserInfoForm(instance=info)
 
     return render(request, "users/info.html", {"form": form, "info": info})
 
 
-# Line 登入後將 id 寫進 social_userid, 名稱寫進 username
 def line_save_profile(backend, user, response, *args, **kwargs):
 
     if backend.name == "line":
@@ -171,7 +163,6 @@ def line_save_profile(backend, user, response, *args, **kwargs):
             u1.save()
 
 
-# 抓第三方登入後轉址
 @login_required
 def login_redirect(request):
     user = request.user

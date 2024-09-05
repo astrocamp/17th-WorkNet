@@ -14,29 +14,30 @@
 3. `npm i` (下載 npm 相關套件)
 4. 建立`.env` (SECRET_KEY)
 
-## Npm run dev
+## Npm
 
-1. `npm run dev` (有安裝 concurrently, wins 使用者請自行修改指令)
+- `npm run dev-mac` (mac)
+- `npm run dev-win` (win)
 
-## Git Push(First Time)
+## Git Push (First Time)
 
 1. `git init` (git 初始化)
 2. `pre-commit run --all-files` (pre-commit 檢查格式)
 3. `git add` (git 新增檔案)
 4. `cz commit` (cz 選擇 commit 格式)
-5. `git push -u origin main` (推到 github)
+5. `git push -u origin dev` (推到 github)
 
 ## Git Push
 
 1. `poetry run pre-commit run --all-files`
-2. `git add`
+2. `git add <file name>`
 3. `cz commit`
 4. `git push`
 
-## Git Push(makefile)
+## Git Push (Makefile)
 
 1. `make lint`
-2. `git add`
+2. `git add <file name>`
 3. `make commit`
 4. `git push`
 
@@ -44,13 +45,19 @@
 
 Front-end：[HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) / [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [TailwindCSS](https://tailwindcss.com/), [DaisyUI](https://daisyui.com/) / [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), [AlpineJS](https://alpinejs.dev/), [HTMX](https://htmx.org/)
 
-Back-end：[Python](https://www.python.org/), [django](https://www.djangoproject.com/)
+Back-end：[Python](https://www.python.org/), [Django](https://www.djangoproject.com/)
 
-Packages：[concurrently](https://www.npmjs.com/package/concurrently), [pre-commit](https://pre-commit.com/), [commitizen](https://github.com/commitizen-tools/commitizen), [python-dotenv](https://github.com/theskumar/python-dotenv), [django-extensions](https://django-extensions.readthedocs.io/en/latest/), [django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/)
+Packages：[Concurrently](https://www.npmjs.com/package/concurrently), [Pre-commit](https://pre-commit.com/), [Commitizen](https://github.com/commitizen-tools/commitizen), [Python-dotenv](https://github.com/theskumar/python-dotenv), [django-extensions](https://django-extensions.readthedocs.io/en/latest/), [Django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/), [Psycopg2](https://pypi.org/project/psycopg2/),[Social-auth-app-django](https://github.com/python-social-auth/social-app-django), [Boto3](https://github.com/boto/boto3), [Django-storages](https://github.com/jschneier/django-storages), [Django-anymail](https://github.com/anymail/django-anymail), [Django-environ](https://github.com/joke2k/django-environ)
 
-Database：[postgreSQL](https://www.postgresql.org/)
+Database：[PostgreSQL](https://www.postgresql.org/)
 
 Version Control：[Git](https://git-scm.com/)
+
+Third-Party Login：[Google](https://www.google.com.tw/?hl=zh_TW), [Line](https://line.me/tw/)
+
+Web Services：[Amazon Web Services (AWS) S3](https://aws.amazon.com/tw/)
+
+Email：[Mail Gun](https://www.mailgun.com/)
 
 ## Team
 

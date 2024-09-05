@@ -1,6 +1,4 @@
-from django.core.exceptions import ValidationError
 from django.db import models
-from django.utils import timezone
 
 from apps.users.models import User
 from lib.models.soft_delete import SoftDeleteManager

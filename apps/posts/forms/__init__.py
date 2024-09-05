@@ -1,1 +1,1 @@
-from .forms import PostForm
+from .form import PostForm
