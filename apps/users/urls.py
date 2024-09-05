@@ -12,16 +12,11 @@ urlpatterns = [
     path("sign_out/", views.sign_out, name="sign_out"),
     path("register/", views.register, name="register"),
     path("<int:id>/info/", views.info, name="info"),
-<<<<<<< HEAD
-    path(
-        "login-redirect/", views.login_redirect, name="login_redirect"
-    ),  # 第三方登入轉址
-=======
+    path("login-redirect/", views.login_redirect, name="login_redirect"),
     path("password_reset/", PasswordResetView.as_view(), name="password_reset"),
     path(
         "password_reset_done/",
         PasswordResetDoneView.as_view(),
         name="password_reset_done",
     ),
->>>>>>> e54df6d (feat: add password_reset send mail ＆mailgun's sandbox test)
 ]
