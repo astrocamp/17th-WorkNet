@@ -195,9 +195,8 @@ def favorites_list(request):
 @login_required
 def favorites_delete(request, id):
     favorite = get_object_or_404(JobFavorite, pk=id)
-    # 驗證是否為該用戶的收藏
+
     if favorite.user != request.user:
-        # 若不是則返回收藏列表
         return redirect("users:favorites_list")
 
     favorite.delete()
