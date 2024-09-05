@@ -11,12 +11,8 @@ from ..models import User, UserInfo
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = User
-<<<<<<< HEAD
-        fields = ("username", "password1", "password2", "type")
+        fields = ("username", "password1", "password2", "email", "type")
         widgets = {"type": forms.Select(choices=User.type_choices)}
-=======
-        fields = ("username", "password1", "password2", "email")  # 添加你的自訂字段
->>>>>>> e54df6d (feat: add password_reset send mail ＆mailgun's sandbox test)
 
 
 class UserInfoForm(ModelForm):
@@ -24,7 +20,7 @@ class UserInfoForm(ModelForm):
         model = UserInfo
 
         fields = ["nickname", "tel", "location", "birth"]
-        # fields = "__all__"
+        
 
         labels = {
             "nickname": "姓名",

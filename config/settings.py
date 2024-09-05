@@ -67,12 +67,9 @@ INSTALLED_APPS = [
     # 第三方登入新增的內容
     "social_django",
     "apps.companies",
-<<<<<<< HEAD
     "storages",
     "apps.resumes",
-=======
     "anymail",
->>>>>>> e54df6d (feat: add password_reset send mail ＆mailgun's sandbox test)
 ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_KEY")
