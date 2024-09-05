@@ -24,11 +24,7 @@ def show(request, id):
             comment.save()
             return redirect("posts:show", id=post.id)
 
-    if request.user.is_authenticated:
-        is_like, is_dislike = get_like_status(post, request.user)
-    else:
-        is_like = False
-        is_dislike = False
+    is_like, is_dislike = get_reaction_status(post, request)
 
     return render(
         request,
@@ -92,36 +88,26 @@ def comment_delete(request, id):
     return HttpResponseNotAllowed(["POST"])
 
 
-def like(request, id):
+def reaction(request, id):
 
     if request.method == "POST":
         post = get_object_or_404(Post, pk=id)
 
-        if request.POST.get("type") == "like":
-            like_type = 1
+        like_type = 1 if request.POST.get("type") == "like" else -1
+
+        log, created = LikeLog.objects.get_or_create(user=request.user, post=post)
+
+        if not created and log.like_type == like_type:
+            log.delete()
         else:
-            like_type = -1
+            log.like_type = like_type
+            log.save()
 
-        log = post.liked_by(request.user)
-
-        if log:
-            if log.like_type == like_type:
-                log.delete()
-            else:
-                log.like_type = like_type
-                log.save()
-        else:
-            LikeLog.objects.create(user=request.user, post=post, like_type=like_type)
-
-        post.like_cnt = post.liked.filter(likelog__like_type=1).count()
-        post.dislike_cnt = post.liked.filter(likelog__like_type=-1).count()
+        post.like_cnt = Post.published.reactions_count(post, 1)
+        post.dislike_cnt = Post.published.reactions_count(post, -1)
         post.save()
 
-        if request.user.is_authenticated:
-            is_like, is_dislike = get_like_status(post, request.user)
-        else:
-            is_like = False
-            is_dislike = False
+        is_like, is_dislike = get_reaction_status(post, request)
 
         return render(
             request,
@@ -134,15 +120,16 @@ def like(request, id):
         )
 
 
-def get_like_status(post, user):
+def get_reaction_status(post, request):
     is_like = False
     is_dislike = False
 
-    log = post.liked_by(user)
-    if log:
-        if 1 == log.like_type:
-            is_like = True
-        else:
-            is_dislike = True
+    if request.user.is_authenticated:
+        log = Post.published.reaction_by(post, request.user)
+        if log:
+            if 1 == log.like_type:
+                is_like = True
+            else:
+                is_dislike = True
 
     return (is_like, is_dislike)
