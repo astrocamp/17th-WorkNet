@@ -19,14 +19,6 @@
 - `npm run dev-mac` (mac)
 - `npm run dev-win` (win)
 
-## Git Push (First Time)
-
-1. `git init` (git 初始化)
-2. `pre-commit run --all-files` (pre-commit 檢查格式)
-3. `git add` (git 新增檔案)
-4. `cz commit` (cz 選擇 commit 格式)
-5. `git push -u origin dev` (推到 github)
-
 ## Git Push
 
 1. `poetry run pre-commit run --all-files`
