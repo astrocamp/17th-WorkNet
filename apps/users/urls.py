@@ -14,6 +14,7 @@ urlpatterns = [
     path("<int:id>/info/", views.info, name="info"),
     path("login_redirect/", views.login_redirect, name="login_redirect"),
     path("password_reset/", PasswordResetView.as_view(), name="password_reset"),
+    path("<int:id>/record/", views.record, name="record"),
     path(
         "password_reset_done/",
         PasswordResetDoneView.as_view(),
