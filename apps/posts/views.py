@@ -46,7 +46,6 @@ def new(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-
             return redirect("posts:index")
     else:
         form = PostForm()
@@ -58,7 +57,9 @@ def edit(request, id):
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
-            form.save()
+            updated_post = form.save(commit=False)
+            updated_post.user = post.user
+            updated_post.save()
             return redirect("posts:index")
     else:
         form = PostForm(instance=post)
