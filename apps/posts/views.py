@@ -95,13 +95,16 @@ def reaction(request, id):
 
         like_type = 1 if request.POST.get("type") == "like" else -1
 
-        log, created = LikeLog.objects.get_or_create(user=request.user, post=post)
-
-        if not created and log.like_type == like_type:
-            log.delete()
-        else:
-            log.like_type = like_type
-            log.save()
+        try:
+            log = Post.published.reaction_by(post, request.user)
+            if log.like_type == like_type:
+                log.delete()
+            else:
+                log.like_type = like_type
+                log.save()
+        except:
+            LikeLog.objects.create(user=request.user, post=post, like_type=like_type)
+            pass
 
         post.like_cnt = Post.published.reactions_count(post, 1)
         post.dislike_cnt = Post.published.reactions_count(post, -1)
