@@ -44,6 +44,12 @@
 - Web Services：[Amazon Web Services (AWS) S3](https://aws.amazon.com/tw/)
 - Email：[Mail Gun](https://www.mailgun.com/)
 
+Third-party login：[Google](https://www.google.com.tw/?hl=zh_TW), [Line](https://line.me/tw/)
+
+Web Services：[Amazon Web Services (AWS) S3](https://aws.amazon.com/tw/)
+
+Email sending：[Mail Gun](https://www.mailgun.com/)
+
 ## Team
 
 - [黃信愷](https://github.com/KK-Huang86)
