@@ -3,10 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from .forms.form import CompanyForm
 from .models import Company
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 94c5ff2 (refactor: resolve conflicts)
 def index(request):
 
     if request.method == "POST":
