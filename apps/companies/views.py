@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
@@ -53,10 +55,16 @@ def delete(request, id):
     return redirect("companies:index")
 
 
-def favorite(requset, id):
+@login_required
+def favorite(request, id):
     company = get_object_or_404(Company, pk=id)
-    if company.favorited_by(requset.user):
-        company.favorite.remove(requset.user)
+    if request.method == "POST":
+        if company.favorited_by(request.user):
+            company.favorite.remove(request.user)
+            favorited = False
+        else:
+            company.favorite.add(request.user)
+            favorited = True
         return render(
-            requset, "companies/favorite.html", {"company": company, "favorited": False}
+            request, "companies/show.html", {"company": company, "favorited": favorited}
         )
