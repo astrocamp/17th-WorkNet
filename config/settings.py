@@ -64,14 +64,14 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_htmx",
+    "apps.companies",
+    "apps.jobs",
     "apps.posts",
     "apps.users",
-    "apps.jobs",
-    "social_django",
-    "apps.companies",
-    "storages",
     "apps.resumes",
     "anymail",
+    "storages",
+    "social_django",
 ]
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_KEY")
@@ -193,7 +193,7 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_LINE_KEY = os.getenv("LINE_KEY")
 SOCIAL_AUTH_LINE_SECRET = os.getenv("LINE_SECRET")
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/login-redirect/"
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = "/login_redirect/"
 SOCIAL_AUTH_LOGIN_URL = "/"
 SOCIAL_AUTH_URL_NAMESPACE = "social"
 
