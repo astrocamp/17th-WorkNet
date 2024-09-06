@@ -35,21 +35,14 @@
 
 ## Technologies
 
-Front-end：[HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) / [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [TailwindCSS](https://tailwindcss.com/), [DaisyUI](https://daisyui.com/) / [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), [AlpineJS](https://alpinejs.dev/), [HTMX](https://htmx.org/)
-
-Back-end：[Python](https://www.python.org/), [Django](https://www.djangoproject.com/)
-
-Packages：[Concurrently](https://www.npmjs.com/package/concurrently), [Pre-commit](https://pre-commit.com/), [Commitizen](https://github.com/commitizen-tools/commitizen), [Psycopg2](https://pypi.org/project/psycopg2/),[Social-auth-app-django](https://github.com/python-social-auth/social-app-django), [Boto3](https://github.com/boto/boto3), [Python-dotenv](https://github.com/theskumar/python-dotenv), [Django-extensions](https://django-extensions.readthedocs.io/en/latest/), [Django-debug-toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/), [Django-storages](https://github.com/jschneier/django-storages), [Django-anymail](https://github.com/anymail/django-anymail), [Django-environ](https://github.com/joke2k/django-environ)
-
-Database：[PostgreSQL](https://www.postgresql.org/)
-
-Version Control：[Git](https://git-scm.com/)
-
-Third-Party Login：[Google](https://www.google.com.tw/?hl=zh_TW), [Line](https://line.me/tw/)
-
-Web Services：[Amazon Web Services (AWS) S3](https://aws.amazon.com/tw/)
-
-Email：[Mail Gun](https://www.mailgun.com/)
+- Front-end：[HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) / [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS), [DaisyUI](https://daisyui.com/), [TailwindCSS](https://tailwindcss.com/) / [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript), [AlpineJS](https://alpinejs.dev/), [HTMX](https://htmx.org/)
+- Back-end：[Python](https://www.python.org/), [Django](https://www.djangoproject.com/)
+- Packages：[Boto3](https://github.com/boto/boto3), [Commitizen](https://github.com/commitizen-tools/commitizen), [Concurrently](https://www.npmjs.com/package/concurrently),[Psycopg2](https://pypi.org/project/psycopg2/),[Python-dotenv](https://github.com/theskumar/python-dotenv), [Social-auth-app-django](https://github.com/python-social-auth/social-app-django), [Django-Anymail](https://github.com/anymail/django-anymail), [Django-Environ](https://github.com/joke2k/django-environ), [Django-Extensions](https://django-extensions.readthedocs.io/en/latest/), [Django-Debug-Toolbar](https://django-debug-toolbar.readthedocs.io/en/latest/), [Django-Storages](https://github.com/jschneier/django-storages)
+- Database：[PostgreSQL](https://www.postgresql.org/)
+- Version Control：[Git](https://git-scm.com/)
+- Third-Party Login：[Google](https://www.google.com.tw/?hl=zh_TW), [Line](https://line.me/tw/)
+- Web Services：[Amazon Web Services (AWS) S3](https://aws.amazon.com/tw/)
+- Email：[Mail Gun](https://www.mailgun.com/)
 
 ## Team
 
