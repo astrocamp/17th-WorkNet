@@ -1,7 +1,9 @@
 {% extends "layouts/base.html" %}
 {% block content %}
 <h1>評論列表</h1>
+{% if request.user.is_authenticated %}
 <a href="{% url 'posts:new' %}">新增評論</a>
+{% endif %}
 <ul>
   {% for post in posts %}
   <li>
