@@ -5,6 +5,8 @@ import requests
 from django.conf import settings
 from functools import wraps
 
+import requests
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
@@ -194,14 +196,14 @@ def favorite(request, id):
         return redirect("jobs:index")
 
 
-@login_redirect_next
+@login_required
 def favorites_list(request):
     user = request.user
     favorites = JobFavorite.objects.filter(user=user).order_by("-favorited_at")
     return render(request, "users/favorites.html", {"favorites": favorites})
 
 
-@login_redirect_next
+@login_required
 def favorites_delete(request, id):
     favorite = get_object_or_404(JobFavorite, pk=id)
     # 驗證是否為該用戶的收藏
