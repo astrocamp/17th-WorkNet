@@ -11,13 +11,14 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
 from django.views import View
+from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateView
 
 from apps.jobs.models import Job, JobFavorite
 from apps.users.models import User
 
 from .forms import CustomUserCreationForm, UserInfoForm
-from .forms.form import PasswordResetForm
+from .forms.users_form import PasswordResetForm
 from .models import UserInfo
 
 
@@ -73,15 +74,8 @@ def index(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            email = form.cleaned_data.get("email")
-            user.email = email
-            user.save()
+            user = form.save()
 
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password1")
-
-            user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
                 messages.success(request, "註冊成功並已登入")
@@ -124,11 +118,11 @@ def sign_in(request):
     return render(request, "users/sign_in.html")
 
 
+@require_POST
 def sign_out(request):
-    if request.method == "POST":
-        logout(request)
-        messages.success(request, "登出成功")
-        return redirect("users:index")
+    logout(request)
+    messages.success(request, "登出成功")
+    return redirect("users:index")
 
 
 def info(request, id):
