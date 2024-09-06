@@ -3,6 +3,8 @@ import string
 
 import requests
 from django.conf import settings
+from functools import wraps
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
@@ -167,8 +169,20 @@ def login_redirect(request):
     else:
         return redirect("companies:index")
 
+def login_redirect_next(view_func):
+    @wraps(view_func)  
+    def wrapper(request, *args, **kwargs):  
+        if request.user.is_authenticated:  
+            return view_func(request, *args, **kwargs)  
+        else:
+            return redirect(
+                reverse("users:sign_in") + f"?next={request.path}"
+            ) 
 
-@login_required
+    return wrapper
+
+
+@login_redirect_next
 def favorite(request, id):
     job = get_object_or_404(Job, pk=id)
     user = request.user
@@ -180,14 +194,14 @@ def favorite(request, id):
         return redirect("jobs:index")
 
 
-@login_required
+@login_redirect_next
 def favorites_list(request):
     user = request.user
     favorites = JobFavorite.objects.filter(user=user).order_by("-favorited_at")
     return render(request, "users/favorites.html", {"favorites": favorites})
 
 
-@login_required
+@login_redirect_next
 def favorites_delete(request, id):
     favorite = get_object_or_404(JobFavorite, pk=id)
     # 驗證是否為該用戶的收藏
