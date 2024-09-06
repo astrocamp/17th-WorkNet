@@ -1,5 +1,6 @@
 import random
 import string
+from functools import wraps
 
 import requests
 from django.conf import settings
@@ -193,17 +194,17 @@ def favorite(request, id):
         JobFavorite.objects.create(user=user, job=job, favorited_at=timezone.now())
         return redirect("jobs:index")
     else:
-        return redirect("jobs:index")
+        return redirect("jobs:index")  # 暫時先用轉址防止重複收藏跳出錯誤
 
 
-@login_required
+@login_redirect_next
 def favorites_list(request):
     user = request.user
     favorites = JobFavorite.objects.filter(user=user).order_by("-favorited_at")
     return render(request, "users/favorites.html", {"favorites": favorites})
 
 
-@login_required
+@login_redirect_next
 def favorites_delete(request, id):
     favorite = get_object_or_404(JobFavorite, pk=id)
     # 驗證是否為該用戶的收藏
