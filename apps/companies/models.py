@@ -19,15 +19,35 @@ class Company(SoftDeletetable, models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(default=None, null=True)
     favorite = models.ManyToManyField(
-        settings.AUTH_USER_MODEL, related_name="company_favorite"
+        settings.AUTH_USER_MODEL,
+        related_name="company_favorite",
+        through="CompanyFavorite",
     )
 
     objects = SoftDeleteManager()
 
-    def favorited_by(self, user):
+    def is_favorited_by(self, user):
         return self.favorite.filter(id=user.id).exists()
 
     class Meta:
         indexes = [
             models.Index(fields=["deleted_at"]),
+        ]
+
+
+class CompanyFavorite(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="favorite_companies",
+    )
+    company = models.ForeignKey(
+        Company, on_delete=models.CASCADE, related_name="favorited_by_users"
+    )
+    favorited_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = [
+            "user",
+            "company",
         ]
