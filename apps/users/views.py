@@ -4,17 +4,11 @@ import string
 import requests
 from django.conf import settings
 from django.contrib import messages
-
-
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-
-
-
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-
 from django.utils import timezone
 from django.views import View
 from django.views.generic.base import TemplateView
@@ -45,11 +39,9 @@ class PasswordResetView(View):
                 form.add_error(None, "此帳號與電子郵件不匹配")
                 return render(request, "users/password_reset.html", {"form": form})
 
-
             new_password = "".join(random.choices(string.digits, k=6))
             user.set_password(new_password)
             user.save()
-
 
             self.send_reset_email(user.email, new_password)
 
@@ -88,7 +80,6 @@ def index(request):
 
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password1")
-
 
             user = authenticate(username=username, password=password)
             if user is not None:
@@ -181,6 +172,7 @@ def login_redirect(request):
         return redirect("users:info", user.id)
     else:
         return redirect("companies:index")
+
 
 @login_required
 def favorite(request, id):

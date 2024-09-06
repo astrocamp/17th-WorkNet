@@ -4,8 +4,6 @@ from .forms import JobForm
 from .models import Job
 
 
-
-
 def index(request):
     if request.method == "POST":
         form = JobForm(request.POST)
