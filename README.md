@@ -10,7 +10,7 @@
 
 ## Front-end
 
-- `npm run dev
+- `npm run dev`
 
 ## Technologies
 

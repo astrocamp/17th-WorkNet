@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 
-import environ
 from django.urls import reverse_lazy
 
 from lib.utils.env import is_dev
@@ -13,15 +12,12 @@ if is_dev():
 
 from lib.utils.env import is_dev
 
-env = environ.Env()
-environ.Env.read_env()
-
-MAILGUN_API_URL = env("MAILGUN_API_URL")
-MAILGUN_API_KEY = env("MAILGUN_API_KEY")
-MAILGUN_SENDER_DOMAIN = env("MAILGUN_SENDER_DOMAIN")
-EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-EMAIL_FROM = env("EMAIL_FROM")
-DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+MAILGUN_API_URL = os.getenv("MAILGUN_API_URL")
+MAILGUN_API_KEY = os.getenv("MAILGUN_API_KEY")
+MAILGUN_SENDER_DOMAIN = os.getenv("MAILGUN_SENDER_DOMAIN")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_FROM = os.getenv("EMAIL_FROM")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
 
 
 ANYMAIL = {
