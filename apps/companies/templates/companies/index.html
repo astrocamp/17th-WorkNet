@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
     <h1 class="text-3xl font-bold">公司首頁</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
@@ -11,10 +11,10 @@
                     <a href="{% url 'companies:show' company.id %}">{{ company.title }} {{ company.average_score }}</a>
                 </div>
                 <div class="flex gap-2">
-                    <a class="btn btn-primary text-white btn-sm" href="{% url 'companies:edit' company.id %}">編輯</a>
+                    <a class="text-white btn btn-primary btn-sm" href="{% url 'companies:edit' company.id %}">編輯</a>
                     <form method="post" action="{% url 'companies:delete' company.id %}">
                         {% csrf_token %}
-                        <button class="btn btn-error text-white btn-sm">刪除</button>
+                        <button class="text-white btn btn-error btn-sm">刪除</button>
                     </form>
                 </div>
             </li>
