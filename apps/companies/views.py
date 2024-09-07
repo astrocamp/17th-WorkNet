@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
 from .forms.company_form import CompanyForm
-from .models import Company
+from .models import Company, CompanyFavorite
 
 
 def index(request):
@@ -59,8 +59,19 @@ def delete(request, id):
 def favorite(request, id):
     company = get_object_or_404(Company, pk=id)
     if request.method == "POST":
-        if company.favorited_by(request.user):
-            company.favorite.remove(request.user)
+        company.mark_delete()
+        return redirect("companies:index")
+
+
+@login_required
+def favorite_company(request, id):
+    company = get_object_or_404(Company, pk=id)
+    user = request.user
+    if request.method == "POST":
+        if company.is_favorited_by(user):
+            company.favorite.remove(user)
+            CompanyFavorite.objects.filter(user=user, company=company).delete()
+
             favorited = False
         else:
             company.favorite.add(request.user)
