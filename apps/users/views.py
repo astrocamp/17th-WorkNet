@@ -15,8 +15,10 @@ from django.views import View
 from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateView
 
+
 from apps.jobs.models import Job, JobFavorite
-from apps.posts.models import Post
+
+from apps.companies.models import Company, CompanyFavorite
 from apps.users.models import User
 
 from .forms import CustomUserCreationForm, UserInfoForm
@@ -213,8 +215,14 @@ def favorites_delete(request, id):
     favorite.delete()
     return redirect("users:favorites_list")
 
+@login_required
+def favorite_company_list(request):
+    user = request.user
+    favorites = CompanyFavorite.objects.filter(user=user).order_by("-favorited_at")
+    return render(request, "users/favorite_company.html", {"favorites": favorites})
 
-def record(request, id):
-    info = get_object_or_404(UserInfo, user_id=id, user=request.user)
-    posts = Post.objects.filter(user=request.user).order_by("-created_at")
-    return render(request, "users/record.html", {"posts": posts, "info": info})
+@login_required
+def favorite_company_delete(request, id):
+    favorite_company = get_object_or_404(CompanyFavorite, pk=id)
+    favorite_company.delete()
+    return redirect("users:favorites_company_list")
