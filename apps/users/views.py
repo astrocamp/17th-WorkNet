@@ -15,10 +15,8 @@ from django.views import View
 from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateView
 
-
-from apps.jobs.models import Job, JobFavorite
-
 from apps.companies.models import Company, CompanyFavorite
+from apps.jobs.models import Job, JobFavorite
 from apps.users.models import User
 
 from .forms import CustomUserCreationForm, UserInfoForm
@@ -220,6 +218,7 @@ def favorite_company_list(request):
     user = request.user
     favorites = CompanyFavorite.objects.filter(user=user).order_by("-favorited_at")
     return render(request, "users/favorite_company.html", {"favorites": favorites})
+
 
 @login_required
 def favorite_company_delete(request, id):
