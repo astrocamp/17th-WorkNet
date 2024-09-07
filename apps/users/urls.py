@@ -25,6 +25,14 @@ urlpatterns = [
     path(
         "favorites/<int:id>/favorites_delete",
         views.favorites_delete,
-        name="favorites_delete",
+        name="favorites_delete"),
+    path("login-redirect/", views.login_redirect, name="login_redirect"),
+    path(
+        "favorites_company", views.favorite_company_list, name="favorites_company_list"
+    ),
+    path(
+        "favorites_company/<int:id>/favorite_delete",
+        views.favorite_company_delete,
+        name="favorite_company_delete",
     ),
 ]
