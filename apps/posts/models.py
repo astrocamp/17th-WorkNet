@@ -18,7 +18,7 @@ class Post(models.Model):
         to=User, on_delete=models.SET_NULL, null=True, related_name="posts"
     )
 
-    company = models.ForeignKey(to=Company, on_delete=models.CASCADE, null=True)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
 
     score = models.PositiveSmallIntegerField(
         choices=[(i, str(i)) for i in range(1, 6)], default=1
@@ -48,6 +48,7 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -57,7 +58,7 @@ class Comment(models.Model):
 
 
 class LikeLog(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
-    post = models.ForeignKey(to=Post, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     like_type = models.IntegerField(blank=False)
     created_at = models.DateTimeField(auto_now=True)

@@ -1,6 +1,7 @@
-from django.http import HttpResponseNotAllowed
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.views.decorators.http import require_POST
 
 from .forms.form import CommentForm, PostForm
 from .models import Comment, LikeLog, Post
@@ -21,6 +22,7 @@ def show(request, id):
         if comment_form.is_valid():
             comment = comment_form.save(commit=False)
             comment.post = post
+            comment.user = request.user
             comment.save()
             return redirect("posts:show", id=post.id)
 
@@ -67,61 +69,54 @@ def edit(request, id):
     return render(request, "posts/edit.html", {"form": form, "post": post})
 
 
+@require_POST
 def delete(request, id):
     post = get_object_or_404(Post, id=id)
-
-    if request.method == "POST":
-        post.deleted_at = timezone.now()
-        post.save()
-        return redirect("posts:index")
-
-    return HttpResponseNotAllowed(["POST"])
+    post.deleted_at = timezone.now()
+    post.save()
+    return redirect("posts:index")
 
 
 def comment_delete(request, id):
-    comment = get_object_or_404(Comment, id=id)
-
-    if request.method == "POST":
+    if request.method == "DELETE":
+        comment = get_object_or_404(Comment, id=id)
         comment.deleted_at = timezone.now()
         comment.save()
-        return redirect("posts:show", id=comment.post.id)
-
-    return HttpResponseNotAllowed(["POST"])
+        return HttpResponse("")
 
 
+@require_POST
 def reaction(request, id):
+    post = get_object_or_404(Post, pk=id)
 
-    if request.method == "POST":
-        post = get_object_or_404(Post, pk=id)
+    like_type = 1 if request.POST.get("type") == "like" else -1
 
-        like_type = 1 if request.POST.get("type") == "like" else -1
+    try:
+        log = Post.published.reaction_by(post, request.user)
+        if log.like_type == like_type:
+            log.delete()
+        else:
+            log.like_type = like_type
+            log.save()
+    except:
+        LikeLog.objects.create(user=request.user, post=post, like_type=like_type)
+        pass
 
-        try:
-            log = Post.published.reaction_by(post, request.user)
-            if log.like_type == like_type:
-                log.delete()
-            else:
-                log.like_type = like_type
-                log.save()
-        except:
-            LikeLog.objects.create(user=request.user, post=post, like_type=like_type)
-            pass
+    post.like_cnt = Post.published.reactions_count(post, 1)
+    post.dislike_cnt = Post.published.reactions_count(post, -1)
+    post.save()
 
-        post.like_cnt = Post.published.reactions_count(post, 1)
-        post.dislike_cnt = Post.published.reactions_count(post, -1)
-        post.save()
+    is_like, is_dislike = get_reaction_status(post, request)
 
-        is_like, is_dislike = get_reaction_status(post, request)
-
-        return render(
-            request,
-            "posts/like.html",
-            {
-                "post": post,
-                "is_like": is_like,
-                "is_dislike": is_dislike,
-            },
-        )
+    return render(
+        request,
+        "posts/like.html",
+        {
+            "post": post,
+            "is_like": is_like,
+            "is_dislike": is_dislike,
+        },
+    )
 
 
 def get_reaction_status(post, request):
