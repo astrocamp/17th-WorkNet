@@ -9,24 +9,22 @@ module.exports = {
     extend: {
       container: {
         screens: {
-          sm: '100%',
-          md: '100%',
-          lg: '1024px',
-          xl: '1280px',
+          sm: "100%",
+          md: "100%",
+          lg: "1024px",
+          xl: "1280px",
         },
       },
     },
   },
-  plugins: [
-    require('daisyui'),
-  ],
+  plugins: [require("daisyui")],
   daisyui: {
     themes: [
       {
         corporate: {
-          "primary": "#007bff",
-          "secondary":"#00336b",
-          "neutral":"#000000",
+          primary: "#007bff",
+          secondary: "#00336b",
+          neutral: "#000000",
         },
       },
     ],
