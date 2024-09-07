@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.db import models
 
+from apps.resumes.models import Resume
 from lib.models.soft_delete import SoftDeleteManager, SoftDeletetable
 
 # Create your models here.
@@ -41,6 +42,7 @@ class Job(SoftDeletetable, models.Model):
     deleted_at = models.DateTimeField(null=True, default=None)
     tenure = models.PositiveIntegerField()
     favorite = models.ManyToManyField(settings.AUTH_USER_MODEL, through="JobFavorite")
+    resumes = models.ManyToManyField(Resume, through="Job_Resume")
 
     objects = SoftDeleteManager()
 
@@ -69,3 +71,14 @@ class JobFavorite(models.Model):
             "user",
             "job",
         ]
+
+
+class Job_Resume(models.Model):
+    job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name="job_resume")
+    resume = models.ForeignKey(
+        Resume, on_delete=models.CASCADE, related_name="resume_job"
+    )
+    created_at = models.DateField(auto_now_add=True)
+    status = models.CharField(max_length=20, default="applied")
+    withdrawn_at = models.DateTimeField(null=True, blank=True)
+    read_at = models.DateTimeField(null=True, blank=True)
