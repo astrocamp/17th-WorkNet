@@ -1,0 +1,15 @@
+<li>
+    <div>
+        <span>{{comment.user}}</span>
+        <small>{{ comment.created_at|date:"Y/m/d H:i" }}</small>
+    </div>
+    {{ comment.content }}<br>
+    {% if comment.user == request.user %}
+        <button hx-delete="{% url 'posts:comment_delete' comment.id %}"
+            hx-confirm="確認刪除？"
+            hx-target="closest li"
+            hx-swap="outerHTML">
+            刪除
+        </button>
+    {% endif %}
+</li>
