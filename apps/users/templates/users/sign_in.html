@@ -1,5 +1,5 @@
 {% extends "layouts/base.html" %} {% block content %}
-<div class="flex items-center justify-center min-h-screen">
+<div class="flex items-center justify-center pt-32 pb-24">
   <section class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
     <h1 class="mb-6 text-2xl font-bold text-center">登入</h1>
 
@@ -16,7 +16,7 @@
       <div>
         <label class="block text-sm font-medium">帳號</label>
         <input
-          class="w-full p-2 mt-1 border border-gray-300 rounded input input-bordered"
+          class="w-full mt-1 input-often-base"
           type="text"
           name="username"
           placeholder="輸入帳號"
@@ -26,7 +26,7 @@
       <div>
         <label class="block text-sm font-medium">密碼</label>
         <input
-          class="w-full p-2 mt-1 border border-gray-300 rounded input input-bordered"
+          class="w-full mt-1 input-often-base"
           type="password"
           name="password"
           placeholder="輸入密碼"
@@ -34,29 +34,21 @@
       </div>
 
       <div>
-        <button class="w-full btn btn-primary">登入</button>
+        <button class="w-full btn btn-primary text-white">登入</button>
       </div>
 
       <div class="mt-4 text-center">
-        <a href="{% url 'users:password_reset' %}" class="text-blue-500 link">忘記密碼？</a>
+        <a href="{% url 'users:password_reset' %}" class="text-primary link">忘記密碼？</a>
       </div>
 
       <div class="mt-4 text-center">
-        還沒有帳號嗎？現在就<a
-          class="text-blue-500 link"
-          href="{% url 'users:register' %}"
-          >註冊</a
-        >領好禮吧！
+        還沒有帳號嗎？現在就<a class="text-primary link" href="{% url 'users:register' %}">註冊</a>領好禮吧！
       </div>
     </form>
 
-    <div class="mt-4 text-center">
-      <a href="{% url 'social:begin' 'line' %}" class="text-green-500 link"
-        >使用 LINE 登入</a
-      >
-      <a class="text-blue-500 btn btn-danger link" href="{% url 'social:begin' 'google-oauth2' %}"
-      >Google登入</a
-    >
+    <div class="mt-4 flex gap-5">
+      <a class="btn btn-outline btn-success flex-1" href="{% url 'social:begin' 'line' %}">使用 LINE 登入</a>
+      <a class="btn btn-outline btn-primary flex-1" href="{% url 'social:begin' 'google-oauth2' %}">Google登入</a>
     </div>
 
 

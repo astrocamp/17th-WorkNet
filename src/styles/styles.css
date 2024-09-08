@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.btn {
+  @apply rounded-full;
+}
+
+.input-often-base{
+  @apply p-2 border border-gray-300 rounded input input-bordered
+}
+
+.no-style{
+  @apply bg-transparent border-transparent shadow-none;
+}
