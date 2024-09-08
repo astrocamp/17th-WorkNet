@@ -11,5 +11,6 @@
   <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
     {% include "shared/navbar.html" %}
     <main>{% block content %}{% endblock %}</main>
+    {% include "shared/footer.html" %}
   </body>
 </html>
