@@ -7,26 +7,50 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('jobs', '0002_alter_job_table_jobfavorite_job_favorite'),
-        ('resumes', '0001_initial'),
+        ("jobs", "0002_alter_job_table_jobfavorite_job_favorite"),
+        ("resumes", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Job_Resume',
+            name="Job_Resume",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateField(auto_now_add=True)),
-                ('status', models.CharField(default='applied', max_length=20)),
-                ('withdrawn_at', models.DateTimeField(blank=True, null=True)),
-                ('read_at', models.DateTimeField(blank=True, null=True)),
-                ('job', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='job_resume', to='jobs.job')),
-                ('resume', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='resume_job', to='resumes.resume')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("created_at", models.DateField(auto_now_add=True)),
+                ("status", models.CharField(default="applied", max_length=20)),
+                ("withdrawn_at", models.DateTimeField(blank=True, null=True)),
+                ("read_at", models.DateTimeField(blank=True, null=True)),
+                (
+                    "job",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="job_resume",
+                        to="jobs.job",
+                    ),
+                ),
+                (
+                    "resume",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="resume_job",
+                        to="resumes.resume",
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='job',
-            name='resumes',
-            field=models.ManyToManyField(through='jobs.Job_Resume', to='resumes.resume'),
+            model_name="job",
+            name="resumes",
+            field=models.ManyToManyField(
+                through="jobs.Job_Resume", to="resumes.resume"
+            ),
         ),
     ]

@@ -6,7 +6,6 @@ import requests
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
-from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
@@ -16,9 +15,9 @@ from django.views import View
 from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateView
 
-from apps.companies.models import Company, CompanyFavorite
-from apps.jobs.models import Job, JobFavorite
-from apps.users.models import User
+from apps.companies.models import CompanyFavorite
+from apps.jobs.models import Job, JobFavorite,Job_Resume
+from apps.resumes.models import Resume
 
 from .forms import CustomUserCreationForm, UserInfoForm
 from .forms.users_form import PasswordResetForm
@@ -218,6 +217,29 @@ def favorites_delete(request, id):
     favorite.delete()
     return redirect("users:favorites_list")
 
+@login_required
+def apply_jobs(request, job_id):
+    job = get_object_or_404(Job, id=job_id)
+    resumes = Resume.objects.filter(user=request.user)
+    return render(request, "users/apply.html", {"job": job, "resumes": resumes})
+
+
+@require_POST
+@login_required
+def submit_jobs(request, job_id):
+    job_id = request.POST.get("job_id")
+    resume_id = request.POST.get("resume_id")
+    job = get_object_or_404(Job, id=job_id)
+    resume = get_object_or_404(Resume, id=resume_id, user=request.user)
+
+    if Job_Resume.objects.filter(job=job, resume=resume).exists():
+        messages.error(request, "已投遞過這個工作，請等候業者審核等候通知，謝謝")
+        return redirect("jobs:index")
+
+    else:
+        Job_Resume.objects.create(job=job, resume=resume, status="applied")
+        messages.success(request, "投遞成功")
+    return redirect("jobs:index")
 
 @login_required
 def favorite_company_list(request):
