@@ -5,7 +5,7 @@
   <h1>應徵的工作職稱 {{job.title}}</h1>
   <h1>應徵的工作地點 {{job.location}}</h1>
 
-  <form action="{% url 'users:submit_jobs' job.id %}" method="POST"> 
+  <form action="{% url 'users:submit_jobs' job.id %}" method="POST">
     {%csrf_token%}
     <input type="hidden" name="job_id" value="{{ job.id }}">
      <label for="resume">選擇履歷:</label>
