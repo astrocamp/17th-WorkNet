@@ -14,7 +14,7 @@ class CustomUserCreationForm(UserCreationForm):
 
         fields = ("username", "password1", "password2", "email", "type")
 
-        widgets = {"type": forms.Select(choices=User.type_choices)}
+        widgets = {"type": forms.Select(choices=User.roles_choice)}
 
 
 class UserInfoForm(ModelForm):

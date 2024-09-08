@@ -5,13 +5,13 @@
   <div class="flex items-center">
     <a href="/" class="text-blue-500 hover:underline">回到首頁</a>
   </div>
-  <div class="absolute transform -translate-x-1/2 left-1/2">
+  <div class="flex justify-center flex-1">
     <a href="{% url 'users:index' %}" class="text-xl font-bold">WorkNet</a>
   </div>
 
   <div class="flex items-center gap-4">
     {% if request.user.is_authenticated %}
-    <div class="flex gap-2 text-sm">
+    <div class="flex gap-4 space-x-5 text-sm">
       <h2>{{ request.user }}</h2>
       <h2>已成功登入</h2>
         {% if request.user.type == 1 %}
