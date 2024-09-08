@@ -216,7 +216,7 @@ def favorites_delete(request, id):
 @login_required
 def favorite_company_list(request):
     user = request.user
-    favorites = CompanyFavorite.objects.filter(user=user).order_by("-favorited_at")
+    favorites = user.favorite_companies.order_by("-favorited_at")
     return render(request, "users/favorite_company.html", {"favorites": favorites})
 
 
