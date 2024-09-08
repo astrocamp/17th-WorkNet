@@ -4,6 +4,8 @@
     <h1 class="text-3xl font-bold">我的履歷</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
+<h2>我的履歷</h2>
+<p>你總共有 {{ resumes|length }} 份履歷。</p> 
     {% if resumes %}
         <ul class="mt-6 divide-y divide-slate-200">
             {% for resume in resumes %}
