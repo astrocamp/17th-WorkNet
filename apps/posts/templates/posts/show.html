@@ -1,19 +1,19 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
     <h1 class="text-3xl font-bold">{{ post.title }}</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
-    <div class="flex gap-5 border-b border-gray-300 pb-5">
+    <div class="flex gap-5 pb-5 border-b border-gray-300">
         <div class="flex-1">Author: {{ post.author }}</div>
         {% include "posts/like.html" with post=post %}
     </div>
 
     <p class="py-10">{{ post.content }}</p>
-    <a class="btn btn-primary text-white" href="{% url 'posts:edit' post.id %}">修改評論</a>
+    <a class="text-white btn btn-primary" href="{% url 'posts:edit' post.id %}">修改評論</a>
 
     <section class="p-5 mt-20 border border-gray-300 rounded-2xl">
-        <h3 class="font-bold text-xl border-b border-gray-300 pb-5 mb-5">留言</h3>
+        <h3 class="pb-5 mb-5 text-xl font-bold border-b border-gray-300">留言</h3>
         {% if comments.exists %}
             <ul class="space-y-4">
                 {% for comment in comments %}
@@ -21,7 +21,7 @@
                 {% endfor %}
             </ul>
         {% else %}
-        <div class="text-center flex items-center justify-center py-3"><p class="text-gray-300">尚無回覆</p></div>
+        <div class="flex items-center justify-center py-3 text-center"><p class="text-gray-300">尚無回覆</p></div>
 
         {% endif %}
 
@@ -29,14 +29,46 @@
             <form method="post">
                 {% csrf_token %}
                 {{ comment_form.as_p }}
-                <button class="btn btn-primary text-white" type="submit">送出留言</button>
+                <button class="text-white btn btn-primary" type="submit">送出留言</button>
             </form>
         </div>
     </section>
 
     <div class="mt-6">
-        <a class="btn btn-neutral text-white" href="{% url 'posts:index' %}">回到列表</a>
+        <a class="text-white btn btn-neutral" href="{% url 'posts:index' %}">回到列表</a>
     </div>
 </div>
+
+<p>Author: {{ post.author }}</p>
+<p>{{ post.content }}</p>
+<a href="{% url 'posts:edit' post.id %}">修改評論</a>
+
+<h3>留言</h3>
+{% if comments.exists %}
+    <ul>
+        {% for comment in comments %}
+            <li>
+                {{ comment.content|linebreaksbr }}<br>
+                <small>{{ comment.created_at|date:"Y/m/d H:i" }}</small>
+                <form method="post" action="{% url 'posts:comment_delete' comment.id %}" hx-post="{% url 'posts:comment_delete' comment.id %}"
+                    hx-confirm="確認刪除？"
+                    hx-target="body">
+                    {% csrf_token %}
+                    <button type="submit">刪除留言</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+<p>尚無留言</p>
+<a href="{% url 'posts:index' %}">回到列表</a>
+{% endif %}
+
+<h4>新增留言</h4>
+<form method="post" action="{% url 'posts:show' post.id %}">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <button type="submit">確定</button>
+</form>
 
 {% endblock %}

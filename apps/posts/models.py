@@ -2,10 +2,10 @@ from django.db import models
 
 from apps.companies.models import Company
 from apps.users.models import User
-from lib.models.soft_delete import SoftDeleteManager
+from lib.models.soft_delete import SoftDeleteManager, SoftDeletetable
 
 
-class Post(models.Model):
+class Post(SoftDeletetable, models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -29,6 +29,11 @@ class Post(models.Model):
 
     objects = SoftDeleteManager()
 
+    class Meta:
+        indexes = [
+            models.Index(fields=["deleted_at"]),
+        ]
+
     def __str__(self):
         return self.title
 
@@ -46,15 +51,23 @@ class Post(models.Model):
     published = PostManager()
 
 
-class Comment(models.Model):
+class Comment(SoftDeletetable, models.Model):
     post = models.ForeignKey(Post, related_name="comments", on_delete=models.CASCADE)
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(default=None, null=True)
+    parent = models.ForeignKey(
+        "self", null=True, blank=True, related_name="replies", on_delete=models.SET_NULL
+    )
 
     objects = SoftDeleteManager()
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["deleted_at"]),
+        ]
 
 
 class LikeLog(models.Model):
