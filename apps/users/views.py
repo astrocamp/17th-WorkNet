@@ -6,6 +6,7 @@ import requests
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, redirect, render
@@ -79,8 +80,9 @@ def index(request):
             user = form.save()
 
             if user is not None:
-                user.backend = "django.contrib.auth.backends.ModelBackend"
-                login(request, user)
+                backend = "django.contrib.auth.backends.ModelBackend"
+
+                login(request, user, backend=backend)
                 messages.success(request, "註冊成功並已登入")
                 if user.type == 1:
                     return redirect("users:info", user.id)
@@ -108,8 +110,8 @@ def sign_in(request):
         user = authenticate(username=username, password=password)
 
         if user is not None:
-            user.backend = "django.contrib.auth.backends.ModelBackend"
-            login(request, user)
+            backend = "django.contrib.auth.backends.ModelBackend"
+            login(request, user, backend=backend)
             messages.success(request, "登入成功")
             if next_url:
                 return redirect(next_url)

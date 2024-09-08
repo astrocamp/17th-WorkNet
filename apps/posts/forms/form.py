@@ -36,3 +36,15 @@ class CommentForm(forms.ModelForm):
         labels = {
             "content": "您想說些什麼",
         }
+
+    def __init__(self, *args, **kwargs):
+        self.post = kwargs.pop("post", None)
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        comment = super().save(commit=False)
+        if self.post:
+            comment.post = self.post
+        if commit:
+            comment.save()
+        return comment
