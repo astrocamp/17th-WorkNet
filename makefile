@@ -1,4 +1,3 @@
-
 .PHONY: server, migrate, migration, shell, routes, lint, commit
 
 

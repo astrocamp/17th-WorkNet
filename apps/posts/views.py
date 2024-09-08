@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
 
 from .forms.form import CommentForm, PostForm
-from .models import Comment, Post, LikeLog
+from .models import Comment, LikeLog, Post
 
 
 def index(request):
