@@ -1,10 +1,9 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
 from .forms.company_form import CompanyForm
-from .models import Company, CompanyFavorite
+from .models import Company
 
 
 def index(request):
@@ -63,19 +62,16 @@ def favorite(request, id):
         return redirect("companies:index")
 
 
-@login_required
+@require_POST
 def favorite_company(request, id):
     company = get_object_or_404(Company, pk=id)
     user = request.user
-    if request.method == "POST":
-        if company.is_favorited_by(user):
-            company.favorite.remove(user)
-            CompanyFavorite.objects.filter(user=user, company=company).delete()
+    favorited = company.is_favorited_by(user)
+    if favorited:
+        company.favorite.remove(user)
+    else:
+        company.favorite.add(user)
 
-            favorited = False
-        else:
-            company.favorite.add(request.user)
-            favorited = True
-        return render(
-            request, "companies/show.html", {"company": company, "favorited": favorited}
-        )
+    return render(
+        request, "companies/show.html", {"company": company, "favorited": not favorited}
+    )

@@ -1,26 +1,20 @@
 {%extends "layouts/base.html"%}
 
-{% block content %}
+  {% block content %}
 
-<h2>喜愛公司的收藏</h2>
-{% if favorites %}
+    <h2>喜愛公司的收藏</h2>
+      {% if favorites %}
+        {%  for favorite in favorites %}
+          <li>
+            <a href="{% url 'companies:show' favorite.company.id %}">公司名稱：{{favorite.company.title}}</a>
+            <form action="{%  url 'users:favorite_company_delete' favorite.id %}" method="POST" >
+              {% csrf_token %}
+              <button>取消收藏</button>
+            </form>
+            {% endfor %}
+          </li>
 
-{%  for favorite in favorites %}
-<li>
-<a href="{% url 'companies:show' favorite.company.id %}">公司名稱：{{favorite.company.title}}</a>
-<form action="{%  url 'users:favorite_company_delete' favorite.id %}" method="POST" >
-  {% csrf_token %}
-<button>取消收藏</button>
-
-</form>
-
-
-{% endfor %}
-
-</li>
-
-{%else%}
-<p>沒有收藏公司? 趕快點我去<a href="{% url 'companies:index' %}">尋找!!!</a></p>
-
-{%endif%}
-{% endblock%}
+      {%else%}
+    <p>沒有收藏公司? 趕快點我去<a href="{% url 'companies:index' %}">尋找!!!</a></p>
+    {%endif%}
+  {% endblock%}
