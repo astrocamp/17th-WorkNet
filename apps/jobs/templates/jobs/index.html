@@ -15,6 +15,7 @@
             <div class="flex gap-2">
                 <a class="btn btn-primary text-white btn-sm" href="{% url 'jobs:edit' job.id %}">編輯</a>
                 <a class="btn btn-secondary text-white btn-sm" href="{% url 'users:favorite' job.id %}">收藏</a>
+                <a class="btn btn-secondary text-white btn-sm" href="{% url 'users:apply_jobs' job.id %}" >應徵</a>
                 <form method="POST" action="{% url 'jobs:delete' job.id %}">
                     {% csrf_token %}
                     <button class="btn btn-error text-white btn-sm">刪除</button>
@@ -24,4 +25,5 @@
         {% endfor %}
     </ul>
 </div>
+
 {% endblock %}
