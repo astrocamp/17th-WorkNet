@@ -164,7 +164,7 @@ def line_save_profile(backend, user, response, *args, **kwargs):
 @login_required
 def login_redirect(request):
     user = request.user
-    if user.type == 1:
+    if user.type == 1:  # 1為個人用戶
         return redirect("users:info", user.id)
     else:
         return redirect("companies:index")
