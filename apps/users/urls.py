@@ -35,4 +35,6 @@ urlpatterns = [
         views.favorite_company_delete,
         name="favorite_company_delete",
     ),
+    path("<int:job_id>/apply/", views.apply_jobs, name="apply_jobs"),
+    path("<int:job_id>/submit", views.submit_jobs, name="submit_jobs"),
 ]

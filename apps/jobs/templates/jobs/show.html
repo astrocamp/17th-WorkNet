@@ -1,5 +1,5 @@
 {% extends "layouts/base.html" %} {% block content %}
-<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
     <h1 class="text-3xl font-bold">{{ job.title }}</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
@@ -7,6 +7,14 @@
         <li>{{ job.description }}</li>
         <li>{{ job.location }}</li>
       </ul>
-    <a class="btn btn-primary text-white min-w-20" href="{% url 'jobs:index' %}">返回列表</a>
+      <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
+        {% csrf_token%}
+        <input type="hidden" name="job_id" value="{{ job.id }}">
+        <button>應徵此工作</button>
+      </form>
+    <a class="text-white btn btn-primary min-w-20" href="{% url 'jobs:index' %}">返回列表</a>
 </div>
+
+
+
 {% endblock %}
