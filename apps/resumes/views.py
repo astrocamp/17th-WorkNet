@@ -8,7 +8,7 @@ from .models import Resume
 
 @login_required
 def index(request):
-    resumes = Resume.objects.filter(user=request.user).order_by("-uploaded_at")
+    resumes = Resume.objects.filter(userinfo=request.user.userinfo).order_by("-uploaded_at")
     return render(request, "resumes/index.html", {"resumes": resumes})
 
 
@@ -18,7 +18,7 @@ def upload(request):
         form = ResumeForm(request.POST, request.FILES)
         if form.is_valid():
             resume = form.save(commit=False)
-            resume.user = request.user
+            resume.userinfo = request.user.userinfo
             resume.save()
             return redirect("resumes:index")
     else:

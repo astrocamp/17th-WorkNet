@@ -1,6 +1,7 @@
 {% extends "layouts/base.html" %}
 {% block content %}
 <h2>我的履歷</h2>
+<p>你總共有 {{ resumes|length }} 份履歷。</p> 
     {% if resumes %}
         <ul>
             {% for resume in resumes %}

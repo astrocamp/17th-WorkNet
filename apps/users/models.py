@@ -17,7 +17,7 @@ class User(AbstractUser):
 
 class UserInfo(TimeStampedModel):
 
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE, blank=False)
+    user = models.OneToOneField(to=User, on_delete=models.CASCADE, blank=False)
     nickname = models.CharField(max_length=30, null=True, blank=True)
     tel = models.CharField(max_length=15, null=True, blank=True)
     location = models.CharField(
