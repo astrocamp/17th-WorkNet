@@ -77,6 +77,7 @@ def index(request):
             user = form.save()
 
             if user is not None:
+                user.backend = "django.contrib.auth.backends.ModelBackend"
                 login(request, user)
                 messages.success(request, "註冊成功並已登入")
                 if user.type == 1:
@@ -105,6 +106,7 @@ def sign_in(request):
         user = authenticate(username=username, password=password)
 
         if user is not None:
+            user.backend = "django.contrib.auth.backends.ModelBackend"
             login(request, user)
             messages.success(request, "登入成功")
             if next_url:
