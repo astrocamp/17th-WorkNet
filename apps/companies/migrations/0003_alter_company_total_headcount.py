@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('companies', '0002_company_average_score'),
+        ("companies", "0002_company_average_score"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='company',
-            name='total_headcount',
+            model_name="company",
+            name="total_headcount",
             field=models.PositiveIntegerField(),
         ),
     ]

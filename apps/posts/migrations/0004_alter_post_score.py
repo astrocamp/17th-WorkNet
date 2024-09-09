@@ -14,7 +14,8 @@ class Migration(migrations.Migration):
             model_name="post",
             name="score",
             field=models.PositiveSmallIntegerField(
-                choices=[(1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")], default=1
+                choices=[(1, "1"), (2, "2"), (3, "3"), (4, "4"), (5, "5")],
+                default=1,
             ),
         ),
     ]

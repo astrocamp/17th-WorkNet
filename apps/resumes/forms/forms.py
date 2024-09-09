@@ -1,5 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.forms.widgets import FileInput
 
 from apps.resumes.models import Resume
 
@@ -10,6 +11,9 @@ class ResumeForm(forms.ModelForm):
         fields = [
             "file",
         ]
+        widgets = {
+            "file": FileInput(attrs={"class": "w-full mt-1 input-often-base"}),
+        }
 
     def clean_file(self):
         file = self.cleaned_data.get("file")
