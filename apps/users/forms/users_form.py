@@ -30,10 +30,16 @@ class UserInfoForm(ModelForm):
         }
 
         widgets = {
-            "nickname": TextInput(attrs={"required": "required"}),
-            "tel": TextInput(attrs={"pattern": r"\d{10,15}"}),
-            "location": Select(),
-            "birth": DateInput(attrs={"type": "date"}),
+            "nickname": TextInput(
+                attrs={"required": "required", "class": "w-full mt-1 input-often-base"}
+            ),
+            "tel": TextInput(
+                attrs={"pattern": r"\d{10,15}", "class": "w-full mt-1 input-often-base"}
+            ),
+            "location": Select(attrs={"class": "w-full mt-1 input-often-base"}),
+            "birth": DateInput(
+                attrs={"type": "date", "class": "w-full mt-1 input-often-base"}
+            ),
         }
 
 

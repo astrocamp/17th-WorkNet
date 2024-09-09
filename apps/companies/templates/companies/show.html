@@ -1,13 +1,12 @@
-
 {% extends "layouts/base.html" %} {% block content %}
-
-<h1>詳細</h1>
-
-<ul>
-  <li>{{ company.title }}</li>
-  <li>{{ company.tel }}</li>
-  <li>{{ company.url }}</li>
-</ul>
-
-<a href="{% url 'companies:index' %}">返回列表</a>
+<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+  <h1 class="text-3xl font-bold">{{ company.title }}</h1>
+</div>
+<div class="container p-5 pb-24 mx-auto">
+  <ul class="mb-4">
+    <li>{{ company.tel }}</li>
+    <li>{{ company.url }}</li>
+  </ul>
+  <a class="btn btn-primary text-white min-w-20" href="{% url 'companies:index' %}">返回列表</a>
+</div>
 {% endblock %}

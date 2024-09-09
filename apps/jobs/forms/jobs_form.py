@@ -20,14 +20,16 @@ class JobForm(ModelForm):
         ]
 
         widgets = {
-            "title": TextInput(attrs={"class": "form-control"}),
-            "description": Textarea(attrs={"class": "form-control"}),
-            "location": Select(attrs={"class": "form-control"}),
-            "type": TextInput(attrs={"class": "form-control"}),
-            "skills": Textarea(attrs={"class": "form-control"}),
-            "contact_info": Textarea(attrs={"class": "form-control"}),
-            "salary_range": TextInput(attrs={"class": "form-control"}),
-            "tenure": NumberInput(attrs={"class": "form-control"}),
+            "title": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
+            "description": Textarea(attrs={"class": "w-full mt-1 textarea-often-base"}),
+            "location": Select(attrs={"class": "w-full mt-1 input-often-base"}),
+            "type": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
+            "skills": Textarea(attrs={"class": "w-full mt-1 textarea-often-base"}),
+            "contact_info": Textarea(
+                attrs={"class": "w-full mt-1 textarea-often-base"}
+            ),
+            "salary_range": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
+            "tenure": NumberInput(attrs={"class": "w-full mt-1 input-often-base"}),
         }
 
         labels = {

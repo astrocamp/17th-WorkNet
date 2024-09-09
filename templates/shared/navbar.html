@@ -1,6 +1,6 @@
 
 <nav
-  class="fixed top-0 left-0 w-full p-4 shadow bg-base-100 box-border z-40 min-h-20 flex items-center"
+  class="fixed top-0 left-0 w-full p-4 shadow-md bg-base-100 box-border z-40 min-h-20 flex items-center"
 >
   <div class="absolute left-4 top-1/2 -translate-y-1/2">
     <a href="{% url 'users:index' %}" class="text-xl font-bold">WorkNet</a>
@@ -28,16 +28,16 @@
       <div class="flex gap-2 text-sm">
         <div class="relative group flex items-center">
           <div class="cursor-pointer"><h2>{{ request.user }}，您好</h2></div>
-          <div class="absolute top-12 hidden w-full text-center bg-white shadow-lg p-3 divide-y divide-slate-200 rounded-xl group-hover:block">
+          <div class="absolute top-12 hidden left-1/2 -translate-x-1/2 text-center bg-white shadow-lg p-3 divide-y divide-slate-200 rounded-xl group-hover:block">
             {% if request.user.type == 1 %}
-              <a class="block py-2" href="{% url 'users:info' request.user.pk %}">會員資料</a>
-              <a class="block py-2" href="{% url 'users:favorites_list' %}">我的收藏</a>
+              <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'users:info' request.user.pk %}">會員資料</a>
+              <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'users:favorites_list' %}">我的收藏</a>
             {% elif request.user.type == 2 %}
-              <a class="block py-2" href="{% url 'companies:index' %}">公司資料</a>
+              <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'companies:index' %}">公司資料</a>
             {%endif%}
           </div>
-        </div> 
-          
+        </div>
+
         <form action="{% url 'users:sign_out' %}" method="POST">
           {% csrf_token %}
           <button class="btn bg-red-500 text-white min-w-20 hover:bg-red-400">登出</button>

@@ -1,21 +1,25 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<h1>公司欄位首頁</h1>
-
-<a href="{% url 'companies:new' %}">新增</a>
-
-<ul>
-
-    {% for company in companies %}
-        <li>
-            <a href="{% url 'companies:show' company.id %}">{{ company.title }} {{ company.average_score }}</a>
-            <a href="{% url 'companies:edit' company.id %}">編輯</a>
-            <form method="post" action="{% url 'companies:delete' company.id %}">
-                {% csrf_token %}
-                <button>刪除</button>
-            </form>
-        </li>
-    {% endfor %}
-
-</ul>
+<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+    <h1 class="text-3xl font-bold">公司首頁</h1>
+</div>
+<div class="container p-5 pb-24 mx-auto">
+    <a class="btn btn-primary text-white min-w-20" href="{% url 'companies:new' %}">新增公司</a>
+    <ul class="mt-6 divide-y divide-slate-200">
+        {% for company in companies %}
+            <li class="flex gap-2 p-5">
+                <div class="flex-1">
+                    <a href="{% url 'companies:show' company.id %}">{{ company.title }} {{ company.average_score }}</a>
+                </div>
+                <div class="flex gap-2">
+                    <a class="btn btn-primary text-white btn-sm" href="{% url 'companies:edit' company.id %}">編輯</a>
+                    <form method="post" action="{% url 'companies:delete' company.id %}">
+                        {% csrf_token %}
+                        <button class="btn btn-error text-white btn-sm">刪除</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

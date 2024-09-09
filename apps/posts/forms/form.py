@@ -1,4 +1,5 @@
 from django import forms
+from django.forms.widgets import Select, Textarea, TextInput
 
 from apps.posts.models import Comment, Post
 
@@ -11,6 +12,11 @@ class PostForm(forms.ModelForm):
             "content",
             "score",
         ]
+        widgets = {
+            "title": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
+            "content": Textarea(attrs={"class": "w-full mt-1 textarea-often-base"}),
+            "score": Select(attrs={"class": "w-full mt-1 input-often-base"}),
+        }
         labels = {
             "title": "標題",
             "content": "內文",
@@ -24,6 +30,9 @@ class CommentForm(forms.ModelForm):
         fields = [
             "content",
         ]
+        widgets = {
+            "content": Textarea(attrs={"class": "w-full mt-1 textarea-often-base"}),
+        }
         labels = {
-            "content": "內文",
+            "content": "您想說些什麼",
         }

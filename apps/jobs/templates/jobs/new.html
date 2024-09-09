@@ -1,11 +1,17 @@
 {% extends "layouts/base.html" %} {% block content %}
-<h1>新增職缺</h1>
-<form method="POST" action="{% url 'jobs:index' %}">
-  {% csrf_token %} {% for field in form %}
-  <div>{{ field.label }} {{ field }} {{ field.errors }}</div>
-  {% endfor %}
-  <div>
-    <button>新增</button>
-  </div>
-</form>
+<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+  <h1 class="text-3xl font-bold">新增職缺</h1>
+</div>
+<div class="container p-5 pb-24 mx-auto">
+  <form method="POST" action="{% url 'jobs:index' %}">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="mt-4">{{ field.label }} {{ field }} {{ field.errors }}</div>
+    {% endfor %}
+    <div class="mt-4 flex gap-4">
+      <button class="btn btn-primary text-white min-w-20">新增</button>
+      <a class="btn btn-neutral text-white min-w-20" href="{% url 'jobs:index' %}">回到列表</a>
+    </div>
+  </form>
+</div>
 {% endblock %}

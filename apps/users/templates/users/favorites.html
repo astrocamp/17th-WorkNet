@@ -1,19 +1,28 @@
+{% extends "layouts/base.html" %}
 {% block content %}
-    <h1>我的收藏</h1>
+<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+    <h1 class="text-3xl font-bold">我的收藏</h1>
+</div>
+<div class="container p-5 pb-24 mx-auto">
     {% if favorites %}
-        <ul>
+        <ul class="mt-6 divide-y divide-slate-200">
             {% for favorite in favorites %}
-                <li>
-                    <a href="{% url 'jobs:show' favorite.job.id %}">職缺名稱: {{ favorite.job.title }}</a>
-                    <p>工作地點: {{ favorite.job.get_location_display }}</p>
-                    <form method="POST" action="{% url 'users:favorites_delete' favorite.id %}">
-                        {% csrf_token %}
-                        <button>取消收藏</button>
-                    </form>
+                <li class="flex gap-2 p-5">
+                    <div class="flex-1">
+                        <a href="{% url 'jobs:show' favorite.job.id %}">職缺名稱: {{ favorite.job.title }}</a>
+                        <p>工作地點: {{ favorite.job.get_location_display }}</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <form method="POST" action="{% url 'users:favorites_delete' favorite.id %}">
+                            {% csrf_token %}
+                            <button class="btn btn-error text-white btn-sm">取消收藏</button>
+                        </form>
+                    </div>
                 </li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>沒有收藏職缺? 趕快點我去<a href="{% url 'jobs:index' %}">尋找!!!</a></p>
+        <p>沒有收藏職缺? <a class="btn btn-link" href="{% url 'jobs:index' %}">趕快點我去尋找!!!</a></p>
     {% endif %}
+</div>
 {% endblock %}
