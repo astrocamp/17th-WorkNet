@@ -6,7 +6,16 @@ module.exports = {
       active: 'active~="true"',
       disabled: 'disabled~="true"',
     },
-    extend: {},
+    extend: {
+      container: {
+        screens: {
+          sm: '100%',
+          md: '100%',
+          lg: '1024px',
+          xl: '1280px',
+        },
+      },
+    },
   },
   plugins: [
     require('daisyui'),
@@ -15,7 +24,9 @@ module.exports = {
     themes: [
       {
         corporate: {
-          "primary": "#007bff", 
+          "primary": "#007bff",
+          "secondary":"#00336b",
+          "neutral":"#000000",
         },
       },
     ],

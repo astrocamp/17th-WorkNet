@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from django.forms.widgets import EmailInput, NumberInput, Textarea, TextInput, URLInput
 
 from apps.companies.models import Company
 
@@ -16,6 +17,21 @@ class CompanyForm(ModelForm):
             "name",
             "email",
         ]
+
+        widgets = {
+            "title": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
+            "tel": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
+            "url": URLInput(attrs={"class": "w-full mt-1 input-often-base"}),
+            "address": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
+            "describe": Textarea(attrs={"class": "w-full mt-1 textarea-often-base"}),
+            "total_headcount": NumberInput(
+                attrs={"class": "w-full mt-1 input-often-base"}
+            ),
+            "name": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
+            "email": EmailInput(attrs={"class": "w-full mt-1 input-often-base"}),
+            "owner_tel": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
+        }
+
         labels = {
             "title": "公司名稱",
             "tel": "公司電話",

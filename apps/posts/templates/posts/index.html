@@ -1,25 +1,31 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<h1>評論列表</h1>
-{% if request.user.is_authenticated %}
-<a href="{% url 'posts:new' %}">新增評論</a>
-{% endif %}
-<ul>
-  {% for post in posts %}
-  <li>
-    <a href="{% url 'posts:show' post.id %}">{{ post.title }} {{ post.score }}</a>
-    <a href="{% url 'posts:edit' post.id %}">修改</a>
-    <form
-      action="{% url 'posts:delete' post.id %}"
-      method="POST"
-      hx-post="{% url 'posts:delete' post.id %}"
-      hx-confirm="確認刪除？"
-      hx-target="body"
-    >
-      {% csrf_token %}
-      <button type="submit">刪除</button>
-    </form>
-  </li>
-  {% endfor %}
-</ul>
+<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+  <h1 class="text-3xl font-bold">評論列表</h1>
+</div>
+<div class="container p-5 pb-24 mx-auto">
+  <a class="btn btn-primary text-white min-w-20" href="{% url 'posts:new' %}">新增評論</a>
+  <ul class="mt-6 divide-y divide-slate-200">
+    {% for post in posts %}
+    <li class="flex gap-2 p-5">
+      <div class="flex-1">
+        <a href="{% url 'posts:show' post.id %}">{{ post.title }} {{ post.score }}</a>
+      </div>
+      <div class="flex gap-2">
+        <a class="btn btn-primary text-white btn-sm" href="{% url 'posts:edit' post.id %}">編輯</a>
+        <form
+          action="{% url 'posts:delete' post.id %}"
+          method="POST"
+          hx-post="{% url 'posts:delete' post.id %}"
+          hx-confirm="確認刪除？"
+          hx-target="body"
+        >
+          {% csrf_token %}
+          <button class="btn btn-error text-white btn-sm" type="submit">刪除</button>
+      </div>
+      </form>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock %}

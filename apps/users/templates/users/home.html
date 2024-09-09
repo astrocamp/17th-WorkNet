@@ -1,27 +1,15 @@
 {% extends "layouts/base.html" %} {% block content %}
 <div class="flex items-center justify-center min-h-screen p-4">
-  <form
-    action="#"
-    method="GET"
-    class="flex items-center w-full max-w-4xl p-4 space-x-2 bg-white rounded-lg shadow-md"
-  >
-    <input
-      type="text"
-      name="keywords"
-      placeholder="輸入工作名稱或公司"
-      class="flex-1 px-4 py-2 border border-gray-300 shadow-sm rounded-l-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-    />
-    <input
-      type="text"
-      name="location"
-      placeholder="輸入地點"
-      class="flex-1 px-4 py-2 border border-gray-300 shadow-sm rounded-r-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-    />
-    <button
-      class="px-4 py-2 font-bold text-white bg-blue-900 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-    >
-      搜尋
-    </button>
+  <form action="#" method="GET" class="flex items-center w-full max-w-4xl p-4 space-x-2 bg-white rounded-lg shadow-md">
+    <div class="flex-1">
+      <input type="text" name="keywords" placeholder="輸入工作名稱或公司" class="w-full mt-1 input-often-base" />
+    </div>
+    <div class="flex-1">
+      <input type="text" name="location" placeholder="輸入地點" class="w-full mt-1 input-often-base" />
+    </div>
+    <div>
+      <button class="w-full btn btn-primary text-white min-w-20">搜尋</button>
+    </div>
   </form>
 </div>
 {% endblock %}

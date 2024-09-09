@@ -1,21 +1,27 @@
-
-{% include "layouts/base.html" %}
+{% extends "layouts/base.html" %}
 {% block content %}
-<h1>職缺</h1>
-<a href="{% url 'jobs:new' %}">新增職缺</a>
-<ul>
-    {% for job in jobs %}
-    <li>
-        {{ job.title }}
-        <a href="{% url 'jobs:show' job.id %}">{{ job.get_location_display }}</a>
-        <a href="{% url 'jobs:edit' job.id %}">編輯</a>
-        <a href="{% url 'users:favorite' job.id %}">收藏</a>
-        <form method="POST" action="{% url 'jobs:delete' job.id %}">
-            {% csrf_token %}
-            <button>刪除</button>
-        </form>
-    </li>
-    {% endfor %}
-
-</ul>
+<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+    <h1 class="text-3xl font-bold">職缺</h1>
+</div>
+<div class="container p-5 pb-24 mx-auto">
+    <a class="btn btn-primary text-white min-w-20" href="{% url 'jobs:new' %}">新增職缺</a>
+    <ul class="mt-6 divide-y divide-slate-200">
+        {% for job in jobs %}
+        <li class="flex gap-2 p-5">
+            <div class="flex-1">
+                {{ job.title }}
+                <a href="{% url 'jobs:show' job.id %}">{{ job.get_location_display }}</a>
+            </div>
+            <div class="flex gap-2">
+                <a class="btn btn-primary text-white btn-sm" href="{% url 'jobs:edit' job.id %}">編輯</a>
+                <a class="btn btn-secondary text-white btn-sm" href="{% url 'users:favorite' job.id %}">收藏</a>
+                <form method="POST" action="{% url 'jobs:delete' job.id %}">
+                    {% csrf_token %}
+                    <button class="btn btn-error text-white btn-sm">刪除</button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}
