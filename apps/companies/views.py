@@ -2,12 +2,17 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
+
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
 from apps.posts.forms.posts_form import PostForm
 from apps.posts.models import Post
 from lib.models.paginate import paginate_queryset
 
+
+
+
+from django.contrib import messages
 
 from apps.jobs.forms import JobForm
 from apps.jobs.models import Job
@@ -21,9 +26,13 @@ def index(request):
     if request.method == "POST":
         form = CompanyForm(request.POST)
         if form.is_valid():
+
             company = form.save(commit=False)
             company.user = request.user
             company.save()
+
+            messages.success(request, "新增成功")
+
             return redirect("companies:index")
     companies = Company.objects.order_by("-id")
 
@@ -54,6 +63,7 @@ def show(request, id):
         form = CompanyForm(request.POST, instance=company)
         if form.is_valid():
             form.save()
+            messages.success(request, "更新成功")
             return redirect("companies:show", company.id)
         else:
             return render(
@@ -70,6 +80,7 @@ def show(request, id):
 def delete(request, id):
     company = get_object_or_404(Company, id=id)
     company.mark_delete()
+    messages.success(request, "刪除成功")
     return redirect("companies:index")
 
 
@@ -139,7 +150,7 @@ def jobs_new(request, id):
         job = form.save(commit=False)
         job.company = company
         job.save()
-
+        messages.success(request, "新增成功")
         return redirect(reverse("companies:jobs_index", args=[company.id]))
     else:
         form = JobForm()
