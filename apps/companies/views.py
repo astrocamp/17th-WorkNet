@@ -73,5 +73,7 @@ def favorite_company(request, id):
         company.favorite.add(user)
 
     return render(
-        request, "companies/show.html", {"company": company, "favorited": not favorited}
+        request,
+        "companies/favorite.html",
+        {"company": company, "favorited": not favorited},
     )

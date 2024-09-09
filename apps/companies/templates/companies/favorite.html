@@ -1,0 +1,9 @@
+<form hx-post="{% url 'companies:favorite' company.id %}"
+hx-swap="outerHTML">
+  {%csrf_token%}
+  {% if favorited %}
+  <button>取消收藏</button>
+{% else %}
+  <button>收藏公司</button>
+{% endif %}
+</form>
