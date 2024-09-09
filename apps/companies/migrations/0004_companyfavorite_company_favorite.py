@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("companies", "0002_company_average_score"),
+        ("companies", "0003_rename_describe_company_description_and_more"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
