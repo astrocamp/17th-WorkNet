@@ -23,8 +23,8 @@ class CompanyForm(ModelForm):
             "tel": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
             "url": URLInput(attrs={"class": "w-full mt-1 input-often-base"}),
             "address": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
-            "describe": Textarea(attrs={"class": "w-full mt-1 textarea-often-base"}),
-            "total_headcount": NumberInput(
+            "description": Textarea(attrs={"class": "w-full mt-1 textarea-often-base"}),
+            "employees": NumberInput(
                 attrs={"class": "w-full mt-1 input-often-base"}
             ),
             "name": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
