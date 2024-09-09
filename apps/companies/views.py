@@ -1,13 +1,19 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
 from apps.posts.forms.posts_form import PostForm
 from apps.posts.models import Post
 from lib.models.paginate import paginate_queryset
 
+
+from apps.jobs.forms import JobForm
+from apps.jobs.models import Job
+
 from .forms.companies_form import CompanyForm
+
 from .models import Company
 
 
@@ -67,6 +73,7 @@ def delete(request, id):
     return redirect("companies:index")
 
 
+
 @login_required
 def favorite(request, id):
     company = get_object_or_404(Company, pk=id)
@@ -117,3 +124,24 @@ def post_new(request, id):
     else:
         form = PostForm()
     return render(request, "posts/new.html", {"form": form, "company": company})
+
+def jobs_index(request, id):
+    company = get_object_or_404(Company, id=id)
+    jobs = Job.objects.filter(company=company)
+    return render(request, "jobs/index.html", {"jobs": jobs, "company": company})
+
+
+@login_required
+def jobs_new(request, id):
+    company = get_object_or_404(Company, id=id)
+    form = JobForm(request.POST)
+    if form.is_valid():
+        job = form.save(commit=False)
+        job.company = company
+        job.save()
+
+        return redirect(reverse("companies:jobs_index", args=[company.id]))
+    else:
+        form = JobForm()
+    return render(request, "jobs/new.html", {"form": form, "company": company})
+
