@@ -14,9 +14,9 @@
                         <a href="{{ resume.file.url }}" target="_blank">{{ resume.file.name }}</a> - 上傳於 {{ resume.uploaded_at }}
                     </div>
                     <div class="flex gap-2">
-                        <form action="{% url 'resumes:delete' resume.id %}" method="POST" style="display:inline;">
+                        <form action="{% url 'resumes:delete' resume.id %}" method="POST" class="inline-block" x-data="cancle_btn" @submit.prevent="confirmDelete('確定要刪除這份履歷嗎？')">
                             {% csrf_token %}
-                            <button class="btn btn-error text-white btn-sm" type="submit" onclick="return confirm('確定要刪除這份履歷嗎？');">刪除</button>
+                            <button class="btn btn-error text-white btn-sm" type="submit">刪除</button>
                         </form>
                     </div>
                 </li>

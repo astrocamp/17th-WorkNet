@@ -1,26 +1,5 @@
-{% comment %}
-alert-success alert-warning alert-error w-6 h-6 stroke-current shrink-0
-{% endcomment %}
-
-{% load svg_icon %}
-
 {% if messages %}
-  <section id="messages" 
-    x-data="{ show: true }" 
-    x-init="setTimeout(() => show = false, 1000)" 
-    x-show="show" 
-    x-transition:leave="transition ease-in duration-1000" 
-    x-transition:leave-start="opacity-100" 
-    x-transition:leave-end="opacity-0" 
-  >
     {% for message in messages %}
-      <div role="alert" x-data class="fixed alert alert-{{ message.tags }}">
-        {{ message.tags|svg_icon }}
-        <span>{{ message }}</span>
-        <div>
-          <button @click="$root.remove()" class="btn btn-sm btn-circle">X</button>
-        </div>
-      </div>
+        <div x-data="flash_msg" data-msg="{{message}}" data-tag="{{message.tags}}"></div>
     {% endfor %}
-  </section>
 {% endif %}
