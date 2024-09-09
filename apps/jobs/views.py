@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 
 from lib.models.paginate import paginate_queryset
@@ -7,22 +8,9 @@ from .models import Job
 
 
 def index(request):
-    if request.method == "POST":
-        form = JobForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect("jobs:index")
-        else:
-            return render(request, "jobs/new.html", {"form": form})
-
     jobs = Job.objects.order_by("-id")
-    page_obj = paginate_queryset(request, jobs, 10)
-    return render(request, "jobs/index.html", {"page_obj": page_obj})
+    return render(request, "jobs/index.html", {"jobs": jobs})
 
-
-def new(request):
-    form = JobForm()
-    return render(request, "jobs/new.html", {"form": form})
 
 
 def show(request, id):
