@@ -1,25 +1,27 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
-  <h1 class="text-3xl font-bold">評論列表</h1>
+<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
+  <h1 class="text-3xl font-bold">{{ company.title }}的評論列表</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
-  <a class="btn btn-primary text-white min-w-20" href="{% url 'posts:new' %}">新增評論</a>
+  <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:post_new' company.id %}">新增評論</a>
   <ul class="mt-6 divide-y divide-slate-200">
     {% for post in posts %}
     <li class="flex gap-2 p-5">
       <div class="flex-1">
-        <a href="{% url 'posts:show' post.id %}">{{ post.title }} {{ post.score }}</a>
+        <a href="{% url 'posts:show' id=post.id %}">{{ post.title }} {{ post.score }}</a>
       </div>
       <div class="flex gap-2">
-        <a class="btn btn-primary text-white btn-sm" href="{% url 'posts:edit' post.id %}">編輯</a>
+        <a class="text-white btn btn-primary btn-sm" href="{% url 'posts:edit' id=post.id %}">編輯</a>
         <form
-          hx-post="{% url 'posts:delete' post.id %}"
+          action="{% url 'posts:delete' id=post.id %}"
+          method="POST"
+          hx-post="{% url 'posts:delete' id=post.id %}"
           hx-confirm="確認刪除？"
           hx-target="body"
         >
           {% csrf_token %}
-          <button class="btn btn-error text-white btn-sm" type="submit">刪除</button>
+          <button class="text-white btn btn-error btn-sm" type="submit">刪除</button>
       </div>
       </form>
     </li>

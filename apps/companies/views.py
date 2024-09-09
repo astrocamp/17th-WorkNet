@@ -1,6 +1,10 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
-from django.views.decorators.http import require_POST
+from django.urls import reverse
+from django.views.decorators.http import require_GET, require_http_methods, require_POST
+
+from apps.posts.forms.form import PostForm
+from apps.posts.models import Post
 
 from .forms.company_form import CompanyForm
 from .models import Company
@@ -86,3 +90,26 @@ def favorite_company(request, id):
         "companies/favorite.html",
         {"company": company, "favorited": not favorited},
     )
+
+
+def post_index(request, id):
+    company = get_object_or_404(Company, id=id)
+    posts = Post.objects.filter(company=company).order_by("-created_at")
+    return render(request, "posts/index.html", {"posts": posts, "company": company})
+
+
+@login_required
+@require_http_methods(["GET", "POST"])
+def post_new(request, id):
+    company = get_object_or_404(Company, id=id)
+    form = PostForm(request.POST)
+    if form.is_valid():
+        post = form.save(commit=False)
+        post.company = company
+        post.user = request.user
+        post.save()
+
+        return redirect(reverse("companies:post_index", args=[company.id]))
+    else:
+        form = PostForm()
+    return render(request, "posts/new.html", {"form": form, "company": company})

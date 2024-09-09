@@ -2,13 +2,16 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseNotAllowed
+from django.shortcuts import get_object_or_404, redirect, render, reverse
+from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
+from apps.companies.models import Company
 
 from .forms.form import CommentForm, PostForm
 from .models import Comment, LikeLog, Post
 
 
-@require_GET
 def index(request):
     posts = Post.objects.order_by("-created_at")
     return render(request, "posts/index.html", {"posts": posts})
@@ -19,14 +22,13 @@ def show(request, id):
     post = get_object_or_404(Post, id=id)
     comments = post.comments.order_by("-created_at")
 
-    if request.method == "POST":
-        comment_form = CommentForm(request.POST)
-        if comment_form.is_valid():
-            comment = comment_form.save(commit=False)
-            comment.post = post
-            comment.user = request.user
-            comment.save()
-            return redirect("posts:show", id=post.id)
+    comment_form = CommentForm(request.POST)
+    if comment_form.is_valid():
+        comment = comment_form.save(commit=False)
+        comment.post = post
+        comment.user = request.user
+        comment.save()
+        return redirect("posts:show", id=post.id)
     else:
         comment_form = CommentForm()
 
@@ -64,14 +66,13 @@ def new(request):
 @require_http_methods(["GET", "POST"])
 def edit(request, id):
     post = get_object_or_404(Post, id=id)
+    company = post.company
 
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
-            updated_post = form.save(commit=False)
-            updated_post.user = post.user
-            updated_post.save()
-            return redirect("posts:index")
+            form.save()
+            return redirect(reverse("companies:post_index", args=[company.id]))
     else:
         form = PostForm(instance=post)
 
@@ -82,12 +83,13 @@ def edit(request, id):
 @require_POST
 def delete(request, id):
     post = get_object_or_404(Post, id=id)
+    company = post.company
     post.mark_delete()
-    return redirect("posts:index")
+    return redirect(reverse("companies:post_index", args=[company.id]))
 
 
 @login_required
-@require_POST
+@require_http_methods(["GET", "POST"])
 def comment_delete(request, id):
     comment = get_object_or_404(Comment, id=id)
     comment.mark_delete()
