@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import JobForm
+from .forms.jobs_form import JobForm
 from .models import Job
 
 
