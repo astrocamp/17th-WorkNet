@@ -48,7 +48,7 @@
     <ul>
         {% for comment in comments %}
             <li>
-                {{ comment.content|linebreaksbr }}<br>
+                {{ comment.content|linebreaksbr }}
                 <small>{{ comment.created_at|date:"Y/m/d H:i" }}</small>
                 <form method="post" action="{% url 'posts:comment_delete' comment.id %}" hx-post="{% url 'posts:comment_delete' comment.id %}"
                     hx-confirm="確認刪除？"
@@ -61,7 +61,7 @@
     </ul>
 {% else %}
 <p>尚無留言</p>
-<a href="{% url 'posts:index' %}">回到列表</a>
+<a href="{% url 'companies:post_index' post.company.id %}">回到列表</a>
 {% endif %}
 
 <h4>新增留言</h4>
