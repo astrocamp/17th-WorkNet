@@ -1,20 +1,28 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<h2>我的履歷</h2>
+<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+    <h1 class="text-3xl font-bold">我的履歷</h1>
+</div>
+<div class="container p-5 pb-24 mx-auto">
     {% if resumes %}
-        <ul>
+        <ul class="mt-6 divide-y divide-slate-200">
             {% for resume in resumes %}
-                <li>
-                    <a href="{{ resume.file.url }}" target="_blank">{{ resume.file.name }}</a> - 上傳於 {{ resume.uploaded_at }}
-                    <form action="{% url 'resumes:delete' resume.id %}" method="POST" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit" onclick="return confirm('確定要刪除這份履歷嗎？');">刪除</button>
-                    </form>
+                <li class="flex gap-2 p-5">
+                    <div class="flex-1">
+                        <a href="{{ resume.file.url }}" target="_blank">{{ resume.file.name }}</a> - 上傳於 {{ resume.uploaded_at }}
+                    </div>
+                    <div class="flex gap-2">
+                        <form action="{% url 'resumes:delete' resume.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button class="btn btn-error text-white btn-sm" type="submit" onclick="return confirm('確定要刪除這份履歷嗎？');">刪除</button>
+                        </form>
+                    </div>
                 </li>
             {% endfor %}
         </ul>
     {% else %}
-        <p>尚無履歷</p>
+        <div class="text-center py-5"><p>尚無履歷</p></div>
     {% endif %}
-<a href="{% url 'resumes:upload' %}">上傳履歷</a>
+    <a class="btn btn-primary text-white" href="{% url 'resumes:upload' %}">上傳履歷</a>
+</div>
 {% endblock %}

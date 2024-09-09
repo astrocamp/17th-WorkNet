@@ -38,7 +38,8 @@ class Migration(migrations.Migration):
             options={
                 "indexes": [
                     models.Index(
-                        fields=["deleted_at"], name="companies_c_deleted_99a40f_idx"
+                        fields=["deleted_at"],
+                        name="companies_c_deleted_99a40f_idx",
                     )
                 ],
             },

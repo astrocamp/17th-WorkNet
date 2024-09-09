@@ -53,7 +53,9 @@ class Job(SoftDeletetable, models.Model):
 
 class JobFavorite(models.Model):
     user = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="user_favorite"
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="user_favorite",
     )
     job = models.ForeignKey(Job, on_delete=models.CASCADE, related_name="favorited_by")
     favorited_at = models.DateTimeField(auto_now_add=True)

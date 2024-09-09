@@ -35,7 +35,9 @@ def show(request, id):
             return redirect("companies:show", company.id)
         else:
             return render(
-                request, "companies/edit.html", {"form": form, "company": company}
+                request,
+                "companies/edit.html",
+                {"form": form, "company": company},
             )
 
     company = get_object_or_404(Company, id=id)
