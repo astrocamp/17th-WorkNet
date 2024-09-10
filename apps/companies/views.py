@@ -1,6 +1,8 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
+
 
 
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
@@ -13,6 +15,9 @@ from lib.models.paginate import paginate_queryset
 
 
 from django.contrib import messages
+
+
+
 
 from apps.jobs.forms import JobForm
 from apps.jobs.models import Job
