@@ -45,18 +45,9 @@
 
 <h3>留言</h3>
 {% if comments.exists %}
-    <ul>
+    <ul id="comments">
         {% for comment in comments %}
-            <li>
-                {{ comment.content|linebreaksbr }}
-                <small>{{ comment.created_at|date:"Y/m/d H:i" }}</small>
-                <form method="post" action="{% url 'posts:comment_delete' comment.id %}" hx-post="{% url 'posts:comment_delete' comment.id %}"
-                    hx-confirm="確認刪除？"
-                    hx-target="body">
-                    {% csrf_token %}
-                    <button type="submit">刪除留言</button>
-                </form>
-            </li>
+            {% include "posts/comment.html" with comment=comment %}
         {% endfor %}
     </ul>
 {% else %}
@@ -65,7 +56,13 @@
 {% endif %}
 
 <h4>新增留言</h4>
-<form method="post" action="{% url 'posts:show' post.id %}">
+<form
+        hx-target="#comments"
+        hx-swap="afterbegin"
+        x-data="resume_comment"
+        hx-confirm="確認送出留言？"
+        hx-on::after-request="this.reset()"
+        hx-post="{% url 'posts:show' post.id %}">
     {% csrf_token %}
     {{ comment_form.as_p }}
     <button type="submit">確定</button>

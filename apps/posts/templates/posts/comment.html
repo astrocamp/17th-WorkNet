@@ -1,4 +1,4 @@
-<li class="flex bg-gray-100 p-4 rounded-2xl">
+<li class="flex p-4 bg-gray-100 rounded-2xl">
     <div class="flex-1">
         {% if comment.user %}
             <small class="font-bold text-slate-500">{{ comment.user }}</small>
@@ -7,7 +7,7 @@
         <small>{{ comment.created_at|date:"Y/m/d H:i" }}</small>
     </div>
     {% if comment.user == request.user %}
-        <button class="btn btn-error text-white btn-sm"
+        <button class="text-white btn btn-error btn-sm"
                 hx-delete="{% url 'posts:comment_delete' comment.id %}"
                 hx-confirm="確認刪除？"
                 hx-target="closest li"

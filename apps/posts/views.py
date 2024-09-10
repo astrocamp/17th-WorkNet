@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST, require_GET, require_http_methods
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseNotAllowed
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.views.decorators.http import require_http_methods, require_POST
 
@@ -17,16 +17,21 @@ def show(request, id):
     post = get_object_or_404(Post, id=id)
     comments = post.comments.order_by("-created_at")
 
-    comment_form = CommentForm(request.POST)
-    if comment_form.is_valid():
-        comment = comment_form.save(commit=False)
-        comment.post = post
-        comment.user = request.user
-        comment.save()
-        return redirect("posts:show", id=post.id)
-    else:
-        comment_form = CommentForm()
+    if request.method == "POST":
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.user = request.user
+            comment.save()
 
+            return render(
+                request,
+                "posts/comment.html",
+                {"comment": comment},
+            )
+
+    comment_form = CommentForm()
     is_like, is_dislike = get_reaction_status(post, request)
 
     return render(
