@@ -21,9 +21,6 @@
 - Third-Party Login：Google, Line
 - Web Services：Amazon Web Services (AWS) S3
 - Email：Mail Gun
-- Third-party login：Google, Line
-- Web Services：Amazon Web Services (AWS) S3
-- Email sending：Mail Gun
 
 ## Team
 
