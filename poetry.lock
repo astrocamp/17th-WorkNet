@@ -32,7 +32,6 @@ tests = ["mypy (>=0.800)", "pytest", "pytest-asyncio"]
 name = "boto3"
 version = "1.35.15"
 
-
 description = "The AWS SDK for Python"
 optional = false
 python-versions = ">=3.8"
@@ -53,7 +52,9 @@ crt = ["botocore[crt] (>=1.21.0,<2.0a0)"]
 [[package]]
 name = "botocore"
 
+
 version = "1.35.15"
+
 
 description = "Low-level, data-driven core of boto 3."
 optional = false
@@ -1098,5 +1099,12 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
+
 content-hash = "1e0ec6d801b33faa6e7030c50dcee7c9ab3186f82a6b4cdfd22cf01df34415ba"
+
+
+
+
+
+
 

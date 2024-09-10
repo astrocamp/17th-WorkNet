@@ -10,7 +10,8 @@
     {% endfor %}
     <div class="flex gap-4 mt-4">
       <button class="text-white btn btn-primary min-w-20">新增</button>
-      <a class="text-white btn btn-neutral min-w-20" href="{% url ''companies:jobs_new' company.id %}">回到列表</a>
+      <a class="text-white btn btn-neutral min-w-20" href="{% url 'companies:jobs_new' company.id %}">回到列表</a>
     </div>
   </form>
 </div>
+{% endblock %}
