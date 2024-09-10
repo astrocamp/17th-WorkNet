@@ -3,16 +3,18 @@
 <div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
     <h1 class="text-3xl font-bold">公司首頁</h1>
 </div>
+
 <div class="container p-5 pb-24 mx-auto">
     <ul class="mt-6 divide-y divide-slate-200">
-        {% for company in companies %}
+        {% for item in favorited_status %}
             <li class="flex gap-2 p-5">
                 <div class="flex-1">
-                    <a href="{% url 'companies:show' company.id %}">{{ company.title }} {{ company.average_score }}</a>
+                    <a href="{% url 'companies:show' item.company.id %}">{{ item.company.title }}</a>
                 </div>
                 <div class="flex gap-2">
-                    <a class="text-white btn btn-primary btn-sm" href="{% url 'companies:edit' company.id %}">編輯</a>
-                    <form method="post" action="{% url 'companies:delete' company.id %}">
+                    <a class="text-white btn btn-primary btn-sm" href="{% url 'companies:edit' item.company.id %}">編輯</a>
+                    {%include "companies/favorite.html" with company=item.company favorited=item.favorited only %}
+                    <form method="post" action="{% url 'companies:delete' item.company.id %}">
                         {% csrf_token %}
                         <button class="text-white btn btn-error btn-sm">刪除</button>
                     </form>
@@ -21,4 +23,5 @@
         {% endfor %}
     </ul>
 </div>
+
 {% endblock %}

@@ -15,7 +15,15 @@ def index(request):
             company.save()
             return redirect("companies:index")
     companies = Company.objects.order_by("-id")
-    return render(request, "companies/index.html", {"companies": companies})
+    favorited_status = [
+        {"company": company, "favorited": company.is_favorited_by(request.user)}
+        for company in companies
+    ]
+    return render(
+        request,
+        "companies/index.html",
+        {"favorited_status": favorited_status, "companies": companies},
+    )
 
 
 def new(request):
@@ -67,6 +75,7 @@ def favorite_company(request, id):
     company = get_object_or_404(Company, pk=id)
     user = request.user
     favorited = company.is_favorited_by(user)
+
     if favorited:
         company.favorite.remove(user)
     else:
