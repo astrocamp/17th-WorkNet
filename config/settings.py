@@ -49,7 +49,9 @@ SECRET_KEY = os.getenv("APP_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = is_dev()
 
-ALLOWED_HOSTS = []
+NGROK_HOSTS = os.getenv("NGROK_HOSTS")
+
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", NGROK_HOSTS]
 AUTH_USER_MODEL = "users.User"
 
 # Application definition

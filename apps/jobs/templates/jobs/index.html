@@ -13,7 +13,7 @@
     <ul class="mt-6 divide-y divide-slate-200">
         {% for job in page_obj %}
         <a class="text-white btn btn-primary min-w-20" href="{% url "companies:jobs_new" job.company.id %}">新增職缺</a>
-        
+
         <li class="flex gap-2 p-5">
             <div class="flex-1">
                 {{ job.title }}
