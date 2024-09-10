@@ -12,7 +12,7 @@ def index(request):
             return redirect("jobs:index")
         else:
             return render(request, "jobs/new.html", {"form": form})
-    jobs = Job.objects.all()
+    jobs = Job.objects.order_by("-id")
     return render(request, "jobs/index.html", {"jobs": jobs})
 
 
