@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
-from apps.posts.forms.form import PostForm
+from apps.posts.forms.posts_form import PostForm
 from apps.posts.models import Post
 
 from .forms.company_form import CompanyForm
