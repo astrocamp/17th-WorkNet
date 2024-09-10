@@ -201,6 +201,7 @@ def favorites_delete(request, id):
     favorite.delete()
     return redirect("users:favorites_list")
 
+
 def record(request, id):
     info = get_object_or_404(UserInfo, user_id=id, user=request.user)
     posts = Post.objects.filter(user=request.user).order_by("-created_at")

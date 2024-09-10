@@ -33,18 +33,18 @@ class UserInfoForm(ModelForm):
             "nickname": TextInput(
                 attrs={
                     "required": "required",
-                    "class": "w-full mt-1 input-often-base",
+                    "class": "mt-1 input-often-base",
                 }
             ),
             "tel": TextInput(
                 attrs={
                     "pattern": r"\d{10,15}",
-                    "class": "w-full mt-1 input-often-base",
+                    "class": "mt-1 input-often-base",
                 }
             ),
-            "location": Select(attrs={"class": "w-full mt-1 input-often-base"}),
+            "location": Select(attrs={"class": "mt-1 input-often-base"}),
             "birth": DateInput(
-                attrs={"type": "date", "class": "w-full mt-1 input-often-base"}
+                attrs={"type": "date", "class": "mt-1 input-often-base"}
             ),
         }
 

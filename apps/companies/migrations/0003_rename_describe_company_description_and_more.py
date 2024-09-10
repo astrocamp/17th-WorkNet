@@ -6,26 +6,26 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('companies', '0002_company_average_score'),
+        ("companies", "0002_company_average_score"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='company',
-            old_name='describe',
-            new_name='description',
+            model_name="company",
+            old_name="describe",
+            new_name="description",
         ),
         migrations.RenameField(
-            model_name='company',
-            old_name='total_headcount',
-            new_name='employees',
+            model_name="company",
+            old_name="total_headcount",
+            new_name="employees",
         ),
         migrations.RemoveField(
-            model_name='company',
-            name='average_score',
+            model_name="company",
+            name="average_score",
         ),
         migrations.RemoveField(
-            model_name='company',
-            name='owner_tel',
+            model_name="company",
+            name="owner_tel",
         ),
     ]

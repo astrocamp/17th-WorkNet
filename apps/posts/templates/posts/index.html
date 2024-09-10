@@ -14,8 +14,6 @@
       <div class="flex gap-2">
         <a class="btn btn-primary text-white btn-sm" href="{% url 'posts:edit' post.id %}">編輯</a>
         <form
-          action="{% url 'posts:delete' post.id %}"
-          method="POST"
           hx-post="{% url 'posts:delete' post.id %}"
           hx-confirm="確認刪除？"
           hx-target="body"
