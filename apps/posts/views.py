@@ -4,17 +4,12 @@ from django.views.decorators.http import require_POST, require_GET, require_http
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, redirect, render, reverse
-from django.views.decorators.http import require_GET, require_http_methods, require_POST
+from django.views.decorators.http import require_http_methods, require_POST
 
 from apps.companies.models import Company
 
-from .forms.form import CommentForm, PostForm
+from .forms.posts_form import CommentForm, PostForm
 from .models import Comment, LikeLog, Post
-
-
-def index(request):
-    posts = Post.objects.order_by("-created_at")
-    return render(request, "posts/index.html", {"posts": posts})
 
 
 @require_http_methods(["GET", "POST"])
@@ -49,21 +44,6 @@ def show(request, id):
 
 @login_required
 @require_http_methods(["GET", "POST"])
-def new(request):
-    form = PostForm(request.POST)
-    if form.is_valid():
-        post = form.save(commit=False)
-        post.user = request.user
-        post.save()
-
-        return redirect("posts:index")
-    else:
-        form = PostForm()
-    return render(request, "posts/new.html", {"form": form})
-
-
-@login_required
-@require_http_methods(["GET", "POST"])
 def edit(request, id):
     post = get_object_or_404(Post, id=id)
     company = post.company
@@ -72,7 +52,7 @@ def edit(request, id):
         form = PostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
-            return redirect(reverse("companies:post_index", args=[company.id]))
+            return redirect(reverse("posts:show", args=[post.id]))
     else:
         form = PostForm(instance=post)
 
