@@ -1,20 +1,28 @@
 {%extends "layouts/base.html"%}
 
   {% block content %}
-
-    <h2>喜愛公司的收藏</h2>
+    <div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
+       <h1 class="text-3xl font-bold">喜愛的公司</h1>
+     </div>
+     <div class="container p-5 pb-24 mx-auto">
       {% if favorites %}
-        {%  for favorite in favorites %}
-          <li>
-            <a href="{% url 'companies:show' favorite.company.id %}">公司名稱：{{favorite.company.title}}</a>
-            <form action="{%  url 'users:favorite_company_delete' favorite.id %}" method="POST" >
-              {% csrf_token %}
-              <button>取消收藏</button>
-            </form>
+        <ul class="mt-6 divide-y divide-slate-200">
+           {%  for favorite in favorites %}
+              <li class="flex gap-2 p-5">
+                <div class="flex-1">
+                  <a href="{% url 'companies:show' favorite.company.id %}">公司名稱：{{favorite.company.title}}</a>
+                </div>
+                <div class="flex gap-2">
+                  <form action="{%  url 'users:favorite_company_delete' favorite.id %}" method="POST" >
+                    {% csrf_token %}
+                      <button class="text-white btn btn-error btn-sm">取消收藏</button>
+                  </form>
+                </div>
+              </li>
             {% endfor %}
-          </li>
-
+          </ul>
       {%else%}
-    <p>沒有收藏公司? 趕快點我去<a href="{% url 'companies:index' %}">尋找!!!</a></p>
-    {%endif%}
+        <p>沒有收藏公司? 趕快點我去<a a class="btn btn-link" href="{% url 'companies:index' %}">趕快點我去尋找!!!</a></p>
+      {%endif%}
+     </div>
   {% endblock%}
