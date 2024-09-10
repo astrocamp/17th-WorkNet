@@ -2,8 +2,8 @@
 hx-swap="outerHTML">
   {%csrf_token%}
   {% if favorited %}
-  <button>取消收藏</button>
+  <button class="text-white btn btn-secondary btn-sm">取消</button>
 {% else %}
-  <button>收藏公司</button>
+  <button class="text-white btn btn-secondary btn-sm">收藏</button>
 {% endif %}
 </form>

@@ -31,7 +31,8 @@
           <div class="absolute hidden p-3 text-center -translate-x-1/2 bg-white divide-y shadow-lg top-12 left-1/2 divide-slate-200 rounded-xl group-hover:block">
             {% if request.user.type == 1 %}
               <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'users:info' request.user.pk %}">會員資料</a>
-              <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'users:favorites_list' %}">我的收藏</a>
+              <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'users:favorites_list' %}">我的職缺收藏</a>
+              <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'users:favorites_company_list' %}">喜愛的公司</a>
               <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'resumes:index' %}">我的履歷</a>
             {% elif request.user.type == 2 %}
               <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'companies:index' %}">公司資料</a>

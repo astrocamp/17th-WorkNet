@@ -213,6 +213,7 @@ def favorites_delete(request, id):
     favorite.delete()
     return redirect("users:favorites_list")
 
+
 @login_required
 def favorite_company_list(request):
     user = request.user
