@@ -138,8 +138,10 @@ def post_new(request, id):
 
 def jobs_index(request, id):
     company = get_object_or_404(Company, id=id)
-    jobs = Job.objects.filter(company=company)
-    return render(request, "jobs/index.html", {"jobs": jobs, "company": company})
+    jobs = Job.objects.filter(company=company).order_by("-created_at")
+    page_obj = paginate_queryset(request, jobs, 10)
+
+    return render(request, "jobs/index.html", {"page_obj": page_obj, "company": company})
 
 
 @login_required
