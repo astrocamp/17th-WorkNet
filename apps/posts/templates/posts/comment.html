@@ -1,18 +1,13 @@
-<li class="chat chat-start">
-    <div class="chat-header">
-        {% if comment.user %}
-            <span>{{comment.user}}</span>
-        {% endif %}
-        <time class="text-xs opacity-50">{{ comment.created_at|date:"Y/m/d H:i" }}</time>
+<li class="flex bg-gray-100 p-4 rounded-2xl">
+    <div class="flex-1">
+        {{ comment.content }}<br>
+        <small>{{ comment.created_at|date:"Y/m/d H:i" }}</small>
     </div>
-    <div class="chat-bubble">{{ comment.content }}</div>
     {% if comment.user == request.user %}
-        <button hx-delete="{% url 'posts:comment_delete' comment.id %}"
-            hx-confirm="確認刪除？"
-            hx-target="closest li"
-            hx-swap="outerHTML"
-            class="chat-footer opacity-50">
-            刪除
-        </button>
+        <button class="btn btn-error text-white btn-sm"
+                hx-delete="{% url 'posts:comment_delete' comment.id %}"
+                hx-confirm="確認刪除？"
+                hx-target="closest li"
+                hx-swap="outerHTML">刪除留言</button>
     {% endif %}
 </li>

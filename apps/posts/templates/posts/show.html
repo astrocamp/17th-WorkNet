@@ -17,16 +17,7 @@
         {% if comments.exists %}
             <ul class="space-y-4">
                 {% for comment in comments %}
-                    <li class="flex bg-gray-100 p-4 rounded-2xl">
-                        <div class="flex-1">
-                            {{ comment.content }}<br>
-                            <small>{{ comment.created_at|date:"Y/m/d H:i" }}</small>
-                        </div>
-                        <form method="post" action="{% url 'posts:comment_delete' comment.id %}">
-                            {% csrf_token %}
-                            <button class="btn btn-error text-white btn-sm" type="submit">刪除留言</button>
-                        </form>
-                    </li>
+                    {% include 'posts/comment.html' with comment=comment request=request only %}
                 {% endfor %}
             </ul>
         {% else %}
