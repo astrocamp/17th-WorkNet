@@ -19,17 +19,15 @@ class CompanyForm(ModelForm):
         ]
 
         widgets = {
-            "title": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
-            "tel": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
-            "url": URLInput(attrs={"class": "w-full mt-1 input-often-base"}),
-            "address": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
-            "description": Textarea(attrs={"class": "w-full mt-1 textarea-often-base"}),
-            "employees": NumberInput(
-                attrs={"class": "w-full mt-1 input-often-base"}
-            ),
-            "name": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
-            "email": EmailInput(attrs={"class": "w-full mt-1 input-often-base"}),
-            "owner_tel": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
+            "title": TextInput(attrs={"class": "mt-1 input-often-base"}),
+            "tel": TextInput(attrs={"class": "mt-1 input-often-base"}),
+            "url": URLInput(attrs={"class": "mt-1 input-often-base"}),
+            "address": TextInput(attrs={"class": "mt-1 input-often-base"}),
+            "description": Textarea(attrs={"class": "mt-1 textarea-often-base"}),
+            "employees": NumberInput(attrs={"class": "mt-1 input-often-base"}),
+            "name": TextInput(attrs={"class": "mt-1 input-often-base"}),
+            "email": EmailInput(attrs={"class": "mt-1 input-often-base"}),
+            "owner_tel": TextInput(attrs={"class": "mt-1 input-often-base"}),
         }
 
         labels = {

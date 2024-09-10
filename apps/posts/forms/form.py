@@ -13,9 +13,9 @@ class PostForm(forms.ModelForm):
             "score",
         ]
         widgets = {
-            "title": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
-            "content": Textarea(attrs={"class": "w-full mt-1 textarea-often-base"}),
-            "score": Select(attrs={"class": "w-full mt-1 input-often-base"}),
+            "title": TextInput(attrs={"class": "mt-1 input-often-base"}),
+            "content": Textarea(attrs={"class": "mt-1 textarea-often-base"}),
+            "score": Select(attrs={"class": "mt-1 input-often-base"}),
         }
         labels = {
             "title": "標題",

@@ -20,16 +20,14 @@ class JobForm(ModelForm):
         ]
 
         widgets = {
-            "title": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
-            "description": Textarea(attrs={"class": "w-full mt-1 textarea-often-base"}),
-            "location": Select(attrs={"class": "w-full mt-1 input-often-base"}),
-            "type": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
-            "skills": Textarea(attrs={"class": "w-full mt-1 textarea-often-base"}),
-            "contact_info": Textarea(
-                attrs={"class": "w-full mt-1 textarea-often-base"}
-            ),
-            "salary_range": TextInput(attrs={"class": "w-full mt-1 input-often-base"}),
-            "tenure": NumberInput(attrs={"class": "w-full mt-1 input-often-base"}),
+            "title": TextInput(attrs={"class": "mt-1 input-often-base"}),
+            "description": Textarea(attrs={"class": "mt-1 textarea-often-base"}),
+            "location": Select(attrs={"class": "mt-1 input-often-base"}),
+            "type": TextInput(attrs={"class": "mt-1 input-often-base"}),
+            "skills": Textarea(attrs={"class": "mt-1 textarea-often-base"}),
+            "contact_info": Textarea(attrs={"class": "mt-1 textarea-often-base"}),
+            "salary_range": TextInput(attrs={"class": "mt-1 input-often-base"}),
+            "tenure": NumberInput(attrs={"class": "mt-1 input-often-base"}),
         }
 
         labels = {

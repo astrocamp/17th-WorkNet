@@ -12,7 +12,7 @@ class ResumeForm(forms.ModelForm):
             "file",
         ]
         widgets = {
-            "file": FileInput(attrs={"class": "w-full mt-1 input-often-base"}),
+            "file": FileInput(attrs={"class": "mt-1 input-often-base"}),
         }
 
     def clean_file(self):
