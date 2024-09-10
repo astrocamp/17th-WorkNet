@@ -217,6 +217,7 @@ def favorites_delete(request, id):
     favorite.delete()
     return redirect("users:favorites_list")
 
+
 @login_required
 def apply_jobs(request, job_id):
     job = get_object_or_404(Job, id=job_id)
