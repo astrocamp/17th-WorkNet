@@ -1,6 +1,9 @@
 <li class="flex bg-gray-100 p-4 rounded-2xl">
     <div class="flex-1">
-        {{ comment.content }}<br>
+        {% if comment.user %}
+            <small class="font-bold text-slate-500">{{ comment.user }}</small>
+        {% endif %}
+        <span class="block">{{ comment.content }}</span>
         <small>{{ comment.created_at|date:"Y/m/d H:i" }}</small>
     </div>
     {% if comment.user == request.user %}
