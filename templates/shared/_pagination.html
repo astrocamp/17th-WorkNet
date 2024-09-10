@@ -1,0 +1,26 @@
+<div class="mt-6">
+    <div class="flex gap-2 justify-center">
+        {% if page_obj.has_previous %}
+            <a class="flex justify-center items-center w-10 h-10 border border-gray-300 rounded-lg" href="?page=1">
+                <div class="w-0.5 h-4 bg-black"></div>
+                <div class="w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-black"></div>
+            </a>
+            <a class="flex justify-center items-center w-10 h-10 border border-gray-300 rounded-lg" href="?page={{ page_obj.previous_page_number }}">
+                <div class="w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-black"></div>
+            </a>
+        {% endif %}
+
+        <span class="flex justify-center items-center w-16 h-10 bg-gray-200 rounded-lg">{{ page_obj.number }}</span>
+
+        {% if page_obj.has_next %}
+            <a class="flex justify-center items-center w-10 h-10 border border-gray-300 rounded-lg" href="?page={{ page_obj.next_page_number }}">
+                <div class="w-0 h-0 border-t-8 border-b-8 border-l-8 border-transparent border-l-black"></div>
+            </a>
+            <a class="flex justify-center items-center w-10 h-10 border border-gray-300 rounded-lg" href="?page={{ page_obj.paginator.num_pages }}">
+                <div class="w-0 h-0 border-t-8 border-b-8 border-l-8 border-transparent border-l-black"></div>
+                <div class="w-0.5 h-4 bg-black"></div>
+            </a>
+        {% endif %}
+    </div>
+    <div class="text-center mt-4">總共 {{ page_obj.paginator.num_pages }} 頁</div>
+</div>
