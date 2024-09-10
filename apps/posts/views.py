@@ -5,9 +5,17 @@ from django.views.decorators.http import require_GET, require_http_methods, requ
 
 from apps.companies.models import Company
 
+
+from lib.models.paginate_queryset import paginate_queryset
+
 from .forms.posts_form import CommentForm, PostForm
 from .models import Comment, LikeLog, Post
 
+
+def index(request):
+    posts = Post.objects.order_by("-created_at")
+    page_obj = paginate_queryset(request, posts, 10)
+    return render(request, "posts/index.html", {"page_obj": page_obj})
 
 @require_http_methods(["GET", "POST"])
 def show(request, id):

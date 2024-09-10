@@ -1,5 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 
+from lib.models.paginate_queryset import paginate_queryset
+
 from .forms.jobs_form import JobForm
 from .models import Job
 
@@ -12,8 +14,11 @@ def index(request):
             return redirect("jobs:index")
         else:
             return render(request, "jobs/new.html", {"form": form})
+
     jobs = Job.objects.order_by("-id")
-    return render(request, "jobs/index.html", {"jobs": jobs})
+    page_obj = paginate_queryset(request, jobs, 10)
+    return render(request, "jobs/index.html", {"page_obj": page_obj})
+
 
 
 def new(request):

@@ -6,6 +6,8 @@ from django.views.decorators.http import require_GET, require_http_methods, requ
 from apps.posts.forms.posts_form import PostForm
 from apps.posts.models import Post
 
+from lib.models.paginate_queryset import paginate_queryset
+
 from .forms.company_form import CompanyForm
 from .models import Company
 
@@ -19,15 +21,14 @@ def index(request):
             company.save()
             return redirect("companies:index")
     companies = Company.objects.order_by("-id")
+
     favorited_status = [
         {"company": company, "favorited": company.is_favorited_by(request.user)}
         for company in companies
     ]
-    return render(
-        request,
-        "companies/index.html",
-        {"favorited_status": favorited_status, "companies": companies},
-    )
+
+    page_obj = paginate_queryset(request, favorited_status, 10)
+    return render(request, "companies/index.html", {"page_obj": page_obj})
 
 
 def new(request):
