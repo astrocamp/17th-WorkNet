@@ -6,8 +6,7 @@
     "test": "tests"
   },
   "scripts": {
-    "dev-mac": "concurrently 'tailwindcss -i ./src/styles/styles.css -o ./static/styles/styles.css --watch' 'esbuild src/scripts/app.js --bundle --outfile=./static/scripts/app.js --watch'",
-    "dev-win": "concurrently \"tailwindcss -i ./src/styles/styles.css -o ./static/styles/styles.css --watch\" \"esbuild ./src/scripts/app.js --bundle --outfile=./static/scripts/app.js --watch\""
+    "dev": "concurrently \"tailwindcss -i ./src/styles/styles.css -o ./static/styles/styles.css --watch\" \"esbuild ./src/scripts/app.js --bundle --outfile=./static/scripts/app.js --watch\""
   },
   "author": "",
   "license": "ISC",

@@ -204,7 +204,7 @@ SOCIAL_AUTH_PIPELINE = (
     "social_core.pipeline.social_auth.associate_user",
     "social_core.pipeline.social_auth.load_extra_data",
     "social_core.pipeline.user.user_details",
-    "apps.users.views.line_save_profile",
+    "apps.users.views.social_save_profile",
 )
 
 

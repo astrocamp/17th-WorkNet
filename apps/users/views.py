@@ -148,19 +148,22 @@ def info(request, id):
     return render(request, "users/info.html", {"form": form, "info": info})
 
 
-def line_save_profile(backend, user, response, *args, **kwargs):
+def social_save_profile(backend, user, response, *args, **kwargs):
 
-    if backend.name == "line":
-        social_id = response["userId"]
-        try:
-            u1 = User.objects.get(username=social_id)
-        except User.DoesNotExist:
-            u1 = None
+    match backend.name:
+        case "line":
+            social_id = response["userId"]
+            try:
+                u1 = User.objects.get(username=social_id)
+            except User.DoesNotExist:
+                u1 = None
 
-        if u1:
-            u1.social_userid = social_id
-            u1.username = response["displayName"]
-            u1.save()
+            if u1:
+                u1.social_userid = social_id
+                u1.username = response["displayName"]
+                u1.save()
+        case _:
+            pass
 
 
 @login_required
@@ -171,15 +174,14 @@ def login_redirect(request):
     else:
         return redirect("companies:index")
 
+
 def login_redirect_next(view_func):
-    @wraps(view_func)  
-    def wrapper(request, *args, **kwargs):  
-        if request.user.is_authenticated:  
-            return view_func(request, *args, **kwargs)  
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return view_func(request, *args, **kwargs)
         else:
-            return redirect(
-                reverse("users:sign_in") + f"?next={request.path}"
-            )  
+            return redirect(reverse("users:sign_in") + f"?next={request.path}")
 
     return wrapper
 
@@ -195,6 +197,7 @@ def favorite(request, id):
     else:
         return redirect("jobs:index")
 
+
 @login_redirect_next
 def favorites_list(request):
     user = request.user
@@ -205,9 +208,9 @@ def favorites_list(request):
 @login_redirect_next
 def favorites_delete(request, id):
     favorite = get_object_or_404(JobFavorite, pk=id)
- 
+
     if favorite.user != request.user:
-       
+
         return redirect("users:favorites_list")
 
     favorite.delete()
