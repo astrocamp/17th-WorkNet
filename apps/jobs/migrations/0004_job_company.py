@@ -7,8 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('companies', '0004_company_user'),
-        ('jobs', '0002_alter_job_table_jobfavorite_job_favorite'),
+        ('jobs', '0003_job_resume_job_resumes'),
     ]
 
     operations = [

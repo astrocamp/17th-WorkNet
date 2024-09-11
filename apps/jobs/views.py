@@ -6,18 +6,14 @@ from lib.models.paginate import paginate_queryset
 
 
 from django.contrib import messages
+
 from .forms.jobs_form import JobForm
 from .models import Job
 
 
-
 def index(request):
-
     jobs = Job.objects.order_by("-id")
     return render(request, "jobs/index.html", {"jobs": jobs})
-
-    
-
 
 
 def show(request, id):

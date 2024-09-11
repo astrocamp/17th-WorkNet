@@ -1,11 +1,8 @@
 from django.conf import settings
 from django.db import models
 
-
-from apps.resumes.models import Resume
-
 from apps.companies.models import Company
-
+from apps.resumes.models import Resume
 from lib.models.soft_delete import SoftDeleteManager, SoftDeletetable
 
 
