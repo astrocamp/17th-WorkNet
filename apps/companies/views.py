@@ -9,7 +9,9 @@ def index(request):
     if request.method == "POST":
         form = CompanyForm(request.POST)
         if form.is_valid():
-            form.save()
+            company = form.save(commit=False)
+            company.user = request.user
+            company.save()
             return redirect("companies:index")
     companies = Company.objects.order_by("-id")
     return render(request, "companies/index.html", {"companies": companies})

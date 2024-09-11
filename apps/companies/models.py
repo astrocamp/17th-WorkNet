@@ -1,9 +1,11 @@
 from django.db import models
 
+from apps.users.models import User
 from lib.models.soft_delete import SoftDeleteManager, SoftDeletetable
 
 
 class Company(SoftDeletetable, models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=False, null=True)
     title = models.CharField(max_length=200)
     tel = models.CharField(max_length=15)
     url = models.URLField()

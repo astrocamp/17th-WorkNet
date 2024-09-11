@@ -85,7 +85,7 @@ def index(request):
                 if user.type == 1:
                     return redirect("users:info", user.id)
                 else:
-                    return redirect("companies:index")
+                    return redirect("companies:new")
             else:
                 messages.error(request, "登入失敗")
                 return redirect("users:sign_in")
@@ -171,15 +171,14 @@ def login_redirect(request):
     else:
         return redirect("companies:index")
 
+
 def login_redirect_next(view_func):
-    @wraps(view_func)  
-    def wrapper(request, *args, **kwargs):  
-        if request.user.is_authenticated:  
-            return view_func(request, *args, **kwargs)  
+    @wraps(view_func)
+    def wrapper(request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return view_func(request, *args, **kwargs)
         else:
-            return redirect(
-                reverse("users:sign_in") + f"?next={request.path}"
-            )  
+            return redirect(reverse("users:sign_in") + f"?next={request.path}")
 
     return wrapper
 
@@ -195,6 +194,7 @@ def favorite(request, id):
     else:
         return redirect("jobs:index")
 
+
 @login_redirect_next
 def favorites_list(request):
     user = request.user
@@ -205,9 +205,9 @@ def favorites_list(request):
 @login_redirect_next
 def favorites_delete(request, id):
     favorite = get_object_or_404(JobFavorite, pk=id)
- 
+
     if favorite.user != request.user:
-       
+
         return redirect("users:favorites_list")
 
     favorite.delete()
