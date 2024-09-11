@@ -2,9 +2,6 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-
-
-
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
 from apps.posts.forms.posts_form import PostForm
@@ -21,6 +18,8 @@ from django.contrib import messages
 
 from apps.jobs.forms import JobForm
 from apps.jobs.models import Job
+from apps.posts.forms.posts_form import PostForm
+from apps.posts.models import Post
 
 from .forms.companies_form import CompanyForm
 
@@ -89,7 +88,6 @@ def delete(request, id):
     return redirect("companies:index")
 
 
-
 @login_required
 def favorite(request, id):
     company = get_object_or_404(Company, pk=id)
@@ -141,6 +139,7 @@ def post_new(request, id):
         form = PostForm()
     return render(request, "posts/new.html", {"form": form, "company": company})
 
+
 def jobs_index(request, id):
     company = get_object_or_404(Company, id=id)
     jobs = Job.objects.filter(company=company).order_by("-created_at")
@@ -157,9 +156,9 @@ def jobs_new(request, id):
         job = form.save(commit=False)
         job.company = company
         job.save()
+        
         messages.success(request, "新增成功")
         return redirect(reverse("companies:jobs_index", args=[company.id]))
     else:
         form = JobForm()
     return render(request, "jobs/new.html", {"form": form, "company": company})
-
