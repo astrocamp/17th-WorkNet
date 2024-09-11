@@ -6,7 +6,7 @@ from django.views.decorators.http import require_GET, require_http_methods, requ
 from apps.companies.models import Company
 
 
-from lib.models.paginate_queryset import paginate_queryset
+from lib.models.paginate import paginate_queryset
 
 from .forms.posts_form import CommentForm, PostForm
 from .models import Comment, LikeLog, Post

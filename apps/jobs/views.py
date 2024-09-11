@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 
-from lib.models.paginate_queryset import paginate_queryset
+from lib.models.paginate import paginate_queryset
 
 from .forms.jobs_form import JobForm
 from .models import Job
