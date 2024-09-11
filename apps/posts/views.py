@@ -4,8 +4,6 @@ from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
 from apps.companies.models import Company
-
-
 from lib.models.paginate import paginate_queryset
 
 from .forms.posts_form import CommentForm, PostForm
@@ -16,6 +14,7 @@ def index(request):
     posts = Post.objects.order_by("-created_at")
     page_obj = paginate_queryset(request, posts, 10)
     return render(request, "posts/index.html", {"page_obj": page_obj})
+
 
 @require_http_methods(["GET", "POST"])
 def show(request, id):

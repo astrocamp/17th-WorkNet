@@ -6,7 +6,7 @@
 
 <div class="container p-5 pb-24 mx-auto">
     <ul class="mt-6 divide-y divide-slate-200">
-        {% for item in favorited_status %}
+        {% for item in page_obj %}
             <li class="flex gap-2 p-5">
                 <div class="flex-1">
                     <a href="{% url 'companies:show' item.company.id %}">{{ item.company.title }}</a>
