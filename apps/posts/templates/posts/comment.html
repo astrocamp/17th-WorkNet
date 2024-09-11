@@ -3,14 +3,14 @@
         {% if comment.user %}
             <small class="font-bold text-slate-500">{{ comment.user }}</small>
         {% endif %}
-        <span class="block">{{ comment.content }}</span>
+        <span class="block">{{ comment.content|linebreaksbr }}</span>
         <small>{{ comment.created_at|date:"Y/m/d H:i" }}</small>
     </div>
     {% if comment.user == request.user %}
         <button class="text-white btn btn-error btn-sm"
-                hx-delete="{% url 'posts:comment_delete' comment.id %}"
+                hx-post="{% url 'posts:comment_delete' comment.id %}"
                 hx-confirm="確認刪除？"
-                hx-target="closest li"
+                hx-target="body"
                 hx-swap="outerHTML">刪除留言</button>
     {% endif %}
 </li>

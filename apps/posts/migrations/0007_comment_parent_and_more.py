@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("companies", "0002_company_average_score"),
-        ("posts", "0005_post_dislike_cnt_post_like_cnt_alter_post_user_and_more"),
+        ("posts", "0006_comment_user"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 

@@ -9,13 +9,14 @@
         {% include "posts/like.html" with post=post %}
     </div>
 
-    <p class="py-10">{{ post.content }}</p>
+    <p class="py-10">{{ post.content|linebreaksbr }}</p>
+    <small>{{ post.created_at|date:"Y/m/d H:i" }}</small><br>
     <a class="text-white btn btn-primary" href="{% url 'posts:edit' post.id %}">修改評論</a>
 
     <section class="p-5 mt-20 border border-gray-300 rounded-2xl">
         <h3 class="pb-5 mb-5 text-xl font-bold border-b border-gray-300">留言</h3>
         {% if comments.exists %}
-            <ul class="space-y-4">
+            <ul id="comments" class="space-y-4">
                 {% for comment in comments %}
                     {% include 'posts/comment.html' with comment=comment request=request only %}
                 {% endfor %}
@@ -26,46 +27,22 @@
         {% endif %}
 
         <div class="mt-6">
-            <form method="post">
+            <form
+                hx-target="#comments"
+                hx-swap="afterbegin"
+                x-data="resume_comment"
+                hx-confirm="確認送出留言？"
+                hx-on::after-request="this.reset()"
+                hx-post="{% url 'posts:show' post.id %}">
                 {% csrf_token %}
                 {{ comment_form.as_p }}
-                <button class="text-white btn btn-primary" type="submit">送出留言</button>
+                <button  class="text-white btn btn-primary" type="submit">確定</button>
             </form>
         </div>
     </section>
 
     <div class="mt-6">
-        <a class="text-white btn btn-neutral" href="{% url 'posts:index' %}">回到列表</a>
+        <a class="text-white btn btn-neutral" href="{% url 'companies:post_index' post.company.id %}">回到列表</a>
     </div>
 </div>
-
-<p>{{ post.content }}</p>
-<small>{{ post.created_at|date:"Y/m/d H:i" }}</small>
-<a href="{% url 'posts:edit' post.id %}">修改評論</a>
-
-<h3>留言</h3>
-{% if comments.exists %}
-    <ul id="comments">
-        {% for comment in comments %}
-            {% include "posts/comment.html" with comment=comment %}
-        {% endfor %}
-    </ul>
-{% else %}
-<p>尚無留言</p>
-<a href="{% url 'companies:post_index' post.company.id %}">回到列表</a>
-{% endif %}
-
-<h4>新增留言</h4>
-<form
-        hx-target="#comments"
-        hx-swap="afterbegin"
-        x-data="resume_comment"
-        hx-confirm="確認送出留言？"
-        hx-on::after-request="this.reset()"
-        hx-post="{% url 'posts:show' post.id %}">
-    {% csrf_token %}
-    {{ comment_form.as_p }}
-    <button type="submit">確定</button>
-</form>
-
 {% endblock %}
