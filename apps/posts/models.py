@@ -58,9 +58,6 @@ class Comment(SoftDeletetable, models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deleted_at = models.DateTimeField(default=None, null=True)
-    parent = models.ForeignKey(
-        "self", null=True, blank=True, related_name="replies", on_delete=models.SET_NULL
-    )
 
     objects = SoftDeleteManager()
 
