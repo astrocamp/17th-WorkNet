@@ -14,3 +14,7 @@
                 hx-swap="outerHTML">刪除留言</button>
     {% endif %}
 </li>
+
+{% if remove_no_comment %}
+<li id="remove_no_comment" hx-swap-oob="delete"></li>
+{% endif %}

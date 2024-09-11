@@ -28,7 +28,7 @@ def show(request, id):
             return render(
                 request,
                 "posts/comment.html",
-                {"comment": comment},
+                {"comment": comment, "remove_no_comment": True},
             )
 
     comment_form = CommentForm()

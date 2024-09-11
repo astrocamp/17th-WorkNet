@@ -5,7 +5,7 @@
 </div>
 <div class="container p-5 pb-24 mx-auto">
     <div class="flex gap-5 pb-5 border-b border-gray-300">
-        <div class="flex-1">Author: {{ post.author }}</div>
+        <div class="flex-1 text-lg">作者：{{ post.user }}</div>
         {% include "posts/like.html" with post=post %}
     </div>
 
@@ -15,24 +15,24 @@
 
     <section class="p-5 mt-20 border border-gray-300 rounded-2xl">
         <h3 class="pb-5 mb-5 text-xl font-bold border-b border-gray-300">留言</h3>
-        {% if comments.exists %}
+        {% if comments %}
             <ul id="comments" class="space-y-4">
                 {% for comment in comments %}
                     {% include 'posts/comment.html' with comment=comment request=request only %}
                 {% endfor %}
             </ul>
         {% else %}
-        <div class="flex items-center justify-center py-3 text-center"><p class="text-gray-300">尚無回覆</p></div>
-
+            <ul id="comments" class="space-y-4">
+                <li id="remove_no_comment" class="text-center text-gray-300">尚無回覆</li>
+            </ul>
         {% endif %}
 
         <div class="mt-6">
             <form
                 hx-target="#comments"
                 hx-swap="afterbegin"
-                x-data="resume_comment"
                 hx-confirm="確認送出留言？"
-                hx-on::after-request="this.reset()"
+                hx-on::after-request="this.reset();"
                 hx-post="{% url 'posts:show' post.id %}">
                 {% csrf_token %}
                 {{ comment_form.as_p }}
