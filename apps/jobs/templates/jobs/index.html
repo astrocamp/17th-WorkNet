@@ -5,7 +5,9 @@
 </div>
 <div class="container p-5 pb-24 mx-auto">
 
+    {% if request.user.is_authenticated and request.user.type == 2 %}
     <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:jobs_new' company.id %}">新增職缺</a>
+    {% endif %}
 
 
     <ul class="mt-6 divide-y divide-slate-200">
