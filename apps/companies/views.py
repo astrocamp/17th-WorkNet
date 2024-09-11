@@ -42,6 +42,7 @@ def edit(request, id):
 
 
 def show(request, id):
+    company = get_object_or_404(Company, id=id)
     if request.method == "POST":
         company = get_object_or_404(Company, id=id)
         form = CompanyForm(request.POST, instance=company)
@@ -54,9 +55,9 @@ def show(request, id):
                 "companies/edit.html",
                 {"form": form, "company": company},
             )
+    post = Post.objects.filter(company=company).order_by("-created_at")
 
-    company = get_object_or_404(Company, id=id)
-    return render(request, "companies/show.html", {"company": company})
+    return render(request, "companies/show.html", {"company": company, "post": post})
 
 
 @require_POST

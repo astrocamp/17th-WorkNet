@@ -16,7 +16,7 @@ from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateView
 
 from apps.companies.models import CompanyFavorite
-from apps.jobs.models import Job, JobFavorite,Job_Resume
+from apps.jobs.models import Job, Job_Resume, JobFavorite
 from apps.resumes.models import Resume
 
 from .forms import CustomUserCreationForm, UserInfoForm
@@ -241,6 +241,7 @@ def submit_jobs(request, job_id):
         Job_Resume.objects.create(job=job, resume=resume, status="applied")
         messages.success(request, "投遞成功")
     return redirect("jobs:index")
+
 
 @login_required
 def favorite_company_list(request):
