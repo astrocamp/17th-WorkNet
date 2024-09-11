@@ -7,6 +7,9 @@
     <li>{{ company.tel }}</li>
     <li>{{ company.url }}</li>
   </ul>
-  <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:index' %}">返回列表</a>
+  <div class="flex flex-col items-start space-y-4">
+    <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:post_index' company.id %}">評論</a>
+    <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:index' %}">返回列表</a>
+  </div>
 </div>
 {% endblock %}
