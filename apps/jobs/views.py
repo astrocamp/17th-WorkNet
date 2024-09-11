@@ -8,13 +8,14 @@ from lib.models.paginate import paginate_queryset
 from django.contrib import messages
 from .forms.jobs_form import JobForm
 from .models import Job
-
-
+from apps.companies.models import Company
 
 
 def index(request):
     jobs = Job.objects.order_by("-id")
     return render(request, "jobs/index.html", {"jobs": jobs})
+
+    
 
 
 
