@@ -189,11 +189,14 @@ def favorite(request, id):
     job = get_object_or_404(Job, pk=id)
     user = request.user
 
-    if not JobFavorite.objects.filter(user=user, job=job).exists():
-        JobFavorite.objects.create(user=user, job=job, favorited_at=timezone.now())
-        return redirect("jobs:index")
+    if JobFavorite.objects.filter(user=user, job=job).exists():
+        JobFavorite.objects.filter(user=user, job=job).delete()
+        messages.success(request, "取消收藏成功")
     else:
-        return redirect("jobs:index")
+        JobFavorite.objects.create(user=user, job=job, favorited_at=timezone.now())
+        messages.success(request, "收藏成功")
+    
+    return redirect("jobs:index")
 
 @login_redirect_next
 def favorites_list(request):

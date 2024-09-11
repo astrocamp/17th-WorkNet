@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms.jobs_form import JobForm
-from .models import Job
+from .models import Job, JobFavorite
 
 
 def index(request):
@@ -12,13 +12,16 @@ def index(request):
             return redirect("jobs:index")
         else:
             return render(request, "jobs/new.html", {"form": form})
-    jobs = Job.objects.all()
-    return render(request, "jobs/index.html", {"jobs": jobs})
+        
+    jobs = Job.objects.order_by("-id")
+    user= request.user
+    favorites = JobFavorite.objects.filter(user=user).values_list("job_id", flat=True)
+    return render(request, "jobs/index.html", {"jobs": jobs, "favorites": favorites})
 
 
 def new(request):
     form = JobForm()
-    return render(request, "jobs/new.html", {"form": form})
+    return render(request, "jobs/new.html", {"form": form}) 
 
 
 def show(request, id):
