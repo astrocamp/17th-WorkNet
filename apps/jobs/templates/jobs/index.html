@@ -6,7 +6,7 @@
 <div class="container p-5 pb-24 mx-auto">
     <a class="text-white btn btn-primary min-w-20" href="{% url 'jobs:new' %}">新增職缺</a>
     <ul class="mt-6 divide-y divide-slate-200">
-        {% for job in jobs %}
+        {% for job in page_obj %}
         <li class="flex gap-2 p-5">
             <div class="flex-1">
                 {{ job.title }}

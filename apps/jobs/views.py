@@ -20,7 +20,6 @@ def index(request):
     return render(request, "jobs/index.html", {"page_obj": page_obj})
 
 
-
 def new(request):
     form = JobForm()
     return render(request, "jobs/new.html", {"form": form})
