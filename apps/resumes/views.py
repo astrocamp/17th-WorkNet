@@ -8,7 +8,9 @@ from .models import Resume
 
 @login_required
 def index(request):
-    resumes = Resume.objects.filter(userinfo=request.user.userinfo).order_by("-uploaded_at")
+    resumes = Resume.objects.filter(userinfo=request.user.userinfo).order_by(
+        "-uploaded_at"
+    )
     return render(request, "resumes/index.html", {"resumes": resumes})
 
 

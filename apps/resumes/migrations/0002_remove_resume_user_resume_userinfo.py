@@ -7,19 +7,24 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('resumes', '0001_initial'),
-        ('users', '0006_user_type'),
+        ("resumes", "0001_initial"),
+        ("users", "0006_user_type"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='resume',
-            name='user',
+            model_name="resume",
+            name="user",
         ),
         migrations.AddField(
-            model_name='resume',
-            name='userinfo',
-            field=models.ForeignKey(default=1, on_delete=django.db.models.deletion.CASCADE, related_name='resumes', to='users.userinfo'),
+            model_name="resume",
+            name="userinfo",
+            field=models.ForeignKey(
+                default=1,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="resumes",
+                to="users.userinfo",
+            ),
             preserve_default=False,
         ),
     ]
