@@ -3,14 +3,14 @@
   <h1 class="text-3xl font-bold">新增職缺</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
-  <form method="POST" action="{% url 'companies:jobs_new' company.id %}">
+  <form method="POST" action="{% url 'companies:jobs_index' company.id %}">
     {% csrf_token %}
     {% for field in form %}
     <div class="mt-4">{{ field.label }} {{ field }} {{ field.errors }}</div>
     {% endfor %}
     <div class="flex gap-4 mt-4">
       <button class="text-white btn btn-primary min-w-20">新增</button>
-      <a class="text-white btn btn-neutral min-w-20" href="{% url 'companies:jobs_new' company.id %}">回到列表</a>
+      <a class="text-white btn btn-neutral min-w-20" href="{% url 'companies:jobs_index' company.id %}">回到列表</a>
     </div>
   </form>
 </div>

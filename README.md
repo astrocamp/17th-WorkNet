@@ -2,11 +2,11 @@
 
 ## Install
 
-1. `git clone https://github.com/astrocamp/17th-WorkNet.git` (複製到本地)
-2. `cd 17th-WorkNet` (進入專案內容)
-3. `poetry install` (下載 poetry 相關套件)
-4. `npm install` (下載 npm 相關套件)
-5. 建立`.env` (SECRET_KEY)
+1. `git clone https://github.com/astrocamp/17th-WorkNet.git` (clone the repository to your local machine)
+2. `cd 17th-WorkNet` (navigate into the project directory)
+3. `poetry install` (install the required Poetry dependencies)
+4. `npm install` (install the required npm dependencies)
+5. Create`.env` (SECRET_KEY)
 
 ## Front-end
 
@@ -20,7 +20,7 @@
 - Version Control：Git
 - Third-Party Login：Google, Line
 - Web Services：Amazon Web Services (AWS) S3
-- Email：Mail Gun
+- Email：Mailgun
 
 ## Team
 
