@@ -2,7 +2,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 from lib.utils.models.defined import LOCATION_CHOICES
-from lib.utils.models.update_date import TimeStampedModel
 
 
 class User(AbstractUser):
@@ -15,7 +14,7 @@ class User(AbstractUser):
     type = models.PositiveSmallIntegerField(choices=roles_choice, default=1)
 
 
-class UserInfo(TimeStampedModel):
+class UserInfo(models.Model):
 
     user = models.OneToOneField(to=User, on_delete=models.CASCADE, blank=False)
     nickname = models.CharField(max_length=30, null=True, blank=True)
@@ -25,4 +24,4 @@ class UserInfo(TimeStampedModel):
     )
     birth = models.DateField(null=True, blank=True)
     points = models.IntegerField(default=0, blank=True)
-    updated_at = models.DateTimeField(null=True, blank=True)
+    updated_at = models.DateTimeField(auto_now=True)

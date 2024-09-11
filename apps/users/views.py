@@ -148,19 +148,22 @@ def info(request, id):
     return render(request, "users/info.html", {"form": form, "info": info})
 
 
-def line_save_profile(backend, user, response, *args, **kwargs):
+def social_save_profile(backend, user, response, *args, **kwargs):
 
-    if backend.name == "line":
-        social_id = response["userId"]
-        try:
-            u1 = User.objects.get(username=social_id)
-        except User.DoesNotExist:
-            u1 = None
+    match backend.name:
+        case "line":
+            social_id = response["userId"]
+            try:
+                u1 = User.objects.get(username=social_id)
+            except User.DoesNotExist:
+                u1 = None
 
-        if u1:
-            u1.social_userid = social_id
-            u1.username = response["displayName"]
-            u1.save()
+            if u1:
+                u1.social_userid = social_id
+                u1.username = response["displayName"]
+                u1.save()
+        case _:
+            pass
 
 
 @login_required
