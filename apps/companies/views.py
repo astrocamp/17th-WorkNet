@@ -6,9 +6,9 @@ from django.views.decorators.http import require_GET, require_http_methods, requ
 from apps.posts.forms.posts_form import PostForm
 from apps.posts.models import Post
 
-from lib.models.paginate_queryset import paginate_queryset
+from lib.models.paginate import paginate_queryset
 
-from .forms.company_form import CompanyForm
+from .forms.companies_form import CompanyForm
 from .models import Company
 
 
