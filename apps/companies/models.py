@@ -3,6 +3,7 @@ from django.db import models
 
 from apps.users.models import User
 from lib.models.soft_delete import SoftDeleteManager, SoftDeletetable
+from apps.users.models import User
 
 
 class Company(SoftDeletetable, models.Model):
