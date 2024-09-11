@@ -80,5 +80,4 @@ class Job_Resume(models.Model):
     )
     created_at = models.DateField(auto_now_add=True)
     status = models.CharField(max_length=20, default="applied")
-    withdrawn_at = models.DateTimeField(null=True, blank=True)
     read_at = models.DateTimeField(null=True, blank=True)
