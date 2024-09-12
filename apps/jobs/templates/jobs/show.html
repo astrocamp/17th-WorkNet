@@ -13,6 +13,10 @@
         <input type="hidden" name="job_id" value="{{ job.id }}">
         <button>應徵此工作</button>
       </form>
+    {% if backJobs %}
     <a class="text-white btn btn-primary min-w-20" href="{% url 'jobs:index' %}">返回列表</a>
+    {% else %}
+    <a class="text-white btn btn-primary min-w-20" href="{% url 'resumes:jobs' %}">返回</a>
+    {% endif %}
 </div>
 {% endblock %}

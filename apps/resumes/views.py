@@ -4,6 +4,8 @@ from django.utils import timezone
 
 from .forms import ResumeForm
 from .models import Resume
+from apps.jobs.models import Job_Resume, Job
+from django.db.models import Subquery, OuterRef
 
 
 @login_required
@@ -36,3 +38,17 @@ def delete_resume(request, resume_id):
     resume.save()
 
     return redirect("resumes:index")
+
+
+@login_required
+def jobs(request):
+    job_title_subquery = Job.objects.filter(id=OuterRef("job_id")).values("title")[:1]
+    resume_file_subquery = Resume.objects.filter(id=OuterRef("resume_id")).values(
+        "file"
+    )[:1]
+    resume_subquery = Resume.objects.filter(userinfo__user_id=1).values("id")
+    job_resumes = Job_Resume.objects.filter(resume_id__in=resume_subquery).annotate(
+        job_title=Subquery(job_title_subquery),
+        resume_file=Subquery(resume_file_subquery),
+    )
+    return render(request, "resumes/job.html", {"job_resumes": job_resumes})
