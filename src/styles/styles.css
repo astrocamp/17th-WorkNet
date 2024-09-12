@@ -18,3 +18,7 @@
 .no-style{
   @apply bg-transparent border-transparent shadow-none;
 }
+
+:root {
+  --fallback-b2:#f3f4f6;
+}
