@@ -6,7 +6,7 @@
 <div class="container p-5 pb-24 mx-auto">
 
     {% if request.user.is_authenticated and request.user.type == 2 %}
-    <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:jobs_new' company.id %}">新增職缺</a>
+    <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:jobs_new' request.user.company.id %}">新增職缺</a>
     {% endif %}
 
 
