@@ -17,8 +17,10 @@
           <a class="font-semibold" href="{% url 'companies:index' %}">公司資訊</a>
         </li>
         <li>
-          {% if request.user.type == 1 %}
-          <a class="font-semibold" href="{% url 'jobs:index' %}">職缺</a>
+          {% if request.user.type == 2 %}
+            <a class="font-semibold" href="{% url 'companies:jobs_index' request.user.company.id %}">職缺</a>
+          {% else %}
+            <a class="font-semibold" href="{% url 'jobs:index' %}">職缺</a>
           {% endif %}
         </li>
       </ul>
