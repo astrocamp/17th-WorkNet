@@ -95,7 +95,10 @@ def favorite_company(request, id):
 def post_index(request, id):
     company = get_object_or_404(Company, id=id)
     posts = Post.objects.filter(company=company).order_by("-created_at")
-    return render(request, "posts/index.html", {"posts": posts, "company": company})
+    page_obj = paginate_queryset(request, posts, 10)
+    return render(
+        request, "posts/index.html", {"page_obj": page_obj, "company": company}
+    )
 
 
 @login_required
