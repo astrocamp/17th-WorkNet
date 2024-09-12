@@ -1,7 +1,11 @@
 <footer class="p-10 bg-white border-t border-gray-300 rounded footer footer-center text-base-content">
     <nav class="grid grid-flow-col gap-4">
       <a href="{% url 'companies:index' %}" class="link link-hover">公司資訊</a>
-      <a href="{% url 'jobs:index' %}" class="link link-hover">職缺</a>
+      {% if request.user.type == 2 %}
+        <a class="link link-hover" href="{% url 'companies:jobs_index' request.user.company.id %}">職缺</a>
+      {% else %}
+        <a class="link link-hover" href="{% url 'jobs:index' %}">職缺</a>
+      {% endif %}
     </nav>
     <aside>
       <p>Copyright © 2023 WorkNet All Rights Reserved</p>

@@ -9,7 +9,8 @@ from .models import Job
 
 def index(request):
     jobs = Job.objects.order_by("-id")
-    return render(request, "jobs/index.html", {"jobs": jobs})
+    page_obj = paginate_queryset(request, jobs, 10)
+    return render(request, "jobs/index.html", {"page_obj": page_obj})
 
 
 def show(request, id):
