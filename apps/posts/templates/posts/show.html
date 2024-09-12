@@ -27,6 +27,7 @@
             </ul>
         {% endif %}
 
+        {% if user.is_authenticated %}
         <div class="mt-6">
             <form
                 hx-target="#comments"
@@ -39,6 +40,10 @@
                 <button  class="text-white btn btn-primary" type="submit">確定</button>
             </form>
         </div>
+        {% else %}
+        <p class="text-red-500">請先登入</p>
+        <a class="text-white btn btn-secondary" href="{% url 'users:sign_in' %}?next={{ request.path }}">登入</a>
+        {% endif %}
     </section>
 
     <div class="mt-6">
