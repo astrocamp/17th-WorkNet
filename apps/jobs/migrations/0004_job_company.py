@@ -7,14 +7,19 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('jobs', '0003_job_resume_job_resumes'),
+        ("jobs", "0003_job_resume_job_resumes"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='job',
-            name='company',
-            field=models.ForeignKey(default=9, on_delete=django.db.models.deletion.CASCADE, related_name='jobs', to='companies.company'),
+            model_name="job",
+            name="company",
+            field=models.ForeignKey(
+                default=9,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="jobs",
+                to="companies.company",
+            ),
             preserve_default=False,
         ),
     ]
