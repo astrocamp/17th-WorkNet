@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>首頁</title>
+    <script src="{% static 'scripts/app.js' %}" type="module"></script>
+    <link href="{% static 'styles/styles.css' %}" rel="stylesheet" />
+  </head>
+  <body class="dark:bg-gray-900 dark:text-white hx-headers='{\"X-CSRFToken\": \"{{ csrf_token }}\"}'">
+    {% include "shared/backend_navbar.html" %}
+    
+    <div class="flex justify-center items-center p-4 min-h-screen">
+    </div>
+    
+    {% include "shared/backend_footer.html" %}
+  </body>
+</html>
