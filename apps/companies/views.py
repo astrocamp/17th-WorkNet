@@ -129,6 +129,7 @@ def post_new(request, id):
         post.user = request.user
         post.save()
 
+        messages.success(request, "新增成功")
         return redirect(reverse("companies:post_index", args=[company.id]))
     else:
         form = PostForm()
