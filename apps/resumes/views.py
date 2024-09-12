@@ -46,7 +46,9 @@ def jobs(request):
     resume_file_subquery = Resume.objects.filter(id=OuterRef("resume_id")).values(
         "file"
     )[:1]
-    resume_subquery = Resume.objects.filter(userinfo__user_id=1).values("id")
+    resume_subquery = Resume.objects.filter(userinfo__user_id=request.user.id).values(
+        "id"
+    )
     job_resumes = Job_Resume.objects.filter(resume_id__in=resume_subquery).annotate(
         job_title=Subquery(job_title_subquery),
         resume_file=Subquery(resume_file_subquery),
