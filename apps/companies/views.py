@@ -156,7 +156,7 @@ def jobs_new(request, id):
         job = form.save(commit=False)
         job.company = company
         job.save()
-        
+
         messages.success(request, "新增成功")
         return redirect(reverse("companies:jobs_index", args=[company.id]))
     else:

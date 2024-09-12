@@ -16,7 +16,9 @@
           <a class="font-semibold" href="{% url 'companies:index' %}">公司資訊</a>
         </li>
         <li>
+          {% if request.user.type == 1 %}
           <a class="font-semibold" href="{% url 'jobs:index' %}">職缺</a>
+          {% endif %}
         </li>
       </ul>
     </div>
@@ -33,7 +35,7 @@
               <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'resumes:index' %}">我的履歷</a>
             {% elif request.user.type == 2 %}
               <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'companies:index' %}">公司資料</a>
-            {%endif%}
+            {% endif %}
           </div>
         </div>
 
