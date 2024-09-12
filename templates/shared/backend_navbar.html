@@ -1,0 +1,58 @@
+<nav
+  class="box-border flex fixed top-0 left-0 z-40 items-center p-4 w-full shadow-md bg-base-100 dark:bg-gray-800 dark:text-white min-h-20"
+>
+  <div class="absolute left-4 top-1/2 -translate-y-1/2">
+    <a href="{% url 'users:index' %}" class="text-xl font-bold dark:text-white">WorkNet</a>
+  </div>
+
+  <div class="w-full">
+    <div class="text-center">
+      <ul class="inline-flex gap-5">
+        <li>
+          <a class="font-semibold dark:text-white" href="/">首頁</a>
+        </li>
+        <li>
+          <a class="font-semibold dark:text-white" href="{% url 'companies:index' %}">公司資訊</a>
+        </li>
+        <li>
+          {% if request.user.type == 1 %}
+          <a class="font-semibold dark:text-white" href="{% url 'jobs:index' %}">職缺</a>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+    <div class="absolute right-4 top-1/2 -translate-y-1/2">
+      {% if request.user.is_authenticated %}
+      <div class="flex gap-2 text-sm">
+        <div class="flex relative items-center group">
+          <div class="cursor-pointer dark:text-white"><h2>{{ request.user }}，您好</h2></div>
+          <div class="hidden absolute top-12 left-1/2 p-3 text-center bg-white rounded-xl divide-y shadow-lg -translate-x-1/2 dark:bg-gray-800 dark:text-white divide-slate-200 group-hover:block">
+            {% if request.user.type == 1 %}
+              <a class="block px-2.5 py-2 whitespace-nowrap dark:text-white" href="{% url 'users:info' request.user.pk %}">會員資料</a>
+              <a class="block px-2.5 py-2 whitespace-nowrap dark:text-white" href="{% url 'users:favorites_list' %}">我的職缺收藏</a>
+              <a class="block px-2.5 py-2 whitespace-nowrap dark:text-white" href="{% url 'users:favorites_company_list' %}">喜愛的公司</a>
+              <a class="block px-2.5 py-2 whitespace-nowrap dark:text-white" href="{% url 'resumes:index' %}">我的履歷</a>
+            {% elif request.user.type == 2 %}
+              <a class="block px-2.5 py-2 whitespace-nowrap dark:text-white" href="{% url 'companies:index' %}">公司資料</a>
+            {% endif %}
+          </div>
+        </div>
+
+        <form action="{% url 'users:sign_out' %}" method="POST">
+          {% csrf_token %}
+          <button class="text-white bg-red-500 btn min-w-20 hover:bg-red-400">登出</button>
+        </form>
+      </div>
+      {% else %}
+      <ul class="flex">
+        <li>
+          <a class="btn no-style hover:border-transparent dark:text-white" href="{% url 'users:sign_in' %}">登入</a>
+        </li>
+        <li>
+          <a class="text-white btn btn-primary min-w-20 dark:bg-blue-600 dark:hover:bg-blue-500" href="{% url 'users:register' %}">註冊</a>
+        </li>
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</nav>
