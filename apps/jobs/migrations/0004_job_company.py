@@ -15,7 +15,6 @@ class Migration(migrations.Migration):
             model_name="job",
             name="company",
             field=models.ForeignKey(
-                default=9,
                 on_delete=django.db.models.deletion.CASCADE,
                 related_name="jobs",
                 to="companies.company",
