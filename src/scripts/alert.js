@@ -21,12 +21,12 @@ export const swalWithBootstrapButtons = Swal.mixin({
   },
   buttonsStyling: false,
   showCancelButton: true,
-  confirmButtonText: "Yes, delete it!",
-  cancelButtonText: "No, cancel!",
+  confirmButtonText: "Yes, do it !",
+  cancelButtonText: "No, cancel !",
   reverseButtons: true,
 });
 
-Alpine.data("cancle_btn", () => ({
+Alpine.data("confirm_msg", () => ({
   confirmDelete(msg) {
     swalWithBootstrapButtons
       .fire({
