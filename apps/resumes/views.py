@@ -1,8 +1,10 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.views.decorators.http import require_http_methods, require_POST
 
-from .forms import ResumeForm
+from .forms.resumes_form import ResumeForm
 from .models import Resume
 from apps.jobs.models import Job_Resume, Job
 from django.db.models import Subquery, OuterRef
@@ -17,7 +19,16 @@ def index(request):
 
 
 @login_required
+@require_http_methods(["GET", "POST"])
 def upload(request):
+    resume_count = Resume.objects.filter(
+        userinfo=request.user.userinfo, deleted_at__isnull=True
+    ).count()
+
+    if resume_count >= 3:
+        messages.error(request, "你已經達到最多上傳 3 份履歷的限制")
+        return redirect("resumes:index")
+
     if request.method == "POST":
         form = ResumeForm(request.POST, request.FILES)
         if form.is_valid():
@@ -27,16 +38,15 @@ def upload(request):
             return redirect("resumes:index")
     else:
         form = ResumeForm()
+
     return render(request, "resumes/upload.html", {"form": form})
 
 
 @login_required
-def delete_resume(request, resume_id):
-    resume = get_object_or_404(Resume, id=resume_id)
-
-    resume.deleted_at = timezone.now()
-    resume.save()
-
+@require_POST
+def delete(request, id):
+    resume = get_object_or_404(Resume, id=id)
+    resume.mark_delete()
     return redirect("resumes:index")
 
 
@@ -54,3 +64,18 @@ def jobs(request):
         resume_file=Subquery(resume_file_subquery),
     )
     return render(request, "resumes/job.html", {"job_resumes": job_resumes})
+
+
+@login_required
+@require_http_methods(["GET", "POST"])
+def edit(request, id):
+    resume = get_object_or_404(Resume, id=id)
+    if request.method == "POST":
+        form = ResumeForm(request.POST, instance=resume)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "檔名已成功更新")
+            return redirect("resumes:index")
+    else:
+        form = ResumeForm(instance=resume)
+    return render(request, "resumes/edit.html", {"form": form, "resume": resume})

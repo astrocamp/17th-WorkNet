@@ -1,16 +1,19 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
     <h1 class="text-3xl font-bold">上傳履歷</h1>
 </div>
+
 <div class="container p-5 pb-24 mx-auto">
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" action="{% url 'resumes:upload' %}" enctype="multipart/form-data">
         {% csrf_token %}
-        {% for field in form %}
-        <div class="mt-4">{{ field.label }} {{ field }} {{ field.errors }}</div>
-        {% endfor %}
-        <div class="mt-4 flex gap-4">
-            <button class="btn btn-primary text-white min-w-20" type="submit">上傳</button>
+        <div class="mt-4">
+            {{ form.file.label_tag }}
+            {{ form.file }}
+            {{ form.file.errors }}
+        </div>
+        <div class="flex gap-4 mt-4">
+            <button class="text-white btn btn-primary min-w-20" type="submit">上傳</button>
         </div>
     </form>
 </div>

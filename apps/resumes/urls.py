@@ -8,5 +8,6 @@ urlpatterns = [
     path("", views.index, name="index"),
     path("jobs", views.jobs, name="jobs"),
     path("upload/", views.upload, name="upload"),
-    path("delete/<int:resume_id>/", views.delete_resume, name="delete"),
+    path("delete/<int:id>/", views.delete, name="delete"),
+    path("edit/<int:id>/", views.edit, name="edit"),
 ]
