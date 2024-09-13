@@ -22,6 +22,7 @@ django-storages = "^1.14.4"
 django-anymail = {extras = ["mailgun"], version = "^11.1"}
 markdown = "^3.7"
 rules = "^3.5"
+django-taggit = "^6.0.0"
 
 [tool.poetry.group.dev.dependencies]
 django-extensions = "^3.2.3"

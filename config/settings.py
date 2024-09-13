@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     "storages",
     "social_django",
     "rules",
+    "taggit",
 ]
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_KEY")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("GOOGLE_SECRET")
