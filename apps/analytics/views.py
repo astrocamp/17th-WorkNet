@@ -1,9 +1,9 @@
+import json
+from collections import Counter
+
 from django.shortcuts import render
 
 from apps.jobs.models import Job
-
-import json
-from collections import Counter
 
 
 def index(request):
