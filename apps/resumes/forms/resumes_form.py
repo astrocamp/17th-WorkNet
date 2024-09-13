@@ -10,9 +10,13 @@ class ResumeForm(forms.ModelForm):
         model = Resume
         fields = [
             "file",
+            "name",
         ]
         widgets = {
             "file": FileInput(attrs={"class": "mt-1 input-often-base"}),
+        }
+        labels = {
+            "file": "選擇檔案",
         }
 
     def clean_file(self):

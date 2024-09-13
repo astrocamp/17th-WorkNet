@@ -1,30 +1,49 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
     <h1 class="text-3xl font-bold">我的履歷</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
-<h2>我的履歷</h2>
-<p>你總共有 {{ resumes|length }} 份履歷。</p>
+    <p class="font-semibold">總共有 {{ resumes|length }} 份履歷。</p>
+    {% if messages %}
+    <div class="container mx-auto mt-4">
+        <ul class="px-4 py-3 border rounded-lg bg-rose-100 text-rose-700 border-rose-200">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
     {% if resumes %}
         <ul class="mt-6 divide-y divide-slate-200">
             {% for resume in resumes %}
                 <li class="flex gap-2 p-5">
                     <div class="flex-1">
-                        <a href="{{ resume.file.url }}" target="_blank">{{ resume.file.name }}</a> - 上傳於 {{ resume.uploaded_at }}
+                        <a href="{{ resume.file.url }}" target="_blank">{{ resume.name|default:resume.file.name }}</a> - 上傳於 {{ resume.uploaded_at }}
                     </div>
                     <div class="flex gap-2">
-                        <form action="{% url 'resumes:delete' resume.id %}" method="POST" class="inline-block" x-data="confirm_msg" @submit.prevent="confirmDelete('確定要刪除這份履歷嗎？')">
+                        <a class="text-white btn btn-secondary btn-sm" href="{{ resume.file.url }}" target="_blank">預覽</a>
+                        <a class="text-white btn btn-warning btn-sm" href="{% url 'resumes:edit' resume.id %}">修改檔名</a>
+                        <form action="{% url 'resumes:delete' resume.id %}" method="POST" style="display:inline;">
                             {% csrf_token %}
-                            <button class="btn btn-error text-white btn-sm" type="submit">刪除</button>
+                            <button class="text-white btn btn-error btn-sm" type="submit" onclick="return confirm('確定要刪除這份履歷嗎？');">刪除</button>
                         </form>
                     </div>
                 </li>
             {% endfor %}
         </ul>
     {% else %}
-        <div class="text-center py-5"><p>尚無履歷</p></div>
+        <div class="py-5 text-center"><p>尚無履歷</p></div>
     {% endif %}
-    <a class="btn btn-primary text-white" href="{% url 'resumes:upload' %}">上傳履歷</a>
+    <a class="text-white btn btn-primary" href="{% url 'resumes:upload' %}">上傳履歷</a>
+    <div class="p-4 mt-8 bg-gray-100 border border-gray-200 rounded-lg">
+        <h3 class="mb-2 text-lg font-semibold text-black">檔案限制：</h3>
+        <ul class="text-black list-disc list-inside">
+            <li>只接受PDF檔案</li>
+            <li>檔案大小上限為 20MB</li>
+            <li>最多只能上傳 3 份履歷</li>
+        </ul>
+    </div>
 </div>
 {% endblock %}
