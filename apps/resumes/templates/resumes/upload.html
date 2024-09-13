@@ -8,12 +8,11 @@
     <form method="POST" action="{% url 'resumes:upload' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mt-4">
-            {{ form.file.label_tag }}
             {{ form.file }}
             {{ form.file.errors }}
         </div>
         <div class="flex gap-4 mt-4">
-            <button class="text-white btn btn-primary min-w-20" type="submit">上傳</button>
+            <button class="px-4 py-2 text-white btn btn-primary min-w-20" type="submit">上傳</button>
         </div>
     </form>
 </div>

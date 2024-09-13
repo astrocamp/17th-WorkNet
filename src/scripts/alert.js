@@ -1,7 +1,6 @@
 import Swal from "sweetalert2";
 import Alpine from "alpinejs";
 
-// 快閃訊息
 export const flashAlert = Swal.mixin({
   toast: true,
   position: "top-end",
@@ -13,7 +12,6 @@ export const flashAlert = Swal.mixin({
   },
 });
 
-// 確認刪除訊息
 export const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
     confirmButton: "btn btn-success",
@@ -21,16 +19,17 @@ export const swalWithBootstrapButtons = Swal.mixin({
   },
   buttonsStyling: false,
   showCancelButton: true,
-  confirmButtonText: "Yes, do it !",
-  cancelButtonText: "No, cancel !",
+  confirmButtonText: "確認",
+  cancelButtonText: "取消",
   reverseButtons: true,
+  title: '',
+  text: '此動作無法還原'
 });
 
 Alpine.data("confirm_msg", () => ({
   confirmDelete(msg) {
     swalWithBootstrapButtons
       .fire({
-        title: "Are you sure?",
         text: msg,
         icon: "warning",
       })
