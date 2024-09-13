@@ -7,7 +7,16 @@
   <form method="POST" action="{% url 'companies:jobs_new' company.id %}">
     {% csrf_token %}
     {% for field in form %}
-    <div class="mt-4">{{ field.label }} {{ field }} {{ field.errors }}</div>
+      {% if field.name == 'tags' %}
+        <label for="{{ field.id_for_label }}">所需技能</label>
+        <input type="text" id="{{ field.id_for_label }}" name="{{ field.name }}"
+            x-data="tag_input"
+            x-model="tag_input"
+            class="mt-1 input-often-base"
+           >
+      {% else %}
+        <div class="mt-4">{{ field.label }} {{ field }} {{ field.errors }}</div>
+      {% endif %}
     {% endfor %}
     <div class="flex gap-4 mt-4">
       <button class="text-white btn btn-primary min-w-20">新增</button>

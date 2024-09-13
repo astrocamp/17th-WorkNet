@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
@@ -152,6 +154,11 @@ def jobs_new(request, id):
         job.company = company
         job.save()
 
+        tags = request.POST.get("tags")
+        if tags:
+            tags = [tag["value"] for tag in json.loads(tags)]
+            job.tags.add(*tags)
+            job.save()
         messages.success(request, "新增成功")
         return redirect(reverse("companies:jobs_index", args=[company.id]))
     else:
