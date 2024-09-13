@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django.forms.widgets import DateInput, Select, TextInput
+from taggit.forms import TagField
 
 from ..models import User, UserInfo
 
@@ -36,14 +37,17 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class UserInfoForm(ModelForm):
+    # tags = TagField(widget=TextInput(attrs={"class": "mt-1 input-often-base",}))
+
     class Meta:
         model = UserInfo
 
-        fields = ["nickname", "tel", "location", "birth"]
+        fields = ["nickname", "tel", "location", "tags", "birth"]
         labels = {
             "nickname": "姓名",
             "tel": "手機",
             "location": "地區",
+            "tags": "具備的技能",
             "birth": "生日",
         }
 
@@ -65,6 +69,10 @@ class UserInfoForm(ModelForm):
                 attrs={"type": "date", "class": "mt-1 input-often-base"}
             ),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["tags"].label = "具備的技能"
 
 
 class PasswordResetForm(forms.Form):

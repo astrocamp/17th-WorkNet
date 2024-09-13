@@ -1,3 +1,4 @@
+import json
 import random
 import string
 from functools import wraps
@@ -93,12 +94,21 @@ def info(request, id):
         info = get_object_or_404(UserInfo, user_id=id, user=request.user)
 
         form = UserInfoForm(request.POST, instance=info)
+
         if form.is_valid():
-            form.save()
+            info_form = form.save(commit=False)
+            tags = request.POST.get("tags")
+
+            if tags:
+                tags = [tag["value"] for tag in json.loads(tags)]
+                info.tags.add(*tags)
+                info_form.save()
             messages.success(request, "更新成功")
             return redirect("users:info", info.user_id)
         else:
-            return render(request, "users/info.html", {"form": form, "info": info})
+            return render(
+                request, "users/info.html", {"form": form, "info": info, "tags": tags}
+            )
 
     info, _ = UserInfo.objects.get_or_create(user_id=id)
     form = UserInfoForm(instance=info)

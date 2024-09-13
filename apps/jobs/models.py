@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from taggit.managers import TaggableManager
 
 from apps.companies.models import Company
 from apps.resumes.models import Resume
@@ -34,7 +35,6 @@ class Job(SoftDeletetable, models.Model):
     description = models.TextField()
     location = models.CharField(max_length=100, choices=LOCATION_CHOICES)
     type = models.CharField(max_length=100, null=False, blank=False)
-    skills = models.TextField(null=False, blank=False)
     contact_info = models.TextField(null=False, blank=False)
     salary_range = models.TextField(null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -43,6 +43,7 @@ class Job(SoftDeletetable, models.Model):
     tenure = models.PositiveIntegerField()
     favorite = models.ManyToManyField(settings.AUTH_USER_MODEL, through="JobFavorite")
     resumes = models.ManyToManyField(Resume, through="Job_Resume")
+    tags = TaggableManager()
 
     objects = SoftDeleteManager()
 

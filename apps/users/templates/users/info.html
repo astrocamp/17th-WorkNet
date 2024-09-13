@@ -1,15 +1,25 @@
 {% extends "layouts/base.html" %} {% block content %}
-<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+<link href="https://cdn.jsdelivr.net/npm/@yaireo/tagify/dist/tagify.css" rel="stylesheet" type="text/css" />
+<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
   <h1 class="text-3xl font-bold">會員資訊</h1>
 </div>
-<div class="container p-5 pb-24 mx-auto">
-  <form method="post" autocomplete="off" class="space-y-4">
+<div class="container p-5 pb-24 mx-auto" >
+  <form method="post" autocomplete="off" class="space-y-4"  >
     {% csrf_token %}
     {% for field in form %}
-    <div class="mt-4">{{ field.label }} {{ field }} {{ field.errors }}</div>
+        {% if field.name == 'tags' %}
+        <label for="{{ field.id_for_label }}">具備的技能</label>
+            <input type="text" id="{{ field.id_for_label }}" name="{{ field.name }}"
+            x-data="tag_input"
+                    x-model="tag_input"
+                    class="mt-1 input-often-base"
+                   >
+        {% else %}
+            <div class="mt-4">{{ field.label }} {{ field }} {{ field.errors }}</div>
+        {% endif %}
     {% endfor %}
     <div class="mt-4">
-      <button type="submit" class="btn btn-primary text-white">更新會員資訊</button>
+      <button type="submit" class="text-white btn btn-primary">更新會員資訊</button>
     </div>
   </form>
   <div class="mt-4 text-gray-700">
