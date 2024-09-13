@@ -1,3 +1,4 @@
+@import "./github-markdown.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -21,4 +22,8 @@
 
 :root {
   --fallback-b2:#f3f4f6;
+}
+
+.markdown-body ol, .markdown-body ul {
+  list-style: revert;
 }
