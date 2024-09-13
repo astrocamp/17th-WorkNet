@@ -4,6 +4,11 @@
     <h1 class="text-3xl font-bold">{{ job.title }}</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
+  <section >
+    {% for tag in tags%}
+    <span class="badge">{{ tag.name }}</span>
+    {%endfor%}
+  </section>
     <ul class="mb-4">
         <li>{{ job.description }}</li>
         <li>{{ job.location }}</li>

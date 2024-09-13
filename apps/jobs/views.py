@@ -1,4 +1,5 @@
 from urllib.parse import urlparse
+import json
 
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
@@ -21,7 +22,14 @@ def show(request, id):
     if request.method == "POST":
         form = JobForm(request.POST, instance=job)
         if form.is_valid():
-            form.save()
+            job = form.save(commit=False)
+
+            tags = request.POST.get("tags")
+        if tags:
+            tags = [tag["value"] for tag in json.loads(tags)]
+            job.tags.add(*tags)
+            job.save()
+
             messages.success(request, "更新成功")
             return redirect("jobs:show", job.id)
         else:
@@ -30,12 +38,12 @@ def show(request, id):
     previous_url = request.META.get("HTTP_REFERER", "/")
     referer_path = urlparse(previous_url).path
     backJobs = "resumes" not in referer_path
-    return render(request, "jobs/show.html", {"job": job, "backJobs": backJobs})
-
+    return render(request, "jobs/show.html", {"job": job, "backJobs": backJobs,"tags":job.tags.all()})
 
 def edit(request, id):
     job = get_object_or_404(Job, pk=id)
     form = JobForm(instance=job)
+
     return render(request, "jobs/edit.html", {"form": form, "job": job})
 
 
