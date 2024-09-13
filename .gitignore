@@ -7,3 +7,4 @@ static/scripts/
 db.sqlite3
 .DS_Store
 *.pdf
+staticfiles/

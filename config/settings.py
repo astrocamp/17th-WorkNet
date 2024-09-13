@@ -30,6 +30,7 @@ EMAIL_HOST = "smtp.mailgun.org"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
+
 EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = MAILGUN_API_KEY
 DEFAULT_FROM_EMAIL = DEFAULT_FROM_EMAIL
@@ -166,12 +167,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
-
-STATIC_URL = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
+    
 ]
-
 
 LOGIN_URL = reverse_lazy("users:sign_in")
 

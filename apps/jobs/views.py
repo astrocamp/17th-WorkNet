@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
 
 from lib.models.paginate import paginate_queryset
+from django.core.exceptions import PermissionDenied
 
 from .forms.jobs_form import JobForm
 from .models import Job
