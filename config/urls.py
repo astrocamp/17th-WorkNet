@@ -12,6 +12,7 @@ urlpatterns = [
     path("posts/", include("apps.posts.urls")),
     path("social-auth/", include("social_django.urls", namespace="social")),
     path("resumes/", include("apps.resumes.urls")),
+    path("analytics/", include("apps.analytics.urls")),
 ]
 
 if is_dev():
