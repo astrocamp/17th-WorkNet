@@ -1,4 +1,5 @@
 {% extends "layouts/base.html" %}
+{% load markdown %}
 {% block content %}
 <div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
     <h1 class="text-3xl font-bold">{{ post.title }}</h1>
@@ -8,8 +9,7 @@
         <div class="flex-1 text-lg">作者：{{ post.user }}</div>
         {% include "posts/like.html" with post=post %}
     </div>
-
-    <p class="py-10">{{ post.content|linebreaksbr }}</p>
+    <div class="py-10 markdown-body">{{ post.content|convert_markdown|safe }}</div><br>
     <small>{{ post.created_at|date:"Y/m/d H:i" }}</small><br>
     <a class="text-white btn btn-primary" href="{% url 'posts:edit' post.id %}">修改評論</a>
 
