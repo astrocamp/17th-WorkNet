@@ -15,9 +15,6 @@ class ResumeForm(forms.ModelForm):
         widgets = {
             "file": FileInput(attrs={"class": "mt-1 input-often-base"}),
         }
-        labels = {
-            "file": "選擇檔案",
-        }
 
     def clean_file(self):
         file = self.cleaned_data.get("file")

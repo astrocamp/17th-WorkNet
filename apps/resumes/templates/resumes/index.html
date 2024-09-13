@@ -4,20 +4,23 @@
     <h1 class="text-3xl font-bold">我的履歷</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
-    <p class="font-semibold">總共有 {{ resumes|length }} 份履歷。</p>
+    <p>總共有 {{ resumes|length }} 份履歷。</p>
     {% if resumes %}
         <ul class="mt-6 divide-y divide-slate-200">
             {% for resume in resumes %}
                 <li class="flex gap-2 p-5">
                     <div class="flex-1">
-                        <a href="{{ resume.file.url }}" target="_blank">{{ resume.name|default:resume.file.name }}</a> - 上傳於 {{ resume.uploaded_at }}
+                        <a class="text-lg font-bold" href="{{ resume.file.url }}" target="_blank">{{ resume.name|default:resume.file.name }}</a>
+                        <p class="mt-1 text-sm font-light text-gray-400">
+                            <span>{{ resume.uploaded_at|date:"Y/m/d, g:i a" }}</span>
+                        </p>
                     </div>
                     <div class="flex gap-2">
                         <a class="text-white btn btn-secondary btn-sm" href="{{ resume.file.url }}" target="_blank">預覽</a>
                         <a class="text-white btn btn-warning btn-sm" href="{% url 'resumes:edit' resume.id %}">修改檔名</a>
-                        <form action="{% url 'resumes:delete' resume.id %}" method="POST" style="display:inline;">
+                        <form action="{% url 'resumes:delete' resume.id %}" method="POST" x-data="confirm_msg" @submit.prevent="confirmDelete('確定要刪除這份履歷嗎？')">
                             {% csrf_token %}
-                            <button class="text-white btn btn-error btn-sm" type="submit" onclick="return confirm('確定要刪除這份履歷嗎？');">刪除</button>
+                            <button type="submit" class="text-white btn btn-error btn-sm">刪除</button>
                         </form>
                     </div>
                 </li>

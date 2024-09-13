@@ -46,6 +46,7 @@ def upload(request):
 def delete(request, id):
     resume = get_object_or_404(Resume, id=id)
     resume.mark_delete()
+    messages.success(request, "履歷已成功刪除")
     return redirect("resumes:index")
 
 
