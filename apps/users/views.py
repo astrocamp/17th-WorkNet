@@ -255,3 +255,4 @@ def favorite_company_delete(request, id):
     favorite_company = get_object_or_404(CompanyFavorite, pk=id)
     favorite_company.delete()
     return redirect("users:favorites_company_list")
+

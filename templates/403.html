@@ -1,0 +1,24 @@
+{% load static %}
+
+{% block content %}
+<link href="{% static 'styles/styles.css' %}" rel="stylesheet">
+<div class="container mx-auto"></div>
+<div class="relative flex justify-center items-center h-screen">
+    <div class="absolute inset-0 bg-cover bg-center filter blur-md transform scale-110" style="background-image: url({% static 'imgs/404_background.jpg' %});"></div>
+    <div class="relative text-center bg-white bg-opacity-70 p-8 rounded-lg shadow-lg">
+        <p class="text-3xl font-bold text-gray-700">
+            <span class="inline-block">U</span>
+            <span class="inline-block opacity-10">R</span>
+            <span class="inline-block">L</span>
+        </p>
+        <h1 class="text-9xl font-extrabold text-gray-800 animate-pulse duration-5000">403</h1>
+        <p class="text-2xl text-gray-600 mt-4">你的權限不足以訪問該頁面</p>
+        <p class="text-2xl text-gray-500 mt-4">請聯繫管理員</p>
+        <div class="mt-5">
+            <a href="{% url 'users:index' %}" class="mt-16 bg-gray-700 text-white px-6 py-1 rounded-lg hover:bg-black transition-all">
+                回到首頁
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
