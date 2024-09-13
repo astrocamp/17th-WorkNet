@@ -1,7 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
-from django.utils import timezone
 from django.views.decorators.http import require_http_methods, require_POST
 
 from .forms.resumes_form import ResumeForm
@@ -74,7 +73,7 @@ def edit(request, id):
         form = ResumeForm(request.POST, instance=resume)
         if form.is_valid():
             form.save()
-            messages.success(request, "檔名已成功更新")
+            messages.success(request, "更新成功")
             return redirect("resumes:index")
     else:
         form = ResumeForm(instance=resume)

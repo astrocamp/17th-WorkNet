@@ -5,16 +5,6 @@
 </div>
 <div class="container p-5 pb-24 mx-auto">
     <p class="font-semibold">總共有 {{ resumes|length }} 份履歷。</p>
-    {% if messages %}
-    <div class="container mx-auto mt-4">
-        <ul class="px-4 py-3 border rounded-lg bg-rose-100 text-rose-700 border-rose-200">
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% endif %}
-
     {% if resumes %}
         <ul class="mt-6 divide-y divide-slate-200">
             {% for resume in resumes %}
