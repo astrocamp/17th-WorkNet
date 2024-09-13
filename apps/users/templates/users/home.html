@@ -1,14 +1,18 @@
-{% extends "layouts/base.html" %} {% block content %}
-<div class="flex items-center justify-center min-h-screen p-4">
-  <form action="#" method="GET" class="flex items-center w-full max-w-4xl p-4 space-x-2 bg-white rounded-lg shadow-md">
+{% extends "layouts/base.html" %}
+{% block content %}
+{% load static %}
+
+<div class="flex flex-col justify-center items-center p-4 min-h-screen">
+  <img src="{% static 'imgs/logo.png' %}" alt="logo" class="mb-1 w-60" />
+  <form action="#" method="GET" class="flex items-center p-4 space-x-2 w-full max-w-4xl bg-white rounded-lg shadow-md">
     <div class="flex-1">
-      <input type="text" name="keywords" placeholder="輸入工作名稱或公司" class="input-often-base" />
+      <input type="text" name="q" placeholder="輸入工作名稱或公司" class="input-often-base" />
     </div>
     <div class="flex-1">
       <input type="text" name="location" placeholder="輸入地點" class="input-often-base" />
     </div>
     <div>
-      <button class="w-full btn btn-primary text-white min-w-20">搜尋</button>
+      <button class="w-full text-white btn btn-primary min-w-20">搜尋</button>
     </div>
   </form>
 </div>
