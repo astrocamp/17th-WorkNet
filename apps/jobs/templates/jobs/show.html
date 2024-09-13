@@ -10,8 +10,8 @@
     {%endfor%}
   </section>
     <ul class="mb-4">
-        <li>{{ job.description }}</li>
-        <li>{{ job.location }}</li>
+        <li>工作敘述：{{ job.description }}</li>
+        <li>工作地點：{{ job.location }}</li>
       </ul>
       <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
         {% csrf_token%}
