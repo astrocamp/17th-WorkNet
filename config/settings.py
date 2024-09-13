@@ -10,7 +10,6 @@ if is_dev():
 
     load_dotenv()
 
-from lib.utils.env import is_dev
 
 MAILGUN_API_URL = os.getenv("MAILGUN_API_URL")
 MAILGUN_API_KEY = os.getenv("MAILGUN_API_KEY")
@@ -112,7 +111,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "django.template.context_processors.request",
             ],
         },
     },
