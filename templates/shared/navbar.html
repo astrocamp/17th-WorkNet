@@ -40,7 +40,8 @@
               <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'resumes:index' %}">我的履歷</a>
               <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'resumes:jobs' %}">應徵紀錄</a>
             {% elif request.user.type == 2 %}
-              <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'companies:index' %}">公司資料</a>
+              <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'companies:index' %}">公司資料</a>
+              <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'companies:company_application' %}">查看應徵</a>
             {% endif %}
           </div>
         </div>
