@@ -46,8 +46,9 @@ def new(request):
     return render(request, "companies/new.html", {"form": form})
 
 
+@login_required
 def edit(request, id):
-    company = get_object_or_404(Company, id=id)
+    company = get_object_or_404(Company, id=id, user=request.user)
     form = CompanyForm(instance=company)
     return render(request, "companies/edit.html", {"form": form, "company": company})
 
@@ -72,9 +73,10 @@ def show(request, id):
     return render(request, "companies/show.html", {"company": company, "post": post})
 
 
+@login_required
 @require_POST
 def delete(request, id):
-    company = get_object_or_404(Company, id=id)
+    company = get_object_or_404(Company, id=id, user=request.user)
     company.mark_delete()
     messages.success(request, "刪除成功")
     return redirect("companies:index")

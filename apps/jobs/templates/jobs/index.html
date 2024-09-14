@@ -18,15 +18,19 @@
                 <a href="{% url 'jobs:show' job.id %}">{{ job.get_location_display }}</a>
             </div>
             <div class="flex gap-2">
+                {% if company.user == request.user%}
                 <a class="text-white btn btn-primary btn-sm" href="{% url 'jobs:edit' job.id %}">編輯</a>
+                {% endif %}
                 <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' job.id %}">收藏</a>
 
                 <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:apply_jobs' job.id %}" >應徵</a>
 
+                {% if company.user == request.user%}
                 <form method="POST" action="{% url 'jobs:delete' job.id %}">
                     {% csrf_token %}
                     <button class="text-white btn btn-error btn-sm">刪除</button>
                 </form>
+                {% endif %}
             </div>
         </li>
         {% endfor %}
