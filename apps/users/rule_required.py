@@ -1,9 +1,6 @@
 from functools import wraps
 from django.http import HttpResponseForbidden
 import rules
-from .rules import user_can_view_info
-
-rules.add_rule("user_can_view_info", user_can_view_info)
 
 
 def rule_required(rule_name):
