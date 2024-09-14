@@ -35,6 +35,7 @@ class Job(SoftDeletetable, models.Model):
     description = models.TextField()
     location = models.CharField(max_length=100, choices=LOCATION_CHOICES)
     type = models.CharField(max_length=100, null=False, blank=False)
+    skills = models.TextField(null=False, blank=False, default="")
     contact_info = models.TextField(null=False, blank=False)
     salary_range = models.TextField(null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
