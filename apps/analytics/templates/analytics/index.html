@@ -1,18 +1,17 @@
 {% extends "layouts/base.html" %}
 {% load static %}
 {% block content %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="{% static 'scripts/chart.js' %}"></script>  <!-- 引用新的 chart.js 文件 -->
 
-<div class="flex justify-center">
-    <div class="w-2/5 h-2/5">
+<script src="{% static 'src/scripts/chart.js' %}" type="module"></script>
+
+<div class="flex flex-col items-center pt-20 min-h-screen">
+    <h1 class="mt-6 mb-2">最受歡迎的程式語言</h1>
+    <div class="w-[400px] h-[400px]">
         <canvas id="myPieChart"></canvas>
     </div>
 </div>
 
-<!-- 將數據以 JSON 格式傳遞到前端 -->
 <script id="skill-data" type="application/json">
     {{ skill_counts_json|safe }}
 </script>
-
 {% endblock %}

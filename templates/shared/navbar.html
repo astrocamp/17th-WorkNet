@@ -23,6 +23,9 @@
             <a class="font-semibold" href="{% url 'jobs:index' %}">職缺</a>
           {% endif %}
         </li>
+        <li>
+          <a class="font-semibold" href="{% url 'analytics:index' %}">分析</a>
+        </li>
       </ul>
     </div>
     <div class="absolute right-4 top-1/2 -translate-y-1/2">
@@ -32,11 +35,11 @@
           <div class="cursor-pointer"><h2>{{ request.user }}，您好</h2></div>
           <div class="hidden absolute top-12 left-1/2 p-3 text-center bg-white rounded-xl divide-y shadow-lg -translate-x-1/2 divide-slate-200 group-hover:block">
             {% if request.user.type == 1 %}
-              <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'users:info' request.user.pk %}">會員資料</a>
-              <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'users:favorites_list' %}">我的職缺收藏</a>
-              <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'users:favorites_company_list' %}">喜愛的公司</a>
-              <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'resumes:index' %}">我的履歷</a>
-              <a class="block py-2 px-2.5 whitespace-nowrap" href="{% url 'resumes:jobs' %}">應徵紀錄</a>
+              <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'users:info' request.user.pk %}">會員資料</a>
+              <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'users:favorites_list' %}">我的職缺收藏</a>
+              <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'users:favorites_company_list' %}">喜愛的公司</a>
+              <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'resumes:index' %}">我的履歷</a>
+              <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'resumes:jobs' %}">應徵紀錄</a>
             {% elif request.user.type == 2 %}
               <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'companies:index' %}">公司資料</a>
             {% endif %}
