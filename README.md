@@ -1,5 +1,7 @@
 # WorkNet
 
+![WorkNet Logo](static/imgs/logo_readme.png)
+
 ## Install
 
 1. `git clone https://github.com/astrocamp/17th-WorkNet.git` (clone the repository to your local machine)
