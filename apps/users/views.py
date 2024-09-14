@@ -1,7 +1,7 @@
 import json
 import random
 import string
-from functools import wraps
+from lib.utils.models.decorators import login_redirect_next
 
 import requests
 from django.conf import settings
@@ -148,18 +148,6 @@ def login_redirect(request):
         return redirect("users:info", user.id)
     else:
         return redirect("companies:index")
-
-
-def login_redirect_next(view_func):
-    @wraps(view_func)
-    def wrapper(request, *args, **kwargs):
-        if request.user.is_authenticated:
-            return view_func(request, *args, **kwargs)
-        else:
-            return redirect(reverse("users:sign_in") + f"?next={request.path}")
-
-    return wrapper
-
 
 @login_redirect_next
 def favorite(request, id):

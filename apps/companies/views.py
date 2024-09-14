@@ -4,13 +4,24 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.views.decorators.http import require_http_methods, require_POST
+from django.views.decorators.http import require_GET, require_http_methods, require_POST
+from django.core.exceptions import PermissionDenied
+
+from apps.posts.forms.posts_form import PostForm
+from apps.posts.models import Post
+from lib.models.paginate import paginate_queryset
+from lib.utils.models.decorators import company_required
+
+
+from django.contrib import messages
+
 
 from apps.jobs.forms import JobForm
 from apps.jobs.models import Job
 from apps.posts.forms.posts_form import PostForm
 from apps.posts.models import Post
 from lib.models.paginate import paginate_queryset
+from apps.jobs.models import Job_Resume
 
 from .forms.companies_form import CompanyForm
 from .models import Company
@@ -164,3 +175,10 @@ def jobs_new(request, id):
     else:
         form = JobForm()
     return render(request, "jobs/new.html", {"form": form, "company": company})
+
+@company_required
+def company_application(request):
+    company = request.user.company
+    applications = Job_Resume.objects.filter(job__company=company).order_by("-created_at")
+
+    return render(request, "companies/applications.html", {"applications": applications})

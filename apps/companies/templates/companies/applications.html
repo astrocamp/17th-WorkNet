@@ -1,0 +1,42 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+    <h1 class="text-3xl font-bold">應徵紀錄</h1>
+</div>
+
+<div class="container p-5 pb-24 mx-auto">
+    <p>總共有 {{ applications|length }} 份求職履歷。</p>
+    {% if applications %}
+    <div class="overflow-x-auto mt-5">
+        <table class="table">
+            <thead>
+                <tr class="text-center text-base">
+                    <th></th>
+                    <th>職缺</th>
+                    <th>應徵者名字</th>
+                    <th>應徵日期</th>
+                    <th>履歷</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for application in applications %}
+                    <tr>
+                        <th>{{ forloop.counter }}</th>
+                        <td>{{ application.job.title }}</td>
+                        <td>{{ application.resume.userinfo.nickname }}</td>
+                        <td>{{ application.created_at }}</td>
+                        <td>
+                            <a href="{{ application.resume.file.url }}" target="_blank" class="text-blue-500 hover:underline">查看履歷</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <div class="text-center py-5"><p>該職缺尚無應徵</p></div>
+    {% endif %}
+</div>
+
+{% endblock %}
