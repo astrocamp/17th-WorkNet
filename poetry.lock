@@ -929,6 +929,17 @@ requests = ">=2.0.0"
 rsa = ["oauthlib[signedtoken] (>=3.0.0)"]
 
 [[package]]
+name = "rules"
+version = "3.5"
+description = "Awesome Django authorization, without the database"
+optional = false
+python-versions = "*"
+files = [
+    {file = "rules-3.5-py2.py3-none-any.whl", hash = "sha256:0f00fc9ee448b3f82e9aff9334ab0c56c76dce4dfa14f1598f57969f1022acc0"},
+    {file = "rules-3.5.tar.gz", hash = "sha256:f01336218f4561bab95f53672d22418b4168baea271423d50d9e8490d64cb27a"},
+]
+
+[[package]]
 name = "s3transfer"
 version = "0.10.2"
 description = "An Amazon S3 Transfer Manager"
@@ -1099,4 +1110,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "73167b4e27c8ed2ea16f208c3912ddf1a1bc7b458fba7626eb68c4da90fe191f"
+content-hash = "793d3fdef7d18acf1d56eb9aebd7cfb88a16f891d6416eab9b4657cd5d5b35a5"
