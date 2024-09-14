@@ -16,11 +16,11 @@ from .models import Company
 
 def index(request):
     if request.method == "POST":
-        form = CompanyForm(request.POST)
+        company = get_object_or_404(Company, user=request.user)
+        form = CompanyForm(request.POST, instance=company)
+
         if form.is_valid():
-            company = form.save(commit=False)
-            company.user = request.user
-            company.save()
+            form.save()
 
             messages.success(request, "新增成功")
             return redirect("companies:index")
@@ -36,7 +36,13 @@ def index(request):
 
 
 def new(request):
-    form = CompanyForm()
+    company, _ = Company.objects.get_or_create(
+        user_id=request.user.id,
+        defaults={
+            "employees": 0,
+        },
+    )
+    form = CompanyForm(instance=company)
     return render(request, "companies/new.html", {"form": form})
 
 
