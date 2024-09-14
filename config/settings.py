@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     "anymail",
     "storages",
     "social_django",
+    "rules",
 ]
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_KEY")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("GOOGLE_SECRET")
@@ -182,6 +183,7 @@ LOGIN_URL = reverse_lazy("users:sign_in")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTHENTICATION_BACKENDS = (
+    "rules.permissions.ObjectPermissionBackend",
     "social_core.backends.line.LineOAuth2",
     "social_core.backends.google.GoogleOAuth2",
     "django.contrib.auth.backends.ModelBackend",
