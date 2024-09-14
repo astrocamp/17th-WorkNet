@@ -1,6 +1,6 @@
 # WorkNet
 
-![WorkNet Logo](static/imgs/logo_readme.png)
+![WorkNet Logo](static/imgs/logo.png)
 
 ## Install
 
