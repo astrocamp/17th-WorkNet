@@ -12,17 +12,19 @@
         <a href="{% url 'posts:show' id=post.id %}">{{ post.title }} {{ post.score }}</a>
       </div>
       <div class="flex gap-2">
-        <a class="text-white btn btn-primary btn-sm" href="{% url 'posts:edit' id=post.id %}">編輯</a>
-        <form
-          action="{% url 'posts:delete' id=post.id %}"
-          method="POST"
-          hx-post="{% url 'posts:delete' id=post.id %}"
-          hx-confirm="確認刪除？"
-          hx-target="body"
-        >
-          {% csrf_token %}
-          <button class="text-white btn btn-error btn-sm" type="submit">刪除</button>
-        </form>
+        {% if post.user == request.user%}
+          <a class="text-white btn btn-primary btn-sm" href="{% url 'posts:edit' id=post.id %}">編輯</a>
+          <form
+            action="{% url 'posts:delete' id=post.id %}"
+            method="POST"
+            hx-post="{% url 'posts:delete' id=post.id %}"
+            hx-confirm="確認刪除？"
+            hx-target="body"
+            >
+            {% csrf_token %}
+            <button class="text-white btn btn-error btn-sm" type="submit">刪除</button>
+            {% endif %}
+          </form>
       </div>
     </li>
     {% endfor %}

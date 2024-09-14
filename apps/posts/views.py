@@ -51,8 +51,9 @@ def show(request, id):
     )
 
 
+@login_required
 def edit(request, id):
-    post = get_object_or_404(Post, id=id)
+    post = get_object_or_404(Post, id=id, user=request.user)
     company = post.company
 
     if request.method == "POST":
@@ -70,7 +71,7 @@ def edit(request, id):
 @login_required
 @require_POST
 def delete(request, id):
-    post = get_object_or_404(Post, id=id)
+    post = get_object_or_404(Post, id=id, user=request.user)
     company = post.company
     post.mark_delete()
     messages.success(request, "刪除成功")
@@ -80,7 +81,7 @@ def delete(request, id):
 @login_required
 @require_http_methods(["POST"])
 def comment_delete(request, id):
-    comment = get_object_or_404(Comment, id=id)
+    comment = get_object_or_404(Comment, id=id, user=request.user)
     comment.mark_delete()
     messages.success(request, "刪除成功")
     return redirect("posts:show", id=comment.post.id)
