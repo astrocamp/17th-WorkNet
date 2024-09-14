@@ -1,6 +1,12 @@
 from django.apps import AppConfig
+from .rules import user_can_view_info
+import rules
 
 
 class UsersConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "apps.users"
+
+    def ready(self):
+
+        rules.add_rule("user_can_view_info", user_can_view_info)
