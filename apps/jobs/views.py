@@ -25,11 +25,11 @@ def show(request, id):
             job = form.save(commit=False)
 
             tags = request.POST.get("tags")
-        if tags:
-            tags = [tag["value"] for tag in json.loads(tags)]
-            job.tags.add(*tags)
-            job.save()
+            if tags:
+                tags = [tag["value"] for tag in json.loads(tags)]
+                job.tags.add(*tags)
 
+            job.save()
             messages.success(request, "更新成功")
             return redirect("jobs:show", job.id)
         else:
