@@ -4,11 +4,13 @@ import string
 from functools import wraps
 
 import requests
+import rules
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -24,6 +26,7 @@ from lib.models.rule_required import rule_required
 from .forms import CustomUserCreationForm, UserInfoForm
 from .forms.users_form import PasswordResetForm
 from .models import UserInfo
+from .rule_required import rule_required
 
 
 def home(request):
