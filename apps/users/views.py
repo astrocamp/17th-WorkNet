@@ -91,7 +91,6 @@ def sign_out(request):
 
 @rule_required("user_can_view_info")
 def info(request, id):
-
     if request.method == "POST":
         info = get_object_or_404(UserInfo, user_id=id, user=request.user)
 
