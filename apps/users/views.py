@@ -26,7 +26,6 @@ from lib.models.rule_required import rule_required
 from .forms import CustomUserCreationForm, UserInfoForm
 from .forms.users_form import PasswordResetForm
 from .models import UserInfo
-from .rule_required import rule_required
 
 
 def home(request):
