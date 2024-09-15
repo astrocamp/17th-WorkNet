@@ -16,6 +16,15 @@ class CustomUserCreationForm(UserCreationForm):
 
         widgets = {"type": forms.Select(choices=User.roles_choice)}
 
+    def clean_email(self):
+
+        email = self.cleaned_data["email"]
+
+        if not email.endswith("@gmail.com"):
+            raise forms.ValidationError("僅接受 gmail.com 網域的電子郵件地址")
+
+        return email
+
 
 class UserInfoForm(ModelForm):
     class Meta:
