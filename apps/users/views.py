@@ -90,6 +90,8 @@ def sign_out(request):
 
 @rule_required("user_can_view")
 def info(request, id):
+    info, _ = UserInfo.objects.get_or_create(user_id=id)
+
     if request.method == "POST":
         info = get_object_or_404(UserInfo, user_id=id, user=request.user)
 
@@ -106,14 +108,19 @@ def info(request, id):
             messages.success(request, "更新成功")
             return redirect("users:info", info.user_id)
         else:
-            return render(
-                request, "users/info.html", {"form": form, "info": info, "tags": tags}
+            tags = request.POST.get("tags", [])
+            tags = (
+                json.loads(tags)
+                if tags
+                else list(info.tags.values_list("name", flat=True))
             )
+    else:
+        form = UserInfoForm(instance=info)
+        tags = list(info.tags.values_list("name", flat=True))
 
-    info, _ = UserInfo.objects.get_or_create(user_id=id)
-    form = UserInfoForm(instance=info)
-
-    return render(request, "users/info.html", {"form": form, "info": info})
+    return render(
+        request, "users/info.html", {"form": form, "info": info, "tags": tags}
+    )
 
 
 def social_save_profile(backend, user, response, *args, **kwargs):

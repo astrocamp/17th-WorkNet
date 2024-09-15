@@ -11,7 +11,7 @@
         <label for="{{ field.id_for_label }}">具備的技能</label>
             <input type="text" id="{{ field.id_for_label }}" name="{{ field.name }}"
                     x-data="tag_input"
-                    x-model="tag_input"
+                    x-init="init({{ tags|safe }})"
                     class="mt-1 input-often-base"
                    >
         {% else %}
