@@ -48,8 +48,9 @@ def show(request, id):
 def edit(request, id):
     job = get_object_or_404(Job, pk=id)
     form = JobForm(instance=job)
+    tags = list(job.tags.values_list("name", flat=True))
 
-    return render(request, "jobs/edit.html", {"form": form, "job": job})
+    return render(request, "jobs/edit.html", {"form": form, "job": job, "tags": tags})
 
 
 def delete(request, id):

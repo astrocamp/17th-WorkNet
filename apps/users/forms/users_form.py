@@ -37,7 +37,6 @@ class CustomUserCreationForm(UserCreationForm):
 
 
 class UserInfoForm(ModelForm):
-    # tags = TagField(widget=TextInput(attrs={"class": "mt-1 input-often-base",}))
 
     class Meta:
         model = UserInfo
