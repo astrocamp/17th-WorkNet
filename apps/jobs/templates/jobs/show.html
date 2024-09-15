@@ -11,7 +11,7 @@
   </section>
     <ul class="mb-4">
         <li>工作敘述：{{ job.description }}</li>
-        <li>工作地點：{{ job.location }}</li>
+        <li>工作地點：{{ job.get_location_display }}</li>
       </ul>
       <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
         {% csrf_token%}
