@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+import dj_database_url
+import django_heroku
 from django.urls import reverse_lazy
 
 from lib.utils.env import is_dev
@@ -51,7 +53,7 @@ DEBUG = is_dev()
 
 NGROK_HOSTS = os.getenv("NGROK_HOSTS")
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", NGROK_HOSTS]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", NGROK_HOSTS, "worknet.herokuapp.com"]
 AUTH_USER_MODEL = "users.User"
 
 # Application definition
@@ -74,6 +76,7 @@ INSTALLED_APPS = [
     "social_django",
     "rules",
     "taggit",
+    "whitenoise.runserver_nostatic",
 ]
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("GOOGLE_KEY")
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("GOOGLE_SECRET")
@@ -94,6 +97,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "social_django.middleware.SocialAuthExceptionMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 if is_dev():
@@ -136,6 +140,11 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT"),
     }
 }
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES["default"].update(db_from_env)
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -230,3 +239,5 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
+
+django_heroku.settings(locals())
