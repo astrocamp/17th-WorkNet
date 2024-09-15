@@ -1,12 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.db.models import OuterRef, Subquery
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods, require_POST
 
 from .forms.resumes_form import ResumeForm
+from apps.jobs.models import Job, Job_Resume
 from .models import Resume
-from apps.jobs.models import Job_Resume, Job
-from django.db.models import Subquery, OuterRef
 
 
 @login_required

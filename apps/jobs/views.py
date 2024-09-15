@@ -1,5 +1,5 @@
-from urllib.parse import urlparse
 import json
+from urllib.parse import urlparse
 
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, redirect, render
@@ -38,7 +38,12 @@ def show(request, id):
     previous_url = request.META.get("HTTP_REFERER", "/")
     referer_path = urlparse(previous_url).path
     backJobs = "resumes" not in referer_path
-    return render(request, "jobs/show.html", {"job": job, "backJobs": backJobs,"tags":job.tags.all()})
+    return render(
+        request,
+        "jobs/show.html",
+        {"job": job, "backJobs": backJobs, "tags": job.tags.all()},
+    )
+
 
 def edit(request, id):
     job = get_object_or_404(Job, pk=id)
