@@ -16,13 +16,6 @@
                         <a class="text-white btn btn-primary btn-sm" href="{% url 'companies:edit' item.company.id %}">編輯</a>
                     {% endif %}
                     {%include "companies/favorite.html" with company=item.company favorited=item.favorited only %}
-
-                    <!-- {% if item.company.user == request.user%}
-                        <form method="post" action="{% url 'companies:delete' item.company.id %}">
-                            {% csrf_token %}
-                            <button class="text-white btn btn-error btn-sm">刪除</button>
-                        </form>
-                    {% endif %} -->
                 </div>
             </li>
         {% endfor %}
