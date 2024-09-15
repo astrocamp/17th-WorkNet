@@ -46,6 +46,20 @@
           </div>
         </div>
 
+        <div class="flex relative items-center group">
+          <div class="mx-2 text-lg">
+            {% if unread_notifications_count > 0 %}
+              <i class="fas fa-bell text-red-500"></i>
+            {% else %}
+              <i class="far fa-bell"></i>
+            {% endif%}
+          </div>
+          <div class="hidden absolute top-12 left-1/2 p-3 text-center bg-white rounded-xl divide-y shadow-lg -translate-x-1/2 divide-slate-200 group-hover:block">
+              {% include "shared/notify.html" %}
+          </div>
+        </div>
+
+
         <form action="{% url 'users:sign_out' %}" method="POST">
           {% csrf_token %}
           <button class="text-white bg-red-500 btn min-w-20 hover:bg-red-400">登出</button>
