@@ -4,7 +4,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 from django.forms.widgets import DateInput, Select, TextInput
-
+import re
+from django.core.exceptions import ValidationError
 from ..models import User, UserInfo
 
 
@@ -17,11 +18,17 @@ class CustomUserCreationForm(UserCreationForm):
         widgets = {"type": forms.Select(choices=User.roles_choice)}
 
     def clean_email(self):
+        email = self.cleaned_data.get("email")
 
-        email = self.cleaned_data["email"]
+        if not email:
+            raise ValidationError("請使用有效的電子郵件地址。.")
 
-        if not email.endswith("@gmail.com"):
-            raise forms.ValidationError("僅接受 gmail.com 網域的電子郵件地址")
+        if not re.match(
+            r"^[a-zA-Z0-9._%+-]+@(gmail|yahoo|outlook|hotmail)\.com$", email
+        ):
+            raise ValidationError(
+                "目前僅支援 Gmail、Yahoo、Outlook 或 Hotmail 的電子郵件地址。"
+            )
 
         return email
 
