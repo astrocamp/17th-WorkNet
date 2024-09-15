@@ -3,13 +3,11 @@ import string
 from functools import wraps
 
 import requests
-import rules
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -89,7 +87,7 @@ def sign_out(request):
     return redirect("users:index")
 
 
-@rule_required("user_can_view_info")
+@rule_required("user_can_view")
 def info(request, id):
     if request.method == "POST":
         info = get_object_or_404(UserInfo, user_id=id, user=request.user)

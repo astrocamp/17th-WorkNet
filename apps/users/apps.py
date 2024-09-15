@@ -1,6 +1,7 @@
-from django.apps import AppConfig
-from .rules import user_can_view_info
 import rules
+from django.apps import AppConfig
+
+from .rules import user_can_view
 
 
 class UsersConfig(AppConfig):
@@ -8,5 +9,4 @@ class UsersConfig(AppConfig):
     name = "apps.users"
 
     def ready(self):
-
-        rules.add_rule("user_can_view_info", user_can_view_info)
+        rules.add_rule("user_can_view", user_can_view)
