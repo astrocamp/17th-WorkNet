@@ -1,11 +1,13 @@
+import re
+
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 from django.forms.widgets import DateInput, Select, TextInput
-import re
-from django.core.exceptions import ValidationError
+
 from ..models import User, UserInfo
 
 
@@ -21,7 +23,7 @@ class CustomUserCreationForm(UserCreationForm):
         email = self.cleaned_data.get("email")
 
         if not email:
-            raise ValidationError("請使用有效的電子郵件地址。.")
+            raise ValidationError("請使用有效的電子郵件地址。")
 
         if not re.match(
             r"^[a-zA-Z0-9._%+-]+@(gmail|yahoo|outlook|hotmail)\.com$", email
