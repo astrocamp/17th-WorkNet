@@ -1,6 +1,7 @@
 from functools import wraps
-from django.http import HttpResponseForbidden
+
 import rules
+from django.http import HttpResponseForbidden
 
 
 def rule_required(rule_name):
