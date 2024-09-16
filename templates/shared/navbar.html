@@ -1,14 +1,13 @@
 
 {% load static %}
 <nav
-  class="box-border flex fixed top-0 left-0 z-40 items-center p-4 w-full shadow-md bg-base-100 min-h-20">
+  class="box-border flex fixed top-0 left-0 z-40 items-center p-4 w-full min-h-20">
   <div class="absolute left-4 top-1/2 -translate-y-1/2">
-    <a href="{% url 'users:index' %}" class="text-xl font-bold">
-      <img src="{% static 'imgs/logo.png' %}" alt="logo" class="w-20" />
+    <a href="{% url 'users:index' %}" class="block h-12 w-32" style="background-image: url('{% static 'imgs/logo_backnend.png' %}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
     </a>
-  </div>
+</div>
   <div class="w-full">
-    <div class="text-center">
+    <div class="text-center text-[20px] text-white">
       <ul class="inline-flex gap-5">
         <li>
           <a class="font-semibold" href="/">首頁</a>
@@ -54,10 +53,10 @@
       {% else %}
       <ul class="flex">
         <li>
-          <a class="btn no-style hover:border-transparent" href="{% url 'users:sign_in' %}">登入</a>
+          <a class="text-white text-[20px] btn no-style hover:border-transparent" href="{% url 'users:sign_in' %}">登入</a>
         </li>
         <li>
-          <a class="text-white btn btn-primary min-w-20" href="{% url 'users:register' %}">註冊</a>
+          <a class="text-white text-[20px] btn btn-primary min-w-20" href="{% url 'users:register' %}">註冊</a>
         </li>
       </ul>
       {% endif %}
