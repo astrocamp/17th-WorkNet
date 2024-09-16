@@ -23,6 +23,8 @@
 - Third-Party Login：Google, Line
 - Web Services：Amazon Web Services (AWS) S3
 - Email：Mailgun
+- Deploy：Heroku
+- Planning：Miro, Trello
 
 ## Team
 
