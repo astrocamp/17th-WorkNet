@@ -5,7 +5,7 @@ Chart.register(ChartDataLabels);
 
 document.addEventListener("DOMContentLoaded", function () {
   const skillCounts = JSON.parse(
-    document.getElementById("skill-data").textContent
+    document.getElementById("skillData").textContent
   );
 
   const labels = Object.keys(skillCounts);
