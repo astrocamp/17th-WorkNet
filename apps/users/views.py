@@ -103,7 +103,7 @@ def info(request, id):
 
             if tags:
                 tags = [tag["value"] for tag in json.loads(tags)]
-                info.tags.add(*tags)
+                info.tags.set(tags, clear=False)
                 info_form.save()
             messages.success(request, "更新成功")
             return redirect("users:info", info.user_id)
