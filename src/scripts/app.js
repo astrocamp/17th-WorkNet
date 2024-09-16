@@ -3,7 +3,7 @@ import Alpine from "alpinejs";
 import "htmx.org";
 import "./fontawesome.js";
 import "./alert.js";
-import "./tag_input.js";
+import "./tagInput.js";
 
 window.Alpine = Alpine;
 
