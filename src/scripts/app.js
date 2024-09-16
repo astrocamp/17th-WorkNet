@@ -5,6 +5,4 @@ import "./fontawesome.js";
 import "./alert.js";
 import "./tagInput.js";
 
-window.Alpine = Alpine;
-
 Alpine.start();

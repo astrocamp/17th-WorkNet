@@ -7,12 +7,12 @@
     {% csrf_token %}
     {% for field in form %}
         {% if field.name == 'tags' %}
-        <label for="{{ field.id_for_label }}">具備的技能</label>
-            <input type="text" id="{{ field.id_for_label }}" name="{{ field.name }}"
-                    x-data="tag_input"
-                    x-init="init({{ tags|safe }})"
-                    class="mt-1 input-often-base"
-                   >
+          <div x-data="tag_input" class="mt-4">
+            <label for="{{ field.id_for_label }}">具備的技能  </label>
+            <input x-ref="tagInput" type="text"  id="{{ field.id_for_label }}" name="{{ field.name }}" x-init="init({{ tags|safe }})"
+              class="mt-1 input-often-base">
+            <input type="hidden" x-ref="hiddenTagsInput" name="tags">
+          </div>
         {% else %}
             <div class="mt-4">{{ field.label }} {{ field }} {{ field.errors }}</div>
         {% endif %}
