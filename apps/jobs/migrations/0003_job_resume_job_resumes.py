@@ -8,6 +8,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ("jobs", "0002_alter_job_table_jobfavorite_job_favorite"),
+        ("resumes", "0002_remove_resume_user_resume_userinfo"),
     ]
 
     operations = [
