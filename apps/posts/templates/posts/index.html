@@ -6,23 +6,25 @@
 <div class="container p-5 pb-24 mx-auto">
   <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:post_new' company.id %}">新增評論</a>
   <ul class="mt-6 divide-y divide-slate-200">
-    {% for post in page_obj %}
+    {% for item in page_obj %}
     <li class="flex gap-2 p-5">
       <div class="flex-1">
-        <a href="{% url 'posts:show' id=post.id %}">{{ post.title }} {{ post.score }}</a>
+        <a href="{% url 'posts:show' id=item.post.id %}">{{ item.post.title }} {{ item.post.score }}</a>
       </div>
       <div class="flex gap-2">
-        <a class="text-white btn btn-primary btn-sm" href="{% url 'posts:edit' id=post.id %}">編輯</a>
-        <form
-          action="{% url 'posts:delete' id=post.id %}"
-          method="POST"
-          hx-post="{% url 'posts:delete' id=post.id %}"
-          hx-confirm="確認刪除？"
-          hx-target="body"
-        >
-          {% csrf_token %}
-          <button class="text-white btn btn-error btn-sm" type="submit">刪除</button>
-        </form>
+        {% if item.can_edit %}
+          <a class="text-white btn btn-primary btn-sm" href="{% url 'posts:edit' id=item.post.id %}">編輯</a>
+          <form
+            action="{% url 'posts:delete' id=item.post.id %}"
+            method="POST"
+            hx-post="{% url 'posts:delete' id=item.post.id %}"
+            hx-confirm="確認刪除？"
+            hx-target="body"
+          >
+            {% csrf_token %}
+            <button class="text-white btn btn-error btn-sm" type="submit">刪除</button>
+          </form>
+        {% endif %}
       </div>
     </li>
     {% endfor %}

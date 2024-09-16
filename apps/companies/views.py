@@ -1,5 +1,5 @@
 import json
-
+import rules
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
@@ -111,7 +111,13 @@ def favorite_company(request, id):
 def post_index(request, id):
     company = get_object_or_404(Company, id=id)
     posts = Post.objects.filter(company=company).order_by("-created_at")
-    page_obj = paginate_queryset(request, posts, 10)
+
+    posts_with_permissions = [
+        {"post": post, "can_edit": rules.test_rule("can_edit_post", request.user, post)}
+        for post in posts
+    ]
+    page_obj = paginate_queryset(request, posts_with_permissions, 10)
+
     return render(
         request, "posts/index.html", {"page_obj": page_obj, "company": company}
     )
