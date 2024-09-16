@@ -22,8 +22,8 @@ export const swalWithBootstrapButtons = Swal.mixin({
   confirmButtonText: "確認",
   cancelButtonText: "取消",
   reverseButtons: true,
-  title: '',
-  text: '此動作無法還原'
+  title: "",
+  text: "此動作無法還原",
 });
 
 Alpine.data("confirm_msg", () => ({
@@ -51,5 +51,3 @@ Alpine.data("flash_msg", () => ({
     });
   },
 }));
-
-Alpine.start();

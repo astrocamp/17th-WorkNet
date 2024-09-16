@@ -4,9 +4,9 @@
     <h1 class="text-3xl font-bold">{{ job.title }}</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
-  <section >
+  <section class="tagify border-none">
     {% for tag in tags%}
-    <span class="gap-2 badge badge-info">{{ tag.name }}</span>
+      <span class="tagify__tag "><div><span class="tagify__tag-text">{{ tag.name }}</span></div></span>
     {%endfor%}
   </section>
     <ul class="mb-4">
