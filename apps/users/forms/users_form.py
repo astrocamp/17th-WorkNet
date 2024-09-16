@@ -19,6 +19,10 @@ class CustomUserCreationForm(UserCreationForm):
 
         widgets = {"type": forms.Select(choices=User.roles_choice)}
 
+    error_messages = {
+        "password_mismatch": "兩次輸入的密碼不一致，請重新輸入。",
+    }
+
     def clean_email(self):
         email = self.cleaned_data.get("email")
 
