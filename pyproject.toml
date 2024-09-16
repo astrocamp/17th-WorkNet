@@ -2,7 +2,7 @@
 name = "worknet"
 version = "0.1.0"
 description = ""
-authors = ["Kait <qw.kaitlyn@gmail.com>"]
+authors = ["5x.worknet <5x.worknet@gmail.com>"]
 readme = "README.md"
 package-mode = false
 
@@ -27,7 +27,7 @@ django-extensions = "^3.2.3"
 pre-commit = "^3.8.0"
 django-debug-toolbar = "^4.4.6"
 commitizen = "^3.29.0"
-django-dotenv = "^1.4.2"
+
 
 [build-system]
 requires = ["poetry-core"]

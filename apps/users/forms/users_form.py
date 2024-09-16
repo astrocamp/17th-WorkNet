@@ -30,9 +30,7 @@ class CustomUserCreationForm(UserCreationForm):
             raise ValidationError("請使用有效的電子郵件地址。")
 
         if not re.match(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", email):
-            raise ValidationError(
-                "目前僅支援 Gmail、Yahoo、Outlook 或 Hotmail 的電子郵件地址。"
-            )
+            raise ValidationError("請使用有效的電子郵件地址。")
 
         return email
 
