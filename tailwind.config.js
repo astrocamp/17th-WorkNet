@@ -8,6 +8,9 @@ module.exports = {
       disabled: 'disabled~="true"',
     },
     extend: {
+      colors: {
+        'white-20':'rgba(255, 255, 255, 0.2)',
+      },
       container: {
         screens: {
           sm: "100%",
@@ -23,8 +26,8 @@ module.exports = {
     themes: [
       {
         corporate: {
-          primary: "#007bff",
-          secondary: "#00336b",
+          primary: "#00336b",
+          secondary: "#007bff",
           neutral: "#000000",
         },
       },
