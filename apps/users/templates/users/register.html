@@ -49,7 +49,7 @@
       </div>
 
       <div>
-        <label for="type">註冊身分</label>
+        <label class="block text-sm font-medium"for="type">註冊身分</label>
         <select class="mt-1 w-full input-often-base" name="type">
           <option value="1" {% if form.type.value == "1" %}selected{% endif %}>一般使用者</option>
           <option value="2" {% if form.type.value == "2" %}selected{% endif %}>公司</option>
