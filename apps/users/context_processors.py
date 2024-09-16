@@ -9,7 +9,7 @@ def notifications_processor(request):
 
         notifications = Notification.objects.filter(recipient=request.user).order_by(
             "-created_at"
-        )
+        )[:5]
     else:
         unread_notifications_count = 0
         notifications = []
