@@ -20,8 +20,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const topValues = topData.map((item) => item.value);
   const topTotal = topValues.reduce((sum, value) => sum + value, 0);
 
-  const ctx = document.getElementById("myPieChart").getContext("2d");
-  const myPieChart = new Chart(ctx, {
+  const ctx = document.getElementById("skillPieChart").getContext("2d");
+  const skillPieChart = new Chart(ctx, {
     type: "pie",
     data: {
       labels: topLabels,
@@ -46,6 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
         datalabels: {
           display: true,
           formatter: (value) => {
+            if (typeof value !== "number" || Number.isNaN(value)) {
+              return "0%";
+            }
             const percentage = ((value / topTotal) * 100).toFixed(2);
             return `${percentage}%`;
           },
@@ -62,6 +65,9 @@ document.addEventListener("DOMContentLoaded", function () {
         tooltip: {
           callbacks: {
             label: function (context) {
+              if (!context || !context.raw) {
+                return "";
+              }
               const value = context.raw;
               const percentage = ((value / topTotal) * 100).toFixed(2);
               const label = context.label || "";
