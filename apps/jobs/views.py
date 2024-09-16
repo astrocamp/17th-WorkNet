@@ -27,7 +27,7 @@ def show(request, id):
             tags = request.POST.get("tags")
             if tags:
                 tags = [tag["value"] for tag in json.loads(tags)]
-                job.tags.add(*tags)
+                job.tags.set(tags, clear=False)
 
             job.save()
             messages.success(request, "更新成功")
