@@ -67,7 +67,7 @@ def delete(request, id):
 def apply_jobs(request, id):
     job = get_object_or_404(Job, id=id)
     resumes = Resume.objects.filter(userinfo__user=request.user)
-    return render(request, "users/apply.html", {"job": job, "resumes": resumes})
+    return render(request, "jobs/apply.html", {"job": job, "resumes": resumes})
 
 
 @require_POST
