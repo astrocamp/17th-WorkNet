@@ -17,8 +17,7 @@ from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateView
 
 from apps.companies.models import CompanyFavorite
-from apps.jobs.models import Job, Job_Resume, JobFavorite
-from apps.resumes.models import Resume
+from apps.jobs.models import Job, JobFavorite
 from lib.models.rule_required import rule_required
 
 from .forms import CustomUserCreationForm, UserInfoForm
