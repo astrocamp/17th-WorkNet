@@ -44,7 +44,7 @@ def index(request):
                 login(request, user, backend=backend)
                 messages.success(request, "註冊成功並已登入")
                 if user.type == 1:
-                    return redirect("users:info", user.id)
+                    return redirect("users:info")
                 else:
                     return redirect("companies:new")
             else:
@@ -91,11 +91,11 @@ def sign_out(request):
 
 
 @rule_required("user_can_view")
-def info(request, id):
-    info, _ = UserInfo.objects.get_or_create(user_id=id)
+def info(request):
+    info, _ = UserInfo.objects.get_or_create(user_id=request.user.id)
 
     if request.method == "POST":
-        info = get_object_or_404(UserInfo, user_id=id, user=request.user)
+        info = get_object_or_404(UserInfo, user_id=request.user.id)
 
         form = UserInfoForm(request.POST, instance=info)
 
@@ -106,9 +106,9 @@ def info(request, id):
             if tags:
                 tags = [tag["value"] for tag in json.loads(tags)]
                 info.tags.set(tags, clear=False)
-                info_form.save()
+            info_form.save()
             messages.success(request, "更新成功")
-            return redirect("users:info", info.user_id)
+            return redirect("users:info")
         else:
             tags = request.POST.get("tags", [])
             tags = (
@@ -147,7 +147,7 @@ def social_save_profile(backend, user, response, *args, **kwargs):
 def login_redirect(request):
     user = request.user
     if user.type == 1:  # 1為個人用戶
-        return redirect("users:info", user.id)
+        return redirect("users:info")
     else:
         return redirect("companies:index")
 
