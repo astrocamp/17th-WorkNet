@@ -1,6 +1,6 @@
-{% extends "layouts/base.html" %}
+{% extends "layouts/frontend.html" %}
 {% block content %}
-<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
+<div class="flex justify-center items-center mt-20 h-24 text-center bg-gray-100">
     <h1 class="text-3xl font-bold">修改檔名</h1>
 </div>
 
@@ -18,7 +18,7 @@
         {% endif %}
         <div class="mt-4">
             <label for="id_name">檔名:</label>
-            <input type="text" name="name" id="id_name" value="{{ form.name.value }}" class="w-full p-2 border rounded-md">
+            <input type="text" name="name" id="id_name" value="{{ form.name.value }}" class="p-2 w-full rounded-md border">
         </div>
         <div class="flex gap-4 mt-4">
             <button class="text-white btn btn-primary min-w-20" type="submit">儲存變更</button>

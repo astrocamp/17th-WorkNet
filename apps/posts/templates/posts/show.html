@@ -1,7 +1,7 @@
-{% extends "layouts/base.html" %}
+{% extends "layouts/frontend.html" %}
 {% load markdown %}
 {% block content %}
-<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
+<div class="flex justify-center items-center mt-20 h-24 text-center bg-gray-100">
     <h1 class="text-3xl font-bold">{{ post.title }}</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
@@ -13,7 +13,7 @@
     <small>{{ post.created_at|date:"Y/m/d H:i" }}</small><br>
     <a class="text-white btn btn-primary" href="{% url 'posts:edit' post.id %}">修改評論</a>
 
-    <section class="p-5 mt-20 border border-gray-300 rounded-2xl">
+    <section class="p-5 mt-20 rounded-2xl border border-gray-300">
         <h3 class="pb-5 mb-5 text-xl font-bold border-b border-gray-300">留言</h3>
         {% if comments %}
             <ul id="comments" class="space-y-4">

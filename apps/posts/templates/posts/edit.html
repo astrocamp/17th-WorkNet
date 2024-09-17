@@ -1,6 +1,6 @@
-{% extends "layouts/base.html" %}
+{% extends "layouts/frontend.html" %}
 {% block content %}
-<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+<div class="flex justify-center items-center mt-20 h-24 text-center bg-gray-100">
   <h1 class="text-3xl font-bold">修改評論</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
@@ -9,7 +9,7 @@
     {% for field in form %}
     <div class="mt-4">{{ field.label }} {{ field }} {{ field.errors }}</div>
     {% endfor %}
-    <div class="mt-4"><button class="btn btn-primary text-white min-w-20">確認修改</button></div>
+    <div class="mt-4"><button class="text-white btn btn-primary min-w-20">確認修改</button></div>
   </form>
 </div>
 {% endblock %}

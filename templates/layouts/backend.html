@@ -1,19 +1,20 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>首頁</title>
+    <meta name="csrf-token" content="{{ csrf_token }}">
     <script src="{% static 'scripts/app.js' %}" type="module"></script>
-    <link href="{% static 'styles/styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
+    <title>WorkNet</title>
   </head>
-  <body class="dark:bg-gray-900 dark:text-white" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <body class="flex flex-col min-h-screen" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
     {% include "shared/backend_navbar.html" %}
-
-    <div class="flex justify-center items-center p-4 min-h-screen">
-    </div>
-
+    <main class="flex-grow">
+        {% block content %}
+        {% endblock %}
+    </main>
     {% include "shared/backend_footer.html" %}
-  </body>
+</body>
 </html>

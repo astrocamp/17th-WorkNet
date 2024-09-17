@@ -12,13 +12,8 @@ django = "^5.1"
 python-dotenv = "^1.0.1"
 psycopg2 = "^2.9.9"
 social-auth-app-django = "^5.4.2"
-
-
-
 boto3 = "^1.35.10"
 django-storages = "^1.14.4"
-
-
 django-anymail = {extras = ["mailgun"], version = "^11.1"}
 markdown = "^3.7"
 

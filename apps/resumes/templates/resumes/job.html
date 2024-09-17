@@ -1,6 +1,6 @@
-{% extends "layouts/base.html" %}
+{% extends "layouts/frontend.html" %}
 {% block content %}
-<div class="mt-20 h-24 text-center bg-gray-100 flex justify-center items-center">
+<div class="flex justify-center items-center mt-20 h-24 text-center bg-gray-100">
     <h1 class="text-3xl font-bold">應徵紀錄</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
@@ -9,7 +9,7 @@
     <div class="overflow-x-auto mt-5">
         <table class="table">
             <thead>
-                <tr class="text-center text-base">
+                <tr class="text-base text-center">
                     <th></th>
                     <th>職缺</th>
                     <th>履歷</th>
@@ -18,7 +18,7 @@
             </thead>
             <tbody>
                 {% for job_resume in job_resumes %}
-                    <tr class="hover cursor-pointer" onclick="window.location.href= '{% url 'jobs:show' job_resume.job_id %}';" >
+                    <tr class="cursor-pointer hover" onclick="window.location.href= '{% url 'jobs:show' job_resume.job_id %}';" >
                         <th>{{ forloop.counter }}</th>
                         <td>{{ job_resume.job_title }}</td>
                         <td>{{ job_resume.resume_file }}</td>
@@ -29,7 +29,7 @@
         </table>
     </div>
     {% else %}
-        <div class="text-center py-5"><p>尚無應徵紀錄</p></div>
+        <div class="py-5 text-center"><p>尚無應徵紀錄</p></div>
     {% endif %}
 </div>
 {% endblock %}

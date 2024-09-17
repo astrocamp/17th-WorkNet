@@ -1,6 +1,6 @@
-{% extends "layouts/base.html" %} {% block content %}
-<div class="flex items-center justify-center pt-32 pb-24">
-  <section class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+{% extends "layouts/frontend.html" %} {% block content %}
+<div class="flex justify-center items-center pt-32 pb-24">
+  <section class="p-6 w-full max-w-md bg-white rounded-lg shadow-lg">
     <h1 class="mb-6 text-2xl font-bold text-center">會員註冊</h1>
 
     <form
@@ -14,7 +14,7 @@
       <div>
         <label class="block text-sm font-medium">帳號</label>
         <input
-          class="w-full mt-1 input-often-base"
+          class="mt-1 w-full input-often-base"
           type="text"
           name="username"
           placeholder="輸入帳號"
@@ -26,7 +26,7 @@
       <div>
         <label class="block text-sm font-medium">密碼</label>
         <input
-          class="w-full mt-1 input-often-base"
+          class="mt-1 w-full input-often-base"
           type="password"
           name="password1"
           placeholder="輸入密碼"
@@ -38,7 +38,7 @@
       <div>
         <label class="block text-sm font-medium">密碼確認</label>
         <input
-          class="w-full mt-1 input-often-base"
+          class="mt-1 w-full input-often-base"
           type="password"
           name="password2"
           placeholder="確認密碼"
@@ -48,7 +48,7 @@
       </div>
       <div>
         <label for="type">註冊身分</label>
-        <select class="w-full mt-1 input-often-base" name="type">
+        <select class="mt-1 w-full input-often-base" name="type">
           <option value="1">一般使用者</option>
           <option value="2">公司</option>
         </select>
@@ -56,7 +56,7 @@
       <div>
         <label class="block text-sm font-medium">電子郵件</label>
         <input
-          class="w-full mt-1 input-often-base"
+          class="mt-1 w-full input-often-base"
           type="email"
           name="email"
           placeholder="輸入電子郵件"
@@ -69,7 +69,7 @@
       </div>
 
       <div>
-        <button class="w-full btn btn-primary text-white">註冊</button>
+        <button class="w-full text-white btn btn-primary">註冊</button>
       </div>
 
       <div class="mt-4 text-center">

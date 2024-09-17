@@ -1,6 +1,6 @@
-{% extends "layouts/base.html" %}
+{% extends "layouts/frontend.html" %}
 {% block content %}
-<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
+<div class="flex justify-center items-center mt-20 h-24 text-center bg-gray-100">
     <h1 class="text-3xl font-bold">我的履歷</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
@@ -30,9 +30,9 @@
         <div class="py-5 text-center"><p>尚無履歷</p></div>
     {% endif %}
     <a class="text-white btn btn-primary" href="{% url 'resumes:upload' %}">上傳履歷</a>
-    <div class="p-4 mt-8 bg-gray-100 border border-gray-200 rounded-lg">
+    <div class="p-4 mt-8 bg-gray-100 rounded-lg border border-gray-200">
         <h3 class="mb-2 text-lg font-semibold text-black">檔案限制：</h3>
-        <ul class="text-black list-disc list-inside">
+        <ul class="list-disc list-inside text-black">
             <li>只接受PDF檔案</li>
             <li>檔案大小上限為 20MB</li>
             <li>最多只能上傳 3 份履歷</li>
