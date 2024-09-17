@@ -8,11 +8,8 @@
   </a>
 </div>
 
-
-
   <div class="w-full">
     <div class="text-center">
-
       <ul class="inline-flex gap-5">
         <li>
           <a class="font-semibold dark:text-white" href="/">首頁</a>
@@ -34,15 +31,10 @@
               <a class="block px-2.5 py-2 whitespace-nowrap dark:text-white" href="{% url 'companies:index' %}">公司資料</a>
           </div>
         </div>
-
         <form action="{% url 'users:sign_out' %}" method="POST">
           {% csrf_token %}
           <button class="text-white bg-red-500 btn min-w-20 hover:bg-red-400">登出</button>
         </form>
-      </div>
-      {% else %}
-      <div>
-        <a href="{% url 'users:sign_in' %}" class="text-white bg-blue-500 btn min-w-20 hover:bg-blue-400">登入</a>
       </div>
       {% endif %}
     </div>
