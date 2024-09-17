@@ -10,8 +10,8 @@
       {% if field.name == 'tags' %}
         <div x-data="tag_input" class="mt-4">
           <label for="{{ field.id_for_label }}">所需技能</label>
-          <input x-ref="tagInput" type="text"  id="{{ field.id_for_label }}" name="{{ field.name }}" x-init="init({{ tags|safe }})"
-            class="mt-1 input-often-base">
+          <textarea x-ref="tagInput" type="text"  id="{{ field.id_for_label }}" name="{{ field.name }}" x-init="init({{ tags|safe }})"
+            class="mt-1 textarea-often-base"></textarea>
           <input type="hidden" x-ref="hiddenTagsInput" name="tags">
         </div>
       {% else %}
