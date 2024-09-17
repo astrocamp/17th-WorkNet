@@ -193,31 +193,6 @@ def favorites_delete(request, id):
 
 
 @login_required
-def apply_jobs(request, job_id):
-    job = get_object_or_404(Job, id=job_id)
-    resumes = Resume.objects.filter(userinfo__user=request.user)
-    return render(request, "users/apply.html", {"job": job, "resumes": resumes})
-
-
-@require_POST
-@login_required
-def submit_jobs(request, job_id):
-    job_id = request.POST.get("job_id")
-    resume_id = request.POST.get("resume_id")
-    job = get_object_or_404(Job, id=job_id)
-    resume = get_object_or_404(Resume, id=resume_id, userinfo__user=request.user)
-
-    if Job_Resume.objects.filter(job=job, resume=resume).exists():
-        messages.error(request, "已投遞過這個工作，請等候業者審核等候通知，謝謝")
-        return redirect("jobs:index")
-
-    else:
-        Job_Resume.objects.create(job=job, resume=resume, status="applied")
-        messages.success(request, "投遞成功")
-    return redirect("jobs:index")
-
-
-@login_required
 def favorite_company_list(request):
     user = request.user
     favorites = user.favorite_companies.order_by("-favorited_at")
