@@ -21,7 +21,7 @@
                 <a class="text-white btn btn-primary btn-sm" href="{% url 'jobs:edit' job.id %}">編輯</a>
                 <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' job.id %}">收藏</a>
 
-                <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:apply_jobs' job.id %}" >應徵</a>
+                <a class="text-white btn btn-secondary btn-sm" href="{% url 'jobs:apply_jobs' job.id %}" >應徵</a>
 
                 <form method="POST" action="{% url 'jobs:delete' job.id %}">
                     {% csrf_token %}

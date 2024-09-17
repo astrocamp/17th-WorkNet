@@ -13,7 +13,7 @@
         <li>工作敘述：{{ job.description }}</li>
         <li>工作地點：{{ job.get_location_display }}</li>
       </ul>
-      <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
+      <form action="{% url 'jobs:apply_jobs' job.id %}" method="POST">
         {% csrf_token%}
         <input type="hidden" name="job_id" value="{{ job.id }}">
         <button>應徵此工作</button>
