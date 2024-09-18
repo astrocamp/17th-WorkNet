@@ -1,73 +1,75 @@
 # Create your views here.
-from django.shortcuts import render,redirect
-from pathlib import Path
-import os
-import dotenv
-import uuid
-import json
-import hmac
-import hashlib
 import base64
+import hashlib
+import hmac
+import json
+import os
+import uuid
+from pathlib import Path
+
+import dotenv
 import requests
+from django.shortcuts import redirect, render
 
 # Create your views here.
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-dotenv.load_dotenv(os.path.join(BASE_DIR, '.env'))
+dotenv.load_dotenv(os.path.join(BASE_DIR, ".env"))
+
 
 def request(request):
     if request.method == "POST":
         url = f"{os.getenv('LINE_SANDBOX_URL')}{os.getenv('LINE_REQUEST_URL')}"
         order_id = f"order_{str(uuid.uuid4())}"  # 生成一個長度為20的唯一訂單ID
-        package_id =f"package_{str(uuid.uuid4())}" # 生成一個長度為20的唯一包裹ID
-     
+        package_id = f"package_{str(uuid.uuid4())}"  # 生成一個長度為20的唯一包裹ID
+
         payload = {
-            'amount': 100,
-            'currency': 'TWD',
-            'orderId': order_id,
-            'packages': [{
-                'id': package_id,
-                "name": "Premium",
-                'amount': 100,
-                'products': [{
-                   "name": "Premium",
-                   "quantity": 1,
-                   "price": 200
-                }]
-            }],
-            'redirectUrls': {
-                'confirmUrl': f"https://{os.getenv('HOSTNAME')}/payment/confirm",
-                'cancelUrl': f"https://{os.getenv('HOSTNAME')}/payment/cancel"
-            }
+            "amount": 200,
+            "currency": "TWD",
+            "orderId": order_id,
+            "packages": [
+                {
+                    "id": package_id,
+                    "name": "Premium",
+                    "amount": 200,
+                    "products": [{"name": "Premium", "quantity": 1, "price": 200}],
+                }
+            ],
+            "redirectUrls": {
+                "confirmUrl": f"https://{os.getenv('HOSTNAME')}/payment/confirm",
+                "cancelUrl": f"https://{os.getenv('HOSTNAME')}/payment/cancel",
+            },
         }
 
-
-        signature_uri = os.getenv('LINE_SIGNATURE_REQUEST_URI')
+        signature_uri = os.getenv("LINE_SIGNATURE_REQUEST_URI")
         headers = create_headers(payload, signature_uri)
         body = json.dumps(payload)
         response = requests.post(url, headers=headers, data=body)
 
+        print("-" * 10)
+        print(body)
         if response.status_code == 200:
-                data = response.json()
-                if data['returnCode'] == '0000':
-                    return redirect(data['info']['paymentUrl']['web'])
-                else:
-                    print(data['returnMessage'])
-                    return render(request, "payment/checkout.html")
+            data = response.json()
+            if data["returnCode"] == "0000":
+                return redirect(data["info"]["paymentUrl"]["web"])
+            else:
+                print(data["returnMessage"])
+                return render(request, "payments/checkout.html")
         else:
-            print(f'Error: {response.status_code}')
-            return render(request, "payment/checkout.html")
-    
+            print(f"Error: {response.status_code}")
+            return render(request, "payments/checkout.html")
+
     else:
-        return render(request, "payment/checkout.html")
-    
+        return render(request, "payments/checkout.html")
+
+
 def create_headers(body, uri):
 
-    channel_id=os.getenv('LINE_CHANNEL_ID')
+    channel_id = os.getenv("LINE_CHANNEL_ID")
     nonce = str(uuid.uuid4())
-    secret_key = os.getenv('LINE_CHANNEL_SECRET_KEY')
-    body_to_json=json.dumps(body)
-    message=secret_key + uri + body_to_json + nonce
+    secret_key = os.getenv("LINE_CHANNEL_SECRET_KEY")
+    body_to_json = json.dumps(body)
+    message = secret_key + uri + body_to_json + nonce
 
     binary_message = message.encode()
     binary_secret_key = secret_key.encode()
@@ -76,12 +78,11 @@ def create_headers(body, uri):
 
     signature = base64.b64encode(hash.digest()).decode()
 
-
     headers = {
-        'Content-Type':'application/json',
-        'X-LINE-ChannelId': channel_id,
-        'X-LINE-Authorization-Nonce': nonce,
-        'X-LINE-Authorization': signature
+        "Content-Type": "application/json",
+        "X-LINE-ChannelId": channel_id,
+        "X-LINE-Authorization-Nonce": nonce,
+        "X-LINE-Authorization": signature,
     }
 
     return headers

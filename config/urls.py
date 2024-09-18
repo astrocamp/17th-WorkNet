@@ -13,6 +13,7 @@ urlpatterns = [
     path("social-auth/", include("social_django.urls", namespace="social")),
     path("resumes/", include("apps.resumes.urls")),
     path("analytics/", include("apps.analytics.urls")),
+    path("payments/", include("apps.payments.urls")),
 ]
 
 if is_dev():

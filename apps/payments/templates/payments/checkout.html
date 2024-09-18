@@ -1,0 +1,9 @@
+
+
+<p>訂單結帳</p>
+
+<form action="{% url 'payments:request' %}" method="POST">
+  {% csrf_token %}
+  <input type="submit">
+</form>
+
