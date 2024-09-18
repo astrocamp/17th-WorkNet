@@ -19,7 +19,7 @@ dotenv.load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 def request(request):
     if request.method == "POST":
-        url = f"{os.getenv('LINE_SANDBOX_URL')}{os.getenv('LINE_REQUEST_URL')}"
+        url = f"{os.getenv('LINE_SANDBOX_URL')}/request"
         order_id = f"order_{str(uuid.uuid4())}"  # 生成一個長度為20的唯一訂單ID
         package_id = f"package_{str(uuid.uuid4())}"  # 生成一個長度為20的唯一包裹ID
 
@@ -36,18 +36,22 @@ def request(request):
                 }
             ],
             "redirectUrls": {
-                "confirmUrl": f"https://{os.getenv('HOSTNAME')}/payment/confirm",
-                "cancelUrl": f"https://{os.getenv('HOSTNAME')}/payment/cancel",
+                "confirmUrl": f"http://{os.getenv('HOSTNAME')}/payments/confirm",
+                "cancelUrl": f"http://{os.getenv('HOSTNAME')}/payments/cancel",
             },
         }
 
         signature_uri = os.getenv("LINE_SIGNATURE_REQUEST_URI")
         headers = create_headers(payload, signature_uri)
         body = json.dumps(payload)
+        print("=====request=====")
+        print(headers)
+        print(body)
+        print(url)
         response = requests.post(url, headers=headers, data=body)
 
-        print("-" * 10)
-        print(body)
+        # print("-" * 10)
+        # print(body)
         if response.status_code == 200:
             data = response.json()
             if data["returnCode"] == "0000":
@@ -57,6 +61,7 @@ def request(request):
                 return render(request, "payments/checkout.html")
         else:
             print(f"Error: {response.status_code}")
+            print(response)
             return render(request, "payments/checkout.html")
 
     else:
@@ -86,3 +91,35 @@ def create_headers(body, uri):
     }
 
     return headers
+
+
+def confirm(request):
+    print("======confirm========")
+    print(request.GET)
+    transaction_id = request.GET.get("transactionId")
+    order_id = request.GET.get("orderId")
+
+    payload = {
+        "amount": 200,
+        "currency": "TWD",
+        "orderId": order_id,
+    }
+
+    signature_uri = f"/v3/payments/{transaction_id}/confirm"
+    headers = create_headers(payload, signature_uri)
+    url = f"{os.getenv('LINE_SANDBOX_URL')}/{transaction_id}/confirm"
+
+    body = json.dumps(payload)
+
+    print(signature_uri)
+    print(headers)
+    print(url)
+    print(body)
+    response = requests.post(url, headers=headers, data=body)
+
+    data = response.json()
+    if data["returnCode"] == "0000":
+        return render(request, "payments/success.html")
+    else:
+        print(data["returnMessage"])
+        return render(request, "payments/fail.html")
