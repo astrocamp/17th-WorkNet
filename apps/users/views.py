@@ -126,7 +126,10 @@ def info(request):
 
 
 def social_save_profile(backend, user, response, *args, **kwargs):
-
+    request = kwargs.get("request")
+    if request is None:
+        return None
+    
     match backend.name:
         case "line":
             social_id = response["userId"]
@@ -141,6 +144,10 @@ def social_save_profile(backend, user, response, *args, **kwargs):
                 u1.save()
         case _:
             pass
+    backend_str = f'{backend.__module__}.{backend.__class__.__name__}'
+    user.backend = backend_str
+    login(request, user, backend=backend_str)  
+    return redirect('/')    
 
 
 @login_required
