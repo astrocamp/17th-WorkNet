@@ -71,7 +71,7 @@ INSTALLED_APPS = [
     "apps.users",
     "apps.resumes",
     "apps.analytics",
-    "apps.paymenrs",
+    "apps.payments",
     "anymail",
     "storages",
     "social_django",
