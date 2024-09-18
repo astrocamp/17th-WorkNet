@@ -51,11 +51,7 @@ DEBUG = is_dev()
 
 NGROK_HOSTS = os.getenv("NGROK_HOSTS")
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-    "7779-2001-b400-e35d-b4aa-800b-444b-89ce-bc7b.ngrok-free.app",
-]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", NGROK_HOSTS]
 AUTH_USER_MODEL = "users.User"
 
 # Application definition
