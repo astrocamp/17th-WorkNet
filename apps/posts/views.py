@@ -1,3 +1,4 @@
+import rules
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render, reverse
@@ -19,6 +20,8 @@ def index(request):
 def show(request, id):
     post = get_object_or_404(Post, id=id)
     comments = post.comments.order_by("-created_at")
+
+    is_author = rules.test_rule("can_edit_post", request.user, post)
 
     if request.method == "POST":
         comment_form = CommentForm(request.POST)
@@ -47,6 +50,7 @@ def show(request, id):
             "comment_form": comment_form,
             "is_like": is_like,
             "is_dislike": is_dislike,
+            "is_author": is_author,
         },
     )
 
