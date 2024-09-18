@@ -11,6 +11,9 @@ module.exports = {
       colors: {
         'white-20':'rgba(255, 255, 255, 0.2)',
       },
+      fontFamily: {
+        'sans': ['Noto Sans TC', 'sans-serif'],
+      },
       container: {
         screens: {
           sm: "100%",
