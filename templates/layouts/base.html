@@ -5,13 +5,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>首頁</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700;900&display=swap" rel="stylesheet">
     <script src="{% static 'scripts/app.js' %}" type="module"></script>
     <link href="{% static 'styles/styles.css' %}" rel="stylesheet">
   </head>
   <body class="flex flex-col min-h-screen" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
     {% include "shared/navbar.html" %}
     {% include "shared/message.html" %}
-    <main class="flex-grow">{% block content %}{% endblock %}</main>
+      <main>{% block content %}{% endblock %}</main>
     {% include "shared/footer.html" %}
   </body>
 </html>
