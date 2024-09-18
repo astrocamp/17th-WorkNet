@@ -63,7 +63,7 @@
     --color-prettylights-syntax-meta-diff-range: #8250df;
     --color-prettylights-syntax-sublimelinter-gutter-mark: #8c959f;
   }
-} 
+}
 
 @media (prefers-color-scheme: light) {
   .markdown-body,
