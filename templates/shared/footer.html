@@ -1,4 +1,4 @@
-<footer class="p-4 bg-white rounded border-t border-gray-300 footer footer-center text-base-content">
+<footer class="p-4 border-t footer footer-center text-base-content {% if request.user.type == 2 %}dark:bg-gray-800 dark:text-white{% endif %}">
     <nav class="grid grid-flow-col gap-4">
       <a href="{% url 'companies:index' %}" class="link link-hover">公司資訊</a>
       {% if request.user.type == 2 %}

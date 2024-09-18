@@ -1,6 +1,8 @@
 {% load static %}
+
 <nav
-  class="box-border flex fixed top-0 left-0 z-40 items-center p-4 w-full shadow-md bg-base-100 min-h-20">
+class="box-border flex fixed top-0 left-0 z-40 items-center p-4 w-full shadow-md bg-base-100
+{% if request.user.type == 2 %} dark:bg-gray-800 dark:text-white {% endif %} min-h-20">
   <div class="absolute left-4 top-1/2 -translate-y-1/2">
     <a href="{% url 'users:index' %}" class="text-xl font-bold">
       <img src="{% static 'imgs/logo.png' %}" alt="logo" class="w-20" />
@@ -60,3 +62,4 @@
     </div>
   </div>
 </nav>
+
