@@ -5,7 +5,11 @@ class="box-border flex fixed top-0 left-0 z-40 items-center p-4 w-full shadow-md
 {% if request.user.type == 2 %} dark:bg-gray-800 dark:text-white {% endif %} min-h-20">
   <div class="absolute left-4 top-1/2 -translate-y-1/2">
     <a href="{% url 'users:index' %}" class="text-xl font-bold">
-      <img src="{% static 'imgs/logo.png' %}" alt="logo" class="w-20" />
+      {% if request.user.type == 2 %}
+  <img src="{% static 'imgs/backend_logo.png' %}" alt="dark logo" class="w-20" />
+{% else %}
+  <img src="{% static 'imgs/logo.png' %}" alt="logo" class="w-20" />
+{% endif %}
     </a>
   </div>
   <div class="w-full">
