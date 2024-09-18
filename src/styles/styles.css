@@ -3,27 +3,31 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-size: 20px;
+}
 
 .btn {
   @apply rounded-full;
 }
 
-.input-often-base{
-  @apply border w-full border-gray-300 rounded-xl input input-bordered box-border
+.input-often-base {
+  @apply box-border w-full rounded-xl border border-gray-300 input input-bordered;
 }
 
-.textarea-often-base{
-  @apply border w-full border-gray-300 rounded-xl input input-bordered box-border min-h-28 resize-none py-4
+.textarea-often-base {
+  @apply box-border py-4 w-full rounded-xl border border-gray-300 resize-none input input-bordered min-h-28;
 }
 
-.no-style{
+.no-style {
   @apply bg-transparent border-transparent shadow-none;
 }
 
 :root {
-  --fallback-b2:#f3f4f6;
+  --fallback-b2: #f3f4f6;
 }
 
-.markdown-body ol, .markdown-body ul {
+.markdown-body ol,
+.markdown-body ul {
   list-style: revert;
 }

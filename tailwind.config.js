@@ -15,6 +15,9 @@ module.exports = {
           xl: "1280px",
         },
       },
+      fontSize: {
+        base: "22px",
+      },
     },
   },
   plugins: [require("daisyui")],
