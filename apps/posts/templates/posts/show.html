@@ -11,7 +11,9 @@
     </div>
     <div class="py-10 markdown-body">{{ post.content|convert_markdown|safe }}</div><br>
     <small>{{ post.created_at|date:"Y/m/d H:i" }}</small><br>
-    <a class="text-white btn btn-primary" href="{% url 'posts:edit' post.id %}">修改評論</a>
+    {% if is_author %}
+        <a class="text-white btn btn-primary" href="{% url 'posts:edit' post.id %}">修改評論</a>
+    {% endif %}
 
     <section class="p-5 mt-20 border border-gray-300 rounded-2xl">
         <h3 class="pb-5 mb-5 text-xl font-bold border-b border-gray-300">留言</h3>
