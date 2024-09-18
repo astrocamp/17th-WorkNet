@@ -146,7 +146,10 @@ def social_save_profile(backend, user, response, *args, **kwargs):
             pass
     backend_str = f'{backend.__module__}.{backend.__class__.__name__}'
     user.backend = backend_str
-    login(request, user, backend=backend_str)  
+    login(request, user, backend=backend_str)
+    user_info = UserInfo.objects.filter(user=user).first()
+    if not user_info or not user_info.nickname:
+        return redirect("users:info", user.id)  
     return redirect('/')    
 
 
