@@ -1,11 +1,12 @@
 {% extends "layouts/base.html" %}
 {% block content %}
+{# file-input file-input-bordered file-input-primary #}
 <div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
     <h1 class="text-3xl font-bold">上傳履歷</h1>
 </div>
 
-<div class="container p-5 pb-24 mx-auto">
-    <form method="POST" action="{% url 'resumes:upload' %}" enctype="multipart/form-data">
+<div class="container p-5 pb-24 mx-auto" x-data="{ loading: false }">
+    <form method="POST" action="{% url 'resumes:upload' %}" enctype="multipart/form-data" @submit="loading = true">
         {% csrf_token %}
         <div class="mt-4">
             {{ form.file }}
@@ -15,5 +16,10 @@
             <button class="px-4 py-2 text-white btn btn-primary min-w-20" type="submit">上傳</button>
         </div>
     </form>
+
+    <div x-show="loading" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
+        <div class="loading loading-bars loading-lg text-primary"></div>
+    </div>
 </div>
+
 {% endblock %}
