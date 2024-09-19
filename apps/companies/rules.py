@@ -12,6 +12,9 @@ def can_edit_company(user, target_job_id):
 
 @rules.predicate
 def can_new_company(user):
+    if user.type != 2:
+        return False
+
     try:
         company = Company.objects.get(user=user)
     except Company.DoesNotExist:
