@@ -1,13 +1,13 @@
-<footer class="p-4 bg-white rounded border-t border-gray-300 footer footer-center text-base-content">
-    <nav class="grid grid-flow-col gap-4">
-      <a href="{% url 'companies:index' %}" class="link link-hover">公司資訊</a>
-      {% if request.user.type == 2 %}
-        <a class="link link-hover" href="{% url 'companies:jobs_index' request.user.company.id %}">職缺</a>
-      {% else %}
-        <a class="link link-hover" href="{% url 'jobs:index' %}">職缺</a>
-      {% endif %}
-    </nav>
-    <aside>
-      <p>Copyright © 2024 WorkNet All Rights Reserved</p>
-    </aside>
-  </footer>
+<footer class="p-4 mt-auto bg-white rounded border-t border-gray-300 footer footer-center text-base-content">
+  <nav class="grid grid-flow-col gap-4">
+    <a href="{% url 'companies:index' %}" class="link link-hover">公司資訊</a>
+    {% if request.user.type == 2 %}
+      <a class="link link-hover" href="{% url 'companies:jobs_index' request.user.company.id %}">職缺</a>
+    {% else %}
+      <a class="link link-hover" href="{% url 'jobs:index' %}">職缺</a>
+    {% endif %}
+  </nav>
+  <aside>
+    <p>Copyright © 2024 WorkNet All Rights Reserved</p>
+  </aside>
+</footer>
