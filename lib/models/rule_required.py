@@ -9,7 +9,8 @@ def rule_required(rule_name):
         @wraps(view_func)
         def _wrapped_view(request, *args, **kwargs):
             user = request.user
-            if not rules.test_rule(rule_name, user):
+            target_id = kwargs.get("id")
+            if not rules.test_rule(rule_name, user, target_id):
                 return HttpResponseForbidden("您沒有權限觀看此頁面")
             return view_func(request, *args, **kwargs)
 
