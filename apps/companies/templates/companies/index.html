@@ -12,14 +12,12 @@
                     <a href="{% url 'companies:show' item.company.id %}">{{ item.company.title }}</a>
                 </div>
                 <div class="flex gap-2">
-
-                    <a class="text-white btn btn-primary btn-sm" href="{% url 'companies:edit' item.company.id %}">編輯</a>
-                    {%include "companies/favorite.html" with company=item.company favorited=item.favorited only %}
-                    <form method="post" action="{% url 'companies:delete' item.company.id %}">
-
-                        {% csrf_token %}
-                        <button class="text-white btn btn-error btn-sm">刪除</button>
-                    </form>
+                    {% if request.user.is_authenticated and request.user.type == 1 %}
+                        {%include "companies/favorite.html" with company=item.company favorited=item.favorited only %}
+                    {% endif %}
+                    {% if item.can_edit %}
+                        <a class="text-white btn btn-primary btn-sm" href="{% url 'companies:edit' item.company.id %}">編輯</a>
+                    {% endif %}
                 </div>
             </li>
         {% endfor %}
