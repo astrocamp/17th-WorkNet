@@ -4,14 +4,29 @@
 
 <script src="{% static 'src/scripts/chart.js' %}" type="module"></script>
 
-<div class="flex flex-col items-center pt-20 min-h-screen">
-    <h1 class="mt-6 mb-2">最受歡迎的程式語言</h1>
-    <div class="w-[400px] h-[400px]">
-        <canvas id="skillPieChart"></canvas>
+<div class="flex flex-col justify-center items-center pt-20 min-h-screen">
+    <div class="flex justify-center items-center space-x-10">
+        <div class="flex flex-col justify-center items-center">
+            <h2 class="mb-2 text-2xl font-bold">企業喜愛的程式語言</h2>
+            <div class="w-[400px] h-[400px]">
+                <canvas id="jobSkillPieChart"></canvas>
+            </div>
+        </div>
+        <div class="flex flex-col justify-center items-center">
+            <h2 class="mb-2 text-2xl font-bold">使用者喜愛的程式語言</h2>
+            <div class="w-[400px] h-[400px]">
+                <canvas id="userSkillPieChart"></canvas>
+            </div>
+        </div>
     </div>
 </div>
 
-<script id="skillData" type="application/json">
-    {{ skill_counts_json|safe }}
+<script id="jobSkillData" type="application/json">
+    {{ job_skill_counts_json|safe }}
 </script>
+
+<script id="userSkillData" type="application/json">
+    {{ user_skill_counts_json|safe }}
+</script>
+
 {% endblock %}
