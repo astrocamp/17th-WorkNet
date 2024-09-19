@@ -5,6 +5,7 @@ import rules
 from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
+from taggit.models import Tag, TaggedItem
 
 from lib.models.paginate import paginate_queryset
 from lib.models.rule_required import rule_required
@@ -105,14 +106,24 @@ def search_results(request):
 
     if search_term:
         search_term_list = [search_term.lower()]
+        # tagged_items = TaggedItem.objects.filter(tag__name__in=search_term_list)
+        tagged_items = TaggedItem.objects.filter(tag__name__icontains=search_term)
+        job_ids_with_tags = tagged_items.values_list("object_id", flat=True)
 
-        search_filter &= Q(title__icontains=search_term) | Q(
-            company__name__icontains=search_term
+        search_filter &= (
+            Q(title__icontains=search_term)
+            | Q(company__name__icontains=search_term)
+            | Q(id__in=job_ids_with_tags)
         )
 
     if location:
         location_code = get_location_code(location)
         search_filter &= Q(location__icontains=location_code)
+
+    if tags:
+        tagged_items = TaggedItem.objects.filter(tag__name__in=tags)
+        job_ids_with_tags = tagged_items.values_list("object_id", flat=True)
+        search_filter &= Q(id__in=job_ids_with_tags)
 
     jobs = (
         Job.objects.filter(search_filter)
@@ -122,6 +133,7 @@ def search_results(request):
     )
 
     page_obj = paginate_queryset(request, jobs, 10)
+    all_tags = Tag.objects.all()
 
     return render(
         request,
@@ -129,6 +141,7 @@ def search_results(request):
         {
             "page_obj": page_obj,
             "tags": tags,
+            "all_tags": all_tags,
             "search_term": search_term,
             "location": location,
         },
