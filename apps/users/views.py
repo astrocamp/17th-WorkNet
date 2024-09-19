@@ -9,7 +9,6 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -232,7 +231,7 @@ def submit_jobs(request, job_id):
     else:
         Job_Resume.objects.create(job=job, resume=resume, status="applied")
         messages.success(request, "投遞成功")
-    return redirect("jobs:index")
+        return redirect("jobs:index")
 
 
 @login_required

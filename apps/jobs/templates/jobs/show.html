@@ -1,12 +1,12 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
+<div class="flex justify-center items-center mt-20 h-24 text-center bg-gray-100">
     <h1 class="text-3xl font-bold">{{ job.title }}</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
   <section class="border-none tagify">
     {% for tag in tags%}
-      <span class="tagify__tag "><div><span class="tagify__tag-text">{{ tag.name }}</span></div></span>
+      <span class="tagify__tag"><div><span class="tagify__tag-text">{{ tag.name }}</span></div></span>
     {%endfor%}
   </section>
     <ul class="mb-4">
@@ -16,12 +16,14 @@
       <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
         {% csrf_token%}
         <input type="hidden" name="job_id" value="{{ job.id }}">
-        <button class="text-white btn btn-primary min-w-20">應徵此工作</button>
+        {% if status == False %}
+          <button>應徵此工作</button>
+        {% endif %}
       </form>
     {% if backJobs %}
-    <a class="text-white btn btn-primary min-w-20" href="{% url 'jobs:index' %}">返回列表</a><br>
+      <a class="text-white btn btn-primary min-w-20" href="{% url 'jobs:index' %}">返回列表</a>
     {% else %}
-    <a class="text-white btn btn-primary min-w-20" href="{% url 'resumes:jobs' %}">返回</a>
+      <a class="text-white btn btn-primary min-w-20" href="{% url 'resumes:jobs' %}">返回</a>
     {% endif %}
 </div>
 {% endblock %}
