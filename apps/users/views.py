@@ -1,7 +1,6 @@
 import json
 import random
 import string
-from lib.utils.models.decorators import login_redirect_next
 
 import requests
 import rules
@@ -22,6 +21,7 @@ from apps.companies.models import CompanyFavorite
 from apps.jobs.models import Job, Job_Resume, JobFavorite
 from apps.resumes.models import Resume
 from lib.models.rule_required import rule_required
+from lib.utils.models.decorators import login_redirect_next
 
 from .forms import CustomUserCreationForm, UserInfoForm
 from .forms.users_form import PasswordResetForm
@@ -150,6 +150,7 @@ def login_redirect(request):
         return redirect("users:info")
     else:
         return redirect("companies:index")
+
 
 @login_redirect_next
 def favorite(request, id):
