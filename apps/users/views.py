@@ -192,11 +192,15 @@ def apply_jobs(request, job_id):
 
 @require_POST
 @login_required
-def submit_jobs(request, job_id):
+def submit_jobs(request, job_id):   
     job_id = request.POST.get("job_id")
     resume_id = request.POST.get("resume_id")
     job = get_object_or_404(Job, id=job_id)
-    resume = get_object_or_404(Resume, id=resume_id, userinfo__user=request.user)
+    resume = Resume.objects.filter(id=resume_id, userinfo__user=request.user).filter()
+
+    if not resume.exists():
+        messages.error(request, "請先新增履歷")
+        return redirect("users:apply_jobs", job_id=job_id)
 
     if Job_Resume.objects.filter(job=job, resume=resume).exists():
         messages.error(request, "已投遞過這個工作，請等候業者審核等候通知，謝謝")
