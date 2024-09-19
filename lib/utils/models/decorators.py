@@ -1,7 +1,9 @@
 from functools import wraps
+
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.core.exceptions import PermissionDenied
+
 
 def login_redirect_next(view_func):
     @wraps(view_func)

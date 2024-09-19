@@ -7,7 +7,6 @@ from django.views.decorators.http import require_http_methods, require_POST
 from apps.jobs.models import Job, Job_Resume
 
 from .forms.resumes_form import ResumeForm
-from apps.jobs.models import Job, Job_Resume
 from .models import Resume
 
 
