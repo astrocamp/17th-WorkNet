@@ -127,8 +127,6 @@ def info(request):
 
 def social_save_profile(backend, user, response, *args, **kwargs):
     request = kwargs.get("request")
-    if request is None:
-        return None
     
     match backend.name:
         case "line":
@@ -151,7 +149,6 @@ def social_save_profile(backend, user, response, *args, **kwargs):
     if not user_info or not user_info.nickname:
         return redirect("users:info", user.id)  
     return redirect('/')    
-
 
 @login_required
 def login_redirect(request):
