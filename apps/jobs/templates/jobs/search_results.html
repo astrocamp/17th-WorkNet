@@ -10,17 +10,11 @@
         {% for job in page_obj %}
         <li class="flex gap-2 p-5" id="job-{{ job.id }}">
             <div class="flex-1">
-                <h2 class="text-xl">{{ job.title }}</h2>
+                <a class="text-xl font-medium" href="{% url 'jobs:show' job.id %}">{{ job.title }}</a>
                 <p class="text-small">{{ job.company.name }}, {{ job.get_location_display }}</p>
             </div>
             <div class="flex gap-2">
-                <button hx-post="{% url 'users:favorite' job.id %}"
-                        hx-target="#job-{{ job.id }}"
-                        hx-swap="outerHTML"
-                        class="text-white btn btn-secondary btn-sm favorite-button">
-                    收藏
-                </button>
-                <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:apply_jobs' job.id %}">應徵</a>
+                <a class="text-white btn btn-primary min-w-20" href="{% url 'users:apply_jobs' job.id %}">應徵</a>
             </div>
         </li>
         {% endfor %}
