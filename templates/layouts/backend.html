@@ -10,7 +10,7 @@
     <title>WorkNet</title>
   </head>
   <body class="flex flex-col min-h-screen" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-    {% include "shared/navbar.html" %}
+    {% include "shared/backend_navbar.html" %}
     <main class="flex-grow">
         {% block content %}
         {% endblock %}

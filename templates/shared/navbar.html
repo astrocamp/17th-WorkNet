@@ -43,7 +43,7 @@ class="box-border flex fixed top-0 left-0 z-40 items-center p-4 w-full shadow-md
               <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'resumes:index' %}">我的履歷</a>
               <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'resumes:jobs' %}">應徵紀錄</a>
             {% elif request.user.type == 2 %}
-              <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'companies:index' %}">公司資料</a>
+              <a class="block px-2.5 py-2 text-black whitespace-nowrap" href="{% url 'companies:index'  %}">公司資料</a>
             {% endif %}
           </div>
         </div>
