@@ -6,4 +6,5 @@ class CompanyJobConfig(AppConfig):
     name = "apps.jobs"
 
     def ready(self):
+        import apps.jobs.rules
         import apps.jobs.signals
