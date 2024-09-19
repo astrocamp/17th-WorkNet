@@ -2,14 +2,14 @@ import json
 from collections import Counter
 
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from taggit.models import TaggedItem
 
 from apps.jobs.models import Job
+from lib.utils.models.decorators import login_redirect_next
 
 
-@login_required
+@login_redirect_next
 def index(request):
     content_type = ContentType.objects.get_for_model(Job)
     job_tag = TaggedItem.objects.filter(content_type=content_type)
