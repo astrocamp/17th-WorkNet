@@ -1,0 +1,34 @@
+{% extends "layouts/base.html" %}
+{% block content %}
+<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
+    <h1 class="text-3xl font-bold">搜尋結果</h1>
+</div>
+<div class="container p-5 pb-24 mx-auto">
+
+    <ul class="mt-6 divide-y divide-slate-200">
+        {% if page_obj %}
+        {% for job in page_obj %}
+        <li class="flex gap-2 p-5" id="job-{{ job.id }}">
+            <div class="flex-1">
+                <h2 class="text-xl">{{ job.title }}</h2>
+                <p class="text-small">{{ job.company.name }}, {{ job.get_location_display }}</p>
+            </div>
+            <div class="flex gap-2">
+                <button hx-post="{% url 'users:favorite' job.id %}"
+                        hx-target="#job-{{ job.id }}"
+                        hx-swap="outerHTML"
+                        class="text-white btn btn-secondary btn-sm favorite-button">
+                    收藏
+                </button>
+                <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:apply_jobs' job.id %}">應徵</a>
+            </div>
+        </li>
+        {% endfor %}
+        {% else %}
+        <p>沒有找到符合的工作。</p>
+        {% endif %}
+    </ul>
+
+    {% include 'shared/_pagination.html' %}
+</div>
+{% endblock %}
