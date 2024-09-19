@@ -3,10 +3,9 @@ import json
 import rules
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.views.decorators.http import require_GET, require_http_methods, require_POST
+from django.views.decorators.http import require_http_methods, require_POST
 
 from apps.jobs.forms import JobForm
 from apps.jobs.models import Job, Job_Resume
