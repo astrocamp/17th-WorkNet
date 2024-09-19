@@ -11,17 +11,18 @@ from lib.models.paginate import paginate_queryset
 from lib.models.rule_required import rule_required
 
 from .forms.jobs_form import JobForm
-from .models import Job
+from .models import Job, JobFavorite
 
 
 def index(request):
     jobs = Job.objects.order_by("-id")
+    favorites = JobFavorite.objects.filter(user=request.user).values_list("job_id", flat=True)
     jobs_with_permissions = [
         {"job": job, "can_edit": rules.test_rule("can_edit_job", request.user, job.id)}
         for job in jobs
     ]
     page_obj = paginate_queryset(request, jobs_with_permissions, 10)
-    return render(request, "jobs/index.html", {"page_obj": page_obj})
+    return render(request, "jobs/index.html", {"page_obj": page_obj, "favorites": favorites})
 
 
 def show(request, id):
