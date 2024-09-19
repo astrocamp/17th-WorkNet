@@ -4,7 +4,7 @@
     <h1 class="text-3xl font-bold">{{ job.title }}</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
-  <section class="tagify border-none">
+  <section class="border-none tagify">
     {% for tag in tags%}
       <span class="tagify__tag "><div><span class="tagify__tag-text">{{ tag.name }}</span></div></span>
     {%endfor%}
@@ -16,10 +16,10 @@
       <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
         {% csrf_token%}
         <input type="hidden" name="job_id" value="{{ job.id }}">
-        <button>應徵此工作</button>
+        <button class="text-white btn btn-primary min-w-20">應徵此工作</button>
       </form>
     {% if backJobs %}
-    <a class="text-white btn btn-primary min-w-20" href="{% url 'jobs:index' %}">返回列表</a>
+    <a class="text-white btn btn-primary min-w-20" href="{% url 'jobs:index' %}">返回列表</a><br>
     {% else %}
     <a class="text-white btn btn-primary min-w-20" href="{% url 'resumes:jobs' %}">返回</a>
     {% endif %}

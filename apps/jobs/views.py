@@ -125,10 +125,14 @@ def search_results(request):
         job_ids_with_tags = tagged_items.values_list("object_id", flat=True)
         search_filter &= Q(id__in=job_ids_with_tags)
 
+    print("--")
+    print(search_filter)
+    print(search_term_list)
+    print("--")
+
     jobs = (
-        Job.objects.filter(search_filter)
-        .select_related("company")
-        .filter(tags__name__in=search_term_list)
+        Job.objects.filter(search_filter).select_related("company")
+        # .filter(tags__name__in=search_term_list)
         .distinct()
     )
 
