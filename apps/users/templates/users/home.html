@@ -11,8 +11,7 @@
       </div>
       <form action="#" method="GET" class="flex items-center p-4 space-x-2 w-full bg-white rounded-full shadow-md">
         <div class="flex items-center flex-1 px-4">
-          <div><i class="fa-solid fa-magnifying-glass"></i></div>
-
+          <img src="{% static 'imgs/icon_search.png' %}" alt="Location Icon" class="h-6 w-6 text-gray-500">
           <input type="text" name="q" placeholder="請輸入工作名稱或公司" class="outline-none bg-transparent border-transparent px-4 py-2 w-full text-gray-500 placeholder-gray-500" />
         </div>
         <div class="border-l border-gray-300 h-8"></div>
@@ -24,18 +23,18 @@
           <button class="text-white bg-primary hover:bg-blue-600 font-bold px-6 py-2 rounded-full">搜尋</button>
         </div>
       </form>
-      <div class="mt-4 flex space-x-4">
-        <button class="px-4 py-2 bg-white-20 text-base text-white border-[#6d86a4] border rounded-full">Python</button>
-        <button class="px-4 py-2 bg-white-20 text-base text-white border-[#6d86a4] border rounded-full">PHP</button>
-        <button class="px-4 py-2 bg-white-20 text-base text-white border-[#6d86a4] border rounded-full">Ruby</button>
-        <button class="px-4 py-2 bg-white-20 text-base text-white border-[#6d86a4] border rounded-full">Javascript</button>
+      <div class="mt-4 flex gap-5">
+        <button class="px-5 py-2 bg-white-20 text-base text-white font-light border-[#6d86a4] border rounded-full">Python</button>
+        <button class="px-5 py-2 bg-white-20 text-base text-white font-light border-[#6d86a4] border rounded-full">PHP</button>
+        <button class="px-5 py-2 bg-white-20 text-base text-white font-light border-[#6d86a4] border rounded-full">Ruby</button>
+        <button class="px-5 py-2 bg-white-20 text-base text-white font-light border-[#6d86a4] border rounded-full">Javascript</button>
       </div>
     </div>
-    <div class="absolute bottom-4 inset-x-0 text-center text-white z-20">
+    <div class="absolute bottom-14 inset-x-0 text-center text-white z-20">
       <div class="w-[28px] h-[46px] border-2 border-white rounded-full mx-auto relative">
-        <div class="w-1 h-2 bg-white rounded-full absolute bottom-2 left-1/2 transform -translate-x-1/2"></div>
+        <div class="w-1 h-4 bg-white rounded-full absolute bottom-2 left-1/2 transform -translate-x-1/2"></div>
       </div>
-      <div class="mt-2 text-[16px]">scroll down</div>
+      <div class="mt-2 font-light text-base">scroll down</div>
     </div>
   </div>
   <div class="py-24 px-5">
