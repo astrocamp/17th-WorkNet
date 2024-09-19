@@ -1,231 +1,231 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-{% load static %}
+  {% load static %}
+  <div class="relative h-[780px] w-full">
+    <div style="background-image: url('{% static "imgs/banner.jpg" %}'); background-size: cover; height: 100%; width: 100%;"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
+    <div class="absolute inset-0 mx-auto flex flex-col justify-center px-5 text-white z-20 max-w-[1280px]">
+      <div class="text-center mb-24">
+        <h1 class="text-7xl font-bold">數百萬的工作機會</h1>
+        <p class="text-2xl mt-4">給您最真實、自由的評論，讓我們為您找到適合的工作</p>
+      </div>
+      <form action="#" method="GET" class="flex items-center p-4 space-x-2 w-full bg-white rounded-full shadow-md">
+        <div class="flex items-center flex-1 px-4">
+          <div><i class="fa-solid fa-magnifying-glass"></i></div>
 
-<div class="relative h-[780px] w-full">
-  <div style="background-image: url('{% static "imgs/banner.jpg" %}'); background-size: cover; height: 100%; width: 100%;"></div>
-  <div class="absolute inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
-  <div class="absolute inset-0 flex flex-col justify-center items-center text-white z-20">
-    <div class="text-center mb-6">
-      <h1 class="text-6xl font-bold">數百萬的工作機會</h1>
-      <p class="text-2xl mt-4">給您最真實、自由的評論，讓我們為您找到適合的工作</p>
+          <input type="text" name="q" placeholder="請輸入工作名稱或公司" class="outline-none bg-transparent border-transparent px-4 py-2 w-full text-gray-500 placeholder-gray-500" />
+        </div>
+        <div class="border-l border-gray-300 h-8"></div>
+        <div class="flex items-center flex-1 px-4">
+          <img src="{% static 'imgs/icon_location.png' %}" alt="Location Icon" class="h-6 w-6 text-gray-500">
+          <input type="text" name="location" placeholder="請輸入地點" class="outline-none bg-transparent border-transparent px-4 py-2 w-full text-gray-500 placeholder-gray-500" />
+        </div>
+        <div class="px-4">
+          <button class="text-white bg-primary hover:bg-blue-600 font-bold px-6 py-2 rounded-full">搜尋</button>
+        </div>
+      </form>
+      <div class="mt-4 flex space-x-4">
+        <button class="px-4 py-2 bg-white-20 text-base text-white border-[#6d86a4] border rounded-full">Python</button>
+        <button class="px-4 py-2 bg-white-20 text-base text-white border-[#6d86a4] border rounded-full">PHP</button>
+        <button class="px-4 py-2 bg-white-20 text-base text-white border-[#6d86a4] border rounded-full">Ruby</button>
+        <button class="px-4 py-2 bg-white-20 text-base text-white border-[#6d86a4] border rounded-full">Javascript</button>
+      </div>
     </div>
-    <form action="#" method="GET" class="flex items-center p-4 space-x-2 w-full max-w-[1280px] bg-white rounded-full shadow-md">
-      <div class="flex items-center flex-1 px-4">
-        <img src="{% static 'imgs/icon_search.png' %}" alt="Search Icon" class="h-6 w-6 text-gray-500">
-        <input type="text" name="q" placeholder="請輸入工作名稱或公司" class="outline-none bg-transparent border-transparent px-4 py-2 w-full text-gray-500 placeholder-gray-500" />
+    <div class="absolute bottom-4 inset-x-0 text-center text-white z-20">
+      <div class="w-[28px] h-[46px] border-2 border-white rounded-full mx-auto relative">
+        <div class="w-1 h-2 bg-white rounded-full absolute bottom-2 left-1/2 transform -translate-x-1/2"></div>
       </div>
-      <div class="border-l border-gray-300 h-8"></div>
-      <div class="flex items-center flex-1 px-4">
-        <img src="{% static 'imgs/icon_location.png' %}" alt="Location Icon" class="h-6 w-6 text-gray-500">
-        <input type="text" name="location" placeholder="請輸入地點" class="outline-none bg-transparent border-transparent px-4 py-2 w-full text-gray-500 placeholder-gray-500" />
-      </div>
-      <div class="px-4">
-        <button class="text-white bg-primary hover:bg-blue-600 font-bold px-6 py-2 rounded-full">搜尋</button>
-      </div>
-    </form>
-    <div class="mt-4 flex space-x-4">
-      <button class="px-4 py-2 bg-white-20 text-white border-white border-[1px] rounded-full">Python</button>
-      <button class="px-4 py-2 bg-white-20 text-white border-white border-[1px] rounded-full">PHP</button>
-      <button class="px-4 py-2 bg-white-20 text-white border-white border-[1px] rounded-full">Ruby</button>
-      <button class="px-4 py-2 bg-white-20 text-white border-white border-[1px] rounded-full">Javascript</button>
+      <div class="mt-2 text-[16px]">scroll down</div>
     </div>
   </div>
-  <div class="absolute bottom-4 inset-x-0 text-center text-white z-20">
-    <div class="w-[28px] h-[46px] border-2 border-white rounded-full mx-auto relative">
-      <div class="w-1 h-2 bg-white rounded-full absolute bottom-2 left-1/2 transform -translate-x-1/2"></div>
-    </div>
-    <div class="mt-2 text-[16px]">scroll down</div>
-  </div>
-</div>
-<div class="py-10 mb-[100px]">
-  <div class="max-w-[1280px] mx-auto">
-    <h2 class="text-3xl font-bold mb-6">熱門職缺</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[40px]">
-      <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
-        <div class="flex items-center">
-          <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
-          <div class="ml-4">
-            <h2 class="text-[24px] font-semibold">Python後端工程師</h2>
-            <p class="text-[16px] font-light text-gray-600">麥當勞 McDonald's</p>
-          </div>
-          <div class="ml-auto">
-            <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
-          </div>
-        </div>
-        <div class="mt-4 flex space-x-4 text-[16px] font-light">
-          <span class="bg-yellow-200 text-black px-2 py-1 rounded">後端</span>
-          <span class="bg-gray-200 text-black px-2 py-1 rounded">台北市</span>
-          <span class="bg-gray-200 text-black px-2 py-1 rounded">$50,000 / 月</span>
-        </div>
-        <div class="flex justify-between items-center mt-4">
-          <div class="text-gray-500 text-[16px] font-light">2024/07/12</div>
-          <button class="bg-primary text-white px-4 py-2 rounded-full">應徵</button>
-        </div>
-      </div>
-      <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
-        <div class="flex items-center">
-          <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
-          <div class="ml-4">
-            <h2 class="text-[24px] font-semibold">Python後端工程師</h2>
-            <p class="text-[16px] font-light text-gray-600">麥當勞 McDonald's</p>
-          </div>
-          <div class="ml-auto">
-            <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
-          </div>
-        </div>
-        <div class="mt-4 flex space-x-4 text-[16px] font-light">
-          <span class="bg-yellow-200 text-black px-2 py-1 rounded">後端</span>
-          <span class="bg-gray-200 text-black px-2 py-1 rounded">台北市</span>
-          <span class="bg-gray-200 text-black px-2 py-1 rounded">$50,000 / 月</span>
-        </div>
-        <div class="flex justify-between items-center mt-4">
-          <div class="text-gray-500 text-[16px] font-light">2024/07/12</div>
-          <button class="bg-primary text-white px-4 py-2 rounded-full">應徵</button>
-        </div>
-      </div>
-      <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
-        <div class="flex items-center">
-          <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
-          <div class="ml-4">
-            <h2 class="text-[24px] font-semibold">Python後端工程師</h2>
-            <p class="text-[16px] font-light text-gray-600">麥當勞 McDonald's</p>
-          </div>
-          <div class="ml-auto">
-            <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
-          </div>
-        </div>
-        <div class="mt-4 flex space-x-4 text-[16px] font-light">
-          <span class="bg-yellow-200 text-black px-2 py-1 rounded">後端</span>
-          <span class="bg-gray-200 text-black px-2 py-1 rounded">台北市</span>
-          <span class="bg-gray-200 text-black px-2 py-1 rounded">$50,000 / 月</span>
-        </div>
-        <div class="flex justify-between items-center mt-4">
-          <div class="text-gray-500 text-[16px] font-light">2024/07/12</div>
-          <button class="bg-primary text-white px-4 py-2 rounded-full">應徵</button>
-        </div>
-      </div>
-      <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
-        <div class="flex items-center">
-          <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
-          <div class="ml-4">
-            <h2 class="text-[24px] font-semibold">Python後端工程師</h2>
-            <p class="text-[16px] font-light text-gray-600">麥當勞 McDonald's</p>
-          </div>
-          <div class="ml-auto">
-            <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
-          </div>
-        </div>
-        <div class="mt-4 flex space-x-4 text-[16px] font-light">
-          <span class="bg-yellow-200 text-black px-2 py-1 rounded">後端</span>
-          <span class="bg-gray-200 text-black px-2 py-1 rounded">台北市</span>
-          <span class="bg-gray-200 text-black px-2 py-1 rounded">$50,000 / 月</span>
-        </div>
-        <div class="flex justify-between items-center mt-4">
-          <div class="text-gray-500 text-[16px] font-light">2024/07/12</div>
-          <button class="bg-primary text-white px-4 py-2 rounded-full">應徵</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="py-10 bg-[#faf6eb]">
-  <div class="max-w-[1280px] mx-auto">
-    <h2 class="text-3xl font-bold mb-6">熱門企業</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[40px]">
-      <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
-        <div class="flex items-center">
-          <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
-          <div class="ml-4">
-            <h2 class="text-[24px] font-semibold">肯德基 KFC</h2>
-            <div class="flex items-center mt-2">
-              <img src="{% static 'imgs/icon_star.png' %}" alt="星星評價" class="w-[18px] h-[18px]">
-              <span class="text-[16px] font-light ml-2">4.9</span>
-              <div class="w-[2px] h-[18px] bg-gray-400 mx-2"></div>
-              <span class="text-[16px] font-light">20個評論</span>
+  <div class="py-24 px-5">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold mb-6">熱門職缺</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[40px]">
+        <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
+          <div class="flex items-center">
+            <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
+            <div class="ml-4">
+              <h2 class="text-[24px] font-semibold">Python後端工程師</h2>
+              <p class="text-[16px] font-light text-gray-600">麥當勞 McDonald's</p>
+            </div>
+            <div class="ml-auto">
+              <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
             </div>
           </div>
-          <div class="ml-auto">
-            <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
+          <div class="mt-4 flex space-x-4 text-[16px] font-light">
+            <span class="bg-yellow-200 text-black px-2 py-1 rounded">後端</span>
+            <span class="bg-gray-200 text-black px-2 py-1 rounded">台北市</span>
+            <span class="bg-gray-200 text-black px-2 py-1 rounded">$50,000 / 月</span>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <div class="text-gray-500 text-[16px] font-light">2024/07/12</div>
+            <button class="bg-primary text-white px-4 py-2 rounded-full">應徵</button>
           </div>
         </div>
-        <div class="flex justify-between items-center mt-4">
-          <div class="text-[18px] font-light text-gray-600 flex-1 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; text-overflow: ellipsis;">
+        <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
+          <div class="flex items-center">
+            <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
+            <div class="ml-4">
+              <h2 class="text-[24px] font-semibold">Python後端工程師</h2>
+              <p class="text-[16px] font-light text-gray-600">麥當勞 McDonald's</p>
+            </div>
+            <div class="ml-auto">
+              <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
+            </div>
+          </div>
+          <div class="mt-4 flex space-x-4 text-[16px] font-light">
+            <span class="bg-yellow-200 text-black px-2 py-1 rounded">後端</span>
+            <span class="bg-gray-200 text-black px-2 py-1 rounded">台北市</span>
+            <span class="bg-gray-200 text-black px-2 py-1 rounded">$50,000 / 月</span>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <div class="text-gray-500 text-[16px] font-light">2024/07/12</div>
+            <button class="bg-primary text-white px-4 py-2 rounded-full">應徵</button>
+          </div>
+        </div>
+        <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
+          <div class="flex items-center">
+            <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
+            <div class="ml-4">
+              <h2 class="text-[24px] font-semibold">Python後端工程師</h2>
+              <p class="text-[16px] font-light text-gray-600">麥當勞 McDonald's</p>
+            </div>
+            <div class="ml-auto">
+              <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
+            </div>
+          </div>
+          <div class="mt-4 flex space-x-4 text-[16px] font-light">
+            <span class="bg-yellow-200 text-black px-2 py-1 rounded">後端</span>
+            <span class="bg-gray-200 text-black px-2 py-1 rounded">台北市</span>
+            <span class="bg-gray-200 text-black px-2 py-1 rounded">$50,000 / 月</span>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <div class="text-gray-500 text-[16px] font-light">2024/07/12</div>
+            <button class="bg-primary text-white px-4 py-2 rounded-full">應徵</button>
+          </div>
+        </div>
+        <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
+          <div class="flex items-center">
+            <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
+            <div class="ml-4">
+              <h2 class="text-[24px] font-semibold">Python後端工程師</h2>
+              <p class="text-[16px] font-light text-gray-600">麥當勞 McDonald's</p>
+            </div>
+            <div class="ml-auto">
+              <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
+            </div>
+          </div>
+          <div class="mt-4 flex space-x-4 text-[16px] font-light">
+            <span class="bg-yellow-200 text-black px-2 py-1 rounded">後端</span>
+            <span class="bg-gray-200 text-black px-2 py-1 rounded">台北市</span>
+            <span class="bg-gray-200 text-black px-2 py-1 rounded">$50,000 / 月</span>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <div class="text-gray-500 text-[16px] font-light">2024/07/12</div>
+            <button class="bg-primary text-white px-4 py-2 rounded-full">應徵</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-24 px-5 bg-[#faf6eb]">
+    <div class="container mx-auto">
+      <h2 class="text-3xl font-bold mb-6">熱門企業</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-[40px]">
+        <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
+          <div class="flex items-center">
+            <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
+            <div class="ml-4">
+              <h2 class="text-[24px] font-semibold">肯德基 KFC</h2>
+              <div class="flex items-center mt-2">
+                <img src="{% static 'imgs/icon_star.png' %}" alt="星星評價" class="w-[18px] h-[18px]">
+                <span class="text-[16px] font-light ml-2">4.9</span>
+                <div class="w-[2px] h-[18px] bg-gray-400 mx-2"></div>
+                <span class="text-[16px] font-light">20個評論</span>
+              </div>
+            </div>
+            <div class="ml-auto">
+              <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
+            </div>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <div class="text-[18px] font-light text-gray-600 flex-1 line-clamp-2">
+                這是一家以炸雞等為主要產品的美國速食連鎖企業。全球150個國家/地區擁有30,000多家門市。
+            </div>
+            <button class="bg-primary text-white px-4 py-2 rounded-full ml-4">應徵</button>
+          </div>
+        </div>
+        <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
+          <div class="flex items-center">
+            <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
+            <div class="ml-4">
+              <h2 class="text-[24px] font-semibold">肯德基 KFC</h2>
+              <div class="flex items-center mt-2">
+                <img src="{% static 'imgs/icon_star.png' %}" alt="星星評價" class="w-[18px] h-[18px]">
+                <span class="text-[16px] font-light ml-2">4.9</span>
+                <div class="w-[2px] h-[18px] bg-gray-400 mx-2"></div>
+                <span class="text-[16px] font-light">20個評論</span>
+              </div>
+            </div>
+            <div class="ml-auto">
+              <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
+            </div>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <div class="text-[18px] font-light text-gray-600 flex-1 line-clamp-2">
+                這是一家以炸雞等為主要產品的美國速食連鎖企業。全球150個國家/地區擁有30,000多家門市。
+            </div>
+            <button class="bg-primary text-white px-4 py-2 rounded-full ml-4">應徵</button>
+          </div>
+        </div>
+        <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
+          <div class="flex items-center">
+            <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
+            <div class="ml-4">
+              <h2 class="text-[24px] font-semibold">肯德基 KFC</h2>
+              <div class="flex items-center mt-2">
+                <img src="{% static 'imgs/icon_star.png' %}" alt="星星評價" class="w-[18px] h-[18px]">
+                <span class="text-[16px] font-light ml-2">4.9</span>
+                <div class="w-[2px] h-[18px] bg-gray-400 mx-2"></div>
+                <span class="text-[16px] font-light">20個評論</span>
+              </div>
+            </div>
+            <div class="ml-auto">
+              <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
+            </div>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <div class="text-[18px] font-light text-gray-600 flex-1 line-clamp-2">
+                這是一家以炸雞等為主要產品的美國速食連鎖企業。全球150個國家/地區擁有30,000多家門市。
+            </div>
+            <button class="bg-primary text-white px-4 py-2 rounded-full ml-4">應徵</button>
+          </div>
+        </div>
+        <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
+          <div class="flex items-center">
+            <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
+            <div class="ml-4">
+              <h2 class="text-[24px] font-semibold">肯德基 KFC</h2>
+              <div class="flex items-center mt-2">
+                <img src="{% static 'imgs/icon_star.png' %}" alt="星星評價" class="w-[18px] h-[18px]">
+                <span class="text-[16px] font-light ml-2">4.9</span>
+                <div class="w-[2px] h-[18px] bg-gray-400 mx-2"></div>
+                <span class="text-[16px] font-light">20個評論</span>
+              </div>
+            </div>
+            <div class="ml-auto">
+              <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
+            </div>
+          </div>
+          <div class="flex justify-between items-center mt-4">
+            <div class="text-[18px] font-light text-gray-600 flex-1 line-clamp-2">
               這是一家以炸雞等為主要產品的美國速食連鎖企業。全球150個國家/地區擁有30,000多家門市。
-          </div>
-          <button class="bg-primary text-white px-4 py-2 rounded-full ml-4">應徵</button>
-        </div>
-      </div>
-      <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
-        <div class="flex items-center">
-          <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
-          <div class="ml-4">
-            <h2 class="text-[24px] font-semibold">肯德基 KFC</h2>
-            <div class="flex items-center mt-2">
-              <img src="{% static 'imgs/icon_star.png' %}" alt="星星評價" class="w-[18px] h-[18px]">
-              <span class="text-[16px] font-light ml-2">4.9</span>
-              <div class="w-[2px] h-[18px] bg-gray-400 mx-2"></div>
-              <span class="text-[16px] font-light">20個評論</span>
             </div>
+            <button class="bg-primary text-white px-4 py-2 rounded-full ml-4">應徵</button>
           </div>
-          <div class="ml-auto">
-            <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
-          </div>
-        </div>
-        <div class="flex justify-between items-center mt-4">
-          <div class="text-[18px] font-light text-gray-600 flex-1 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; text-overflow: ellipsis;">
-              這是一家以炸雞等為主要產品的美國速食連鎖企業。全球150個國家/地區擁有30,000多家門市。
-          </div>
-          <button class="bg-primary text-white px-4 py-2 rounded-full ml-4">應徵</button>
-        </div>
-      </div>
-      <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
-        <div class="flex items-center">
-          <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
-          <div class="ml-4">
-            <h2 class="text-[24px] font-semibold">肯德基 KFC</h2>
-            <div class="flex items-center mt-2">
-              <img src="{% static 'imgs/icon_star.png' %}" alt="星星評價" class="w-[18px] h-[18px]">
-              <span class="text-[16px] font-light ml-2">4.9</span>
-              <div class="w-[2px] h-[18px] bg-gray-400 mx-2"></div>
-              <span class="text-[16px] font-light">20個評論</span>
-            </div>
-          </div>
-          <div class="ml-auto">
-            <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
-          </div>
-        </div>
-        <div class="flex justify-between items-center mt-4">
-          <div class="text-[18px] font-light text-gray-600 flex-1 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; text-overflow: ellipsis;">
-              這是一家以炸雞等為主要產品的美國速食連鎖企業。全球150個國家/地區擁有30,000多家門市。
-          </div>
-          <button class="bg-primary text-white px-4 py-2 rounded-full ml-4">應徵</button>
-        </div>
-      </div>
-      <div class="border border-[#cccccc] rounded-[30px] p-6 bg-white shadow-md h-auto">
-        <div class="flex items-center">
-          <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="w-[80px] h-[80px] rounded-full">
-          <div class="ml-4">
-            <h2 class="text-[24px] font-semibold">肯德基 KFC</h2>
-            <div class="flex items-center mt-2">
-              <img src="{% static 'imgs/icon_star.png' %}" alt="星星評價" class="w-[18px] h-[18px]">
-              <span class="text-[16px] font-light ml-2">4.9</span>
-              <div class="w-[2px] h-[18px] bg-gray-400 mx-2"></div>
-              <span class="text-[16px] font-light">20個評論</span>
-            </div>
-          </div>
-          <div class="ml-auto">
-            <img src="{% static 'imgs/icon_like.png' %}" alt="收藏愛心" class="w-7 h-6">
-          </div>
-        </div>
-        <div class="flex justify-between items-center mt-4">
-          <div class="text-[18px] font-light text-gray-600 flex-1 overflow-hidden" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; text-overflow: ellipsis; overflow: hidden;">
-            這是一家以炸雞等為主要產品的美國速食連鎖企業。全球150個國家/地區擁有30,000多家門市。
-          </div>
-          <button class="bg-primary text-white px-4 py-2 rounded-full ml-4">應徵</button>
         </div>
       </div>
     </div>
   </div>
-</div>
 {% endblock %}
