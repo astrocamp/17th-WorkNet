@@ -1,30 +1,30 @@
 
 {% load static %}
 <nav
-  class="box-border flex fixed top-0 left-0 z-40 items-center p-4 w-full min-h-20 bg-[#00336b]">
+  class="box-border flex fixed top-0 left-0 z-40 items-center w-full min-h-28">
   <div class="absolute left-4 top-1/2 -translate-y-1/2">
-    <a href="{% url 'users:index' %}" class="block w-32 h-12" style="background-image: url('{% static 'imgs/logo_backnend.png' %}'); background-size: contain; background-position: center; background-repeat: no-repeat;">
-</a>
+    <a href="{% url 'users:index' %}" class="block h-12 w-32 bg-center bg-no-repeat bg-contain bg-logo-backend">
+    </a>
 </div>
   <div class="w-full">
-    <div class="text-center text-[20px] text-white">
+    <div class="text-center text-xl text-white">
       <ul class="inline-flex gap-5">
         <li>
-          <a class="font-semibold" href="/">首頁</a>
+          <a class="font-medium" href="/">首頁</a>
         </li>
         {% if request.user.is_authenticated %}
         <li>
-          <a class="font-semibold" href="{% url 'companies:index' %}">公司資訊</a>
+          <a class="font-medium" href="{% url 'companies:index' %}">公司資訊</a>
         </li>
         <li>
           {% if request.user.type == 2 %}
-            <a class="font-semibold" href="{% url 'companies:jobs_index' request.user.company.id %}">職缺</a>
+            <a class="font-medium" href="{% url 'companies:jobs_index' request.user.company.id %}">職缺</a>
           {% else %}
-            <a class="font-semibold" href="{% url 'jobs:index' %}">職缺</a>
+            <a class="font-medium" href="{% url 'jobs:index' %}">職缺</a>
           {% endif %}
         </li>
         <li>
-          <a class="font-semibold" href="{% url 'analytics:index' %}">分析</a>
+          <a class="font-medium" href="{% url 'analytics:index' %}">分析</a>
         </li>
         {% endif %}
       </ul>
@@ -70,10 +70,10 @@
       {% else %}
       <ul class="flex text-white">
         <li>
-          <a class="text-white text-[20px] btn no-style hover:border-transparent" href="{% url 'users:sign_in' %}">登入</a>
+          <a class="text-white text-xl btn no-style hover:border-transparent" href="{% url 'users:sign_in' %}">登入</a>
         </li>
         <li>
-          <a class="text-white text-[20px] btn btn-primary min-w-20" href="{% url 'users:register' %}">註冊</a>
+          <a class="text-white text-xl btn btn-primary min-w-20" href="{% url 'users:register' %}">註冊</a>
         </li>
       </ul>
       {% endif %}

@@ -8,6 +8,9 @@ module.exports = {
       disabled: 'disabled~="true"',
     },
     extend: {
+      backgroundImage: {
+        'logo-backend': "url('/static/imgs/logo_backnend.png')",
+      },
       colors: {
         'white-20':'rgba(255, 255, 255, 0.2)',
       },
