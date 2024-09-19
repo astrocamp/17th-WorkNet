@@ -4,31 +4,31 @@ import ChartDataLabels from "chartjs-plugin-datalabels";
 Chart.register(ChartDataLabels);
 
 document.addEventListener("DOMContentLoaded", function () {
-  const skillCounts = JSON.parse(
-    document.getElementById("skillData").textContent
+  const jobSkillCounts = JSON.parse(
+    document.getElementById("jobSkillData").textContent
   );
 
-  const labels = Object.keys(skillCounts);
-  const data = Object.values(skillCounts);
-  const total = data.reduce((sum, value) => sum + value, 0);
+  const jobLabels = Object.keys(jobSkillCounts);
+  const jobData = Object.values(jobSkillCounts);
+  const jobTotal = jobData.reduce((sum, value) => sum + value, 0);
 
-  const topData = data
-    .map((value, index) => ({ label: labels[index], value }))
+  const jobTopData = jobData
+    .map((value, index) => ({ label: jobLabels[index], value }))
     .sort((a, b) => b.value - a.value)
     .slice(0, 5);
-  const topLabels = topData.map((item) => item.label);
-  const topValues = topData.map((item) => item.value);
-  const topTotal = topValues.reduce((sum, value) => sum + value, 0);
+  const jobTopLabels = jobTopData.map((item) => item.label);
+  const jobTopValues = jobTopData.map((item) => item.value);
+  const jobTopTotal = jobTopValues.reduce((sum, value) => sum + value, 0);
 
-  const ctx = document.getElementById("skillPieChart").getContext("2d");
-  const skillPieChart = new Chart(ctx, {
+  const jobCtx = document.getElementById("jobSkillPieChart").getContext("2d");
+  const jobSkillPieChart = new Chart(jobCtx, {
     type: "pie",
     data: {
-      labels: topLabels,
+      labels: jobTopLabels,
       datasets: [
         {
           label: "Skills",
-          data: topValues,
+          data: jobTopValues,
           backgroundColor: [
             "#FF6384",
             "#36A2EB",
@@ -46,10 +46,15 @@ document.addEventListener("DOMContentLoaded", function () {
         datalabels: {
           display: true,
           formatter: (value) => {
-            if (typeof value !== "number" || Number.isNaN(value)) {
+            if (
+              typeof value !== "number" ||
+              Number.isNaN(value) ||
+              value === null ||
+              value === undefined
+            ) {
               return "0%";
             }
-            const percentage = ((value / topTotal) * 100).toFixed(2);
+            const percentage = ((value / jobTopTotal) * 100).toFixed(2);
             return `${percentage}%`;
           },
           color: "#fff",
@@ -69,7 +74,88 @@ document.addEventListener("DOMContentLoaded", function () {
                 return "";
               }
               const value = context.raw;
-              const percentage = ((value / topTotal) * 100).toFixed(2);
+              const percentage = ((value / jobTopTotal) * 100).toFixed(2);
+              const label = context.label || "";
+              return `${percentage}%`;
+            },
+          },
+        },
+      },
+    },
+    plugins: [ChartDataLabels],
+  });
+
+  const userSkillCounts = JSON.parse(
+    document.getElementById("userSkillData").textContent
+  );
+
+  const userLabels = Object.keys(userSkillCounts);
+  const userData = Object.values(userSkillCounts);
+  const userTotal = userData.reduce((sum, value) => sum + value, 0);
+
+  const userTopData = userData
+    .map((value, index) => ({ label: userLabels[index], value }))
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5);
+  const userTopLabels = userTopData.map((item) => item.label);
+  const userTopValues = userTopData.map((item) => item.value);
+  const userTopTotal = userTopValues.reduce((sum, value) => sum + value, 0);
+
+  const userCtx = document.getElementById("userSkillPieChart").getContext("2d");
+  const userSkillPieChart = new Chart(userCtx, {
+    type: "pie",
+    data: {
+      labels: userTopLabels,
+      datasets: [
+        {
+          label: "Skills",
+          data: userTopValues,
+          backgroundColor: [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56",
+            "#4BC0C0",
+            "#9966FF",
+            "#FF9F40",
+          ],
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        datalabels: {
+          display: true,
+          formatter: (value) => {
+            if (
+              typeof value !== "number" ||
+              Number.isNaN(value) ||
+              value === null ||
+              value === undefined
+            ) {
+              return "0%";
+            }
+            const percentage = ((value / userTopTotal) * 100).toFixed(2);
+            return `${percentage}%`;
+          },
+          color: "#fff",
+          backgroundColor: "#000",
+          borderRadius: 3,
+          font: {
+            weight: "bold",
+          },
+        },
+        legend: {
+          position: "top",
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              if (!context || !context.raw) {
+                return "";
+              }
+              const value = context.raw;
+              const percentage = ((value / userTopTotal) * 100).toFixed(2);
               const label = context.label || "";
               return `${percentage}%`;
             },
