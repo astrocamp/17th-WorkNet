@@ -196,9 +196,9 @@ def submit_jobs(request, job_id):
     job_id = request.POST.get("job_id")
     resume_id = request.POST.get("resume_id")
     job = get_object_or_404(Job, id=job_id)
-    resume = Resume.objects.filter(id=resume_id, userinfo__user=request.user).filter()
+    resume = Resume.objects.filter(id=resume_id, userinfo__user=request.user).first()
 
-    if not resume.exists():
+    if resume is None:
         messages.error(request, "請先新增履歷")
         return redirect("users:apply_jobs", job_id=job_id)
 
