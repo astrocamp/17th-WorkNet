@@ -13,6 +13,7 @@ from apps.jobs.models import Job, Job_Resume
 from apps.posts.forms.posts_form import PostForm
 from apps.posts.models import Post
 from lib.models.paginate import paginate_queryset
+from lib.models.rule_required import rule_required
 from lib.utils.models.decorators import company_required
 
 from .forms.companies_form import CompanyForm
@@ -31,15 +32,20 @@ def index(request):
             return redirect("companies:index")
     companies = Company.objects.order_by("-id")
 
-    favorited_status = [
-        {"company": company, "favorited": company.is_favorited_by(request.user)}
+    company_data = [
+        {
+            "company": company,
+            "favorited": company.is_favorited_by(request.user),
+            "can_edit": rules.test_rule("can_edit_company", request.user, company.id),
+        }
         for company in companies
     ]
 
-    page_obj = paginate_queryset(request, favorited_status, 10)
+    page_obj = paginate_queryset(request, company_data, 10)
     return render(request, "companies/index.html", {"page_obj": page_obj})
 
 
+@rule_required("can_new_company")
 def new(request):
     company, _ = Company.objects.get_or_create(
         user_id=request.user.id,
@@ -51,6 +57,7 @@ def new(request):
     return render(request, "companies/new.html", {"form": form})
 
 
+@rule_required("can_edit_company")
 def edit(request, id):
     company = get_object_or_404(Company, id=id)
     form = CompanyForm(instance=company)
@@ -75,14 +82,6 @@ def show(request, id):
     post = Post.objects.filter(company=company).order_by("-created_at")
 
     return render(request, "companies/show.html", {"company": company, "post": post})
-
-
-@require_POST
-def delete(request, id):
-    company = get_object_or_404(Company, id=id)
-    company.mark_delete()
-    messages.success(request, "刪除成功")
-    return redirect("companies:index")
 
 
 @login_required
