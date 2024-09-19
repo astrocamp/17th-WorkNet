@@ -200,7 +200,7 @@ def submit_jobs(request, job_id):
 
     if resume is None:
         messages.error(request, "請先新增履歷")
-        return redirect("users:apply_jobs", job_id=job_id)
+        return redirect("resumes:index")
 
     if Job_Resume.objects.filter(job=job, resume=resume).exists():
         messages.error(request, "已投遞過這個工作，請等候業者審核等候通知，謝謝")
