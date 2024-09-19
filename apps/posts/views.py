@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.views.decorators.http import require_http_methods, require_POST
 
 from lib.models.paginate import paginate_queryset
+from lib.models.rule_required import rule_required 
 
 from .forms.posts_form import CommentForm, PostForm
 from .models import Comment, LikeLog, Post
@@ -54,10 +55,9 @@ def show(request, id):
         },
     )
 
-
+@rule_required("can_edit_post")
 def edit(request, id):
     post = get_object_or_404(Post, id=id)
-    company = post.company
 
     if request.method == "POST":
         form = PostForm(request.POST, instance=post)
