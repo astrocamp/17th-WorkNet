@@ -5,7 +5,11 @@ from .models import Post
 
 
 @rules.predicate
-def can_edit_post(user, post):
+def can_edit_post(user, post_or_post_id):
+    if isinstance(post_or_post_id, int):
+        post = get_object_or_404(Post, id=post_or_post_id)
+    else:
+        post = post_or_post_id
     return user == post.user
 
 
