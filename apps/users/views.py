@@ -7,6 +7,8 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.utils import timezone
@@ -26,7 +28,7 @@ from lib.utils.models.defined import LOCATION_CHOICES
 
 from .forms import CustomUserCreationForm, UserInfoForm
 from .forms.users_form import PasswordResetForm
-from .models import User, UserInfo
+from .models import User, UserInfo, Notification
 
 
 def index(request):
@@ -331,6 +333,33 @@ def get_popular_companies(user):
         for company in companies
     ]
     return companies_data
+
+
+@login_required
+def fetch_notifications(request):
+    if request.user.is_authenticated:
+        unread_notifications_count = Notification.objects.filter(
+            recipient=request.user
+        ).count()
+        notifications = Notification.objects.filter(recipient=request.user).order_by(
+            "-created_at"
+        )[:5]
+        notifications_data = [
+            {
+                "id": n.id,
+                "message": n.message,
+                "read": n.read,
+            }
+            for n in notifications
+        ]
+        return JsonResponse(
+            {
+                "notifications": notifications_data,
+                "unreadNotificationsCount": unread_notifications_count,
+            }
+        )
+    else:
+        return JsonResponse({"notifications": [], "unreadNotificationsCount": 0})
 
 
 class PasswordResetView(View):
