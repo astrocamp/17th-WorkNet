@@ -100,6 +100,7 @@ def search_results(request):
     search_term = request.GET.get("q")
     location = request.GET.get("location")
     tags = request.GET.getlist("tags")
+    company_name = request.GET.get("company_name")
 
     search_filter = Q()
 
@@ -112,6 +113,9 @@ def search_results(request):
             | Q(company__name__icontains=search_term)
             | Q(id__in=job_ids_with_tags)
         )
+
+    if company_name:
+        search_filter &= Q(company__name__icontains=company_name)
 
     if location:
         location_code = get_location_code(location)
@@ -136,5 +140,6 @@ def search_results(request):
             "all_tags": all_tags,
             "search_term": search_term,
             "location": location,
+            "company_name": company_name,
         },
     )
