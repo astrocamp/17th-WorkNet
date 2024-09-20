@@ -27,6 +27,7 @@
           <div class="cursor-pointer dark:text-white"><h2>{{ request.user }}，您好</h2></div>
           <div class="absolute hidden p-3 text-center -translate-x-1/2 bg-white divide-y shadow-lg top-12 left-1/2 rounded-xl dark:bg-gray-800 dark:text-white divide-slate-200 group-hover:block">
               <a class="block px-2.5 py-2 whitespace-nowrap dark:text-white" href="{% url 'companies:edit' request.user.company.id %}">公司資料</a>
+              <a class="block px-2.5 py-2 whitespace-nowrap dark:text-white" href="{% url 'companies:company_application' %}">查看應徵</a>
             {% endif %}
           </div>
         </div>
