@@ -9,25 +9,25 @@
         <h1 class="text-3xl font-bold md:text-5xl lg:text-7xl">數百萬的工作機會</h1>
         <p class="mt-2 text-base md:mt-4 lg:mt-4 md:text-xl lg:text-2xl">給您最真實、自由的評論，讓我們為您找到適合的工作</p>
       </div>
-      <form action="#" method="GET" class="flex flex-col w-full gap-1 px-4 pt-2 pb-4 bg-white shadow-md md:flex-row lg:flex-row md:items-center lg:items-center md:p-3 lg:p-4 md:gap-4 lg:gap-4 rounded-xl md:rounded-full lg:rounded-full">
+      <form action="{% url 'jobs:search_results' %}" method="GET" class="flex flex-col w-full gap-1 px-4 pt-2 pb-4 bg-white shadow-md md:flex-row lg:flex-row md:items-center lg:items-center md:p-3 lg:p-4 md:gap-4 lg:gap-4 rounded-xl md:rounded-full lg:rounded-full">
         <div class="flex items-center flex-1">
           <div class="w-5 text-base text-center text-black md:w-7 lg:w-7 md:text-2xl lg:text-2xl"><i class="fa-solid fa-magnifying-glass"></i></div>
-          <input type="text" name="q" placeholder="請輸入工作名稱或公司" class="w-full px-2 py-2 text-base text-gray-500 placeholder-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" />
+          <input type="text" name="q" placeholder="請輸入工作名稱或公司" class="w-full px-2 py-2 text-base text-gray-500 placeholder-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" value="{{ request.GET.q }}"/>
         </div>
         <div class="w-full h-px bg-gray-300 md:w-px lg:w-px md:h-8 lg:h-8"></div>
         <div class="flex items-center flex-1">
           <div class="w-5 text-base text-center text-black md:w-7 lg:w-7 md:text-2xl lg:text-2xl"><i class="fa-solid fa-location-dot"></i></div>
-          <input type="text" name="location" placeholder="請輸入地點" class="w-full px-2 py-2 text-base text-gray-500 placeholder-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" />
+          <input type="text" name="location" placeholder="請輸入地點" class="w-full px-2 py-2 text-base text-gray-500 placeholder-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" value="{{ request.GET.location }}"/>
         </div>
         <div class="mt-2 md:m-0 lg:m-0">
           <button class="w-full btn btn-primary btn-sm md:btn-lg lg:btn-lg md:w-auto lg:w-auto md:min-w-28 lg:min-w-28">搜尋</button>
         </div>
       </form>
       <div class="mt-4 flex flex-wrap gap-1.5 md:gap-5 lg:gap-5">
-        <button class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">Python</button>
-        <button class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">PHP</button>
-        <button class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">Ruby</button>
-        <button class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">Javascript</button>
+        <a href="{% url 'jobs:search_results' %}?q=Python" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">Python</a>
+        <a href="{% url 'jobs:search_results' %}?q=PHP" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">PHP</a>
+        <a href="{% url 'jobs:search_results' %}?q=Ruby" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">Ruby</a>
+        <a href="{% url 'jobs:search_results' %}?q=Javascript" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">Javascript</a>
       </div>
     </div>
     <div class="absolute inset-x-0 z-20 text-center text-white bottom-4 md:bottom-14 lg:bottom-14">
