@@ -1,9 +1,10 @@
-<form hx-post="{% url 'companies:favorite' company.id %}"
+<form x-data="company_favorite"
+hx-post="{% url 'companies:favorite' company.id %}"
 hx-swap="outerHTML">
   {%csrf_token%}
   {% if favorited %}
-  <button class="text-white btn btn-secondary btn-sm">取消</button>
-{% else %}
-  <button class="text-white btn btn-secondary btn-sm">收藏</button>
-{% endif %}
+    <button class="text-error"><i class="fa-solid fa-heart"></i></button>
+  {% else %}
+    <button class="text-[#cccccc]"><i class="fa-regular fa-heart"></i></button>
+  {% endif %}
 </form>
