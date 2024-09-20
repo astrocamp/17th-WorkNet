@@ -1,13 +1,14 @@
-<footer class="p-4 mt-auto bg-white rounded border-t border-gray-300 footer footer-center text-base-content">
-  <nav class="grid grid-flow-col gap-4">
-    <a href="{% url 'companies:index' %}" class="link link-hover">公司資訊</a>
-    {% if request.user.type == 2 %}
-      <a class="link link-hover" href="{% url 'companies:jobs_index' request.user.company.id %}">職缺</a>
-    {% else %}
-      <a class="link link-hover" href="{% url 'jobs:index' %}">職缺</a>
-    {% endif %}
-  </nav>
-  <aside>
-    <p>Copyright © 2024 WorkNet All Rights Reserved</p>
-  </aside>
+<footer class="py-5 md:py-10 lg:py-10 px-5 bg-white rounded border-t border-gray-300 footer-center text-base-content flex flex-col gap-3 md:gap-4 lg:gap-4">
+    <nav class="flex justify-center gap-4">
+      <a href="{% url 'companies:index' %}" class="text-base link link-hover font-light">公司資訊</a>
+      {% if request.user.type == 2 %}
+        <a class="text-base link link-hover font-light" href="{% url 'companies:jobs_index' request.user.company.id %}">職缺</a>
+      {% else %}
+        <a class="text-base link link-hover font-light" href="{% url 'jobs:index' %}">職缺</a>
+      {% endif %}
+      <a href="{% url 'analytics:index' %}" class="text-base link link-hover font-light">分析</a>
+    </nav>
+    <aside>
+      <p class="text-xs md:text-base lg:text-base font-light">Copyright © 2024 WorkNet All Rights Reserved</p>
+    </aside>
 </footer>
