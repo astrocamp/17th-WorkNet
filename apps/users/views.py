@@ -96,7 +96,10 @@ def sign_out(request):
 
 @rule_required("user_can_view")
 def info(request):
-    info, _ = UserInfo.objects.get_or_create(user_id=request.user.id)
+    info, created = UserInfo.objects.get_or_create(user_id=request.user.id)
+    if created:
+        info.nickname = request.user.username
+        info.save()
 
     if request.method == "POST":
         info = get_object_or_404(UserInfo, user_id=request.user.id)
