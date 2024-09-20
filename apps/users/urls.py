@@ -37,5 +37,9 @@ urlpatterns = [
     ),
     path("<int:job_id>/apply/", views.apply_jobs, name="apply_jobs"),
     path("<int:job_id>/submit", views.submit_jobs, name="submit_jobs"),
-     path('social-auth/complete/<str:backend>/', social_auth_complete, name='social_auth_complete'),
+    path(
+        "social-auth/complete/<str:backend>/",
+        social_auth_complete,
+        name="social_auth_complete",
+    ),
 ]
