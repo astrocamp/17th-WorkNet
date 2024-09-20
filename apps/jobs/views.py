@@ -128,10 +128,6 @@ def search_results(request):
     page_obj = paginate_queryset(request, jobs, 10)
     all_tags = Tag.objects.all()
 
-    print("----")
-    print(search_term)
-    print("----")
-
     return render(
         request,
         "jobs/search_results.html",
