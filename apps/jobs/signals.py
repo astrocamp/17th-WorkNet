@@ -8,7 +8,6 @@ from apps.users.models import Notification
 @receiver(post_save, sender=Job)
 def job_posting_created(sender, instance, created, **kwargs):
     if created:
-
         company = instance.company
         followers = company.favorited_by_users.all()
 
@@ -17,6 +16,7 @@ def job_posting_created(sender, instance, created, **kwargs):
             Notification.objects.create(
                 recipient=user,
                 sender=company.user,
+                job=instance,
                 title="New Job",
                 message=f"{instance.company.title} 發布新職缺：{instance.title}",
             )

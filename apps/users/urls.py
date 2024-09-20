@@ -43,6 +43,9 @@ urlpatterns = [
     ),
     path("<int:job_id>/job_favorite/", views.job_favorite, name="job_favorite"),
     path(
+        "<int:job_id>/notification/", views.read_notification, name="read_notification"
+    ),
+    path(
         "api/notifications/",
         views.fetch_notifications,
         name="fetch_notifications",

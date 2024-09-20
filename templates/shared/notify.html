@@ -1,14 +1,11 @@
-{% if notifications %}
-    {% for notification in notifications %}
-        <span class="block py-4 px-2 lg:p-2 break-words text-base md:text-xl lg:text-base"
-              x-data="{ notification: {{ notification|safe|lower }} }" 
-              x-bind:class="{'text-red-500': notification.read}">
-            {{ notification.message }}
-            {% if not notification.read %}
-                <span class="bg-error rounded-md text-white text-xs px-1">NEW</span>
-            {% endif %}
-        </span>
-    {% endfor %}
-{% else %}
-    <span class="block text-center py-4">沒有通知</span>
-{% endif %}
+<template x-for="notification in notifications" hidden>
+    <a class="block py-4 px-2 lg:p-2 break-words text-base md:text-xl lg:text-base"
+        x-bind:class="{'text-red-500': !notification.read}"
+        x-text="notification.message"
+        x-bind:href="`/${notification.job_id}/notification/`"></a>
+    <span x-show="!notification.read" class="bg-error rounded-md text-white text-xs px-1">NEW</span>        
+</template>
+
+<template x-if="notifications.length === 0" hidden>
+    <p class="text-gray-500 mt-2 mb-2 mx-2.5 w-48 ">沒有通知</p>
+</template>
