@@ -42,4 +42,9 @@ urlpatterns = [
         name="social_auth_complete",
     ),
     path("<int:job_id>/job_favorite/", views.job_favorite, name="job_favorite"),
+    path(
+        "api/notifications/",
+        views.fetch_notifications,
+        name="fetch_notifications",
+    ),
 ]
