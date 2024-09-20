@@ -11,6 +11,7 @@ import {
   faLocationDot as fasLocationDot,
   faMagnifyingGlass as fasMagnifyingGlass,
   faSackDollar as fasSackDollar,
+  faPen as fasPen,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faThumbsDown as farThumbsDown,
@@ -20,10 +21,16 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 
 
-library.add(fasThumbsDown, farThumbsDown, fasThumbsUp, farThumbsUp,farBell,fasBell, fasHeart, farHeart, fasUser ,fasCaretDown ,fasStar , fasLocationDot,fasMagnifyingGlass,fasSackDollar);
+library.add(fasThumbsDown, farThumbsDown, fasThumbsUp, farThumbsUp,farBell,fasBell, fasHeart, farHeart, fasUser ,fasCaretDown ,fasStar , fasLocationDot,fasMagnifyingGlass,fasSackDollar,fasPen);
 dom.i2svg();
 
 Alpine.data("reactions_post", () => ({
+  init() {
+    dom.i2svg();
+  },
+}));
+
+Alpine.data("company_favorite", () => ({
   init() {
     dom.i2svg();
   },
