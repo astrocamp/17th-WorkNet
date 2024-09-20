@@ -12,7 +12,7 @@
         <li>
           <a class="font-semibold" href="/">首頁</a>
         </li>
-        {% if request.user.is_authenticated %}
+
         <li>
           <a class="font-semibold" href="{% url 'companies:index' %}">公司資訊</a>
         </li>
@@ -26,7 +26,6 @@
         <li>
           <a class="font-semibold" href="{% url 'analytics:index' %}">分析</a>
         </li>
-        {% endif %}
       </ul>
     </div>
     <div class="absolute right-4 top-1/2 -translate-y-1/2">
