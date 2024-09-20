@@ -7,6 +7,8 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from taggit.models import Tag, TaggedItem
 
+from apps.resumes.models import Resume
+from apps.users.models import UserInfo
 from lib.models.paginate import paginate_queryset
 from lib.models.rule_required import rule_required
 
@@ -47,13 +49,14 @@ def show(request, id):
     referer_path = urlparse(previous_url).path
     backJobs = "resumes" not in referer_path
 
-    # resume_id = request.POST.get("resume_id")
-    # resume = get_object_or_404(Resume, id=resume_id, userinfo__user=request.user)
-    status=Job_Resume.objects.filter(job=job).exists() 
+    user_info = UserInfo.objects.get(user=request.user)
+    user_resume = Resume.objects.filter(userinfo=user_info).values_list("id", flat=True)
+    status = Job_Resume.objects.filter(job=job, resume__in=user_resume).exists()
+
     return render(
         request,
         "jobs/show.html",
-        {"job": job, "backJobs": backJobs, "tags": job.tags.all(),"status":status},
+        {"job": job, "backJobs": backJobs, "tags": job.tags.all(), "status": status},
     )
 
 
