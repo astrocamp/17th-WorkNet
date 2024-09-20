@@ -12,6 +12,7 @@ import {
   faMagnifyingGlass as fasMagnifyingGlass,
   faSackDollar as fasSackDollar,
   faPen as fasPen,
+  faUserCircle as faUserCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faThumbsDown as farThumbsDown,
@@ -35,7 +36,8 @@ library.add(
   fasLocationDot,
   fasMagnifyingGlass,
   fasSackDollar,
-  fasPen
+  fasPen,
+  faUserCircle,
 );
 dom.i2svg();
 

@@ -5,12 +5,24 @@
     <h1 class="text-3xl font-bold">{{ post.title }}</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
-    <div class="flex gap-5 pb-5 border-b border-gray-300">
-        <div class="flex-1 text-lg">作者：{{ post.user }}</div>
-        {% include "posts/like.html" with post=post %}
+    <div class="flex gap-5 pb-5 border-gray-300">
+        <div class="flex-1 text-xl font-bold"><i class="fas fa-user-circle fa-2xl"></i> &ensp;{{ post.user }}&nbsp;
+            <small class="text-xs font-light">{{ post.created_at|date:"Y/m/d H:i" }}</small>
+        </div>
+    </div>
+    <div class="p-5 mt-2 bg-gray-100 rounded-lg">
+        <div class="flex justify-between">
+            <div class="flex items-center">
+                <span>整體評分</span>
+            </div>
+            <div class="flex items-center">
+                {% include "posts/like.html" with post=post %}
+            </div>
+        </div>
     </div>
     <div class="py-10 markdown-body">{{ post.content|convert_markdown|safe }}</div><br>
-    <small>{{ post.created_at|date:"Y/m/d H:i" }}</small><br>
+
+
     {% if is_author %}
         <a class="text-white btn btn-primary" href="{% url 'posts:edit' post.id %}">修改評論</a>
     {% endif %}
