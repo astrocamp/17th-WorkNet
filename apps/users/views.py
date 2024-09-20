@@ -355,7 +355,7 @@ def fetch_notifications(request):
             read=False,
         ).count()
         notifications = Notification.objects.filter(recipient=request.user).order_by(
-            "-read", "-created_at"
+            "read", "-created_at"
         )[:5]
         notifications_data = [
             {

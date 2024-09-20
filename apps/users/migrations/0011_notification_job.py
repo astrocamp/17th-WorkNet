@@ -7,14 +7,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('jobs', '0005_job_tags_alter_job_skills'),
-        ('users', '0010_notification'),
+        ("jobs", "0005_job_tags_alter_job_skills"),
+        ("users", "0010_notification"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='notification',
-            name='job',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='job_notifications', to='jobs.job'),
+            model_name="notification",
+            name="job",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="job_notifications",
+                to="jobs.job",
+            ),
         ),
     ]

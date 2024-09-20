@@ -98,10 +98,10 @@
                   {% endif %}
                 </div>
               </div>
-            </div>            
+            </div>
             <div class="relative flex items-center group" x-data="notificationHandler({{ notifications|safe|lower }}, {{ unread|lower }})">
               <div class="mx-2 text-lg">
-                <i class="text-red-500 fas fa-bell" x-show="unread"></i>          
+                <i class="text-red-500 fas fa-bell" x-show="unread"></i>
                 <i class="text-white far fa-bell" x-show="!unread"></i>
               </div>
               <div class="hidden absolute top-12 left-1/2 p-3 text-center bg-white rounded-xl divide-y shadow-lg -translate-x-1/2 divide-slate-200 group-hover:block">
