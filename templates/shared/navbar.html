@@ -32,7 +32,7 @@
               </div>
               <div class="hidden absolute top-12 left-1/2 p-3 text-center bg-white rounded-xl divide-y shadow-lg -translate-x-1/2 divide-slate-200 lg:group-hover:block">
                 {% if request.user.type == 1 %}
-                  <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'users:info' request.user.pk %}">會員資料</a>
+                  <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'users:info' %}">會員資料</a>
                   <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'users:favorites_list' %}">我的職缺收藏</a>
                   <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'users:favorites_company_list' %}">喜愛的公司</a>
                   <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'resumes:index' %}">我的履歷</a>
