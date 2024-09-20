@@ -2,7 +2,7 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from . import views
-from .views import PasswordResetDoneView, PasswordResetView
+from .views import PasswordResetDoneView, PasswordResetView, social_auth_complete
 
 app_name = "users"
 
@@ -37,4 +37,5 @@ urlpatterns = [
     ),
     path("<int:job_id>/apply/", views.apply_jobs, name="apply_jobs"),
     path("<int:job_id>/submit", views.submit_jobs, name="submit_jobs"),
+     path('social-auth/complete/<str:backend>/', social_auth_complete, name='social_auth_complete'),
 ]
