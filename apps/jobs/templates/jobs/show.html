@@ -17,7 +17,8 @@
         {% csrf_token%}
         <input type="hidden" name="job_id" value="{{ job.id }}">
         {% if status == False %}
-          <button>應徵此工作</button>
+          <button class="text-white btn btn-secondary btn-sm">應徵</button>
+        {% else %}
         {% endif %}
       </form>
     {% if backJobs %}
