@@ -26,6 +26,8 @@ from lib.utils.models.decorators import login_redirect_next
 from .forms import CustomUserCreationForm, UserInfoForm
 from .forms.users_form import PasswordResetForm
 from .models import UserInfo
+from social_django.views import complete
+from social_core.exceptions import AuthCanceled
 
 
 def home(request):
@@ -61,6 +63,10 @@ def register(request):
 
 
 def sign_in(request):
+    if request.user.is_authenticated:
+        messages.error(request, "您已登入，請先登出")
+        return redirect("users:index")
+    
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -147,8 +153,15 @@ def social_save_profile(backend, user, response, *args, **kwargs):
     login(request, user, backend=backend_str)
     user_info = UserInfo.objects.filter(user=user).first()
     if not user_info or not user_info.nickname:
-        return redirect("users:info", user.id)  
-    return redirect('/')    
+        return redirect("users:info")  
+    return redirect('/')
+
+def social_auth_complete(request, *args, **kwargs):
+    try:
+        return complete(request, *args, **kwargs)
+    except AuthCanceled:
+        messages.error(request, "認證失敗，請重新登入")
+        return redirect("users:sign_in")
 
 @login_required
 def login_redirect(request):
