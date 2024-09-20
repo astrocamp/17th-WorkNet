@@ -192,7 +192,7 @@ def apply_jobs(request, job_id):
 
 @require_POST
 @login_required
-def submit_jobs(request, job_id):   
+def submit_jobs(request, job_id):
     job_id = request.POST.get("job_id")
     resume_id = request.POST.get("resume_id")
     job = get_object_or_404(Job, id=job_id)
