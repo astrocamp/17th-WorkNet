@@ -336,30 +336,44 @@ def get_popular_companies(user):
 
 
 @login_required
+def read_notification(request, job_id):
+    try:
+        notify = Notification.objects.get(recipient=request.user, job_id=job_id)
+        notify.read = True
+        notify.save()
+    except:
+        pass
+
+    return redirect(reverse("jobs:show", args=[job_id]))
+
+
+@login_required
 def fetch_notifications(request):
     if request.user.is_authenticated:
         unread_notifications_count = Notification.objects.filter(
-            recipient=request.user
+            recipient=request.user,
+            read=False,
         ).count()
         notifications = Notification.objects.filter(recipient=request.user).order_by(
-            "-created_at"
+            "-read", "-created_at"
         )[:5]
         notifications_data = [
             {
                 "id": n.id,
                 "message": n.message,
                 "read": n.read,
+                "job_id": n.job_id,
             }
             for n in notifications
         ]
         return JsonResponse(
             {
                 "notifications": notifications_data,
-                "unreadNotificationsCount": unread_notifications_count,
+                "unread": unread_notifications_count > 0,
             }
         )
     else:
-        return JsonResponse({"notifications": [], "unreadNotificationsCount": 0})
+        return JsonResponse({"notifications": [], "unread": False})
 
 
 class PasswordResetView(View):

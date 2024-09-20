@@ -30,6 +30,7 @@ class UserInfo(models.Model):
 
 
 class Notification(models.Model):
+
     recipient = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="notifications"
     )
@@ -37,6 +38,13 @@ class Notification(models.Model):
         User,
         on_delete=models.CASCADE,
         related_name="sent_notifications",
+        null=True,
+        blank=True,
+    )
+    job = models.ForeignKey(
+        "jobs.Job",
+        on_delete=models.CASCADE,
+        related_name="job_notifications",
         null=True,
         blank=True,
     )
