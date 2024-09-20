@@ -1,7 +1,11 @@
 {% extends "layouts/base.html" %}
 {% block content %}
 <div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
-    <h1 class="text-3xl font-bold">搜尋結果: {{ search_term }}</h1>
+    <h1 class="text-3xl font-bold">
+        搜尋結果:
+        {% if search_term %}{{ search_term }}{% endif %}
+        {% if location %}{{ location }}{% endif %}
+    </h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
 
@@ -11,7 +15,7 @@
         <li class="flex gap-2 p-5" id="job-{{ job.id }}">
             <div class="flex-1">
                 <a class="text-xl font-medium" href="{% url 'jobs:show' job.id %}">{{ job.title }}</a>
-                <p class="text-small">{{ job.company.name }}, {{ job.get_location_display }}</p>
+                <p class="text-small">{{ job.company.title }}, {{ job.get_location_display }}</p>
             </div>
             <div class="flex gap-2">
                 <a class="text-white btn btn-primary min-w-20" href="{% url 'users:apply_jobs' job.id %}">應徵</a>
