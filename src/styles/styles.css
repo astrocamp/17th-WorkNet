@@ -8,8 +8,24 @@
   @apply font-sans;
 }
 
+.footer{
+  @apply gap-8
+}
+
 .btn {
-  @apply rounded-full;
+  @apply rounded-full text-white ;
+}
+
+.btn-lg{
+  @apply min-h-14 h-14 text-xl
+}
+
+.btn-md{
+  @apply min-h-12 h-12 text-xl
+}
+
+.btn-sm{
+  @apply min-h-8 h-8 text-base
 }
 
 .input-often-base {
@@ -57,4 +73,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-bounce {
+  animation: bounce 2s infinite;
 }
