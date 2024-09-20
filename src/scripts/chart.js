@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const jobSkillCounts = JSON.parse(
     document.getElementById("jobSkillData").textContent
   );
-
   const jobLabels = Object.keys(jobSkillCounts);
   const jobData = Object.values(jobSkillCounts);
   const jobTotal = jobData.reduce((sum, value) => sum + value, 0);
@@ -18,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .slice(0, 5);
   const jobTopLabels = jobTopData.map((item) => item.label);
   const jobTopValues = jobTopData.map((item) => item.value);
-  const jobTopTotal = jobTopValues.reduce((sum, value) => sum + value, 0);
 
   const jobCtx = document.getElementById("jobSkillPieChart").getContext("2d");
   const jobSkillPieChart = new Chart(jobCtx, {
@@ -54,27 +52,39 @@ document.addEventListener("DOMContentLoaded", function () {
             ) {
               return "0%";
             }
-            const percentage = ((value / jobTopTotal) * 100).toFixed(2);
+            const percentage = ((value / jobTotal) * 100).toFixed(2);
             return `${percentage}%`;
           },
           color: "#fff",
           backgroundColor: "#000",
           borderRadius: 3,
           font: {
+            size: 20,
             weight: "bold",
           },
         },
         legend: {
           position: "top",
+          labels: {
+            font: {
+              size: 20,
+            },
+          },
         },
         tooltip: {
+          titleFont: {
+            size: 20,
+          },
+          bodyFont: {
+            size: 20,
+          },
           callbacks: {
             label: function (context) {
               if (!context || !context.raw) {
                 return "";
               }
               const value = context.raw;
-              const percentage = ((value / jobTopTotal) * 100).toFixed(2);
+              const percentage = ((value / jobTotal) * 100).toFixed(2);
               const label = context.label || "";
               return `${percentage}%`;
             },
@@ -88,7 +98,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const userSkillCounts = JSON.parse(
     document.getElementById("userSkillData").textContent
   );
-
   const userLabels = Object.keys(userSkillCounts);
   const userData = Object.values(userSkillCounts);
   const userTotal = userData.reduce((sum, value) => sum + value, 0);
@@ -99,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .slice(0, 5);
   const userTopLabels = userTopData.map((item) => item.label);
   const userTopValues = userTopData.map((item) => item.value);
-  const userTopTotal = userTopValues.reduce((sum, value) => sum + value, 0);
 
   const userCtx = document.getElementById("userSkillPieChart").getContext("2d");
   const userSkillPieChart = new Chart(userCtx, {
@@ -135,31 +143,179 @@ document.addEventListener("DOMContentLoaded", function () {
             ) {
               return "0%";
             }
-            const percentage = ((value / userTopTotal) * 100).toFixed(2);
+            const percentage = ((value / userTotal) * 100).toFixed(2);
             return `${percentage}%`;
           },
           color: "#fff",
           backgroundColor: "#000",
           borderRadius: 3,
           font: {
+            size: 20,
             weight: "bold",
           },
         },
         legend: {
           position: "top",
+          labels: {
+            font: {
+              size: 20,
+            },
+          },
         },
         tooltip: {
+          titleFont: {
+            size: 20,
+          },
+          bodyFont: {
+            size: 20,
+          },
           callbacks: {
             label: function (context) {
               if (!context || !context.raw) {
                 return "";
               }
               const value = context.raw;
-              const percentage = ((value / userTopTotal) * 100).toFixed(2);
+              const percentage = ((value / userTotal) * 100).toFixed(2);
               const label = context.label || "";
               return `${percentage}%`;
             },
           },
+        },
+      },
+    },
+    plugins: [ChartDataLabels],
+  });
+
+  const salaryData = JSON.parse(
+    document.getElementById("averageSalaryData").textContent
+  );
+  const salaryLabels = Object.keys(salaryData);
+  const salaryValues = Object.values(salaryData);
+
+  const salaryCtx = document.getElementById("salaryChart").getContext("2d");
+  const salaryChart = new Chart(salaryCtx, {
+    type: "bar",
+    data: {
+      labels: salaryLabels,
+      datasets: [
+        {
+          label: "平均薪資",
+          data: salaryValues,
+          backgroundColor: "#36A2EB",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            font: {
+              size: 20,
+            },
+          },
+        },
+        x: {
+          ticks: {
+            font: {
+              size: 20,
+            },
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: 20,
+            },
+          },
+        },
+        tooltip: {
+          titleFont: {
+            size: 20,
+          },
+          bodyFont: {
+            size: 20,
+          },
+        },
+        datalabels: {
+          display: true,
+          color: "#000",
+          font: {
+            size: 20,
+          },
+          formatter: (value) => `${value}`,
+        },
+      },
+    },
+    plugins: [ChartDataLabels],
+  });
+
+  const tenureSalaryData = JSON.parse(
+    document.getElementById("averageTenureSalaryData").textContent
+  );
+  const tenureLabels = Object.keys(tenureSalaryData);
+  const tenureValues = Object.values(tenureSalaryData);
+
+  const tenureCtx = document
+    .getElementById("tenureSalaryChart")
+    .getContext("2d");
+  const tenureSalaryChart = new Chart(tenureCtx, {
+    type: "bar",
+    data: {
+      labels: tenureLabels,
+      datasets: [
+        {
+          label: "平均薪資",
+          data: tenureValues,
+          backgroundColor: "#FF9F40",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            font: {
+              size: 20,
+            },
+          },
+        },
+        x: {
+          ticks: {
+            font: {
+              size: 20,
+            },
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: 20,
+            },
+          },
+        },
+        tooltip: {
+          titleFont: {
+            size: 20,
+          },
+          bodyFont: {
+            size: 20,
+          },
+        },
+        datalabels: {
+          display: true,
+          color: "#000",
+          font: {
+            size: 20,
+          },
+          formatter: (value) => `${value}`,
         },
       },
     },
