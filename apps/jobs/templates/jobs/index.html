@@ -53,7 +53,7 @@
                                 <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'jobs:edit' item.job.id %}"><i class="text-base fa-solid fa-pen lg:text-base"></i> <span>編輯</span></a>
                                 <form method="POST" action="{% url 'jobs:delete' item.job.id %}">
                                     {% csrf_token %}
-                                    <button class="text-white btn btn-error btn-sm">刪除</button>
+                                    <button class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">刪除</button>
                                 </form>
                             {% endif %}
                             {% if request.user.is_authenticated and request.user.type == 1 %}
