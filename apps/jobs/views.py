@@ -77,7 +77,6 @@ def edit(request, id):
     return render(request, "jobs/edit.html", {"form": form, "job": job, "tags": tags})
 
 
-
 def delete(request, id):
     job = get_object_or_404(Job, pk=id)
     job.mark_delete()
