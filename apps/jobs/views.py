@@ -13,7 +13,7 @@ from lib.models.paginate import paginate_queryset
 from lib.models.rule_required import rule_required
 
 from .forms.jobs_form import JobForm
-from .models import Job, JobFavorite , Job_Resume
+from .models import Job, Job_Resume, JobFavorite
 
 
 def index(request):
