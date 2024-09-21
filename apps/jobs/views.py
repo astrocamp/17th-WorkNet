@@ -17,6 +17,8 @@ from .forms.jobs_form import JobForm
 from .models import Job, Job_Resume, JobFavorite
 
 
+
+
 def index(request):
     jobs = Job.objects.order_by("-id")
     favorites = JobFavorite.objects.filter(user=request.user).values_list(
@@ -54,14 +56,21 @@ def show(request, id):
     referer_path = urlparse(previous_url).path
     backJobs = "resumes" not in referer_path
 
-    user_info = UserInfo.objects.get(user=request.user)
-    user_resume = Resume.objects.filter(userinfo=user_info).values_list("id", flat=True)
-    status = Job_Resume.objects.filter(job=job, resume__in=user_resume).exists()
+    if request.user.type == 1:
+        user_info = UserInfo.objects.get(user=request.user)
+        user_resume = Resume.objects.filter(userinfo=user_info).values_list("id", flat=True)
+        status = Job_Resume.objects.filter(job=job, resume__in=user_resume).exists()
+
+        return render(
+        request,
+        "jobs/show.html",
+        {"job": job, "backJobs": backJobs, "tags": job.tags.all(), "status": status},
+    )
 
     return render(
         request,
         "jobs/show.html",
-        {"job": job, "backJobs": backJobs, "tags": job.tags.all(), "status": status},
+        {"job": job, "backJobs": backJobs, "tags": job.tags.all(),},
     )
 
 
