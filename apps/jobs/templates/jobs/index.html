@@ -26,10 +26,10 @@
                     </form>
                 {% endif %}
                 {% if request.user.is_authenticated and request.user.type == 1 %}
-                {% if item.job.id in favorites %}
-                <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">取消</a>
+                {% if item.favorited %}
+                    <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">取消</a>
                 {% else %}
-                <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">收藏</a>
+                    <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">收藏</a>
                 {% endif %}
                     <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:apply_jobs' item.job.id %}" >應徵</a>
                 {% endif %}
