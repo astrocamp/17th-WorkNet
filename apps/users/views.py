@@ -16,6 +16,8 @@ from django.utils import timezone
 from django.views import View
 from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateView
+from social_core.exceptions import AuthCanceled
+from social_django.views import complete
 
 from apps.companies.models import CompanyFavorite
 from apps.jobs.models import Job, Job_Resume, JobFavorite
@@ -26,8 +28,6 @@ from lib.utils.models.decorators import login_redirect_next
 from .forms import CustomUserCreationForm, UserInfoForm
 from .forms.users_form import PasswordResetForm
 from .models import UserInfo
-from social_django.views import complete
-from social_core.exceptions import AuthCanceled
 
 
 def home(request):
@@ -66,7 +66,7 @@ def sign_in(request):
     if request.user.is_authenticated:
         messages.error(request, "您已登入，請先登出")
         return redirect("users:index")
-    
+
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -133,7 +133,7 @@ def info(request):
 
 def social_save_profile(backend, user, response, *args, **kwargs):
     request = kwargs.get("request")
-    
+
     match backend.name:
         case "line":
             social_id = response["userId"]
@@ -148,13 +148,14 @@ def social_save_profile(backend, user, response, *args, **kwargs):
                 u1.save()
         case _:
             pass
-    backend_str = f'{backend.__module__}.{backend.__class__.__name__}'
+    backend_str = f"{backend.__module__}.{backend.__class__.__name__}"
     user.backend = backend_str
     login(request, user, backend=backend_str)
     user_info = UserInfo.objects.filter(user=user).first()
     if not user_info or not user_info.nickname:
-        return redirect("users:info")  
-    return redirect('/')
+        return redirect("users:info")
+    return redirect("/")
+
 
 def social_auth_complete(request, *args, **kwargs):
     try:
@@ -162,6 +163,7 @@ def social_auth_complete(request, *args, **kwargs):
     except AuthCanceled:
         messages.error(request, "認證失敗，請重新登入")
         return redirect("users:sign_in")
+
 
 @login_required
 def login_redirect(request):
@@ -177,7 +179,7 @@ def favorite(request, id):
     job = get_object_or_404(Job, pk=id)
     user = request.user
 
-    if  JobFavorite.objects.filter(user=user, job=job).exists():
+    if JobFavorite.objects.filter(user=user, job=job).exists():
         JobFavorite.objects.filter(user=user, job=job).delete()
         messages.success(request, "取消收藏成功")
         return redirect("jobs:index")

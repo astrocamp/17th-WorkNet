@@ -23,6 +23,7 @@ module.exports = {
       },
       spacing: {
         'calc-card': 'calc(50% - 20px)',
+        'calc-data': 'calc(50% - 10px)',
       },
       aspectRatio: {
         '8/3': '8 / 3',

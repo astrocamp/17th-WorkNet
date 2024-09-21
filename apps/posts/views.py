@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.views.decorators.http import require_http_methods, require_POST
 
 from lib.models.paginate import paginate_queryset
-from lib.models.rule_required import rule_required 
+from lib.models.rule_required import rule_required
 
 from .forms.posts_form import CommentForm, PostForm
 from .models import Comment, LikeLog, Post
@@ -54,6 +54,7 @@ def show(request, id):
             "is_author": is_author,
         },
     )
+
 
 @rule_required("can_edit_post")
 def edit(request, id):
