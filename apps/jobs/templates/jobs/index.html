@@ -39,12 +39,11 @@
                             <div class="text-[#cccccc] cursor-pointer">
                                 {% if request.user.is_authenticated and request.user.type == 1 %}
                                 {% if item.job.id in favorites %}
-                                    <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">取消</a>
+                                    <button class="text-error"><a href="{% url 'users:favorite' item.job.id %}"> <i class="fa-solid fa-heart"></i></a></button>
                                 {% else %}
-                                    <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">收藏</a>
-                                {% endif %}
+                                    <button class="text-[#cccccc]"><a href="{% url 'users:favorite' item.job.id %}"> <i class="fa-regular fa-heart"></i></a></button>                                {% endif %}
                             {% endif %}
-                                <i class="fa-regular fa-heart"></i>
+
                             </div>
                         </div>
                     </div>
