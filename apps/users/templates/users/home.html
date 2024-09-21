@@ -12,12 +12,17 @@
       <form action="{% url 'jobs:search_results' %}" method="GET" class="flex flex-col w-full gap-1 px-4 pt-2 pb-4 bg-white shadow-md md:flex-row lg:flex-row md:items-center lg:items-center md:p-3 lg:p-4 md:gap-4 lg:gap-4 rounded-xl md:rounded-full lg:rounded-full">
         <div class="flex items-center flex-1">
           <div class="w-5 text-base text-center text-black md:w-7 lg:w-7 md:text-2xl lg:text-2xl"><i class="fa-solid fa-magnifying-glass"></i></div>
-          <input type="text" name="q" placeholder="請輸入工作名稱或公司" class="w-full px-2 py-2 text-base text-gray-500 placeholder-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" value="{{ request.GET.q }}"/>
+          <input type="text" name="q" placeholder="請輸入工作名稱或公司" class="w-full px-2 py-2 text-base text-gray-500 placeholder-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" value="{{ request.GET.q }}" />
         </div>
         <div class="w-full h-px bg-gray-300 md:w-px lg:w-px md:h-8 lg:h-8"></div>
         <div class="flex items-center flex-1">
           <div class="w-5 text-base text-center text-black md:w-7 lg:w-7 md:text-2xl lg:text-2xl"><i class="fa-solid fa-location-dot"></i></div>
-          <input type="text" name="location" placeholder="請輸入地點" class="w-full px-2 py-2 text-base text-gray-500 placeholder-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" value="{{ request.GET.location }}"/>
+          <select name="location" class="w-full px-2 py-2 text-base text-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg">
+            <option value="">請選擇地點</option>
+            {% for value, label in locations %}
+                <option value="{{ value }}" {% if request.GET.location == value %} selected {% endif %}>{{ label }}</option>
+            {% endfor %}
+          </select>
         </div>
         <div class="mt-2 md:m-0 lg:m-0">
           <button class="w-full btn btn-primary btn-sm md:btn-lg lg:btn-lg md:w-auto lg:w-auto md:min-w-28 lg:min-w-28">搜尋</button>
@@ -44,101 +49,46 @@
       <h2 class="mb-5 text-2xl font-bold lg:text-3xl lg:mb-9">熱門職缺</h2>
       <div class="flex flex-wrap gap-5 md:gap-7 lg:gap-10">
         <!--card-->
-        <div class="relative border border-[#cccccc] rounded-xl md:rounded-3xl lg:rounded-3xl p-5 md:p-6 lg:p-6 bg-white w-full md:w-calc-card lg:w-calc-card box-border">
-          <div class="items-center block md:flex lg:flex">
-            <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
-              <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+        {% for job in jobs %}
+          <div class="relative border border-[#cccccc] rounded-xl md:rounded-3xl lg:rounded-3xl p-5 md:p-6 lg:p-6 bg-white w-full md:w-calc-card lg:w-calc-card box-border">
+            <div class="items-center block md:flex lg:flex">
+              <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
+                <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+              </div>
+              <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:px-4 lg:px-4">
+                <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">
+                  <a href="{% url 'jobs:show' job.id %}">{{ job.title }}</a>
+                </h2>
+                <p class="text-sm font-light text-gray-600 md:text-base lg:text-base">
+                  <a href="{% url 'companies:show' job.company_id %}">{{ job.company }}</a>
+                </p>
+              </div>
+              {% if  request.user.is_authenticated and request.user.type == 1 %}
+                <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
+                  {% include "shared/job_favorite.html" with favorited=job.favorited%}
+                </div>
+              {% endif %}
             </div>
-            <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:px-4 lg:px-4">
-              <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">Python後端工程師</h2>
-              <p class="text-sm font-light text-gray-600 md:text-base lg:text-base">麥當勞 McDonald's</p>
+            <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
+              <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{ job.type }}</span>
+              <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base">
+                <a href="{% url 'jobs:search_results' %}?location={{job.location}}">
+                  <i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i>
+                  {{ job.location_label }}</a>
+                </span>
+              <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{ job.salary }} / 月</span>
             </div>
-            <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-              <div class="text-[#cccccc] cursor-pointer"><i class="fa-regular fa-heart"></i></div>
-            </div>
-          </div>
-          <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
-            <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">遠距</span>
-            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i> 台北市</span>
-            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> $50,000 / 月</span>
-          </div>
-          <div class="flex justify-between items-center mt-6 md:mt-4 lg:mt-4">
-            <div class="text-gray-500 text-xs md:text-base lg:text-base font-light">2024/07/12</div>
-            <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">應徵</button>
-          </div>
-        </div>
-        <!--card-->
-        <div class="relative border border-[#cccccc] rounded-xl md:rounded-3xl lg:rounded-3xl p-5 md:p-6 lg:p-6 bg-white w-full md:w-calc-card lg:w-calc-card box-border">
-          <div class="items-center block md:flex lg:flex">
-            <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
-              <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-            </div>
-            <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:px-4 lg:px-4">
-              <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">Python後端工程師</h2>
-              <p class="text-sm font-light text-gray-600 md:text-base lg:text-base">麥當勞 McDonald's</p>
-            </div>
-            <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-              <div class="text-[#cccccc] cursor-pointer"><i class="fa-regular fa-heart"></i></div>
-            </div>
-          </div>
-          <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
-            <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">遠距</span>
-            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i> 台北市</span>
-            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> $50,000 / 月</span>
-          </div>
-          <div class="flex justify-between items-center mt-6 md:mt-4 lg:mt-4">
-            <div class="text-gray-500 text-xs md:text-base lg:text-base font-light">2024/07/12</div>
-            <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">應徵</button>
-          </div>
-        </div>
-        <!--card-->
-        <div class="relative border border-[#cccccc] rounded-xl md:rounded-3xl lg:rounded-3xl p-5 md:p-6 lg:p-6 bg-white w-full md:w-calc-card lg:w-calc-card box-border">
-          <div class="items-center block md:flex lg:flex">
-            <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
-              <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-            </div>
-            <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:px-4 lg:px-4">
-              <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">Python後端工程師</h2>
-              <p class="text-sm font-light text-gray-600 md:text-base lg:text-base">麥當勞 McDonald's</p>
-            </div>
-            <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-              <div class="text-[#cccccc] cursor-pointer"><i class="fa-regular fa-heart"></i></div>
+            <div class="flex justify-between items-center mt-6 md:mt-4 lg:mt-4">
+              <div class="text-gray-500 text-xs md:text-base lg:text-base font-light">{{ job.created_at|date:"Y/m/d" }}</div>
+              {% if request.user.type != 2 and not job.apply %}
+                <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
+                  {% csrf_token%}
+                  <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">應徵</button>
+                </form>
+              {% endif %}
             </div>
           </div>
-          <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
-            <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">遠距</span>
-            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i> 台北市</span>
-            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> $50,000 / 月</span>
-          </div>
-          <div class="flex justify-between items-center mt-6 md:mt-4 lg:mt-4">
-            <div class="text-gray-500 text-xs md:text-base lg:text-base font-light">2024/07/12</div>
-            <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">應徵</button>
-          </div>
-        </div>
-        <!--card-->
-        <div class="relative border border-[#cccccc] rounded-xl md:rounded-3xl lg:rounded-3xl p-5 md:p-6 lg:p-6 bg-white w-full md:w-calc-card lg:w-calc-card box-border">
-          <div class="items-center block md:flex lg:flex">
-            <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
-              <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-            </div>
-            <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:px-4 lg:px-4">
-              <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">Python後端工程師</h2>
-              <p class="text-sm font-light text-gray-600 md:text-base lg:text-base">麥當勞 McDonald's</p>
-            </div>
-            <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-              <div class="text-[#cccccc] cursor-pointer"><i class="fa-regular fa-heart"></i></div>
-            </div>
-          </div>
-          <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
-            <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">遠距</span>
-            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i> 台北市</span>
-            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> $50,000 / 月</span>
-          </div>
-          <div class="flex justify-between items-center mt-6 md:mt-4 lg:mt-4">
-            <div class="text-gray-500 text-xs md:text-base lg:text-base font-light">2024/07/12</div>
-            <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">應徵</button>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
@@ -148,110 +98,41 @@
     <div class="container mx-auto">
       <h2 class="mb-5 text-2xl font-bold lg:text-3xl lg:mb-9">熱門企業</h2>
       <div class="flex flex-wrap gap-5 md:gap-7 lg:gap-10">
-        <!--card-->
-        <div class="box-border relative w-full p-6 bg-white rounded-xl md:rounded-3xl lg:rounded-3xl shadow-custom-light md:w-calc-card lg:w-calc-card">
-          <div class="items-center block md:flex lg:flex">
-            <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
-              <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-            </div>
-            <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:px-4 lg:px-4">
-              <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">肯德基 KFC</h2>
-              <div class="flex items-center mt-px">
-                <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
-                <span class="ml-2 text-base font-light md:text-xl lg:text-xl">4.9</span>
-                <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
-                <span class="text-base font-light md:text-xl lg:text-xl">20個評論</span>
+        {% for company in companies %}
+          <div class="box-border relative w-full p-6 bg-white rounded-xl md:rounded-3xl lg:rounded-3xl shadow-custom-light md:w-calc-card lg:w-calc-card">
+            <div class="items-center block md:flex lg:flex">
+              <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
+                <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
               </div>
-            </div>
-            <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-              <div class="text-[#cccccc] cursor-pointer"><i class="fa-regular fa-heart"></i></div>
-            </div>
-          </div>
-          <div class="flex items-center justify-between mt-4">
-            <div class="text-sm md:text-lg lg:text-lg font-light text-black flex-1 line-clamp-2 pr-2.5">
-                這是一家以炸雞等為主要產品的美國速食連鎖企業。全球150個國家/地區擁有30,000多家門市。
-            </div>
-            <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">詳細</button>
-          </div>
-        </div>
-        <!--card-->
-        <div class="box-border relative w-full p-6 bg-white rounded-xl md:rounded-3xl lg:rounded-3xl shadow-custom-light md:w-calc-card lg:w-calc-card">
-          <div class="items-center block md:flex lg:flex">
-            <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
-              <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-            </div>
-            <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:px-4 lg:px-4">
-              <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">肯德基 KFC</h2>
-              <div class="flex items-center mt-px">
-                <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
-                <span class="ml-2 text-base font-light md:text-xl lg:text-xl">4.9</span>
-                <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
-                <span class="text-base font-light md:text-xl lg:text-xl">20個評論</span>
+              <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:px-4 lg:px-4">
+                <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">
+                  <a href="{% url 'companies:show' company.id %}">{{ company.title }}</a>
+                </h2>
+                <div class="flex items-center mt-px">
+                  <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
+                  <span class="ml-2 text-base font-light md:text-xl lg:text-xl">???</span>
+                  <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
+                  <span class="text-base font-light md:text-xl lg:text-xl">
+                    <a href="{% url 'companies:post_index' company.id %}">{{ company.post_count }}個評論</a>
+                  </span>
+                </div>
               </div>
+              {% if request.user.is_authenticated and request.user.type == 1 %}
+                <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
+                  {% include "companies/favorite.html" with favorited=company.favorited %}
+                </div>
+              {% endif %}
             </div>
-            <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-              <div class="text-[#cccccc] cursor-pointer"><i class="fa-regular fa-heart"></i></div>
-            </div>
-          </div>
-          <div class="flex items-center justify-between mt-4">
-            <div class="text-sm md:text-lg lg:text-lg font-light text-black flex-1 line-clamp-2 pr-2.5">
-                這是一家以炸雞等為主要產品的美國速食連鎖企業。全球150個國家/地區擁有30,000多家門市。
-            </div>
-            <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">詳細</button>
-          </div>
-        </div>
-        <!--card-->
-        <div class="box-border relative w-full p-6 bg-white rounded-xl md:rounded-3xl lg:rounded-3xl shadow-custom-light md:w-calc-card lg:w-calc-card">
-          <div class="items-center block md:flex lg:flex">
-            <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
-              <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-            </div>
-            <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:px-4 lg:px-4">
-              <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">肯德基 KFC</h2>
-              <div class="flex items-center mt-px">
-                <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
-                <span class="ml-2 text-base font-light md:text-xl lg:text-xl">4.9</span>
-                <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
-                <span class="text-base font-light md:text-xl lg:text-xl">20個評論</span>
+            <div class="flex items-center justify-between mt-4">
+              <div class="text-sm md:text-lg lg:text-lg font-light text-black flex-1 line-clamp-2 pr-2.5">
+                  {{ company.description }}
               </div>
-            </div>
-            <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-              <div class="text-[#cccccc] cursor-pointer"><i class="fa-regular fa-heart"></i></div>
-            </div>
-          </div>
-          <div class="flex items-center justify-between mt-4">
-            <div class="text-sm md:text-lg lg:text-lg font-light text-black flex-1 line-clamp-2 pr-2.5">
-                這是一家以炸雞等為主要產品的美國速食連鎖企業。全球150個國家/地區擁有30,000多家門市。
-            </div>
-            <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">詳細</button>
-          </div>
-        </div>
-        <!--card-->
-        <div class="box-border relative w-full p-6 bg-white rounded-xl md:rounded-3xl lg:rounded-3xl shadow-custom-light md:w-calc-card lg:w-calc-card">
-          <div class="items-center block md:flex lg:flex">
-            <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
-              <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-            </div>
-            <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:px-4 lg:px-4">
-              <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">肯德基 KFC</h2>
-              <div class="flex items-center mt-px">
-                <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
-                <span class="ml-2 text-base font-light md:text-xl lg:text-xl">4.9</span>
-                <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
-                <span class="text-base font-light md:text-xl lg:text-xl">20個評論</span>
-              </div>
-            </div>
-            <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-              <div class="text-[#cccccc] cursor-pointer"><i class="fa-regular fa-heart"></i></div>
+              <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">
+                <a href="{% url 'companies:show' company.id %}">詳細</a>
+              </button>
             </div>
           </div>
-          <div class="flex items-center justify-between mt-4">
-            <div class="text-sm md:text-lg lg:text-lg font-light text-black flex-1 line-clamp-2 pr-2.5">
-                這是一家以炸雞等為主要產品的美國速食連鎖企業。全球150個國家/地區擁有30,000多家門市。
-            </div>
-            <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">詳細</button>
-          </div>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </div>
