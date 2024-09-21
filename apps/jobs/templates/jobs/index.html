@@ -22,79 +22,55 @@
             </form>
         </div>
 
-{% if request.user.is_authenticated and request.user.type == 2 %}
-    <div class="container p-5 pb-24 mx-auto">
-        <a class="text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{% url 'companies:jobs_new' request.user.company.id %}">新增職缺</a>
-    </div>
-{% endif %}
-
-    <ul class="flex flex-col gap-8">
-        {% for item in page_obj %}
-        <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
-            <div class="items-center block md:flex lg:flex">
-              <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:pr-4 lg:pr-4">
-                <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">{{item.job.title}}</h2>
-              </div>
-              <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-                <div class="text-[#cccccc] cursor-pointer"><i class="fa-regular fa-heart"></i></div>
-              </div>
+        {% if request.user.is_authenticated and request.user.type == 2 %}
+            <div class="container p-5 pb-24 mx-auto">
+                <a class="text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{% url 'companies:jobs_new' request.user.company.id %}">新增職缺</a>
             </div>
-            <p class="mt-2 text-sm font-light text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">{{item.job.description}}</p>
-            <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
-              <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{item.job.type}}</span>
-              <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i> {{item.job.get_location_display}}</span>
-              <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{item.job.salary_range}} / 月</span>
-            </div>
-            <div class="flex items-center justify-between mt-6 md:mt-4 lg:mt-4">
-              <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">2024/07/12</div>
-              <a href="{% url 'jobs:show' item.job.id %}" class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">詳細</a>
-              {% if item.can_edit %}
-              <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'jobs:edit' item.job.id %}"><i class="text-base fa-solid fa-pen lg:text-base"></i> <span>編輯</span></a>
-              <form method="POST" action="{% url 'jobs:delete' item.job.id %}"></form>
-                  {% csrf_token %}
-                  <button class="text-white btn btn-error btn-sm">刪除</button>
-              </form>
-          {% endif %}
-          
+        {% endif %}
 
-          {% if request.user.is_authenticated and request.user.type == 1 %}
-          {% if item.job.id in favorites %}
-          <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">取消</a>
-          {% else %}
-          <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">收藏</a>
-          {% endif %}
-          {% endif %}
-
-            </div>
-          </li>
-          {% endfor %}
+        <ul class="flex flex-col gap-8">
+            {% for item in page_obj %}
+                <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
+                    <div class="items-center block md:flex lg:flex">
+                        <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:pr-4 lg:pr-4">
+                            <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">{{item.job.title}}</h2>
+                        </div>
+                        <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
+                            <div class="text-[#cccccc] cursor-pointer"><i class="fa-regular fa-heart"></i></div>
+                        </div>
+                    </div>
+                    <p class="mt-2 text-sm font-light text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">{{item.job.description}}</p>
+                    <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
+                        <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{item.job.type}}</span>
+                        <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i> {{item.job.get_location_display}}</span>
+                        <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{item.job.salary_range}} / 月</span>
+                    </div>
+                    <div class="flex items-center justify-between mt-6 md:mt-4 lg:mt-4">
+                        <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">2024/07/12</div>
+                        <div class="flex items-center w-full gap-2 md:w-auto lg:w-auto">
+                            <a href="{% url 'jobs:show' item.job.id %}" class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">詳細</a>
+                            {% if item.can_edit %}
+                                <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'jobs:edit' item.job.id %}"><i class="text-base fa-solid fa-pen lg:text-base"></i> <span>編輯</span></a>
+                                <form method="POST" action="{% url 'jobs:delete' item.job.id %}"></form>
+                                    {% csrf_token %}
+                                    <button class="text-white btn btn-error btn-sm">刪除</button>
+                                </form>
+                            {% endif %}
+                            {% if request.user.is_authenticated and request.user.type == 1 %}
+                                {% if item.job.id in favorites %}
+                                    <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">取消</a>
+                                {% else %}
+                                    <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">收藏</a>
+                                {% endif %}
+                            {% endif %}
+                        </div>    
+                    </div>
+                </li>
+            {% endfor %}
         </ul>
         {% include 'shared/_pagination.html' %}
-      </div>
-
-
-
+    </div>
+</div>
 {% endblock %}
 
 
-     <!-- <li class="flex gap-2 p-5">
-            <div class="flex-1">
-                {{ item.job.title }}
-            </div>
-            <div class="flex gap-2">
-                {% if item.can_edit %}
-                    <a class="text-white btn btn-primary btn-sm" href="{% url 'jobs:edit' item.job.id %}">編輯</a>
-                    <form method="POST" action="{% url 'jobs:delete' item.job.id %}">
-                        {% csrf_token %}
-                        <button class="text-white btn btn-error btn-sm">刪除</button>
-                    </form>
-                {% endif %}
-                {% if request.user.is_authenticated and request.user.type == 1 %}
-                {% if item.favorited %}
-                    <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">取消</a>
-                {% else %}
-                    <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">收藏</a>
-                {% endif %}
-                    <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:apply_jobs' item.job.id %}" >應徵</a>
-                {% endif %}
-            </div>
