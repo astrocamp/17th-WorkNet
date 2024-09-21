@@ -136,7 +136,7 @@ def post_new(request, id):
         post.save()
 
         messages.success(request, "新增成功")
-        return redirect(reverse("companies:post_index", args=[company.id]))
+        return redirect(reverse("posts:show", args=[post.id]))
     else:
         form = PostForm()
     return render(request, "posts/new.html", {"form": form, "company": company})

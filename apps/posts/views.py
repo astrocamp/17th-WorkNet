@@ -2,7 +2,7 @@ import rules
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render, reverse
-from django.views.decorators.http import require_http_methods, require_POST
+from django.views.decorators.http import require_POST
 
 from lib.models.paginate import paginate_queryset
 from lib.models.rule_required import rule_required
@@ -17,7 +17,6 @@ def index(request):
     return render(request, "posts/index.html", {"page_obj": page_obj})
 
 
-@require_http_methods(["GET", "POST"])
 def show(request, id):
     post = get_object_or_404(Post, id=id)
     comments = post.comments.order_by("-created_at")
@@ -83,7 +82,7 @@ def delete(request, id):
 
 
 @login_required
-@require_http_methods(["POST"])
+@require_POST
 def comment_delete(request, id):
     comment = get_object_or_404(Comment, id=id)
     comment.mark_delete()
