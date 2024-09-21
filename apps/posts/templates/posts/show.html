@@ -19,11 +19,15 @@
             <div class="flex flex-col">
                 <span class="text-sm font-semibold text-gray-600">整體評分</span>
                 <div class="flex mt-2">
-                    <i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i>
-                    <i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i>
+                    {% with stars=5 %}
+                        {% for i in "01234" %}
+                            {% if forloop.counter <= post.score %}
+                                <i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i>  <!-- 實心星星 -->
+                            {% else %}
+                                <i class="fa-regular fa-star fa-xl" style="color: #FFD43B;"></i>  <!-- 空心星星 -->
+                            {% endif %}
+                        {% endfor %}
+                    {% endwith %}
                 </div>
             </div>
             <div class="flex items-center">
