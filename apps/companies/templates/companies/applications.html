@@ -22,15 +22,15 @@
             </thead>
             <tbody>
                 {% for application in applications %}
-                    <tr>
-                        <th class="text-center">{{ forloop.counter }}</th>
-                        <td class="text-center">{{ application.job.title }}</td>
-                        <td class="text-center">{{ application.resume.userinfo.nickname }}</td>
-                        <td class="text-center">{{ application.created_at }}</td>
-                        <td class="text-center">
+                    <tr class="text-base text-center">
+                        <th >{{ forloop.counter }}</th>
+                        <td >{{ application.job.title }}</td>
+                        <td >{{ application.resume.userinfo.nickname }}</td>
+                        <td >{{ application.created_at }}</td>
+                        <td >
                             <a href="{{ application.resume.file.url }}" target="_blank" class="text-blue-500 hover:underline ">查看履歷</a>
                         </td>
-                        <td class="text-center">
+                        <td >
                             <a href="mailto:{{ application.resume.userinfo.user.email }}?subject=誠摯邀請您前來面試&body={{ application.resume.userinfo.nickname }}您好，%0A%0A我們非常榮幸收到了您的履歷，對於您的專業背景及經歷感到十分欣賞。我們誠摯地邀請您來參加面試，讓我們能更深入瞭解您，也想趁這個機會向您介紹我們公司。%0A%0A請您告知方便面試的時間，期待與您見面！%0A%0A謝謝，並祝一切順利。%0A%0A{{application.job.company.title}}公司"  class="text-blue-500 hover:underline">寄信聯絡</a>
                         </td>
                     </tr>
