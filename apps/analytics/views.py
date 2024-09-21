@@ -6,8 +6,8 @@ from django.shortcuts import render
 from taggit.models import TaggedItem
 
 from apps.jobs.models import Job
-from lib.utils.models.decorators import login_redirect_next
 from apps.users.models import UserInfo
+from lib.utils.models.decorators import login_redirect_next
 
 
 @login_redirect_next

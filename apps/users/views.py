@@ -177,7 +177,7 @@ def favorite(request, id):
     job = get_object_or_404(Job, pk=id)
     user = request.user
 
-    if  JobFavorite.objects.filter(user=user, job=job).exists():
+    if JobFavorite.objects.filter(user=user, job=job).exists():
         JobFavorite.objects.filter(user=user, job=job).delete()
         messages.success(request, "取消收藏成功")
         return redirect("jobs:index")

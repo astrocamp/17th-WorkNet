@@ -18,13 +18,17 @@ from .models import Job, JobFavorite , Job_Resume
 
 def index(request):
     jobs = Job.objects.order_by("-id")
-    favorites = JobFavorite.objects.filter(user=request.user).values_list("job_id", flat=True)
+    favorites = JobFavorite.objects.filter(user=request.user).values_list(
+        "job_id", flat=True
+    )
     jobs_with_permissions = [
         {"job": job, "can_edit": rules.test_rule("can_edit_job", request.user, job.id)}
         for job in jobs
     ]
     page_obj = paginate_queryset(request, jobs_with_permissions, 10)
-    return render(request, "jobs/index.html", {"page_obj": page_obj, "favorites": favorites})
+    return render(
+        request, "jobs/index.html", {"page_obj": page_obj, "favorites": favorites}
+    )
 
 
 def show(request, id):
