@@ -1,0 +1,10 @@
+<form x-data="job_favorite"
+hx-post="{% url 'users:job_favorite' job.id %}"
+hx-swap="outerHTML">
+  {%csrf_token%}
+  {% if favorited %}
+    <button class="text-error"><i class="fa-solid fa-heart"></i></button>
+  {% else %}
+    <button class="text-[#cccccc]"><i class="fa-regular fa-heart"></i></button>
+  {% endif %}
+</form>

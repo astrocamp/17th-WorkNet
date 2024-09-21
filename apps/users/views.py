@@ -17,19 +17,17 @@ from django.views.generic.base import TemplateView
 from social_core.exceptions import AuthCanceled
 from social_django.views import complete
 
-from apps.companies.models import CompanyFavorite
+from apps.companies.models import Company, CompanyFavorite
 from apps.jobs.models import Job, Job_Resume, JobFavorite
+from apps.posts.models import Post
 from apps.resumes.models import Resume
 from lib.models.rule_required import rule_required
 from lib.utils.models.decorators import login_redirect_next
+from lib.utils.models.defined import LOCATION_CHOICES
 
 from .forms import CustomUserCreationForm, UserInfoForm
 from .forms.users_form import PasswordResetForm
 from .models import UserInfo
-
-
-def home(request):
-    return render(request, "users/home.html")
 
 
 def index(request):
@@ -52,7 +50,16 @@ def index(request):
                 return redirect("users:sign_in")
         else:
             return render(request, "users/register.html", {"form": form})
-    return render(request, "users/home.html")
+
+    locations = LOCATION_CHOICES
+    jobs = get_popular_jobs(request.user)
+    companies = get_popular_companies(request.user)
+
+    return render(
+        request,
+        "users/home.html",
+        {"locations": locations, "jobs": jobs, "companies": companies},
+    )
 
 
 def register(request):
@@ -191,6 +198,28 @@ def favorite(request, id):
 
 
 @login_redirect_next
+def job_favorite(request, job_id):
+    job = get_object_or_404(Job, pk=job_id)
+    user = request.user
+
+    if JobFavorite.objects.filter(user=user, job=job).exists():
+        JobFavorite.objects.filter(user=user, job=job).delete()
+        favorited = False
+    else:
+        JobFavorite.objects.create(user=user, job=job, favorited_at=timezone.now())
+        favorited = True
+
+    return render(
+        request,
+        "shared/job_favorite.html",
+        {
+            "job": job,
+            "favorited": favorited,
+        },
+    )
+
+
+@login_redirect_next
 def favorites_list(request):
     user = request.user
     favorites = JobFavorite.objects.filter(user=user).order_by("-favorited_at")
@@ -250,6 +279,60 @@ def favorite_company_delete(request, id):
     favorite_company = get_object_or_404(CompanyFavorite, pk=id)
     favorite_company.delete()
     return redirect("users:favorites_company_list")
+
+
+def get_popular_jobs(user):
+    location_dict = dict(LOCATION_CHOICES)
+    user_resume = []
+    if user.is_authenticated and 1 == user.type:
+        user_info = UserInfo.objects.get(user=user)
+        user_resume = Resume.objects.filter(userinfo=user_info).values_list(
+            "id", flat=True
+        )
+
+    jobs = Job.objects.order_by("-created_at")[:4]
+    jobs_data = [
+        {
+            "id": job.id,
+            "title": job.title,
+            "company": job.company.title,
+            "company_id": job.company.id,
+            "type": job.type,
+            "location_label": location_dict.get(job.location),
+            "location": job.location,
+            "salary": job.salary_range,
+            "created_at": job.created_at,
+            "favorited": (
+                JobFavorite.objects.filter(job=job, user=user).exists()
+                if user.is_authenticated
+                else False
+            ),
+            "apply": Job_Resume.objects.filter(
+                job=job, resume__in=user_resume
+            ).exists(),
+        }
+        for job in jobs
+    ]
+    return jobs_data
+
+
+def get_popular_companies(user):
+    companies = Company.objects.order_by("-created_at")[:4]
+    companies_data = [
+        {
+            "id": company.id,
+            "title": company.title,
+            "description": company.description,
+            "post_count": Post.objects.filter(company=company).count(),
+            "favorited": (
+                CompanyFavorite.objects.filter(company=company, user=user).exists()
+                if user.is_authenticated
+                else False
+            ),
+        }
+        for company in companies
+    ]
+    return companies_data
 
 
 class PasswordResetView(View):

@@ -11,9 +11,10 @@ from apps.resumes.models import Resume
 from apps.users.models import UserInfo
 from lib.models.paginate import paginate_queryset
 from lib.models.rule_required import rule_required
+from lib.utils.models.defined import LOCATION_CHOICES
 
 from .forms.jobs_form import JobForm
-from .models import Job, JobFavorite , Job_Resume
+from .models import Job, Job_Resume, JobFavorite
 
 
 def index(request):
@@ -80,39 +81,10 @@ def delete(request, id):
     return redirect("jobs:index")
 
 
-LOCATION_MAP = {
-    "基隆": "Keelung",
-    "台北": "Taipei",
-    "新北": "New Taipei",
-    "桃園": "Taoyuan",
-    "新竹": "Hsinchu",
-    "苗栗": "Miaoli",
-    "台中": "Taichung",
-    "彰化": "Changhua",
-    "南投": "Nantou",
-    "雲林": "Yunlin",
-    "嘉義": "Chiayi",
-    "台南": "Tainan",
-    "高雄": "Kaohsiung",
-    "屏東": "Pingtung",
-    "台東": "Taitung",
-    "花蓮": "Hualien",
-    "宜蘭": "Yilan",
-    "澎湖": "Penghu",
-    "金門": "Kinmen",
-    "連江": "Lienchiang",
-}
-
-
-def get_location_code(location_input):
-    return LOCATION_MAP.get(location_input, location_input)
-
-
 def search_results(request):
     search_term = request.GET.get("q")
     location = request.GET.get("location")
     tags = request.GET.getlist("tags")
-
     search_filter = Q()
 
     if search_term:
@@ -127,18 +99,25 @@ def search_results(request):
         )
 
     if location:
-        location_code = get_location_code(location)
-        search_filter &= Q(location__icontains=location_code)
+        search_filter &= Q(location__icontains=location)
 
     if tags:
         tagged_items = TaggedItem.objects.filter(tag__name__in=tags)
         job_ids_with_tags = tagged_items.values_list("object_id", flat=True)
         search_filter &= Q(id__in=job_ids_with_tags)
 
-    jobs = Job.objects.filter(search_filter).select_related("company").distinct()
+    jobs = (
+        Job.objects.filter(search_filter)
+        .select_related("company")
+        .distinct()
+        .order_by("created_at")
+    )
 
     page_obj = paginate_queryset(request, jobs, 10)
     all_tags = Tag.objects.all()
+
+    location_dict = dict(LOCATION_CHOICES)
+    location_label = location_dict.get(location)
 
     return render(
         request,
@@ -148,6 +127,6 @@ def search_results(request):
             "tags": tags,
             "all_tags": all_tags,
             "search_term": search_term,
-            "location": location,
+            "location": location_label,
         },
     )

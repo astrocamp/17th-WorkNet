@@ -1,5 +1,4 @@
 from django.urls import path
-from django.views.generic import TemplateView
 
 from . import views
 from .views import PasswordResetDoneView, PasswordResetView, social_auth_complete
@@ -42,4 +41,5 @@ urlpatterns = [
         social_auth_complete,
         name="social_auth_complete",
     ),
+    path("<int:job_id>/job_favorite/", views.job_favorite, name="job_favorite"),
 ]

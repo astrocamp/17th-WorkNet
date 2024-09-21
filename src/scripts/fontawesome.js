@@ -20,8 +20,23 @@ import {
   faHeart as farHeart,
 } from "@fortawesome/free-regular-svg-icons";
 
-
-library.add(fasThumbsDown, farThumbsDown, fasThumbsUp, farThumbsUp,farBell,fasBell, fasHeart, farHeart, fasUser ,fasCaretDown ,fasStar , fasLocationDot,fasMagnifyingGlass,fasSackDollar,fasPen);
+library.add(
+  fasThumbsDown,
+  farThumbsDown,
+  fasThumbsUp,
+  farThumbsUp,
+  farBell,
+  fasBell,
+  fasHeart,
+  farHeart,
+  fasUser,
+  fasCaretDown,
+  fasStar,
+  fasLocationDot,
+  fasMagnifyingGlass,
+  fasSackDollar,
+  fasPen
+);
 dom.i2svg();
 
 Alpine.data("reactions_post", () => ({
@@ -31,6 +46,12 @@ Alpine.data("reactions_post", () => ({
 }));
 
 Alpine.data("company_favorite", () => ({
+  init() {
+    dom.i2svg();
+  },
+}));
+
+Alpine.data("job_favorite", () => ({
   init() {
     dom.i2svg();
   },
