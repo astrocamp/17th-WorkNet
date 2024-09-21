@@ -19,6 +19,7 @@ import {
   faThumbsUp as farThumbsUp,
   faBell as farBell,
   faHeart as farHeart,
+  faStar as faStar
 } from "@fortawesome/free-regular-svg-icons";
 
 library.add(
@@ -38,6 +39,7 @@ library.add(
   fasSackDollar,
   fasPen,
   faUserCircle,
+  faStar,
 );
 dom.i2svg();
 

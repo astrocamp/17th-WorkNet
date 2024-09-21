@@ -9,7 +9,7 @@
     {% for item in page_obj %}
     <li class="flex gap-2 p-5">
       <div class="flex-1">
-        <a href="{% url 'posts:show' id=item.post.id %}">{{ item.post.title }} {{ item.post.score }}</a>
+        <a href="{% url 'posts:show' id=item.post.id %}">{{ item.post.title }}</a>
       </div>
       <div class="flex gap-2">
         {% if item.can_edit %}
