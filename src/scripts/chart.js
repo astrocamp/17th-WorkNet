@@ -241,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
           },
         },
         datalabels: {
-          display: true,
+          display: false,
           color: "#000",
           font: {
             size: 20,
@@ -310,7 +310,7 @@ document.addEventListener("DOMContentLoaded", function () {
           },
         },
         datalabels: {
-          display: true,
+          display: false,
           color: "#000",
           font: {
             size: 20,
