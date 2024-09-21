@@ -1,8 +1,8 @@
 
 {% load static %}
 <div x-data="{ isScrolled: false }" @scroll.window="isScrolled = window.scrollY > 0">
-  <nav :class="isScrolled ? 'bg-primary bg-opacity-90' : 'bg-transparent'" class="box-border fixed top-0 left-0 z-40 flex items-center w-full transition-colors duration-300 min-h-16 md:min-h-28 lg:min-h-28">
-    <div class="absolute -translate-y-1/2 left-4 top-1/2">
+  <nav :class="isScrolled ? 'bg-primary bg-opacity-90' : 'bg-transparent'" class="box-border flex fixed top-0 left-0 z-40 items-center w-full transition-colors duration-300 min-h-16 md:min-h-28 lg:min-h-28">
+    <div class="absolute left-4 top-1/2 -translate-y-1/2">
       <a href="{% url 'users:index' %}" class="block w-20 bg-center bg-no-repeat bg-contain md:w-32 lg:w-32 aspect-8/3 bg-logo-backend">
       </a>
     </div>
@@ -12,7 +12,7 @@
             if (isMobile) { open = false; }
             else { open = true; }"
         x-init="open = !isMobile">
-      <div @click="open = !open" class="absolute z-20 flex flex-col justify-between w-6 h-5 -translate-y-1/2 cursor-pointer right-7 top-1/2 md:h-7 md:w-8 lg:hidden">
+      <div @click="open = !open" class="flex absolute right-7 top-1/2 z-20 flex-col justify-between w-6 h-5 -translate-y-1/2 cursor-pointer md:h-7 md:w-8 lg:hidden">
         <span class="block w-full h-1 bg-white rounded-full"></span>
         <span class="block w-full h-1 bg-white rounded-full"></span>
         <span class="block w-full h-1 bg-white rounded-full"></span>
@@ -21,7 +21,7 @@
         <div class="pt-16 md:pt-24 lg:pt-0 lg:absolute lg:right-4 lg:top-1/2 lg:-translate-y-1/2">
           {% if request.user.is_authenticated %}
           <div class="flex flex-col gap-4 px-4 py-4 bg-secondary lg:bg-transparent lg:px-0 lg:py-0 lg:flex-row">
-            <div class="relative flex items-center group">
+            <div class="flex relative items-center group">
               <div class="w-full cursor-pointer">
                 <h2 class="flex justify-between text-base text-white">
                   <div class="flex-1">
@@ -30,7 +30,7 @@
                   <div><i class="ml-1 fa-solid fa-caret-down"></i></div>
                 </h2>
               </div>
-              <div class="absolute hidden p-3 text-center -translate-x-1/2 bg-white divide-y shadow-lg top-12 left-1/2 rounded-xl divide-slate-200 lg:group-hover:block">
+              <div class="hidden absolute top-12 left-1/2 p-3 text-center bg-white rounded-xl divide-y shadow-lg -translate-x-1/2 divide-slate-200 lg:group-hover:block">
                 {% if request.user.type == 1 %}
                   <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'users:info' %}">會員資料</a>
                   <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'users:favorites_list' %}">我的職缺收藏</a>
