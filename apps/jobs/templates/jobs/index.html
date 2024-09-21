@@ -36,7 +36,16 @@
                             <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">{{item.job.title}}</h2>
                         </div>
                         <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-                            <div class="text-[#cccccc] cursor-pointer"><i class="fa-regular fa-heart"></i></div>
+                            <div class="text-[#cccccc] cursor-pointer">
+                                {% if request.user.is_authenticated and request.user.type == 1 %}
+                                {% if item.job.id in favorites %}
+                                    <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">取消</a>
+                                {% else %}
+                                    <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">收藏</a>
+                                {% endif %}
+                            {% endif %}
+                                <i class="fa-regular fa-heart"></i>
+                            </div>
                         </div>
                     </div>
                     <p class="mt-2 text-sm font-light text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">{{item.job.description}}</p>
@@ -55,13 +64,6 @@
                                     {% csrf_token %}
                                     <button class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">刪除</button>
                                 </form>
-                            {% endif %}
-                            {% if request.user.is_authenticated and request.user.type == 1 %}
-                                {% if item.job.id in favorites %}
-                                    <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">取消</a>
-                                {% else %}
-                                    <a class="text-white btn btn-secondary btn-sm" href="{% url 'users:favorite' item.job.id %}">收藏</a>
-                                {% endif %}
                             {% endif %}
                         </div>
                     </div>
