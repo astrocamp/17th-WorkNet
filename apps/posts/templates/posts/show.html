@@ -76,5 +76,9 @@
         <a class="text-white btn btn-secondary" href="{% url 'users:sign_in' %}?next={{ request.path }}">登入</a>
         {% endif %}
     </section>
+
+    <div class="mt-6">
+        <span class="text-white btn btn-neutral" onclick="history.back();">回到列表</span>
+    </div>
 </div>
 {% endblock %}

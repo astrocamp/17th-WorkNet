@@ -8,7 +8,7 @@ from django.urls import reverse
 from django.views.decorators.http import require_http_methods, require_POST
 
 from apps.jobs.forms import JobForm
-from apps.jobs.models import Job, Job_Resume
+from apps.jobs.models import Job, Job_Resume, JobFavorite
 from apps.posts.forms.posts_form import PostForm
 from apps.posts.models import Post
 from lib.models.paginate import paginate_queryset
@@ -17,6 +17,9 @@ from lib.utils.models.decorators import company_required
 
 from .forms.companies_form import CompanyForm
 from .models import Company
+from apps.resumes.models import Resume
+from apps.users.models import UserInfo
+from lib.utils.models.defined import LOCATION_CHOICES
 
 
 def index(request):
@@ -78,9 +81,55 @@ def show(request, id):
                 "companies/edit.html",
                 {"form": form, "company": company},
             )
-    post = Post.objects.filter(company=company).order_by("-created_at")
 
-    return render(request, "companies/show.html", {"company": company, "post": post})
+    posts = Post.objects.filter(company=company).order_by("-created_at")[:10]
+    posts_data = [
+        {
+            "post": post,
+            "can_edit": (
+                rules.test_rule("can_edit_post", request.user, post)
+                if request.user.is_authenticated
+                else False
+            ),
+        }
+        for post in posts
+    ]
+    page_obj = paginate_queryset(request, posts_data, 1)
+
+    user_resume = []
+    if request.user.is_authenticated and 1 == request.user.type:
+        user_info = UserInfo.objects.get(user=request.user)
+        user_resume = Resume.objects.filter(userinfo=user_info).values_list(
+            "id", flat=True
+        )
+    location_dict = dict(LOCATION_CHOICES)
+    jobs = Job.objects.filter(company=company).order_by("-created_at")[:5]
+    jobs_data = [
+        {
+            "id": job.id,
+            "title": job.title,
+            "type": job.type,
+            "location_label": location_dict.get(job.location),
+            "location": job.location,
+            "salary": job.salary_range,
+            "created_at": job.created_at,
+            "favorited": (
+                JobFavorite.objects.filter(job=job, user=request.user).exists()
+                if request.user.is_authenticated
+                else False
+            ),
+            "apply": Job_Resume.objects.filter(
+                job=job, resume__in=user_resume
+            ).exists(),
+        }
+        for job in jobs
+    ]
+
+    return render(
+        request,
+        "companies/show.html",
+        {"company": company, "jobs": jobs_data, "page_obj": page_obj},
+    )
 
 
 @login_required

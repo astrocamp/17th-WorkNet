@@ -5,108 +5,116 @@
   <div class="absolute z-10 m-auto inset-0 bg-cover bg-banner-img bg-center bg-fixed"></div>
   <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
-<div class="bg-[#eef0f0]">
-  <div class="container px-5 pt-10 pb-16 lg:pt-20 lg:pb-24 mx-auto">
-    <div class="flex border-b border-[#cccccc] mb-14">
-      <a href="" class="block min-w-0 md:min-w-28 lg:min-w-52 pb-5 border-b-4 border-secondary text-center text-base md:text-lg lg:text-xl text-secondary font-bold flex-auto md:flex-none lg:flex-none">公司介紹</a>
-      <a href="{% url 'companies:post_index' company.id %}" class="block min-w-0 md:min-w-28 lg:min-w-52 pb-5 border-b-4 border-transparent text-center text-base md:text-lg lg:text-xl flex-auto md:flex-none lg:flex-none">公司評論</a>
-    </div>
-    <div class="flex flex-col md:flex-row lg:flex-row gap-6 md:gap-12 lg:gap-12 items-start md:items-start lg:items-center mb-10 md:mb-14 lg:mb-14">
-      <div class="max-w-[200px] w-1/2 md:w-1/3 lg:w-1/4 aspect-square overflow-hidden rounded-3xl bg-gray-300 relative m-auto">
-        <img class="absolute w-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" src="{% static 'imgs/logo.png' %}">
+<div x-data="{ activeTab: 'tab1' }">
+  <div class="bg-[#eef0f0]">
+    <div class="container px-5 pt-10 pb-16 lg:pt-20 lg:pb-24 mx-auto">
+      <div class="flex border-b border-[#cccccc] mb-14">
+        <span @click="activeTab = 'tab1'" :class="{ 'active': activeTab === 'tab1' }" class="block min-w-0 md:min-w-28 lg:min-w-52 pb-5 border-b-4 border-secondary text-center text-base md:text-lg lg:text-xl text-secondary font-bold flex-auto md:flex-none lg:flex-none">公司介紹</span>
+        <span @click="activeTab = 'tab2'" :class="{ 'active': activeTab === 'tab2' }" class="block min-w-0 md:min-w-28 lg:min-w-52 pb-5 border-b-4 border-transparent text-center text-base md:text-lg lg:text-xl flex-auto md:flex-none lg:flex-none">公司評論</span>
       </div>
-      <div class="flex-1">
-        <div class="flex flex-wrap gap-3 md:gap-5 lg:gap-5">
-          <div class="w-full">
-            <div class="inline-flex items-center bg-secondary rounded-full py-1 px-2.5">
-              <i class="text-base fa-solid fa-star text-warning text-sm md:text-md lg:text-md"></i>
-              <span class="ml-1 text-sm md:text-lg lg:text-lg font-bold text-white">4.9</span>
+      <div x-show="activeTab === 'tab1'">
+        <div class="flex flex-col md:flex-row lg:flex-row gap-6 md:gap-12 lg:gap-12 items-start md:items-start lg:items-center mb-10 md:mb-14 lg:mb-14">
+          <div class="max-w-[200px] w-1/2 md:w-1/3 lg:w-1/4 aspect-square overflow-hidden rounded-3xl bg-gray-300 relative m-auto">
+            <img class="absolute w-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2" src="{% static 'imgs/logo.png' %}">
+          </div>
+          <div class="flex-1">
+            <div class="flex flex-wrap gap-3 md:gap-5 lg:gap-5">
+              <div class="w-full">
+                <div class="inline-flex items-center bg-secondary rounded-full py-1 px-2.5">
+                  <i class="text-base fa-solid fa-star text-warning text-sm md:text-md lg:text-md"></i>
+                  <span class="ml-1 text-sm md:text-lg lg:text-lg font-bold text-white">???</span>
+                </div>
+              </div>
+              <div class="flex w-full md:w-full lg:w-calc-data">
+                <div class="min-w-24 font-bold text-base md:text-xl lg:text-xl">負責人</div>
+                <div class="flex-auto text-base md:text-xl lg:text-xl break-all font-light">{{ company.name }}</div>
+              </div>
+              <div class="flex w-full md:w-full lg:w-calc-data">
+                <div class="min-w-24 font-bold text-base md:text-xl lg:text-xl">Email</div>
+                <div class="flex-auto text-base md:text-xl lg:text-xl break-all font-light">{{ company.email }}</div>
+              </div>
+              <div class="flex w-full md:w-full lg:w-calc-data">
+                <div class="min-w-24 font-bold text-base md:text-xl lg:text-xl">公司地址</div>
+                <div class="flex-auto text-base md:text-xl lg:text-xl break-all font-light">{{ company.address }}</div>
+              </div>
+              <div class="flex w-full md:w-full lg:w-calc-data">
+                <div class="min-w-24 font-bold text-base md:text-xl lg:text-xl">公司網址</div>
+                <div class="flex-auto text-base md:text-xl lg:text-xl break-all font-light">
+                  <a href="{{ company.url }}" target="_blank" class="text-secondary underline">{{ company.url }}</a>
+                </div>
+              </div>
+              <div class="flex w-full md:w-full lg:w-calc-data">
+                <div class="min-w-24 font-bold text-base md:text-xl lg:text-xl">公司電話</div>
+                <div class="flex-auto text-base md:text-xl lg:text-xl break-all font-light">{{ company.tel }}</div>
+              </div>
+              <div class="flex w-full md:w-full lg:w-calc-data">
+                <div class="min-w-24 font-bold text-base md:text-xl lg:text-xl">員工人數</div>
+                <div class="flex-auto text-base md:text-xl lg:text-xl break-all font-light">{{ company.employees }}</div>
+              </div>
             </div>
-          </div>
-          <div class="flex w-full md:w-full lg:w-calc-data">
-            <div class="min-w-24 font-bold text-base md:text-xl lg:text-xl">負責人</div>
-            <div class="flex-auto text-base md:text-xl lg:text-xl break-all font-light">王曉明</div>
-          </div>
-          <div class="flex w-full md:w-full lg:w-calc-data">
-            <div class="min-w-24 font-bold text-base md:text-xl lg:text-xl">Email</div>
-            <div class="flex-auto text-base md:text-xl lg:text-xl break-all font-light">kfcclub@gmail.com</div>
-          </div>
-          <div class="flex w-full md:w-full lg:w-calc-data">
-            <div class="min-w-24 font-bold text-base md:text-xl lg:text-xl">公司地址</div>
-            <div class="flex-auto text-base md:text-xl lg:text-xl break-all font-light">新北市三重區重新路二段1-1號</div>
-          </div>
-          <div class="flex w-full md:w-full lg:w-calc-data">
-            <div class="min-w-24 font-bold text-base md:text-xl lg:text-xl">公司網址</div>
-            <div class="flex-auto text-base md:text-xl lg:text-xl break-all font-light">
-              <a href="{{ company.url }}" target="_blank" class="text-secondary underline">{{ company.url }}</a>
-            </div>
-          </div>
-          <div class="flex w-full md:w-full lg:w-calc-data">
-            <div class="min-w-24 font-bold text-base md:text-xl lg:text-xl">公司電話</div>
-            <div class="flex-auto text-base md:text-xl lg:text-xl break-all font-light">{{ company.tel }}</div>
-          </div>
-          <div class="flex w-full md:w-full lg:w-calc-data">
-            <div class="min-w-24 font-bold text-base md:text-xl lg:text-xl">員工人數</div>
-            <div class="flex-auto text-base md:text-xl lg:text-xl break-all font-light">{{ company.tel }}</div>
           </div>
         </div>
+    
+        <div class="font-light text-base md:text-xl lg:text-xl mb-10 md:mb-20 lg:mb-20">
+          <div class="leading-loose">{{ company.description }}</div>
+        </div>
+    
+        <div class="mb-10 md:mb-20 lg:mb-20">
+          <div class="flex justify-between">
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-medium mb-7">公司職缺列表</h2>
+            {% if  request.user.is_authenticated and request.user.type == 2 %}
+              <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:jobs_new' request.user.company.id %}">新增職缺</a>
+            {% else %}
+              <a class="block font-medium py-4 border-b border-[#365f8c] lg:border-0" href="{% url 'companies:jobs_index' company.id %}">全部職缺</a>
+            {% endif %}
+            
+          </div>
+          <ul class="flex flex-col gap-6 md:gap-8 lg:gap-8">
+            <!--card-->
+            {% for job in jobs %}
+              <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
+                <div class="items-center block md:flex lg:flex">
+                  <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:pr-4 lg:pr-4">
+                    <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl"><a href="{% url 'jobs:show' job.id %}">{{ job.title }}</a></h2>
+                  </div>
+                  {% if  request.user.is_authenticated and request.user.type == 1 %}
+                    <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
+                      {% include "shared/job_favorite.html" with favorited=job.favorited%}
+                    </div>
+                  {% endif %}
+                </div>
+                <p class="mt-2 md:mt-4 lg:mt-4 text-sm font-light text-gray-600 md:text-base lg:text-base line-clamp-2">{{ job.description }}</p>
+                <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
+                  <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{ job.type }}</span>
+                  <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base">
+                    <a href="{% url 'jobs:search_results' %}?location={{job.location}}">
+                    <i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i>
+                    {{ job.location_label }}</a>
+                  </span>
+                  <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{ job.salary }} / 月</span>
+                </div>
+                <div class="flex justify-between items-center mt-6 md:mt-4 lg:mt-4">
+                  <div class="text-gray-500 text-xs md:text-base lg:text-base font-light">{{ job.created_at|date:"Y/m/d" }}</div>
+                  {% if request.user.type != 2 and not job.apply %}
+                    <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
+                      {% csrf_token%}
+                      <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">應徵</button>
+                    </form>
+                  {% endif %}
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
       </div>
-    </div>
 
-    <div class="font-light text-base md:text-xl lg:text-xl mb-10 md:mb-20 lg:mb-20">
-      <div class="leading-loose">{{ company.description }}</div>
-    </div>
-
-    <div class="mb-10 md:mb-20 lg:mb-20">
-      <h2 class="text-xl md:text-2xl lg:text-3xl font-medium mb-7">公司職缺列表</h2>
-      <ul class="flex flex-col gap-6 md:gap-8 lg:gap-8">
-        <!--card-->
-        <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
-          <div class="items-center block md:flex lg:flex">
-            <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:pr-4 lg:pr-4">
-              <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">Python後端工程師</h2>
-            </div>
-            <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-              <div class="text-[#cccccc] cursor-pointer"><i class="fa-regular fa-heart"></i></div>
-            </div>
-          </div>
-          <p class="mt-2 md:mt-4 lg:mt-4 text-sm font-light text-gray-600 md:text-base lg:text-base line-clamp-2">1.網站前後台功能維護與功能開發。 2.軟體架構及功能模組化設計。 3.討論、規劃任務時程與需求單位合作。 4.第三方 API 進行串接，開發新功能並整合外部服務。 5.撰寫相關開發文件。</p>
-          <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
-            <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">遠距</span>
-            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i> 台北市</span>
-            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> $50,000 / 月</span>
-          </div>
-          <div class="flex justify-between items-center mt-6 md:mt-4 lg:mt-4">
-            <div class="text-gray-500 text-xs md:text-base lg:text-base font-light">2024/07/12</div>
-            <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">應徵</button>
-          </div>
-        </li>
-        <!--card-->
-        <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
-          <div class="items-center block md:flex lg:flex">
-            <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:pr-4 lg:pr-4">
-              <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">Python後端工程師</h2>
-            </div>
-            <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-              <div class="text-[#cccccc] cursor-pointer"><i class="fa-regular fa-heart"></i></div>
-            </div>
-          </div>
-          <p class="mt-2 md:mt-4 lg:mt-4 text-sm font-light text-gray-600 md:text-base lg:text-base line-clamp-2">1.網站前後台功能維護與功能開發。 2.軟體架構及功能模組化設計。 3.討論、規劃任務時程與需求單位合作。 4.第三方 API 進行串接，開發新功能並整合外部服務。 5.撰寫相關開發文件。</p>
-          <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
-            <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">遠距</span>
-            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i> 台北市</span>
-            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> $50,000 / 月</span>
-          </div>
-          <div class="flex justify-between items-center mt-6 md:mt-4 lg:mt-4">
-            <div class="text-gray-500 text-xs md:text-base lg:text-base font-light">2024/07/12</div>
-            <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">應徵</button>
-          </div>
-        </li>
-      </ul>
-    </div>
-
-    <div class="flex gap-5 justify-center">
-      <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" href="{% url 'companies:index' %}">返回列表</a>
+      <div x-show="activeTab === 'tab2'">
+        {% include 'posts/list.html' %}
+      </div>
+      
+      <div class="flex gap-5 justify-center">
+        <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" href="{% url 'companies:index' %}">返回列表</a>
+      </div>
     </div>
   </div>
 </div>
