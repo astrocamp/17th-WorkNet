@@ -20,10 +20,6 @@
           <button class="mb-4 text-white btn btn-secondary btn-sm">應徵</button>
         {% endif %}
       </form>
-    {% if backJobs %}
-      <a class="text-white btn btn-primary min-w-20" href="{% url 'jobs:index' %}">返回列表</a>
-    {% else %}
-      <a class="text-white btn btn-primary min-w-20" href="{% url 'resumes:jobs' %}">返回</a>
-    {% endif %}
+      <a class="text-white btn btn-primary min-w-20" onclick="history.back();">返回列表</a>
 </div>
 {% endblock %}
