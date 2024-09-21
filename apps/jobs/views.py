@@ -5,6 +5,7 @@ import rules
 from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
 from taggit.models import Tag, TaggedItem
 
 from apps.resumes.models import Resume
@@ -77,6 +78,7 @@ def edit(request, id):
     return render(request, "jobs/edit.html", {"form": form, "job": job, "tags": tags})
 
 
+@require_POST
 def delete(request, id):
     job = get_object_or_404(Job, pk=id)
     job.mark_delete()
