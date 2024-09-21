@@ -22,8 +22,8 @@ module.exports = {
         sans: ["Noto Sans TC", "sans-serif"],
       },
       spacing: {
-        "calc-card": "calc(50% - 20px)",
-        "calc-data": "calc(50% - 10px)",
+        'calc-card': 'calc(50% - 20px)',
+        'calc-data': 'calc(50% - 10px)',
       },
       aspectRatio: {
         "8/3": "8 / 3",

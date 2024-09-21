@@ -29,11 +29,15 @@
 }
 
 .input-often-base {
-  @apply box-border w-full border border-gray-300 rounded-xl input input-bordered;
+  @apply box-border w-full border-0 border-b border-gray-300 input rounded-none text-base md:text-xl lg:text-xl;
+}
+
+.input-often-base:focus{
+  @apply outline-0 border-secondary
 }
 
 .textarea-often-base {
-  @apply box-border w-full py-4 border border-gray-300 resize-none rounded-xl input input-bordered min-h-28;
+  @apply box-border w-full py-4 border-0 border-b border-gray-300 resize-none input rounded-none text-base md:text-xl lg:text-xl min-h-28;
 }
 
 .no-style {
