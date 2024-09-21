@@ -1,19 +1,36 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
-    <h1 class="text-3xl font-bold">{{ job.title }}</h1>
+{% load static %}
+<div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
+  <h1 class="relative z-20 px-5 text-3xl font-bold text-white md:text-5xl lg:text-5xl">{{ job.title }}</h1>
+  <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
+  <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
-<div class="container p-5 pb-24 mx-auto">
+
+<div class="bg-[#eef0f0]">
+  <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
+
+  <div class="container p-5 pb-24 mx-auto">
   <section class="border-none tagify">
     {% for tag in tags%}
     <span class="tagify__tag "><div><span class="tagify__tag-text"><a href="{% url 'jobs:search_results' %}?q={{tag.name}}">{{ tag.name }}</a></span></div></span>
     {%endfor%}
   </section>
-    <ul class="mb-4">
-        <li>工作敘述：{{ job.description }}</li>
-        <li>工作地點：{{ job.get_location_display }}</li>
-    </ul>
-    {% if request.user.is_authenticated %}
+
+  <div class="flex w-full md:w-full lg:w-calc-data">
+    <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">職缺名稱：</div>
+    <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.title }}</div>
+  </div>
+  <div class="flex w-full md:w-full lg:w-calc-data">
+    <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">職缺描述：</div>
+    <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.description }}</div>
+  </div>
+  <div class="flex w-full md:w-full lg:w-calc-data">
+    <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">工作地點：</div>
+    <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.get_location_display }}</div>
+  </div>
+
+
       <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="job_id" value="{{ job.id }}">
