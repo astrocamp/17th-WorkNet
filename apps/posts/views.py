@@ -21,7 +21,6 @@ def index(request):
 def show(request, id):
     post = get_object_or_404(Post, id=id)
     comments = post.comments.order_by("-created_at")
-    company = post.company
 
     is_author = rules.test_rule("can_edit_post", request.user, post)
 
@@ -53,7 +52,6 @@ def show(request, id):
             "is_like": is_like,
             "is_dislike": is_dislike,
             "is_author": is_author,
-            "company": company,
         },
     )
 
