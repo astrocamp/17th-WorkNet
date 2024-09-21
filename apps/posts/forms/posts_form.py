@@ -20,7 +20,7 @@ class PostForm(forms.ModelForm):
         labels = {
             "title": "標題",
             "content": "內文",
-            "score": "評分",
+            "score": "整體評分",
         }
 
 
@@ -31,20 +31,13 @@ class CommentForm(forms.ModelForm):
             "content",
         ]
         widgets = {
-            "content": Textarea(attrs={"class": "w-full mt-1 textarea-often-base"}),
+            "content": Textarea(
+                attrs={
+                    "class": "w-full mt-1 textarea-often-base",
+                    "placeholder": "分享你的想法",
+                }
+            ),
         }
         labels = {
-            "content": "您想說些什麼",
+            "content": "",
         }
-
-    def __init__(self, *args, **kwargs):
-        self.post = kwargs.pop("post", None)
-        super().__init__(*args, **kwargs)
-
-    def save(self, commit=True):
-        comment = super().save(commit=False)
-        if self.post:
-            comment.post = self.post
-        if commit:
-            comment.save()
-        return comment
