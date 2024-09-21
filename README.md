@@ -1,13 +1,18 @@
 # WorkNet
 
 ![WorkNet Logo](static/imgs/logo.png)
-WorkNet 助你求職風雨無阻
+
+### WorkNet 助你求職風雨無阻
+
+專案網址：https://www.worknet.live/
 
 ## 簡介
 
-![WorkNet Home](static/imgs/home.jpg)
+### WorkNet 讓使用者瀏覽面試經歷與工作心得，了解公司環境與文化。
 
-WorkNet 讓使用者瀏覽面試經歷與工作心得，了解公司環境與文化。使用者可以上傳履歷，應徵職缺，並與其他會員留言互動，分享面試技巧和工作經驗，打造一個真實的求職社群，幫助大家在職涯中做出更明智的決策。
+### 使用者可以上傳履歷，應徵職缺，並與其他會員留言互動，分享面試技巧和工作經驗，打造一個真實的求職社群，幫助大家在職涯中做出更明智的決策。
+
+![WorkNet Home](static/imgs/home.jpg)
 
 ## 安裝環境
 
