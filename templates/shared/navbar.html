@@ -1,11 +1,44 @@
 
 {% load static %}
 <div x-data="{ isScrolled: false }" @scroll.window="isScrolled = window.scrollY > 0">
-  <nav :class="isScrolled ? 'bg-primary bg-opacity-90' : 'bg-transparent'" class="box-border flex fixed top-0 left-0 z-40 items-center w-full transition-colors duration-300 min-h-16 md:min-h-28 lg:min-h-28">
-    <div class="absolute left-4 top-1/2 -translate-y-1/2">
+  <nav :class="isScrolled ? 'bg-primary bg-opacity-90' : 'bg-transparent'" class="box-border fixed top-0 left-0 z-40 flex items-center w-full transition-colors duration-300 min-h-16 md:min-h-28 lg:min-h-28">
+    <div class="absolute -translate-y-1/2 left-4 top-1/2 z-10">
       <a href="{% url 'users:index' %}" class="block w-20 bg-center bg-no-repeat bg-contain md:w-32 lg:w-32 aspect-8/3 bg-logo-backend">
       </a>
     </div>
+    {% if request.user.is_authenticated %}
+    <div class="absolute right-20 md:right-24 lg:right-32 z-30">
+      <div class="flex h-12 relative items-center group cursor-pointer" x-data="{ open: false, isMobile: window.innerWidth < 1024 }"
+      @resize.window="
+              isMobile = window.innerWidth < 1024;
+              if (isMobile) { open = false; }
+              else { open = true; }"
+          x-init="open = !isMobile">
+        <div @click="open = !open">
+          {% if unread_notifications_count > 0 %}
+            <div class="flex justify-center items-center w-6 md:w-8 lg:w-8 h-6 md:h-8 lg:h-8 rounded-full bg-white text-base md:text-lg lg:text-lg">
+              <i class="text-error fas fa-bell"></i>
+            </div>
+          {% else %}
+            <div class="flex justify-center items-center w-6 md:w-8 lg:w-8 h-6 md:h-8 lg:h-8 rounded-full bg-white text-base md:text-lg lg:text-lg">
+              <i class="text-gray-600 far fa-bell"></i>
+            </div>
+          {% endif%}
+        </div>
+        <div x-show="open" class="fixed z-50 w-full lg:w-48 lg:absolute text-center lg:-translate-x-1/2 top-0 left-0 right-0 bottom-0 lg:top-12 lg:left-1/2 lg:right-auto lg:bottom-auto m-auto bg-primary lg:bg-transparent lg:hidden lg:group-hover:block">
+          <div class="flex h-16 md:h-28 items-center justify-end lg:hidden">
+            <div @click="open = false" class="w-6 h-5 md:w-8 md:h-7 mr-7 relative cursor-pointer">
+              <div class="w-full h-1 bg-white rounded-full rotate-45 absolute inset-0 m-auto"></div>
+              <div class="w-full h-1 bg-white rounded-full -rotate-45 absolute inset-0 m-auto"></div>
+            </div>
+          </div>
+          <div class="w-4/5 lg:w-auto bg-white rounded-xl divide-y divide-slate-200 lg:shadow-lg py-0 px-5 lg:p-3 m-auto text-left max-h-[50dvh] lg:max-h-none overflow-y-auto">
+            {% include "shared/notify.html" %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
     <div class="w-full" x-data="{ open: false, isMobile: window.innerWidth < 1024 }"
     @resize.window="
             isMobile = window.innerWidth < 1024;
@@ -17,12 +50,17 @@
         <span class="block w-full h-1 bg-white rounded-full"></span>
         <span class="block w-full h-1 bg-white rounded-full"></span>
       </div>
-      <div x-show="open" class="absolute top-0 right-0 z-10 w-full md:w-2/6 lg:w-full h-dvh lg:h-auto lg:block lg:relative bg-primary lg:bg-transparent">
+      <div x-show="open" class="absolute top-0 right-0 w-full md:w-2/6 lg:w-full h-dvh lg:h-auto lg:block lg:relative bg-primary lg:bg-transparent">
         <div class="pt-16 md:pt-24 lg:pt-0 lg:absolute lg:right-4 lg:top-1/2 lg:-translate-y-1/2">
           {% if request.user.is_authenticated %}
-          <div class="flex flex-col gap-4 px-4 py-4 bg-secondary lg:bg-transparent lg:px-0 lg:py-0 lg:flex-row">
-            <div class="flex relative items-center group">
-              <div class="w-full cursor-pointer">
+          <div class="flex flex-col gap-4 lg:p-4 bg-secondary lg:bg-transparent lg:px-0 lg:py-0 lg:flex-row">
+            <div class="relative flex items-center group lg:mr-14" x-data="{ open: false, isMobile: window.innerWidth < 1024 }"
+            @resize.window="
+                    isMobile = window.innerWidth < 1024;
+                    if (isMobile) { open = false; }
+                    else { open = true; }"
+                x-init="open = !isMobile">
+              <div @click="open = !open" class="w-full cursor-pointer p-4 lg:p-0">
                 <h2 class="flex justify-between text-base text-white">
                   <div class="flex-1">
                     <i class="mr-1 fa-solid fa-user"></i> {{ request.user }}，您好
@@ -30,41 +68,46 @@
                   <div><i class="ml-1 fa-solid fa-caret-down"></i></div>
                 </h2>
               </div>
-              <div class="hidden absolute top-12 left-1/2 p-3 text-center bg-white rounded-xl divide-y shadow-lg -translate-x-1/2 divide-slate-200 lg:group-hover:block">
-                {% if request.user.type == 1 %}
-                  <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'users:info' %}">會員資料</a>
-                  <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'users:favorites_list' %}">我的職缺收藏</a>
-                  <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'users:favorites_company_list' %}">喜愛的公司</a>
-                  <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'resumes:index' %}">我的履歷</a>
-                  <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'resumes:jobs' %}">應徵紀錄</a>
-                {% elif request.user.type == 2 %}
-                  <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'companies:edit' request.user.company.id  %}">公司資料</a>
-                  <a class="block px-2.5 py-2 whitespace-nowrap" href="{% url 'companies:company_application' %}">查看應徵</a>
-                {% endif %}
+              <div x-show="open" class="fixed z-50 w-full lg:w-auto lg:absolute text-center lg:-translate-x-1/2 top-0 left-0 right-0 bottom-0 lg:top-12 lg:left-1/2 lg:right-auto lg:bottom-auto m-auto bg-primary lg:bg-transparent lg:hidden lg:group-hover:block">
+                <div class="flex h-16 md:h-28 items-center justify-end lg:hidden">
+                  <div @click="open = false" class="w-6 h-5 md:w-8 md:h-7 mr-7 relative cursor-pointer">
+                    <div class="w-full h-1 bg-white rounded-full rotate-45 absolute inset-0 m-auto"></div>
+                    <div class="w-full h-1 bg-white rounded-full -rotate-45 absolute inset-0 m-auto"></div>
+                  </div>
+                </div>
+                <div class="w-auto p-3 lg:bg-white rounded-xl divide-y divide-[#365f8c] lg:divide-slate-200 lg:shadow-lg">
+                  {% if request.user.type == 1 %}
+                    <a class="block px-2.5 py-2 md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base text-white lg:text-black whitespace-nowrap" href="{% url 'users:info' %}">會員資料</a>
+                    <a class="block px-2.5 py-2 md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base text-white lg:text-black whitespace-nowrap" href="{% url 'users:favorites_list' %}">我的職缺收藏</a>
+                    <a class="block px-2.5 py-2 md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base text-white lg:text-black whitespace-nowrap" href="{% url 'users:favorites_company_list' %}">喜愛的公司</a>
+                    <a class="block px-2.5 py-2 md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base text-white lg:text-black whitespace-nowrap" href="{% url 'resumes:index' %}">我的履歷</a>
+                    <a class="block px-2.5 py-2 md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base text-white lg:text-black whitespace-nowrap" href="{% url 'resumes:jobs' %}">應徵紀錄</a>
+                  {% elif request.user.type == 2 %}
+                    <a class="block px-2.5 py-2 md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base text-white lg:text-black whitespace-nowrap" href="{% url 'companies:edit' request.user.company.id  %}">公司資料</a>
+                    <a class="block px-2.5 py-2 md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base text-white lg:text-black whitespace-nowrap" href="{% url 'companies:company_application' %}">查看應徵</a>
+                  {% endif %}
+                </div>
               </div>
             </div>
 
             <form action="{% url 'users:sign_out' %}" method="POST" class="hidden lg:block">
               {% csrf_token %}
-              <button class="w-full border-0 btn btn-error btn-lg min-w-28 lg:w-auto">登出</button>
+              <button class="w-full border-0 btn btn-error btn-sm md:btn-md lg:btn-md lg:text-lg min-w-20 md:min-w-24 lg:min-w-24 rounded-full">登出</button>
             </form>
           </div>
           {% else %}
           <ul class="flex border-b border-[#365f8c] justify-center pb-4 lg:p-0 lg:border-0">
             <li>
-              <a class="text-xl text-white btn no-style min-w-28 hover:border-transparent" href="{% url 'users:sign_in' %}">登入</a>
+              <a class="btn-sm md:btn-md lg:btn-md text-white btn no-style min-w-28 md:text-lg lg:text-lg hover:border-transparent" href="{% url 'users:sign_in' %}">登入</a>
             </li>
             <li>
-              <a :class="isScrolled ? 'btn-secondary' : 'btn-primary'" class="text-xl btn btn-primary min-w-28" href="{% url 'users:register' %}">註冊</a>
+              <a :class="isScrolled ? 'btn-secondary' : 'btn-primary'" class="btn btn-secondary lg:btn-primary btn-sm md:btn-md lg:btn-md md:text-lg lg:text-lg min-w-20 md:min-w-24 lg:min-w-24 rounded-full" href="{% url 'users:register' %}">註冊</a>
             </li>
           </ul>
           {% endif %}
         </div>
         <div class="text-base text-white md:text-xl lg:text-xl lg:pl-48">
-          <ul class="flex flex-col text-center lg:inline-flex lg:gap-11 lg:flex-row">
-            <li>
-              <a class="block font-medium py-4 border-b border-[#365f8c] lg:border-0" href="/">首頁</a>
-            </li>
+          <ul class="flex flex-col text-center lg:inline-flex lg:gap-8 lg:flex-row">
             <li>
               <a class="block font-medium py-4 border-b border-[#365f8c] lg:border-0" href="{% url 'companies:index' %}">公司資訊</a>
             </li>
@@ -82,7 +125,7 @@
         </div>
         {% if request.user.is_authenticated %}
           <div class="p-4 lg:hidden">
-            <form action="{% url 'users:sign_out' %}" method="POST"></form>
+            <form action="{% url 'users:sign_out' %}" method="POST">
               {% csrf_token %}
               <button class="w-full border-0 btn btn-error btn-sm md:btn-lg lg:btn-lg min-w-28 lg:w-auto">登出</button>
             </form>
