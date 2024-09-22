@@ -257,12 +257,12 @@ def submit_jobs(request, job_id):
 
     if Job_Resume.objects.filter(job=job, resume=resume).exists():
         messages.error(request, "已投遞過這個工作，請等候業者審核等候通知，謝謝")
-        return redirect("jobs:index")
+        return redirect("jobs:show", id=job.id)
 
     else:
         Job_Resume.objects.create(job=job, resume=resume, status="applied")
         messages.success(request, "投遞成功")
-        return redirect("jobs:index")
+        return redirect("jobs:show", id=job.id)
 
 
 @login_required
