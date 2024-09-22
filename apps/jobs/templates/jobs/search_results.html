@@ -18,7 +18,9 @@
                 <p class="text-small">{{ job.company.title }}, {{ job.get_location_display }}</p>
             </div>
             <div class="flex gap-2">
-                <a class="text-white btn btn-primary min-w-20" href="{% url 'users:apply_jobs' job.id %}">應徵</a>
+                {% if user.type == 1 %}
+                    <a class="text-white btn btn-primary min-w-20" href="{% url 'users:apply_jobs' job.id %}">應徵</a>
+                {% endif %}
             </div>
         </li>
         {% endfor %}
