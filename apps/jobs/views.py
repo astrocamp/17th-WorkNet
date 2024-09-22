@@ -17,8 +17,6 @@ from .forms.jobs_form import JobForm
 from .models import Job, Job_Resume, JobFavorite
 
 
-
-
 def index(request):
     jobs = Job.objects.order_by("-id")
     favorites = JobFavorite.objects.filter(user=request.user).values_list(
