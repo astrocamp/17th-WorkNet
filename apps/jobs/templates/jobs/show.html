@@ -31,6 +31,22 @@
               <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.type}}</div>
             </div>
             <div class="flex w-full md:w-full lg:w-calc-data">
+              <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">聯絡方式</div>
+              <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.contact_info}}</div>
+            </div>
+            <div class="flex w-full md:w-full lg:w-calc-data">
+              <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">聯絡方式</div>
+              <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.contact_info}}</div>
+            </div>
+            <div class="flex w-full md:w-full lg:w-calc-data">
+              <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">薪資範圍</div>
+              <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.salary_range}}</div>
+            </div>
+            <div class="flex w-full md:w-full lg:w-calc-data">
+              <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">年資</div>
+              <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.tenure}}年</div>
+            </div>
+            <div class="flex w-full md:w-full lg:w-calc-data">
               <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">所需技能</div>
               <section class="border-none tagify">
                 {% for tag in tags%}
@@ -38,29 +54,24 @@
                 {%endfor%}
               </section>  
             </div>
-            <div class="flex w-full md:w-full lg:w-calc-data">
-              <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">聯絡方式</div>
-              <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.contact_info}}</div>
-            </div>
-            <div class="flex w-full md:w-full lg:w-calc-data">
-              <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">聯絡方式</div>
-              <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.contact_info}}</div>
-            </div>
           </div>
-
-
-
+        </div>
+      </div>
       <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
-        {% csrf_token %}
-        <input type="hidden" name="job_id" value="{{ job.id }}">
-        {% if status == False and request.user.type == 1 %}
-          <button class="mb-4 text-white btn btn-secondary btn-sm">應徵</button>
-        {% endif %}
+        {% csrf_token%}
+          <input type="hidden" name="job_id" value="{{ job.id }}">
+            {% if status == False and request.user.type == 1 %}
+              <button class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none">應徵</button>
+            {% endif %}
       </form>
-    {% else %}
-      <a href="{% url 'users:sign_in' %}?next={% url 'users:apply_jobs' job.id %}" class="text-white btn btn-primary">登入應徵</a>
-    {% endif %}
-
+      <div class="flex justify-center gap-5">
+        {% if backJobs %}
+          <a class= "btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28"  href="{% url 'jobs:index' %}">返回列表</a>
+        {% else %}
+          <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" href="{% url 'resumes:jobs' %}">返回</a>
+        {% endif %}
+      </div>  
+    </div>
     {% if is_search_result %}
       <a class="text-white btn btn-primary min-w-20" href="{% url 'jobs:search_results' %}?q={{ search_query }}&location={{ location }}&page={{ request.GET.page }}">返回搜尋頁</a>
     {% elif backJobs %}
