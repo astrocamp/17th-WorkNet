@@ -17,7 +17,7 @@
       <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
         {% csrf_token %}
         <input type="hidden" name="job_id" value="{{ job.id }}">
-        {% if status == False %}
+        {% if status == False and request.user.type == 1 %}
           <button class="mb-4 text-white btn btn-secondary btn-sm">應徵</button>
         {% endif %}
       </form>
