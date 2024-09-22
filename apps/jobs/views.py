@@ -33,6 +33,7 @@ def index(request):
 
 def show(request, id):
     job = get_object_or_404(Job, pk=id)
+    company=job.company
     if request.method == "POST":
         form = JobForm(request.POST, instance=job)
         if form.is_valid():
@@ -60,7 +61,7 @@ def show(request, id):
     return render(
         request,
         "jobs/show.html",
-        {"job": job, "backJobs": backJobs, "tags": job.tags.all(), "status": status},
+        {"job": job, "backJobs": backJobs, "tags": job.tags.all(), "status": status,"company":company},
     )
 
 
