@@ -1,5 +1,5 @@
 import json
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 import rules
 from django.contrib import messages
@@ -64,20 +64,38 @@ def show(request, id):
 
     previous_url = request.META.get("HTTP_REFERER", "/")
     referer_path = urlparse(previous_url).path
+    parsed_url = urlparse(previous_url)
+    query_params = parse_qs(parsed_url.query)
+
     backJobs = "resumes" not in referer_path
+    is_search_result = "search" in referer_path
+    search_query = query_params.get("q", [""])[0]
+    location = query_params.get("location", [""])[0]
+
     status = False
 
     if request.user.is_authenticated and request.user.type == 1:
-        user_info = UserInfo.objects.get(user=request.user)
-        user_resume = Resume.objects.filter(userinfo=user_info).values_list(
-            "id", flat=True
-        )
-        status = Job_Resume.objects.filter(job=job, resume__in=user_resume).exists()
+        try:
+            user_info = UserInfo.objects.get(user=request.user)
+            user_resume = Resume.objects.filter(userinfo=user_info).values_list(
+                "id", flat=True
+            )
+            status = Job_Resume.objects.filter(job=job, resume__in=user_resume).exists()
+        except UserInfo.DoesNotExist:
+            user_info = None
 
     return render(
         request,
         "jobs/show.html",
-        {"job": job, "tags": job.tags.all(), "status": status},
+        {
+            "job": job,
+            "backJobs": backJobs,
+            "tags": job.tags.all(),
+            "status": status,
+            "is_search_result": is_search_result,
+            "search_query": search_query,
+            "location": location,
+        },
     )
 
 
