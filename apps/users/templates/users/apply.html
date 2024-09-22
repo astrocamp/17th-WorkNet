@@ -22,7 +22,7 @@
           {% endfor %}
         </select>
       <button class="text-white btn btn-error btn-sm" >提交申請</button>
-      <button class="text-white btn btn-error btn-sm" ><a href="{% url 'jobs:index' %}">取消</a></button>
+      <button class="text-white btn btn-error btn-sm" ><a href="{% url 'jobs:show' job.id %}">取消</a></button>
     </form>
   </div>
 </div>
