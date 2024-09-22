@@ -9,12 +9,15 @@
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
 
-<div x-data="{ showLanguages: true }" class="flex flex-col items-center pt-20 mt-10 min-h-screen">
+<div x-data="{ showLanguages: true, showSalaries: false, showLocations: false }" class="flex flex-col justify-center items-center pt-20 min-h-screen">
+    
     <div class="flex justify-center mb-4 w-full">
-        <button @click="showLanguages = true" class="px-4 py-2 mr-2 text-white bg-blue-500 rounded">顯示熱門語言</button>
-        <button @click="showLanguages = false" class="px-4 py-2 text-white bg-green-500 rounded">顯示薪資分析</button>
+        <button @click="showLanguages = true; showSalaries = false; showLocations = false" class="px-4 py-2 mr-2 text-white bg-blue-500 rounded">顯示熱門語言</button>
+        <button @click="showLanguages = false; showSalaries = true; showLocations = false" class="px-4 py-2 mr-2 text-white bg-green-500 rounded">顯示薪資分析</button>
+        <button @click="showLanguages = false; showSalaries = false; showLocations = true" class="px-4 py-2 mr-2 text-white bg-purple-500 rounded">顯示地區分析</button>
     </div>
 
+    
     <div x-show="showLanguages" class="flex justify-center items-center space-x-10 w-full">
         <div class="flex flex-col justify-center items-center">
             <h2 class="mb-2 text-2xl font-bold">企業喜愛的程式語言</h2>
@@ -30,7 +33,8 @@
         </div>
     </div>
 
-    <div x-show="!showLanguages" class="flex justify-center items-center mt-10 space-x-10 w-full">
+    
+    <div x-show="showSalaries" class="flex justify-center items-center mt-10 space-x-10 w-full">
         <div class="flex flex-col justify-center items-center">
             <h2 class="mb-2 text-2xl font-bold">程式語言與薪資分析</h2>
             <div class="w-[800px] h-[700px]">
@@ -41,6 +45,16 @@
             <h2 class="mb-2 text-2xl font-bold">年資與薪資分析</h2>
             <div class="w-[800px] h-[700px]">
                 <canvas id="tenureSalaryChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    
+    <div x-show="showLocations" class="flex justify-center items-center mt-10 w-full">
+        <div class="flex flex-col justify-center items-center">
+            <h2 class="mb-2 text-2xl font-bold">地區與程式語言需求分析</h2>
+            <div class="w-[1000px] h-[500px]">
+                <canvas id="locationLanguageChart"></canvas>
             </div>
         </div>
     </div>
@@ -60,6 +74,10 @@
 
 <script id="averageTenureSalaryData" type="application/json">
     {{ average_tenure_salary_json|safe }}
+</script>
+
+<script id="locationLanguageData" type="application/json">
+    {{ location_language_data_json|safe }}
 </script>
 
 {% endblock %}

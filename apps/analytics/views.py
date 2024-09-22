@@ -12,20 +12,17 @@ from lib.utils.models.decorators import login_redirect_next
 
 @login_redirect_next
 def index(request):
+
     job_content_type = ContentType.objects.get_for_model(Job)
-    job_tags = (
-        TaggedItem.objects.filter(content_type=job_content_type)
-        .values_list("tag__name", flat=True)
-        .distinct()
+    job_tags = TaggedItem.objects.filter(content_type=job_content_type).values_list(
+        "tag__name", flat=True
     )
     job_skill_counts = Counter(job_tags)
     job_skill_counts_json = json.dumps(dict(job_skill_counts))
 
     user_content_type = ContentType.objects.get_for_model(UserInfo)
-    user_tags = (
-        TaggedItem.objects.filter(content_type=user_content_type)
-        .values_list("tag__name", flat=True)
-        .distinct()
+    user_tags = TaggedItem.objects.filter(content_type=user_content_type).values_list(
+        "tag__name", flat=True
     )
     user_skill_counts = Counter(user_tags)
     user_skill_counts_json = json.dumps(dict(user_skill_counts))
@@ -56,7 +53,6 @@ def index(request):
         .exclude(salary_range__isnull=True)
         .exclude(salary_range="")
         .values_list("tenure", "salary_range")
-        .distinct()
     )
 
     salary_by_tenure = {}
@@ -75,6 +71,26 @@ def index(request):
 
     average_tenure_salary_json = json.dumps(average_salary_by_tenure)
 
+    job_location_data = (
+        Job.objects.exclude(tags__name__isnull=True)
+        .exclude(tags__name="")
+        .values_list("location", "tags__name")
+    )
+
+    location_language_map = {}
+    tag_counter = Counter([tag for location, tag in job_location_data])
+
+    top_five_tags = [tag for tag, _ in tag_counter.most_common(5)]
+
+    for location, tag in job_location_data:
+        if tag in top_five_tags:
+            if location not in location_language_map:
+                location_language_map[location] = {}
+            location_language_map[location].setdefault(tag, 0)
+            location_language_map[location][tag] += 1
+
+    location_language_data_json = json.dumps(location_language_map)
+
     return render(
         request,
         "analytics/index.html",
@@ -83,5 +99,6 @@ def index(request):
             "user_skill_counts_json": user_skill_counts_json,
             "average_salary_json": average_salary_json,
             "average_tenure_salary_json": average_tenure_salary_json,
+            "location_language_data_json": location_language_data_json,
         },
     )

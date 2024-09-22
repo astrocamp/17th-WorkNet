@@ -78,17 +78,6 @@ document.addEventListener("DOMContentLoaded", function () {
           bodyFont: {
             size: 20,
           },
-          callbacks: {
-            label: function (context) {
-              if (!context || !context.raw) {
-                return "";
-              }
-              const value = context.raw;
-              const percentage = ((value / jobTotal) * 100).toFixed(2);
-              const label = context.label || "";
-              return `${percentage}%`;
-            },
-          },
         },
       },
     },
@@ -169,17 +158,6 @@ document.addEventListener("DOMContentLoaded", function () {
           bodyFont: {
             size: 20,
           },
-          callbacks: {
-            label: function (context) {
-              if (!context || !context.raw) {
-                return "";
-              }
-              const value = context.raw;
-              const percentage = ((value / userTotal) * 100).toFixed(2);
-              const label = context.label || "";
-              return `${percentage}%`;
-            },
-          },
         },
       },
     },
@@ -246,11 +224,9 @@ document.addEventListener("DOMContentLoaded", function () {
           font: {
             size: 20,
           },
-          formatter: (value) => `${value}`,
         },
       },
     },
-    plugins: [ChartDataLabels],
   });
 
   const tenureSalaryData = JSON.parse(
@@ -315,10 +291,120 @@ document.addEventListener("DOMContentLoaded", function () {
           font: {
             size: 20,
           },
-          formatter: (value) => `${value}`,
         },
       },
     },
-    plugins: [ChartDataLabels],
   });
+
+  const locationMap = {
+    Keelung: "基隆",
+    Taipei: "台北",
+    "New Taipei": "新北",
+    Taoyuan: "桃園",
+    Hsinchu: "新竹",
+    Miaoli: "苗栗",
+    Taichung: "台中",
+    Changhua: "彰化",
+    Nantou: "南投",
+    Yunlin: "雲林",
+    Chiayi: "嘉義",
+    Tainan: "台南",
+    Kaohsiung: "高雄",
+    Pingtung: "屏東",
+    Taitung: "台東",
+    Hualien: "花蓮",
+    Yilan: "宜蘭",
+    Penghu: "澎湖",
+    Kinmen: "金門",
+    Lienchiang: "連江",
+  };
+
+  const locationLanguageData = JSON.parse(
+    document.getElementById("locationLanguageData").textContent
+  );
+
+  const locationLabels = Object.keys(locationLanguageData).map(
+    (location) => locationMap[location] || location
+  );
+  const languageTrendDatasets = [];
+
+  Object.keys(
+    locationLanguageData[Object.keys(locationLanguageData)[0]]
+  ).forEach((language) => {
+    const languageData = locationLabels.map(
+      (location, index) =>
+        locationLanguageData[Object.keys(locationLanguageData)[index]][
+          language
+        ] || 0
+    );
+    languageTrendDatasets.push({
+      label: language,
+      data: languageData,
+      borderColor: getRandomColor(),
+      fill: false,
+    });
+  });
+
+  const locationCtx = document
+    .getElementById("locationLanguageChart")
+    .getContext("2d");
+  const locationLanguageChart = new Chart(locationCtx, {
+    type: "line",
+    data: {
+      labels: locationLabels,
+      datasets: languageTrendDatasets,
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            callback: function (value) {
+              if (Number.isInteger(value)) {
+                return `${value} 個職缺`;
+              }
+              return null;
+            },
+            font: {
+              size: 20,
+            },
+          },
+        },
+        x: {
+          ticks: {
+            font: {
+              size: 20,
+            },
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              size: 20,
+            },
+          },
+        },
+        tooltip: {
+          titleFont: {
+            size: 20,
+          },
+          bodyFont: {
+            size: 20,
+          },
+        },
+      },
+    },
+  });
+
+  function getRandomColor() {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
 });
