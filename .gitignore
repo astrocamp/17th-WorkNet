@@ -2,7 +2,9 @@
 __pycache__/
 node_modules/
 static/styles/
-static/scripts/
+static/scripts/*
+static/scripts/app.js
+!static/scripts/map.js
 .env
 db.sqlite3
 .DS_Store

@@ -1,6 +1,7 @@
 import json
 
 import rules
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect, render
@@ -16,8 +17,7 @@ from apps.users.models import UserInfo
 from lib.models.paginate import paginate_queryset
 from lib.models.rule_required import rule_required
 from lib.utils.models.decorators import company_required
-from lib.utils.models.defined import LOCATION_CHOICES
-
+from lib.utils.models.defined import LOCATION_CHOICES, fetch_coordinates
 from .forms.companies_form import CompanyForm
 from .models import Company
 
@@ -29,6 +29,12 @@ def index(request):
 
         if form.is_valid():
             form.save()
+
+            coord_x, coord_y = fetch_coordinates(company.address)
+            if coord_x and coord_y:
+                company.latitude = coord_x
+                company.longitude = coord_y
+                company.save()
 
             messages.success(request, "新增成功")
             return redirect("companies:index")
@@ -74,6 +80,13 @@ def show(request, id):
         form = CompanyForm(request.POST, instance=company)
         if form.is_valid():
             form.save()
+            
+            coord_x, coord_y = fetch_coordinates(company.address)
+            if coord_x and coord_y:
+                company.latitude = coord_x
+                company.longitude = coord_y
+                company.save()
+
             messages.success(request, "更新成功")
             return redirect("companies:show", company.id)
         else:
@@ -134,7 +147,7 @@ def show(request, id):
     return render(
         request,
         "companies/show.html",
-        {"company": company, "jobs": jobs_data, "posts": posts_data},
+        {"company": company, "jobs": jobs_data, "posts": posts_data, "GOOGLE_MAPS_API_KEY": settings.GOOGLE_MAPS_API_KEY},
     )
 
 

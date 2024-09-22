@@ -27,6 +27,8 @@ module.exports = {
       },
       aspectRatio: {
         "8/3": "8 / 3",
+        "32/5": "32 / 5",
+        "16/5": "16 / 5",
       },
       container: {
         screens: {
