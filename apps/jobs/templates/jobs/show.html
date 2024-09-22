@@ -12,19 +12,22 @@
     <ul class="mb-4">
         <li>工作敘述：{{ job.description }}</li>
         <li>工作地點：{{ job.get_location_display }}</li>
-      </ul>
-      {% if request.user.is_authenticated %}
-        <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
-          {% csrf_token %}
-          <input type="hidden" name="job_id" value="{{ job.id }}">
-          {% if status == False %}
-            <button class="mb-4 text-white btn btn-secondary btn-sm">應徵</button>
-          {% endif %}
-        </form>
-      {% else %}
-        <p>請登入以應徵此工作。</p>
-      {% endif %}
-    {% if backJobs %}
+    </ul>
+    {% if request.user.is_authenticated %}
+      <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="job_id" value="{{ job.id }}">
+        {% if status == False %}
+          <button class="mb-4 text-white btn btn-secondary btn-sm">應徵</button>
+        {% endif %}
+      </form>
+    {% else %}
+      <a href="{% url 'users:sign_in' %}?next={% url 'users:apply_jobs' job.id %}" class="text-white btn btn-primary">登入應徵</a>
+    {% endif %}
+
+    {% if is_search_result %}
+      <a class="text-white btn btn-primary min-w-20" href="{% url 'jobs:search_results' %}?q={{ search_query }}">返回搜尋頁</a>
+    {% elif backJobs %}
       <a class="text-white btn btn-primary min-w-20" href="{% url 'jobs:index' %}">返回列表</a>
     {% else %}
       <a class="text-white btn btn-primary min-w-20" href="{% url 'resumes:jobs' %}">返回</a>
