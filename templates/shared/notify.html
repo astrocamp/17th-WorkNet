@@ -1,12 +1,12 @@
 {% if notifications %}
     {% for notification in notifications %}
-        <span class="block pt-2 mt-2 mb-2 mx-2.5 w-48 h-12 whitespace-normal truncate">
+        <span class="block py-4 px-2 lg:p-2 break-words text-base md:text-xl lg:text-base">
             {{ notification.message }}
             {% if not notification.read %}
-                <span style="color: red;">(New)</span>
+                <span class="bg-error rounded-md text-white text-xs px-1">NEW</span>
             {% endif %}
         </span>
     {% endfor %}
 {% else %}
-    <span class="block my-2 mx-2.5 w-48">沒有通知</span>
+    <span class="block text-center py-4">沒有通知</span>
 {% endif %}
