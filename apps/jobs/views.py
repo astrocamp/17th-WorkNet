@@ -19,7 +19,7 @@ from .models import Job, Job_Resume, JobFavorite
 
 
 def index(request):
-    jobs = Job.objects.order_by("-id")
+    jobs = Job.objects.order_by("-id").select_related("company")
     jobs_with_permissions = [
         {
             "job": job,
@@ -28,10 +28,10 @@ def index(request):
                 JobFavorite.objects.filter(job=job, user=request.user).exists()
                 if request.user.is_authenticated
                 else False
-            ),
-        }
-        for job in jobs
-    ]
+            ),"company":job.company
+        } for job in jobs]
+  
+    
     page_obj = paginate_queryset(request, jobs_with_permissions, 10)
     return render(request, "jobs/index.html", {"page_obj": page_obj})
 

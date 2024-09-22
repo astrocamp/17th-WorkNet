@@ -30,7 +30,7 @@
 
         <ul class="flex flex-col gap-8">
             {% for item in page_obj %}
-                <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
+                <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl border border-[#e7e8eb] p-6 bg-white w-full box-border">
                     <div class="items-center block md:flex lg:flex">
                         <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:pr-4 lg:pr-4">
                             <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">{{item.job.title}}</h2>
@@ -47,6 +47,7 @@
                             </div>
                         </div>
                     </div>
+                    <h3 class="mt-2 text-sm font-bold text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">from<a href="{% url 'companies:show' item.company.id %}">{{item.company.title}}</a></h3>
                     <p class="mt-2 text-sm font-light text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">{{item.job.description}}</p>
                     <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
                         <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{item.job.type}}</span>
