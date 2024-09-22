@@ -85,7 +85,12 @@ def show(request, id):
     posts = Post.objects.filter(company=company).order_by("-created_at")[:10]
     posts_data = [
         {
-            "post": post,
+            "id": post.id,
+            "title": post.title,
+            "content": post.content,
+            "score": post.score,
+            "created_at": post.created_at,
+            "user": post.user,
             "can_edit": (
                 rules.test_rule("can_edit_post", request.user, post)
                 if request.user.is_authenticated
@@ -94,7 +99,6 @@ def show(request, id):
         }
         for post in posts
     ]
-    page_obj = paginate_queryset(request, posts_data, 1)
 
     user_resume = []
     if request.user.is_authenticated and 1 == request.user.type:
@@ -108,6 +112,7 @@ def show(request, id):
         {
             "id": job.id,
             "title": job.title,
+            "description": job.description,
             "type": job.type,
             "location_label": location_dict.get(job.location),
             "location": job.location,
@@ -128,7 +133,7 @@ def show(request, id):
     return render(
         request,
         "companies/show.html",
-        {"company": company, "jobs": jobs_data, "page_obj": page_obj},
+        {"company": company, "jobs": jobs_data, "posts": posts_data},
     )
 
 
@@ -194,7 +199,10 @@ def post_new(request, id):
 def jobs_index(request, id):
     company = get_object_or_404(Company, id=id)
     jobs = Job.objects.filter(company=company).order_by("-created_at")
-    jobs_with_permissions = [{"job": job, "can_edit": True} for job in jobs]
+    jobs_with_permissions = [
+        {"job": job, "can_edit": rules.test_rule("can_edit_job", request.user, job.id)}
+        for job in jobs
+    ]
     page_obj = paginate_queryset(request, jobs_with_permissions, 10)
 
     return render(
