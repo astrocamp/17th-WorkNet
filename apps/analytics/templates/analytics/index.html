@@ -3,6 +3,11 @@
 {% block content %}
 
 <script src="{% static 'src/scripts/chart.js' %}" type="module"></script>
+<div class="flex overflow-hidden relative justify-center items-center h-44 text-center md:h-80 lg:h-80">
+    <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">分析</h1>
+    <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
+    <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
+</div>
 
 <div x-data="{ showLanguages: true }" class="flex flex-col items-center pt-20 mt-10 min-h-screen">
     <div class="flex justify-center mb-4 w-full">
