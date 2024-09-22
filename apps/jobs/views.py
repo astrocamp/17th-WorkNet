@@ -55,24 +55,14 @@ def show(request, id):
     previous_url = request.META.get("HTTP_REFERER", "/")
     referer_path = urlparse(previous_url).path
     backJobs = "resumes" not in referer_path
+    status = True
 
-    if request.user.type == 1:
+    if request.user.is_authenticated and request.user.type == 1:
         user_info = UserInfo.objects.get(user=request.user)
         user_resume = Resume.objects.filter(userinfo=user_info).values_list(
             "id", flat=True
         )
         status = Job_Resume.objects.filter(job=job, resume__in=user_resume).exists()
-
-        return render(
-            request,
-            "jobs/show.html",
-            {
-                "job": job,
-                "backJobs": backJobs,
-                "tags": job.tags.all(),
-                "status": status,
-            },
-        )
 
     return render(
         request,
@@ -81,6 +71,7 @@ def show(request, id):
             "job": job,
             "backJobs": backJobs,
             "tags": job.tags.all(),
+            "status": status,
         },
     )
 
