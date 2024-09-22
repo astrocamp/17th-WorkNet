@@ -33,7 +33,7 @@
 - 資料庫：PostgreSQL
 - 版本控制：Git
 - 第三方登入：Google, Line
-- 雲服務：Amazon Web Services (AWS) S3
+- 履歷上傳：Amazon Web Services (AWS) S3
 - 郵件發送：Mailgun
 - 部署：Heroku
 - 規劃：Miro, Trello
