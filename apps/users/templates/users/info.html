@@ -1,32 +1,44 @@
-{% extends "layouts/base.html" %} {% block content %}
-<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
-  <h1 class="text-3xl font-bold">會員資訊</h1>
+{% extends "layouts/base.html" %}
+{% block content %}
+<div class="flex overflow-hidden relative justify-center items-center h-44 text-center md:h-80 lg:h-80">
+    <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">會員資訊</h1>
+    <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
+    <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
-<div class="container p-5 pb-24 mx-auto" >
-  <form method="post" autocomplete="off" class="space-y-4"  >
-    {% csrf_token %}
-    {% for field in form %}
-        {% if field.name == 'tags' %}
-          <div x-data="tag_input" class="mt-4">
-            <label for="{{ field.id_for_label }}">具備的技能  </label>
-            <textarea x-ref="tagInput" type="text"  id="{{ field.id_for_label }}" name="{{ field.name }}" x-init="init({{ tags|safe }})"
-            class="mt-1 textarea-often-base"></textarea>
-            <input type="hidden" x-ref="hiddenTagsInput" name="tags">
+<div class="bg-[#eef0f0]">
+  <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
+    <div class="px-5 py-7 bg-white rounded-xl md:rounded-3xl lg:rounded-3xl md:p-10 lg:p-10">
+      <form method="post" autocomplete="off" class="space-y-4">
+        {% csrf_token %}
+        <div class="flex flex-wrap gap-3 mb-10 md:gap-5 lg:gap-5 md:mb-16 lg:mb-16">
+          {% for field in form %}
+          <div class="w-full md:w-calc-data lg:w-calc-data">
+            <div class="text-sm md:text-base lg:text-base text-primary">{{ field.label }}
+              {% if field.required %}<span class="text-error">*</span>{% endif %}
+            </div>
+            {% if field.name == 'tags' %}
+              <div x-data="tag_input" class="mt-4">
+                <textarea x-ref="tagInput" type="text" id="{{ field.id_for_label }}" name="{{ field.name }}" x-init="init({{ tags|safe }})"
+                class="p-2 mt-1 w-full rounded-lg border border-gray-300 shadow-sm resize-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                <input type="hidden" x-ref="hiddenTagsInput" name="tags">
+              </div>
+            {% else %}
+              <div>{{ field }}</div>
+            {% endif %}
+            <div class="text-xl text-error">{{ field.errors }}</div>
           </div>
-        {% else %}
-            <div class="mt-4">{{ field.label }} {{ field }} {{ field.errors }}</div>
-        {% endif %}
-    {% endfor %}
-    <div class="mt-4">
-      <button type="submit" class="text-white btn btn-primary">更新會員資訊</button>
+          {% endfor %}
+        </div>
+        <div class="flex gap-5 justify-center">
+          <button type="submit" class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28">更新會員資訊</button>
+        </div>
+      </form>
     </div>
-  </form>
-  <div class="mt-4 text-gray-700">
-    <p>目前點數: <span class="font-bold">{{ info.points }}</span></p>
-    {% if info.updated_at %}
-    <p>最後更新: <span class="font-bold">{{ info.updated_at }}</span></p>
-    {% endif %}
+    <div class="mt-4 text-gray-700">
+      {% if info.updated_at %}
+      <p>最後更新: <span class="font-bold">{{ info.updated_at }}</span></p>
+      {% endif %}
+    </div>
   </div>
 </div>
 {% endblock %}
-
