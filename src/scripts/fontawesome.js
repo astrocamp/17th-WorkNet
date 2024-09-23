@@ -6,6 +6,7 @@ import {
   faBell as fasBell,
   faHeart as fasHeart,
   faUser as fasUser,
+  faBriefcase as fasBriefcase,
   faCaretDown as fasCaretDown,
   faStar as fasStar,
   faLocationDot as fasLocationDot,
@@ -39,6 +40,7 @@ library.add(
   fasSackDollar,
   fasPen,
   faUserCircle,
+  fasBriefcase,
   faStar
 );
 dom.i2svg();
