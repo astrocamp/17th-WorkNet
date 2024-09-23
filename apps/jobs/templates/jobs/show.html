@@ -8,7 +8,7 @@
 </div>
 
 <div class="bg-[#eef0f0]">
-  <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24"> 
+  <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
     <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl border border-[#e7e8eb] p-6 bg-white w-full list-none">
       <div class="items-center block md:flex lg:flex">
         <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:pr-4 lg:pr-4">
@@ -17,7 +17,7 @@
             <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
               {% csrf_token %}
               <input type="hidden" name="job_id" value="{{ job.id }}">
-              {% if status == False %}
+              {% if status == False and request.user.type == 1 %}
                 <button class="text-base rounded-full btn btn-secondary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28">
                   應徵此職缺
                 </button>
@@ -73,36 +73,16 @@
             </div>
           </div>
           <div class="flex justify-center gap-5">
-            {% if backJobs %}
-              <a class= "btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28"  href="{% url 'jobs:index' %}">返回列表</a>
+            {% if is_search_result %}
+              <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" href="{% url 'jobs:search_results' %}?q={{ search_query }}&location={{ location }}&page={{ request.GET.page }}">返回搜尋頁</a>
+            {% elif backJobs %}
+              <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" href="{% url 'jobs:index' %}">返回列表</a>
             {% else %}
               <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" href="{% url 'resumes:jobs' %}">返回</a>
             {% endif %}
           </div>
         </div>
       </div>
-      <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
-        {% csrf_token%}
-          <input type="hidden" name="job_id" value="{{ job.id }}">
-            {% if status == False and request.user.type == 1 %}
-              <button class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none">應徵</button>
-            {% endif %}
-      </form>
-      <div class="flex justify-center gap-5">
-        {% if backJobs %}
-          <a class= "btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28"  href="{% url 'jobs:index' %}">返回列表</a>
-        {% else %}
-          <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" href="{% url 'resumes:jobs' %}">返回</a>
-        {% endif %}
-      </div>
-    </div>
-    {% if is_search_result %}
-      <a class="text-white btn btn-primary min-w-20" href="{% url 'jobs:search_results' %}?q={{ search_query }}&location={{ location }}&page={{ request.GET.page }}">返回搜尋頁</a>
-    {% elif backJobs %}
-      <a class="text-white btn btn-primary min-w-20" href="{% url 'jobs:index' %}">返回列表</a>
-    {% else %}
-      <a class="text-white btn btn-primary min-w-20" href="{% url 'resumes:jobs' %}">返回</a>
-    {% endif %}
     </li>
   </div>
 </div>
