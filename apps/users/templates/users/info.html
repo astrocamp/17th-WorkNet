@@ -8,13 +8,14 @@
 <div class="bg-[#eef0f0]">
   <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
     <div class="px-5 py-7 bg-white rounded-xl md:rounded-3xl lg:rounded-3xl md:p-10 lg:p-10">
+      <div class="mb-5 text-lg text-error">* 為必填項目</div>
       <form method="post" autocomplete="off" class="space-y-4">
         {% csrf_token %}
         <div class="flex flex-wrap gap-3 mb-10 md:gap-5 lg:gap-5 md:mb-16 lg:mb-16">
           {% for field in form %}
             {% if field.name != 'birthday' and field.name != 'tags' %}
               <div class="w-full md:w-calc-data lg:w-calc-data">
-                <div class="text-sm md:text-base lg:text-base text-primary">{{ field.label }}
+                <div class="text-sm md:text-base lg:text-base text-primary">{{ field.label }}<span class="text-error">*</span>
                   {% if field.required %}<span class="text-error">*</span>{% endif %}
                 </div>
                 <div>{{ field }}</div>
@@ -37,7 +38,7 @@
         <div class="w-full">
           {% for field in form %}
             {% if field.name == 'tags' %}
-              <div class="text-sm md:text-base lg:text-base text-primary">{{ field.label }}
+              <div class="text-sm md:text-base lg:text-base text-primary">{{ field.label }}<span class="text-error">*</span>
                 {% if field.required %}<span class="text-error">*</span>{% endif %}
               </div>
               <div x-data="tag_input" class="mt-4">
