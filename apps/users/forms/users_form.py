@@ -86,7 +86,14 @@ class UserInfoForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["tags"].label = "具備的技能"
+        for field_name in self.fields:
+            if field_name != "birth":
+                self.fields[field_name].required = True
+
+        self.fields["nickname"].error_messages["required"] = "姓名不能為空。"
+        self.fields["tel"].error_messages["required"] = "手機號碼不能為空。"
+        self.fields["location"].error_messages["required"] = "地區不能為空。"
+        self.fields["tags"].error_messages["required"] = "技能標籤不能為空。"
 
 
 class PasswordResetForm(forms.Form):
