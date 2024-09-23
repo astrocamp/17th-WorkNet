@@ -1,63 +1,76 @@
 {% extends "layouts/base.html" %} {% block content %}
-<div class="flex items-center justify-center pt-32 pb-24">
-  <section class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
-    <h1 class="mb-6 text-2xl font-bold text-center">登入</h1>
+<div class="flex items-center justify-center h-44 md:h-80 lg:h-80 text-center relative overflow-hidden">
+  <h1 class="text-3xl md:text-5xl lg:text-5xl text-white font-bold relative z-20">會員登入</h1>
+  <div class="absolute z-10 m-auto inset-0 bg-cover bg-banner-img bg-center bg-fixed"></div>
+  <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
+</div>
 
-    <form
-      action="{% url 'users:sign_in' %}"
-      autocomplete="off"
-      method="POST"
-      class="space-y-4"
-    >
-      {% csrf_token %} {% if request.GET.next %}
-      <input type="hidden" name="next" value="{{ request.GET.next }}" />
-      {% endif %}
+<div class="bg-[#eef0f0]">
+  <div class="container px-5 pt-10 pb-16 lg:pt-20 lg:pb-24 mx-auto">
+    <div class="flex justify-center items-center">
+      <section class="p-6 w-full max-w-md bg-white rounded-xl md:rounded-3xl lg:rounded-3xl shadow-lg">
+          <form
+            action="{% url 'users:sign_in' %}"
+            autocomplete="off"
+            method="POST"
+            class="space-y-4"
+          >
+            {% csrf_token %} {% if request.GET.next %}
+            <input type="hidden" name="next" value="{{ request.GET.next }}" />
+            {% endif %}
+            <div>
+              <div class="text-sm md:text-base lg:text-base text-primary">
+                <label>帳號</label>
+              </div>
+              <div>
+                <input
+                  class="input-often-base"
+                  type="text"
+                  name="username"
+                  placeholder="輸入帳號"
+                />
+              </div>
+            </div>
+            <div>
+              <div class="text-sm md:text-base lg:text-base text-primary">
+                <label>密碼</label>
+              </div>
+              <div>
+                <input
+                  class="input-often-base"
+                  type="password"
+                  name="password"
+                  placeholder="輸入密碼"
+                />
+              </div>
+            </div>
+            <div>
+              <button class="btn btn-primary w-full md:btn-lg lg:btn-lg">登入</button>
+            </div>
 
-      <div>
-        <label class="block text-sm font-medium">帳號</label>
-        <input
-          class="w-full mt-1 input-often-base"
-          type="text"
-          name="username"
-          placeholder="輸入帳號"
-        />
-      </div>
+            <div class="text-center">
+              <a href="{% url 'users:password_reset' %}" class="text-secondary link">忘記密碼？</a>
+            </div>
 
-      <div>
-        <label class="block text-sm font-medium">密碼</label>
-        <input
-          class="w-full mt-1 input-often-base"
-          type="password"
-          name="password"
-          placeholder="輸入密碼"
-        />
-      </div>
+            <div class="text-center">
+              還沒有帳號嗎？現在就<a class="text-secondary link" href="{% url 'users:register' %}">註冊</a>領好禮吧！
+            </div>
+          </form>
 
-      <div>
-        <button class="w-full btn btn-primary text-white">登入</button>
-      </div>
+          <div class="mt-12 flex items-center">
+            <div class="flex-auto h-px bg-gray-300"></div>
+            <div class="px-6 text-xl text-primary font-bold">快速登入</div>
+            <div class="flex-auto h-px bg-gray-300"></div>
+          </div>
 
-      <div class="mt-4 text-center">
-        <a href="{% url 'users:password_reset' %}" class="text-primary link">忘記密碼？</a>
-      </div>
-
-      <div class="mt-4 text-center">
-        還沒有帳號嗎？現在就<a class="text-primary link" href="{% url 'users:register' %}">註冊</a>領好禮吧！
-      </div>
-    </form>
-
-    <div class="mt-4 flex gap-5">
-      <a class="btn btn-outline btn-success flex-1" href="{% url 'social:begin' 'line' %}">使用 LINE 登入</a>
-      <a class="btn btn-outline btn-primary flex-1" href="{% url 'social:begin' 'google-oauth2' %}">Google登入</a>
+          <div class="mt-6 flex gap-5">
+            <a class="btn btn-outline btn-success flex-1 hover:!text-white" href="{% url 'social:begin' 'line' %}">使用 LINE 登入</a>
+            <a class="btn btn-outline btn-secondary flex-1 hover:!text-white" href="{% url 'social:begin' 'google-oauth2' %}">Google登入</a>
+          </div>
+        </form>
+      </section>
     </div>
-
-
-
-
-
-  </form>
-
-</section>
+  </div>
 </div>
 
 {% endblock %}

@@ -1,81 +1,109 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<div class="flex justify-center items-center pt-32 pb-24">
-  <section class="p-6 w-full max-w-md bg-white rounded-lg shadow-lg">
-    <h1 class="mb-6 text-2xl font-bold text-center">會員註冊</h1>
+<div class="flex items-center justify-center h-44 md:h-80 lg:h-80 text-center relative overflow-hidden">
+  <h1 class="text-3xl md:text-5xl lg:text-5xl text-white font-bold relative z-20">會員註冊</h1>
+  <div class="absolute z-10 m-auto inset-0 bg-cover bg-banner-img bg-center bg-fixed"></div>
+  <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
+</div>
 
-    <form
-      action="{% url 'users:index' %}"
-      autocomplete="off"
-      method="POST"
-      class="space-y-4"
-    >
-      {% csrf_token %}
+<div class="bg-[#eef0f0]">
+  <div class="container px-5 pt-10 pb-16 lg:pt-20 lg:pb-24 mx-auto">
+    <div class="flex justify-center items-center">
+      <section class="p-6 w-full max-w-md bg-white rounded-xl md:rounded-3xl lg:rounded-3xl shadow-lg">
+        <form
+          action="{% url 'users:index' %}"
+          autocomplete="off"
+          method="POST"
+          class="space-y-4"
+        >
+          {% csrf_token %}
 
-      <div>
-        <label class="block text-sm font-medium">帳號</label>
-        <input
-          class="mt-1 w-full input-often-base"
-          type="text"
-          name="username"
-          placeholder="輸入帳號"
-          value="{{ form.username.value|default_if_none:'' }}"
-        />
-        <div class="mt-1 text-sm text-red-500">{{ form.username.errors }}</div>
-      </div>
+          <div>
+            <div class="text-sm md:text-base lg:text-base text-primary">
+              <label>帳號</label>
+            </div>
+            <div>
+              <input
+                class="input-often-base"
+                type="text"
+                name="username"
+                placeholder="輸入帳號"
+                value="{{ form.username.value|default_if_none:'' }}"
+              />
+            </div>
+            <div class="mt-1 text-sm text-red-500">{{ form.username.errors }}</div>
+          </div>
 
-      <div>
-        <label class="block text-sm font-medium">密碼</label>
-        <input
-          class="mt-1 w-full input-often-base"
-          type="password"
-          name="password1"
-          placeholder="輸入密碼"
-          value="{{ form.password1.value|default_if_none:'' }}"
-        />
-        <div class="mt-1 text-sm text-red-500">{{ form.password1.errors }}</div>
-      </div>
+          <div>
+            <div class="text-sm md:text-base lg:text-base text-primary">
+              <label>密碼</label>
+            </div>
+            <div>
+              <input
+                class="input-often-base"
+                type="password"
+                name="password1"
+                placeholder="輸入密碼"
+                value="{{ form.password1.value|default_if_none:'' }}"
+              />
+            </div>
+            <div class="mt-1 text-sm text-red-500">{{ form.password1.errors }}</div>
+          </div>
 
-      <div>
-        <label class="block text-sm font-medium">密碼確認</label>
-        <input
-          class="mt-1 w-full input-often-base"
-          type="password"
-          name="password2"
-          placeholder="確認密碼"
-          value="{{ form.password2.value|default_if_none:'' }}"
-        />
-        <div class="mt-1 text-sm text-red-500">{{ form.password2.errors }}</div>
-      </div>
+          <div>
+            <div class="text-sm md:text-base lg:text-base text-primary">
+              <label>密碼確認</label>
+            </div>
+            <div>
+              <input
+                class="input-often-base"
+                type="password"
+                name="password2"
+                placeholder="確認密碼"
+                value="{{ form.password2.value|default_if_none:'' }}"
+              />
+            </div>
+            <div class="mt-1 text-sm text-red-500">{{ form.password2.errors }}</div>
+          </div>
 
-      <div>
-        <label class="block text-sm font-medium"for="type">註冊身分</label>
-        <select class="mt-1 w-full input-often-base" name="type">
-          <option value="1" {% if form.type.value == "1" %}selected{% endif %}>一般使用者</option>
-          <option value="2" {% if form.type.value == "2" %}selected{% endif %}>公司</option>
-        </select>
-      </div>
+          <div>
+            <div class="text-sm md:text-base lg:text-base text-primary">
+              <label for="type">註冊身分</label>
+            </div>
+            <div>
+              <select class="input-often-base" name="type">
+                <option value="1" {% if form.type.value == "1" %}selected{% endif %}>一般使用者</option>
+                <option value="2" {% if form.type.value == "2" %}selected{% endif %}>公司</option>
+              </select>
+            </div>
+          </div>
 
-      <div>
-        <label class="block text-sm font-medium">電子郵件</label>
-        <input
-          class="mt-1 w-full input-often-base"
-          type="email"
-          name="email"
-          placeholder="輸入電子郵件"
-          value="{{ form.email.value|default_if_none:'' }}"
-        />
-        <div class="mt-1 text-sm text-red-500">{{ form.email.errors }}</div>
-      </div>
+          <div>
+            <div class="text-sm md:text-base lg:text-base text-primary">
+              <label>電子郵件</label>
+            </div>
+            <div>
+              <input
+                class="input-often-base"
+                type="email"
+                name="email"
+                placeholder="輸入電子郵件"
+                value="{{ form.email.value|default_if_none:'' }}"
+              />
+            </div>
+            <div class="mt-1 text-sm text-red-500">{{ form.email.errors }}</div>
+          </div>
 
-      <div>
-        <button class="w-full text-white btn btn-primary">註冊</button>
-      </div>
+          <div>
+            <button class="btn btn-primary w-full md:btn-lg lg:btn-lg">註冊</button>
+          </div>
 
-      <div class="mt-4 text-center">
-        已經有帳號了？<a class="text-blue-500 link" href="{% url 'users:sign_in' %}">登入</a>
-      </div>
-    </form>
-  </section>
+          <div class="mt-4 text-center">
+            已經有帳號了？<a class="text-secondary link" href="{% url 'users:sign_in' %}">登入</a>
+          </div>
+        </form>
+      </section>
+    </div>
+  </div>
 </div>
 {% endblock %}
