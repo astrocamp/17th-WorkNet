@@ -21,13 +21,11 @@
                 </div>
             </form>
         </div>
-
-        {% if request.user.is_authenticated and request.user.type == 2 %}
-            <div class="container p-5 pb-24 mx-auto">
-                <a class="text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{% url 'companies:jobs_new' request.user.company.id %}">新增職缺</a>
-            </div>
-        {% endif %}
-
+        <div class="container p-5 pb-24 mx-auto">
+            {% if request.user.is_authenticated and request.user == company.user %}
+                <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:jobs_new' request.user.company.id %}">新增職缺</a>
+            {% endif %}
+        </div>
         <ul class="flex flex-col gap-8">
             {% for job in page_obj %}
                 <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
