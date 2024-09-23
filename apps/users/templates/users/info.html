@@ -11,7 +11,6 @@
       <form method="post" autocomplete="off" class="space-y-4">
         {% csrf_token %}
         <div class="flex flex-wrap gap-3 mb-10 md:gap-5 lg:gap-5 md:mb-16 lg:mb-16">
-          {# 其他欄位，保持原來的順序顯示 #}
           {% for field in form %}
             {% if field.name != 'birthday' and field.name != 'tags' %}
               <div class="w-full md:w-calc-data lg:w-calc-data">
@@ -23,8 +22,6 @@
               </div>
             {% endif %}
           {% endfor %}
-
-          {# 生日欄位，顯示在右下角 #}
           {% for field in form %}
             {% if field.name == 'birthday' %}
               <div class="w-full md:w-1/2 lg:w-1/2">
@@ -37,8 +34,6 @@
             {% endif %}
           {% endfor %}
         </div>
-
-        {# 技能欄位，顯示在表單最下方 #}
         <div class="w-full">
           {% for field in form %}
             {% if field.name == 'tags' %}
@@ -54,7 +49,6 @@
             {% endif %}
           {% endfor %}
         </div>
-
         <div class="flex gap-5 justify-center">
           <button type="submit" class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28">更新會員資訊</button>
         </div>
