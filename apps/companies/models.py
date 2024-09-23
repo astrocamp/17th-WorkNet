@@ -25,6 +25,7 @@ class Company(SoftDeletetable, models.Model):
         related_name="company_favorite",
         through="CompanyFavorite",
     )
+    score = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
 
     objects = SoftDeleteManager()
 
