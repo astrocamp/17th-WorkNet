@@ -11,15 +11,15 @@ from apps.jobs.forms import JobForm
 from apps.jobs.models import Job, Job_Resume, JobFavorite
 from apps.posts.forms.posts_form import PostForm
 from apps.posts.models import Post
+from apps.resumes.models import Resume
+from apps.users.models import UserInfo
 from lib.models.paginate import paginate_queryset
 from lib.models.rule_required import rule_required
 from lib.utils.models.decorators import company_required
+from lib.utils.models.defined import LOCATION_CHOICES
 
 from .forms.companies_form import CompanyForm
 from .models import Company
-from apps.resumes.models import Resume
-from apps.users.models import UserInfo
-from lib.utils.models.defined import LOCATION_CHOICES
 
 
 def index(request):
@@ -197,7 +197,8 @@ def post_new(request, id):
 
 
 def jobs_index(request, id):
-    jobs = Job.objects.order_by("-id").select_related("company")
+    company = get_object_or_404(Company, id=id)
+    jobs = Job.objects.filter(company=company).order_by("-id").select_related("company")
     jobs_with_permissions = [
         {
             "id": job.id,

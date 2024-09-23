@@ -54,11 +54,11 @@
             </div>
           </div>
         </div>
-    
+
         <div class="font-light text-base md:text-xl lg:text-xl mb-10 md:mb-20 lg:mb-20">
           <div class="leading-loose">{{ company.description }}</div>
         </div>
-    
+
         <div class="mb-10 md:mb-20 lg:mb-20">
           <div class="flex justify-between">
             <h2 class="text-xl md:text-2xl lg:text-3xl font-medium mb-7">公司職缺列表</h2>
@@ -67,7 +67,7 @@
             {% elif jobs|length > 0  %}
               <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:jobs_index' company.id %}">全部職缺</a>
             {% endif %}
-            
+
           </div>
           <ul class="flex flex-col gap-6 md:gap-8 lg:gap-8">
             <!--card-->
@@ -163,7 +163,7 @@
           </ul>
         </div>
       </div>
-      
+
       <div class="flex gap-5 justify-center">
         <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" href="{% url 'companies:index' %}">返回列表</a>
       </div>
