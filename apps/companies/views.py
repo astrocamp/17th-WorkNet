@@ -221,7 +221,9 @@ def jobs_index(request, id):
     ]
 
     page_obj = paginate_queryset(request, jobs_with_permissions, 10)
-    return render(request, "jobs/index.html", {"page_obj": page_obj})
+    return render(
+        request, "jobs/index.html", {"page_obj": page_obj, "company": company}
+    )
 
 
 @login_required
