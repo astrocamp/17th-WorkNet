@@ -9,15 +9,15 @@
         <h1 class="text-3xl font-bold md:text-5xl lg:text-7xl">數百萬的工作機會</h1>
         <p class="mt-2 text-base md:mt-4 lg:mt-4 md:text-xl lg:text-2xl">給您最真實、自由的評論，讓我們為您找到適合的工作</p>
       </div>
-      <form action="{% url 'jobs:search_results' %}" method="GET" class="flex flex-col w-full gap-1 px-4 pt-2 pb-4 bg-white shadow-md md:flex-row lg:flex-row md:items-center lg:items-center md:p-3 lg:p-4 md:gap-4 lg:gap-4 rounded-xl md:rounded-full lg:rounded-full">
-        <div class="flex items-center flex-1">
+      <form action="{% url 'jobs:search_results' %}" method="GET" class="flex flex-col gap-1 px-4 pt-2 pb-4 w-full bg-white rounded-xl shadow-md md:flex-row lg:flex-row md:items-center lg:items-center md:p-3 lg:p-4 md:gap-4 lg:gap-4 md:rounded-full lg:rounded-full">
+        <div class="flex flex-1 items-center">
           <div class="w-5 text-base text-center text-black md:w-7 lg:w-7 md:text-2xl lg:text-2xl"><i class="fa-solid fa-magnifying-glass"></i></div>
-          <input type="text" name="q" placeholder="請輸入工作名稱或公司" class="w-full px-2 py-2 text-base text-gray-500 placeholder-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" value="{{ request.GET.q }}" />
+          <input type="text" name="q" placeholder="請輸入工作名稱或公司" class="px-2 py-2 w-full text-base placeholder-gray-500 text-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" value="{{ request.GET.q }}" />
         </div>
         <div class="w-full h-px bg-gray-300 md:w-px lg:w-px md:h-8 lg:h-8"></div>
-        <div class="flex items-center flex-1">
+        <div class="flex flex-1 items-center">
           <div class="w-5 text-base text-center text-black md:w-7 lg:w-7 md:text-2xl lg:text-2xl"><i class="fa-solid fa-location-dot"></i></div>
-          <select name="location" class="w-full px-2 py-2 text-base text-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg">
+          <select name="location" class="px-2 py-2 w-full text-base text-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg">
             <option value="">請選擇地點</option>
             {% for value, label in locations %}
                 <option value="{{ value }}" {% if request.GET.location == value %} selected {% endif %}>{{ label }}</option>
@@ -28,15 +28,15 @@
           <button class="w-full btn btn-primary btn-sm md:btn-lg lg:btn-lg md:w-auto lg:w-auto md:min-w-28 lg:min-w-28">搜尋</button>
         </div>
       </form>
-      <div class="mt-4 flex flex-wrap gap-1.5 md:gap-5 lg:gap-5">
+      <div class="flex flex-wrap gap-1.5 mt-4 md:gap-5 lg:gap-5">
         <a href="{% url 'jobs:search_results' %}?q=Python" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">Python</a>
         <a href="{% url 'jobs:search_results' %}?q=PHP" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">PHP</a>
         <a href="{% url 'jobs:search_results' %}?q=Ruby" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">Ruby</a>
-        <a href="{% url 'jobs:search_results' %}?q=Javascript" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">Javascript</a>
+        <a href="{% url 'jobs:search_results' %}?q=Javascript" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">JavaScript</a>
       </div>
     </div>
-    <div class="absolute inset-x-0 z-20 text-center text-white bottom-4 md:bottom-14 lg:bottom-14">
-      <div class="relative w-5 h-8 mx-auto border border-white rounded-full md:w-7 lg:w-7 md:h-11 lg:h-11 lg:border-2">
+    <div class="absolute inset-x-0 bottom-4 z-20 text-center text-white md:bottom-14 lg:bottom-14">
+      <div class="relative mx-auto w-5 h-8 rounded-full border border-white md:w-7 lg:w-7 md:h-11 lg:h-11 lg:border-2">
         <div class="w-0.5 md:w-1 lg:w-1 h-2 md:h-4 lg:h-4 bg-white rounded-full absolute bottom-2 left-1/2 ml-[-1px] md:ml-[-2px] lg:ml-[-2px] animate-bounce"></div>
       </div>
       <div class="mt-2 text-xs font-light md:text-base lg:text-base">往下滑精彩不斷</div>
@@ -52,10 +52,10 @@
         {% for job in jobs %}
           <div class="relative border border-[#cccccc] rounded-xl md:rounded-3xl lg:rounded-3xl p-6 bg-white w-full md:w-calc-card lg:w-calc-card box-border">
             <div class="flex items-center">
-              <div class="relative mx-auto overflow-hidden bg-gray-200 rounded-full w-14 h-14 md:w-20 md:h-20 lg:w-20 lg:h-20 md:mx-0 lg:mx-0">
-                <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+              <div class="overflow-hidden relative mx-auto w-14 h-14 bg-gray-200 rounded-full md:w-20 md:h-20 lg:w-20 lg:h-20 md:mx-0 lg:mx-0">
+                <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute top-1/2 left-1/2 w-full transform -translate-x-1/2 -translate-y-1/2">
               </div>
-              <div class="box-border flex-1 pl-3 pr-4 md:px-4 lg:px-4">
+              <div class="box-border flex-1 pr-4 pl-3 md:px-4 lg:px-4">
                 <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">
                   <a href="{% url 'jobs:show' job.id %}">{{ job.title }}</a>
                 </h2>
@@ -64,12 +64,12 @@
                 </p>
               </div>
               {% if  request.user.is_authenticated and request.user.type == 1 %}
-                <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
+                <div class="flex absolute top-2.5 right-3 gap-2 text-2xl md:lg:static lg:static">
                   {% include "shared/job_favorite.html" with favorited=job.favorited%}
                 </div>
               {% endif %}
             </div>
-            <div class="mt-3 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
+            <div class="flex flex-wrap gap-1 mt-3 text-base font-light md:mt-4 lg:mt-4 md:gap-1.5 lg:gap-2.5">
               <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{ job.type }}</span>
               <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base">
                 <a href="{% url 'jobs:search_results' %}?location={{job.location}}">
@@ -78,9 +78,9 @@
                 </span>
               <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{ job.salary }} / 月</span>
             </div>
-            <div class="flex flex-col items-start justify-between gap-4 mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
+            <div class="flex flex-col gap-4 justify-between items-start mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
               <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{ job.created_at|date:"Y/m/d" }}</div>
-              <div class="flex w-full gap-4 lg:w-auto">
+              <div class="flex gap-4 w-full lg:w-auto">
                 {% if request.user.type != 2 and not job.apply %}
                   <form action="{% url 'users:apply_jobs' job.id %}" method="POST" class="flex flex-auto gap-4">
                     {% csrf_token%}
@@ -101,12 +101,12 @@
       <h2 class="mb-5 text-2xl font-bold lg:text-3xl lg:mb-9">熱門企業</h2>
       <div class="flex flex-wrap gap-5 md:gap-7 lg:gap-10">
         {% for company in companies %}
-          <div class="box-border relative w-full p-6 bg-white rounded-xl md:rounded-3xl lg:rounded-3xl shadow-custom-light md:w-calc-card lg:w-calc-card">
+          <div class="box-border relative p-6 w-full bg-white rounded-xl md:rounded-3xl lg:rounded-3xl shadow-custom-light md:w-calc-card lg:w-calc-card">
             <div class="flex items-center">
-              <div class="relative mx-auto overflow-hidden bg-gray-200 rounded-full w-14 h-14 md:w-20 md:h-20 lg:w-20 lg:h-20 md:mx-0 lg:mx-0">
-                <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+              <div class="overflow-hidden relative mx-auto w-14 h-14 bg-gray-200 rounded-full md:w-20 md:h-20 lg:w-20 lg:h-20 md:mx-0 lg:mx-0">
+                <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute top-1/2 left-1/2 w-full transform -translate-x-1/2 -translate-y-1/2">
               </div>
-              <div class="box-border flex-1 pl-3 pr-4 md:px-4 lg:px-4">
+              <div class="box-border flex-1 pr-4 pl-3 md:px-4 lg:px-4">
                 <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">
                   <a href="{% url 'companies:show' company.id %}">{{ company.title }}</a>
                 </h2>
@@ -120,16 +120,16 @@
                 </div>
               </div>
               {% if request.user.is_authenticated and request.user.type == 1 %}
-                <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
+                <div class="flex absolute top-2.5 right-3 gap-2 text-2xl md:lg:static lg:static">
                   {% include "companies/favorite.html" with favorited=company.favorited %}
                 </div>
               {% endif %}
             </div>
-            <div class="flex flex-col items-start justify-between gap-4 mt-4 lg:flex-row lg:items-center">
+            <div class="flex flex-col gap-4 justify-between items-start mt-4 lg:flex-row lg:items-center">
               <div class="flex-1 text-sm font-light text-black md:text-lg lg:text-lg line-clamp-2">
                   {{ company.description }}
               </div>
-              <div class="flex w-full gap-4 lg:w-auto">
+              <div class="flex gap-4 w-full lg:w-auto">
                 <button class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:min-w-24">
                   <a href="{% url 'companies:show' company.id %}">詳細</a>
                 </button>
