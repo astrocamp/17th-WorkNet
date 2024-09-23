@@ -197,20 +197,29 @@ def post_new(request, id):
 
 
 def jobs_index(request, id):
-    company = get_object_or_404(Company, id=id)
-    jobs = (
-        Job.objects.filter(company=company)
-        .order_by("-created_at")
-        .select_related("company")
-    )
+    jobs = Job.objects.order_by("-id").select_related("company")
     jobs_with_permissions = [
-        {"job": job, "can_edit": True, "company": job.company} for job in jobs
+        {
+            "id": job.id,
+            "title": job.title,
+            "description": job.description,
+            "type": job.type,
+            "get_location_display": job.get_location_display,
+            "salary_range": job.salary_range,
+            "company": job.company.title,
+            "company_id": job.company.id,
+            "can_edit": rules.test_rule("can_edit_job", request.user, job.id),
+            "favorited": (
+                JobFavorite.objects.filter(job=job, user=request.user).exists()
+                if request.user.is_authenticated
+                else False
+            ),
+        }
+        for job in jobs
     ]
-    page_obj = paginate_queryset(request, jobs_with_permissions, 10)
 
-    return render(
-        request, "jobs/index.html", {"page_obj": page_obj, "company": company}
-    )
+    page_obj = paginate_queryset(request, jobs_with_permissions, 10)
+    return render(request, "jobs/index.html", {"page_obj": page_obj})
 
 
 @login_required

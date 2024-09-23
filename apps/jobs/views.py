@@ -22,14 +22,20 @@ def index(request):
     jobs = Job.objects.order_by("-id").select_related("company")
     jobs_with_permissions = [
         {
-            "job": job,
+            "id": job.id,
+            "title": job.title,
+            "description": job.description,
+            "type": job.type,
+            "get_location_display": job.get_location_display,
+            "salary_range": job.salary_range,
+            "company": job.company.title,
+            "company_id": job.company.id,
             "can_edit": rules.test_rule("can_edit_job", request.user, job.id),
             "favorited": (
                 JobFavorite.objects.filter(job=job, user=request.user).exists()
                 if request.user.is_authenticated
                 else False
             ),
-            "company": job.company,
         }
         for job in jobs
     ]
