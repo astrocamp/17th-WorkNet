@@ -1,46 +1,49 @@
 {% extends 'layouts/base.html' %}
-
 {% block content %}
-<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
-    <h1 class="text-3xl font-bold">應徵紀錄</h1>
+<div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
+    <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">應徵記錄</h1>
+    <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
+    <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
 
-<div class="container p-5 pb-24 mx-auto">
-    <p>總共有 {{ applications|length }} 份求職履歷。</p>
-    {% if applications %}
-    <div class="mt-5 overflow-x-auto">
-        <table class="table">
-            <thead>
-                <tr class="text-base text-center">
-                    <th></th>
-                    <th>職缺</th>
-                    <th>應徵者名字</th>
-                    <th>應徵日期</th>
-                    <th>履歷</th>
-                    <th>聯絡</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for application in applications %}
+<div class="flex-1 bg-[#eef0f0]">
+    <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
+        <p>總共有 {{ applications|length }} 份求職履歷。</p>
+        {% if applications %}
+        <div class="mt-5 overflow-x-auto">
+            <table class="table">
+                <thead>
                     <tr class="text-base text-center">
-                        <th >{{ forloop.counter }}</th>
-                        <td >{{ application.job.title }}</td>
-                        <td >{{ application.resume.userinfo.nickname }}</td>
-                        <td >{{ application.created_at }}</td>
-                        <td >
-                            <a href="{{ application.resume.file.url }}" target="_blank" class="text-blue-500 hover:underline ">查看履歷</a>
-                        </td>
-                        <td >
-                            <a href="mailto:{{ application.resume.userinfo.user.email }}?subject=誠摯邀請您前來面試&body={{ application.resume.userinfo.nickname }}您好，%0A%0A我們非常榮幸收到了您的履歷，對於您的專業背景及經歷感到十分欣賞，因此我們誠摯地邀請您來參加面試。%0A%0A請您告知方便安排面試的時間，我們期待能與您當面交流，並深入了解您的專業經驗。%0A%0A謝謝，並祝一切順心、順利。%0A%0A{{application.job.company.title}}公司"  class="text-blue-500 hover:underline">寄信聯絡</a>
-                        </td>
+                        <th></th>
+                        <th>職缺</th>
+                        <th>應徵者名字</th>
+                        <th>應徵日期</th>
+                        <th>履歷</th>
+                        <th>聯絡</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for application in applications %}
+                        <tr>
+                            <th>{{ forloop.counter }}</th>
+                            <td>{{ application.job.title }}</td>
+                            <td>{{ application.resume.userinfo.nickname }}</td>
+                            <td class="text-center">{{ application.created_at|date:"Y/m/d" }}</td>
+                            <td class="text-center">
+                                <a href="{{ application.resume.file.url }}" target="_blank" class="text-blue-500 hover:underline ">查看履歷</a>
+                            </td>
+                            <td class="text-center">
+                                <a href="mailto:{{ application.resume.userinfo.user.email }}?subject=誠摯邀請您前來面試&body={{ application.resume.userinfo.nickname }}您好，%0A%0A我們非常榮幸收到了您的履歷，對於您的專業背景及經歷感到十分欣賞，因此我們誠摯地邀請您來參加面試。%0A%0A請您告知方便安排面試的時間，我們期待能與您當面交流，並深入了解您的專業經驗。%0A%0A謝謝，並祝一切順心、順利。%0A%0A{{application.job.company.title}}公司"  class="text-blue-500 hover:underline">寄信聯絡</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+            <div class="py-5 text-center"><p>該職缺尚無應徵</p></div>
+        {% endif %}
     </div>
-    {% else %}
-        <div class="py-5 text-center"><p>該職缺尚無應徵</p></div>
-    {% endif %}
 </div>
 
 {% endblock %}
