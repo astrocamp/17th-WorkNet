@@ -4,17 +4,13 @@
     <h1 class="text-3xl font-bold">職缺</h1>
 </div>
 <div class="container p-5 pb-24 mx-auto">
-
     {% if request.user.is_authenticated and request.user.type == 2 %}
     <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:jobs_new' request.user.company.id %}">新增職缺</a>
     {% endif %}
-
-
     <ul class="mt-6 divide-y divide-slate-200">
         {% for item in page_obj %}
         <li class="flex gap-2 p-5">
             <div class="flex-1">
-
                 <a href="{% url 'jobs:show' item.job.id %}">{{ item.job.title }} {{ item.job.get_location_display }}</a>
             </div>
             <div class="flex gap-2">
