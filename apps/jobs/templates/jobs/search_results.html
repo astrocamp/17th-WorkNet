@@ -16,7 +16,7 @@
         {% for job in page_obj %}
         <li class="flex gap-2 p-5" id="job-{{ job.id }}">
             <div class="flex-1">
-                <a class="text-xl font-medium" href="{% url 'jobs:show' job.id %}">{{ job.title }}</a>
+                <a class="text-xl font-medium" href="{% url 'jobs:show' job.id %}?q={{ search_term }}&location={{ location }}&page={{ page_obj.number }}">{{ job.title }}</a>
                 <p class="text-small">{{ job.company.title }}, {{ job.get_location_display }}</p>
             </div>
             <div class="flex gap-2">

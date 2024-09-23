@@ -154,6 +154,7 @@ def search_results(request):
             resume__userinfo__user=request.user
         ).values_list("job_id", flat=True)
 
+    current_page = request.GET.get("page", 1)
     page_obj = paginate_queryset(request, jobs, 10)
     all_tags = Tag.objects.all()
 
@@ -170,5 +171,6 @@ def search_results(request):
             "search_term": search_term,
             "location": location_label,
             "applied_job_ids": list(applied_job_ids),
+            "current_page": current_page,
         },
     )
