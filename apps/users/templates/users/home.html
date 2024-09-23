@@ -50,12 +50,12 @@
       <div class="flex flex-wrap gap-5 md:gap-7 lg:gap-10">
         <!--card-->
         {% for job in jobs %}
-          <div class="relative border border-[#cccccc] rounded-xl md:rounded-3xl lg:rounded-3xl p-5 md:p-6 lg:p-6 bg-white w-full md:w-calc-card lg:w-calc-card box-border">
-            <div class="items-center block md:flex lg:flex">
-              <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
+          <div class="relative border border-[#cccccc] rounded-xl md:rounded-3xl lg:rounded-3xl p-6 bg-white w-full md:w-calc-card lg:w-calc-card box-border">
+            <div class="items-center flex">
+              <div class="relative w-14 h-14 md:w-20 md:h-20 lg:w-20 lg:h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
                 <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
               </div>
-              <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:px-4 lg:px-4">
+              <div class="box-border flex-1 pl-3 pr-4 md:px-4 lg:px-4">
                 <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">
                   <a href="{% url 'jobs:show' job.id %}">{{ job.title }}</a>
                 </h2>
@@ -69,7 +69,7 @@
                 </div>
               {% endif %}
             </div>
-            <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
+            <div class="mt-3 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
               <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{ job.type }}</span>
               <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base">
                 <a href="{% url 'jobs:search_results' %}?location={{job.location}}">
@@ -78,14 +78,16 @@
                 </span>
               <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{ job.salary }} / 月</span>
             </div>
-            <div class="flex justify-between items-center mt-6 md:mt-4 lg:mt-4">
+            <div class="flex flex-col lg:flex-row gap-4 justify-between items-start lg:items-center mt-6 md:mt-4 lg:mt-4">
               <div class="text-gray-500 text-xs md:text-base lg:text-base font-light">{{ job.created_at|date:"Y/m/d" }}</div>
-              {% if request.user.type != 2 and not job.apply %}
-                <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
-                  {% csrf_token%}
-                  <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">應徵</button>
-                </form>
-              {% endif %}
+              <div class="flex gap-4 w-full lg:w-auto">
+                {% if request.user.type != 2 and not job.apply %}
+                  <form action="{% url 'users:apply_jobs' job.id %}" method="POST" class="flex flex-auto gap-4">
+                    {% csrf_token%}
+                    <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl flex-auto lg:min-w-24 rounded-full">應徵</button>
+                  </form>
+                {% endif %}
+              </div>
             </div>
           </div>
         {% endfor %}
@@ -100,11 +102,11 @@
       <div class="flex flex-wrap gap-5 md:gap-7 lg:gap-10">
         {% for company in companies %}
           <div class="box-border relative w-full p-6 bg-white rounded-xl md:rounded-3xl lg:rounded-3xl shadow-custom-light md:w-calc-card lg:w-calc-card">
-            <div class="items-center block md:flex lg:flex">
-              <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
+            <div class="items-center flex">
+              <div class="relative w-14 h-14 md:w-20 md:h-20 lg:w-20 lg:h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
                 <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
               </div>
-              <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:px-4 lg:px-4">
+              <div class="box-border flex-1 pl-3 pr-4 md:px-4 lg:px-4">
                 <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">
                   <a href="{% url 'companies:show' company.id %}">{{ company.title }}</a>
                 </h2>
@@ -123,13 +125,15 @@
                 </div>
               {% endif %}
             </div>
-            <div class="flex items-center justify-between mt-4">
-              <div class="text-sm md:text-lg lg:text-lg font-light text-black flex-1 line-clamp-2 pr-2.5">
+            <div class="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between mt-4">
+              <div class="text-sm md:text-lg lg:text-lg font-light text-black flex-1 line-clamp-2">
                   {{ company.description }}
               </div>
-              <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">
-                <a href="{% url 'companies:show' company.id %}">詳細</a>
-              </button>
+              <div class="flex gap-4 w-full lg:w-auto">
+                <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl flex-auto rounded-full lg:min-w-24">
+                  <a href="{% url 'companies:show' company.id %}">詳細</a>
+                </button>
+              </div>
             </div>
           </div>
         {% endfor %}
