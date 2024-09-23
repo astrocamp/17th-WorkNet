@@ -1,4 +1,4 @@
-<footer class="py-5 md:py-10 lg:py-10 px-5 text-white footer-center flex flex-col gap-3 md:gap-4 lg:gap-4 bg-opacity-90  
+<footer class="py-5 md:py-10 lg:py-10 px-5 text-white footer-center flex flex-col gap-3 md:gap-4 lg:gap-4 bg-opacity-90
               {% if request.user.type == 2 %} bg-gray-900 {% else %} bg-primary {% endif %}">
     <nav class="flex justify-center gap-4">
       <a href="{% url 'companies:index' %}" class="text-base link link-hover">公司資訊</a>

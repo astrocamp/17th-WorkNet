@@ -1,8 +1,8 @@
 
 {% load static %}
 <div x-data="{ isScrolled: false }" @scroll.window="isScrolled = window.scrollY > 0">
-  <nav :class="isScrolled ? 'bg-opacity-90' : 'bg-transparent'" 
-        class="box-border fixed top-0 left-0 z-40 flex items-center w-full transition-colors duration-300 min-h-16 md:min-h-28 lg:min-h-28 
+  <nav :class="isScrolled ? 'bg-opacity-90' : 'bg-transparent'"
+        class="box-border fixed top-0 left-0 z-40 flex items-center w-full transition-colors duration-300 min-h-16 md:min-h-28 lg:min-h-28
               {% if request.user.type == 2 %} bg-gray-900 {% else %} bg-primary {% endif %}">
     <div class="absolute -translate-y-1/2 left-4 top-1/2 z-10">
       <a href="{% url 'users:index' %}" class="block w-28 bg-center bg-no-repeat bg-contain md:w-32 lg:w-32 aspect-8/3 bg-logo-backend">
