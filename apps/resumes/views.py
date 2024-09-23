@@ -78,6 +78,18 @@ def jobs(request):
 
     return render(request, "resumes/job.html", {"job_resumes": job_resumes})
 
+@login_required
+def jobs_delete(request, id):
+    job_resume = get_object_or_404(Job_Resume, id=id)
+
+    if job_resume.resume.userinfo.user != request.user:
+        messages.error(request, "你沒有權限取消此應徵")
+        return redirect("resumes:jobs")
+    else:
+        job_resume.delete()
+        messages.success(request, "已取消應徵")
+        return redirect("resumes:jobs")
+
 
 @login_required
 @require_http_methods(["GET", "POST"])
