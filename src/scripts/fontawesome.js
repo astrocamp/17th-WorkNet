@@ -13,14 +13,16 @@ import {
   faMagnifyingGlass as fasMagnifyingGlass,
   faSackDollar as fasSackDollar,
   faPen as fasPen,
-  faUserCircle as faUserCircle,
+  faUserCircle as fasUserCircle,
+  faTrashCan as fasTrashCan,
+  faPlus as fasPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faThumbsDown as farThumbsDown,
   faThumbsUp as farThumbsUp,
   faBell as farBell,
   faHeart as farHeart,
-  faStar as faStar,
+  faStar as farStar,
 } from "@fortawesome/free-regular-svg-icons";
 
 library.add(
@@ -39,9 +41,11 @@ library.add(
   fasMagnifyingGlass,
   fasSackDollar,
   fasPen,
-  faUserCircle,
+  fasUserCircle,
+  farStar,
+  fasTrashCan,
+  fasPlus,
   fasBriefcase,
-  faStar
 );
 dom.i2svg();
 
