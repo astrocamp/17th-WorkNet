@@ -112,7 +112,7 @@
               <a class="text-white btn-sm md:btn-md lg:btn-md btn no-style min-w-28 md:text-lg lg:text-lg hover:border-transparent" href="{% url 'users:sign_in' %}">登入</a>
             </li>
             <li>
-              <a :class="isScrolled ? 'btn-secondary' : 'btn-primary'" class="rounded-full btn btn-secondary lg:btn-primary btn-sm md:btn-md lg:btn-md md:text-lg lg:text-lg min-w-20 md:min-w-24 lg:min-w-24" href="{% url 'users:register' %}">註冊</a>
+              <a :class="isScrolled ? 'btn-secondary lg:btn-secondary' : 'btn-primary'" class="btn btn-secondary lg:btn-primary btn-sm md:btn-md lg:btn-md md:text-lg lg:text-lg min-w-20 md:min-w-24 lg:min-w-24 rounded-full !text-white" href="{% url 'users:register' %}">註冊</a>
             </li>
           </ul>
           {% endif %}
