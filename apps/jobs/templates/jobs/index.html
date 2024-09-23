@@ -21,48 +21,46 @@
                 </div>
             </form>
         </div>
-        <div class="container p-5 pb-24 mx-auto">
-            {% if request.user.is_authenticated and request.user == company.user %}
-                <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:jobs_new' request.user.company.id %}">新增職缺</a>
-            {% endif %}
-        </div>
-        <ul class="flex flex-col gap-8">
+
+        {% if request.user.is_authenticated and request.user.type == 2 %}
+            <div class="flex justify-end mb-4">
+                <a class="text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{% url 'companies:jobs_new' request.user.company.id %}"><i class="fa-solid fa-plus"></i> 新增職缺</a>
+            </div>
+        {% endif %}
+
+        <ul class="flex flex-wrap gap-5 md:gap-7 lg:gap-7">
             {% for job in page_obj %}
                 <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
-                    <div class="items-center block md:flex lg:flex">
-                        <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:pr-4 lg:pr-4">
+                    <div class="flex items-center">
+                        <div class="box-border flex-1 pr-4 md:pr-4 lg:pr-4">
                             <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">{{job.title}}</h2>
                         </div>
                         <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
                             {% if  request.user.is_authenticated and request.user.type == 1 %}
-
                                 <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
                                     {% include "shared/job_favorite.html" with favorited=favorited %}
                                 </div>
                             {% endif %}
-
                         </div>
                     </div>
-                    <h3 class="mt-2 text-sm font-bold text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">from <a href="{% url 'companies:show' job.company_id %}">{{job.company}}</a></h3>
+                    <h3 class="text-sm font-light text-gray-600 mt-0.5 md:text-base lg:text-base line-clamp-2">from <a href="{% url 'companies:show' job.company_id %}">{{job.company}}</a></h3>
                     <p class="mt-2 text-sm font-light text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">{{job.description}}</p>
                     <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
                         <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{job.type}}</span>
                         <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i> {{job.get_location_display}}</span>
                         <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{job.salary_range}} / 月</span>
                     </div>
-                    <div class="flex items-center justify-between mt-6 md:mt-4 lg:mt-4">
+                    <div class="flex flex-col items-start justify-between gap-4 mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
                         <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">2024/07/12</div>
-                        <div class="flex items-center w-full gap-2 md:w-auto lg:w-auto">
+                        <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
                             <a href="{% url 'jobs:show' job.id %}" class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">詳細</a>
                             {% if job.can_edit %}
-                                <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'jobs:edit' job.id %}"><i class="text-base fa-solid fa-pen lg:text-base"></i> <span>編輯</span></a>
-                                <form method="POST" action="{% url 'jobs:delete' job.id %}">
+                                <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'jobs:edit' job.id %}"><i class="text-base fa-solid fa-pen lg:text-base"></i></a>
+                                <form method="POST" action="{% url 'jobs:delete' job.id %}" class="flex flex-auto gap-2 md:gap-4 lg:gap-4">
                                     {% csrf_token %}
-                                    <button class="text-white btn btn-error btn-sm">刪除</button>
+                                    <button class="flex-auto text-base rounded-full btn btn-error btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none"><i class="fa-solid fa-trash-can"></i></button>
                                 </form>
                             {% endif %}
-
-
                         </div>
                     </div>
                 </li>

@@ -80,9 +80,9 @@
             </div>
             <div class="flex flex-col gap-4 justify-between items-start mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
               <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{ job.created_at|date:"Y/m/d" }}</div>
-              <div class="flex gap-4 w-full lg:w-auto">
+              <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
                 {% if request.user.type != 2 and not job.apply %}
-                  <form action="{% url 'users:apply_jobs' job.id %}" method="POST" class="flex flex-auto gap-4">
+                  <form action="{% url 'users:apply_jobs' job.id %}" method="POST" class="flex flex-auto gap-2 md:gap-4 lg:gap-4">
                     {% csrf_token%}
                     <button class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:min-w-24">應徵</button>
                   </form>
@@ -129,7 +129,7 @@
               <div class="flex-1 text-sm font-light text-black md:text-lg lg:text-lg line-clamp-2">
                   {{ company.description }}
               </div>
-              <div class="flex gap-4 w-full lg:w-auto">
+              <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
                 <button class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:min-w-24">
                   <a href="{% url 'companies:show' company.id %}">詳細</a>
                 </button>
