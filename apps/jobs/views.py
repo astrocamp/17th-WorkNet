@@ -58,7 +58,6 @@ def index(request):
 
 def show(request, id):
     job = get_object_or_404(Job, pk=id)
-    company=job.company
     if request.method == "POST":
         form = JobForm(request.POST, instance=job)
         if form.is_valid():
@@ -94,6 +93,8 @@ def show(request, id):
                 "id", flat=True
             )
             status = Job_Resume.objects.filter(job=job, resume__in=user_resume).exists()
+            favorited = JobFavorite.objects.filter(job=job, user=request.user).exists()
+
         except UserInfo.DoesNotExist:
             user_info = None
 
@@ -108,6 +109,7 @@ def show(request, id):
             "is_search_result": is_search_result,
             "search_query": search_query,
             "location": location,
+            "favorited": favorited,
         },
     )
 
