@@ -33,7 +33,7 @@
                 <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
                     <div class="flex items-center">
                         <div class="box-border flex-1 pr-4 md:pr-4 lg:pr-4">
-                            <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">{{job.title}}</h2>
+                            <a href="{% url 'jobs:show' job.id %}"><h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">{{job.title}}</h2></a>
                         </div>
                         <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
                             {% if  request.user.is_authenticated and request.user.type == 1 %}

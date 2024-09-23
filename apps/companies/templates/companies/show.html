@@ -9,8 +9,8 @@
   <div class="bg-[#eef0f0]">
     <div class="container px-5 pt-10 pb-16 lg:pt-20 lg:pb-24 mx-auto">
       <div class="flex border-b border-[#cccccc]">
-        <span @click="activeTab = 'tab1'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab1' }" class="block min-w-0 md:min-w-28 lg:min-w-52 pb-5 text-center text-base md:text-lg lg:text-xl flex-auto md:flex-none lg:flex-none">公司介紹</span>
-        <span @click="activeTab = 'tab2'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab2' }" class="block min-w-0 md:min-w-28 lg:min-w-52 pb-5 text-center text-base md:text-lg lg:text-xl flex-auto md:flex-none lg:flex-none">公司評論</span>
+        <span @click="activeTab = 'tab1'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab1' }" class="block min-w-0 md:min-w-28 lg:min-w-52 pb-5 text-center text-base md:text-lg lg:text-xl flex-auto md:flex-none lg:flex-none cursor-pointer">公司介紹</span>
+        <span @click="activeTab = 'tab2'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab2' }" class="block min-w-0 md:min-w-28 lg:min-w-52 pb-5 text-center text-base md:text-lg lg:text-xl flex-auto md:flex-none lg:flex-none cursor-pointer">公司評論</span>
       </div>
       <div x-show="activeTab === 'tab1'">
         <div class="mt-14 flex flex-col md:flex-row lg:flex-row gap-6 md:gap-12 lg:gap-12 items-start md:items-start lg:items-center mb-10 md:mb-14 lg:mb-14">
@@ -60,21 +60,20 @@
         </div>
 
         <div class="mb-10 md:mb-20 lg:mb-20">
-          <div class="flex justify-between">
-            <h2 class="text-xl md:text-2xl lg:text-3xl font-medium mb-7">公司職缺列表</h2>
-            {% if  request.user.is_authenticated and request.user == company.user %}
-              <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:jobs_new' company.id %}">新增職缺</a>
+          <div class="flex justify-between mb-4 md:mb-7 lg:mb-7">
+            <h2 class="text-xl md:text-2xl lg:text-3xl font-medium">公司職缺列表</h2>
+            {% if request.user.is_authenticated and request.user == company.user %}
+              <a class="text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{% url 'companies:jobs_new' company.id %}"><i class="fa-solid fa-plus"></i> 新增職缺</a>
             {% elif jobs|length > 0  %}
-              <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:jobs_index' company.id %}">全部職缺</a>
+              <a class="text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{% url 'companies:jobs_index' company.id %}">全部職缺</a>
             {% endif %}
-
           </div>
-          <ul class="flex flex-col gap-6 md:gap-8 lg:gap-8">
+          <ul class="flex flex-wrap gap-5 md:gap-7 lg:gap-7">
             <!--card-->
             {% for job in jobs %}
               <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 w-full box-border">
-                <div class="items-center block md:flex lg:flex">
-                  <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:pr-4 lg:pr-4">
+                <div class="flex items-center">
+                  <div class="box-border flex-1 pr-4 md:pr-4 lg:pr-4">
                     <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl"><a href="{% url 'jobs:show' job.id %}">{{ job.title }}</a></h2>
                   </div>
                   {% if  request.user.is_authenticated and request.user.type == 1 %}
@@ -93,13 +92,15 @@
                   </span>
                   <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{ job.salary }} / 月</span>
                 </div>
-                <div class="flex justify-between items-center mt-6 md:mt-4 lg:mt-4">
-                  <div class="text-gray-500 text-xs md:text-base lg:text-base font-light">{{ job.created_at|date:"Y/m/d" }}</div>
+                <div class="flex flex-col items-start justify-between gap-4 mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
+                  <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{ job.created_at|date:"Y/m/d" }}</div>
                   {% if request.user.type != 2 and not job.apply %}
-                    <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
-                      {% csrf_token%}
-                      <button class="btn btn-primary btn-sm md:btn-md lg:btn-md text-base md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 rounded-full">應徵</button>
-                    </form>
+                  <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
+                      <form action="{% url 'users:apply_jobs' job.id %}" method="POST" class="flex flex-auto gap-2 md:gap-4 lg:gap-4">
+                        {% csrf_token%}
+                        <button class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">應徵</button>
+                      </form>
+                  </div>
                   {% endif %}
                 </div>
               </li>
@@ -114,45 +115,45 @@
 
       <div x-show="activeTab === 'tab2'">
         <div class="mb-10 md:mb-20 lg:mb-20">
-          <div class="flex justify-end gap-2 mt-8 mb-4">
+          <div class="flex justify-end mt-14 mb-4 md:mb-7 lg:mb-7 gap-2 lg:gap-5">
             {% if  request.user.is_authenticated and request.user.type == 1 %}
-              <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:post_new' company.id %}">新增評論</a>
+              <a class="text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{% url 'companies:post_new' company.id %}"><i class="fa-solid fa-plus"></i> 新增評論</a>
             {% endif %}
             {% if posts|length > 0 %}
-              <a class="text-white btn btn-primary min-w-20" href="{% url 'companies:post_index' company.id %}">全部評論</a>
+              <a class="text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{% url 'companies:post_index' company.id %}">全部評論</a>
             {% endif %}
           </div>
           <ul class="flex flex-col gap-6 md:gap-8 lg:gap-8">
             <!--card-->
             {% for post in posts %}
-              <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 w-full box-border">
-                <div class="items-center block md:flex lg:flex">
-                  <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:pr-4 lg:pr-4 flex justify-between">
-                    <div class="items-baseline">
-                      <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl inline"><a href="{% url 'posts:show' post.id %}">{{ post.title }}</a></h2>
-                      <div class="inline-flex items-center py-1">
-                        <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
-                        <i class="fa-solid fa-star text-warning text-base md:text-lg lg:text-lg"></i>
-                        <span class="text-base md:text-lg lg:text-lg font-light ml-1">???</span>
-                      </div>
-                    </div>
+              <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
+                <div class="flex flex-col md:flex-row lg:flex-row gap-2 md:gap-7 lg:gap-7">
+                  <h2 class="font-semibold text-xl md:text-2xl lg:text-2xl flex-auto"><a href="{% url 'posts:show' post.id %}">{{ post.title }}</a></h2>
+                  <div class="flex items-center">
                     <span class="self-center">{{ post.user }}</span>
+                    <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
+                    <i class="fa-solid fa-star text-warning text-base md:text-lg lg:text-lg"></i>
+                    <span class="text-base md:text-lg lg:text-lg font-light ml-1">???</span>
                   </div>
                 </div>
-                <p class="mt-2 md:mt-4 lg:mt-4 text-sm font-light text-gray-600 md:text-base lg:text-base line-clamp-2">{{ post.content }}</p>
-                <div class="flex justify-between items-center mt-6 md:mt-4 lg:mt-4">
-                  <div class="text-gray-500 text-xs md:text-base lg:text-base font-light">{{ post.created_at|date:"Y/m/d" }}</div>
-                  {% if can_edit %}
-                    <a class="text-white btn btn-primary btn-sm" href="{% url 'posts:edit' post.id %}">編輯</a>
-                    <form
-                      hx-post="{% url 'posts:delete' post.id %}"
-                      hx-confirm="確認刪除？"
-                      hx-target="body"
-                    >
-                      {% csrf_token %}
-                      <button class="text-white btn btn-error btn-sm" type="submit">刪除</button>
-                    </form>
-                  {% endif %}
+                <p class="mt-2 md:mt-4 lg:mt-4 font-light text-black text-sm md:text-base lg:text-base line-clamp-2">{{ post.content }}</p>
+                <div class="flex flex-col items-start justify-between gap-4 mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
+                  <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{ post.created_at|date:"Y/m/d" }}</div>
+                  <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
+                    <a href="{% url 'posts:show' post.id %}" class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">詳細</a>
+                    {% if post.can_edit %}
+                      <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'posts:edit' post.id %}"><i class="text-base fa-solid fa-pen lg:text-base"></i></a>
+                      <form
+                        class="flex flex-auto gap-2 md:gap-4 lg:gap-4"
+                        hx-post="{% url 'posts:delete' post.id %}"
+                        hx-confirm="確認刪除？"
+                        hx-target="body"
+                      >
+                        {% csrf_token %}
+                        <button class="flex-auto text-base rounded-full btn btn-error btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" type="submit"><i class="fa-solid fa-trash-can"></i></button>
+                      </form>
+                    {% endif %}
+                  </div>
                 </div>
               </li>
             {% endfor %}
