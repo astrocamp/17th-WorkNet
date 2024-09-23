@@ -19,6 +19,7 @@
                         <th>職缺</th>
                         <th>履歷</th>
                         <th>應徵時間</th>
+                        <th>取消應徵</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -29,6 +30,12 @@
                             <td>{{ job_resume.job_title }}</td>
                             <td>{{ job_resume.file_name }}</td>
                             <td class="text-center">{{ job_resume.created_at|date:"Y/m/d" }}</td>
+                            <td>
+                                <form action="{% url 'resumes:jobs_delete' job_resume.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button class="text-red-500">取消應徵</button>
+                                </form>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
