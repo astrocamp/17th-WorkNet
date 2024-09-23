@@ -24,6 +24,11 @@ class CustomUserCreationForm(UserCreationForm):
         "password_mismatch": "兩次輸入的密碼不一致，請重新輸入。",
     }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["username"].error_messages["required"] = "帳號不能為空白。"
+        self.fields["email"].error_messages["required"] = "請使用有效的電子郵件地址。"
+
     def clean_email(self):
         email = self.cleaned_data.get("email")
 
