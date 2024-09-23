@@ -206,6 +206,7 @@ def jobs_index(request, id):
             "title": job.title,
             "description": job.description,
             "type": job.type,
+            "created_at": job.created_at,
             "get_location_display": job.get_location_display,
             "salary_range": job.salary_range,
             "company": job.company.title,

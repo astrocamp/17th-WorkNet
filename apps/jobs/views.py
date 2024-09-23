@@ -31,6 +31,7 @@ def index(request):
             "title": job.title,
             "description": job.description,
             "type": job.type,
+            "created_at": job.created_at,
             "get_location_display": job.get_location_display,
             "salary_range": job.salary_range,
             "company": job.company.title,
@@ -93,6 +94,7 @@ def show(request, id):
                 "id", flat=True
             )
             status = Job_Resume.objects.filter(job=job, resume__in=user_resume).exists()
+            favorited = JobFavorite.objects.filter(job=job, user=request.user).exists()
 
         except UserInfo.DoesNotExist:
             user_info = None
@@ -108,6 +110,7 @@ def show(request, id):
             "is_search_result": is_search_result,
             "search_query": search_query,
             "location": location,
+            "favorited": favorited,
         },
     )
 

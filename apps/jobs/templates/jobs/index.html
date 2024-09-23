@@ -50,9 +50,9 @@
                         <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i> {{job.get_location_display}}</span>
                         <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{job.salary_range}} / 月</span>
                     </div>
-                    <div class="flex flex-col items-start justify-between gap-4 mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
-                        <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">2024/07/12</div>
-                        <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
+                    <div class="flex items-center justify-between mt-6 md:mt-4 lg:mt-4">
+                        <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{job.created_at|date:"Y/m/d"}}</div>
+                        <div class="flex items-center w-full gap-2 md:w-auto lg:w-auto">
                             <a href="{% url 'jobs:show' job.id %}" class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">詳細</a>
                             {% if job.can_edit %}
                                 <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'jobs:edit' job.id %}"><i class="text-base fa-solid fa-pen lg:text-base"></i></a>
