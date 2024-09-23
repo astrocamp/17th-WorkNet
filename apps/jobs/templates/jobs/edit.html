@@ -1,24 +1,50 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
-  <h1 class="text-3xl font-bold">編輯職缺</h1>
+<div class="flex overflow-hidden relative justify-center items-center h-44 text-center md:h-80 lg:h-80">
+  <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">編輯職缺</h1>
+  <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
+  <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
-<div class="container p-5 pb-24 mx-auto">
-  <form method="POST" action="{% url 'jobs:show' job.id %}">
-    {% csrf_token %}
-    {% for field in form %}
-      {% if field.name == 'tags' %}
-        <div x-data="tag_input" class="mt-4">
-          <label for="{{ field.id_for_label }}">所需技能</label>
-          <textarea x-ref="tagInput" type="text"  id="{{ field.id_for_label }}" name="{{ field.name }}" x-init="init({{ tags|safe }})"
-          class="mt-1 textarea-often-base"></textarea>
-          <input type="hidden" x-ref="hiddenTagsInput" name="tags">
+
+<div class="bg-[#eef0f0]">
+  <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
+    <div class="px-5 py-7 bg-white rounded-xl md:rounded-3xl lg:rounded-3xl md:p-10 lg:p-10">
+      <div class="mb-5 text-lg text-error">* 為必填項目</div>
+      <form method="POST" action="{% url 'jobs:show' job.id %}">
+        {% csrf_token %}
+        <div class="flex flex-wrap gap-3 mb-10 md:gap-5 lg:gap-5 md:mb-16 lg:mb-16">
+          {% for field in form %}
+            {% if field.name == 'tags' %}
+              <div class="w-full">
+                <div x-data="tag_input" class="text-sm md:text-base lg:text-base text-primary">
+                  <label for="{{ field.id_for_label }}">所需技能 <span class="text-error">*</span></label>
+                  <textarea x-ref="tagInput" type="text" id="{{ field.id_for_label }}" name="{{ field.name }}" x-init="init({{ tags|safe }})"
+                    class="mt-1 textarea-often-base"></textarea>
+                  <input type="hidden" x-ref="hiddenTagsInput" name="tags">
+                  <div class="text-xl text-error">{{ field.errors }}</div>
+                </div>
+              </div>
+            {% elif field.name == 'description' or field.name == 'contact_info' %}
+              <div class="w-full">
+                <div class="text-sm md:text-base lg:text-base text-primary">{{ field.label }} <span class="text-error">*</span></div>
+                <div class="">{{ field }}</div>
+                <div class="text-xl text-error">{{ field.errors }}</div>
+              </div>
+            {% else %}
+              <div class="w-full md:w-calc-data lg:w-calc-data">
+                <div class="text-sm md:text-base lg:text-base text-primary">{{ field.label }} <span class="text-error">*</span></div>
+                <div class="">{{ field }}</div>
+                <div class="text-xl text-error">{{ field.errors }}</div>
+              </div>
+            {% endif %}
+          {% endfor %}
         </div>
-      {% else %}
-        <div class="mt-4">{{ field.label }} {{ field }} {{ field.errors }}</div>
-      {% endif %}
-    {% endfor %}
-    <div class="mt-4"><button class="text-white btn btn-primary min-w-20">確認修改</button></div>
-  </form>
+        <div class="flex gap-5 justify-center">
+          <button class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28">確認修改</button>
+          <a class="btn btn-neutral btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" onclick="history.back();">回到列表</a>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 {% endblock %}

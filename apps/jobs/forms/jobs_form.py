@@ -15,23 +15,23 @@ class JobForm(ModelForm):
 
         fields = [
             "title",
-            "description",
-            "location",
             "type",
-            "tags",
-            "contact_info",
-            "salary_range",
+            "location",
             "tenure",
+            "salary_range", 
+            "contact_info",
+            "description",
+            "tags",
         ]
 
         widgets = {
-            "title": TextInput(attrs={"class": "mt-1 input-often-base"}),
-            "description": Textarea(attrs={"class": "mt-1 textarea-often-base"}),
-            "location": Select(attrs={"class": "mt-1 input-often-base"}),
-            "type": TextInput(attrs={"class": "mt-1 input-often-base"}),
-            "contact_info": Textarea(attrs={"class": "mt-1 textarea-often-base"}),
-            "salary_range": TextInput(attrs={"class": "mt-1 input-often-base"}),
-            "tenure": NumberInput(attrs={"class": "mt-1 input-often-base"}),
+            "title": TextInput(attrs={"class": "input-often-base", "placeholder": "請輸入職缺名稱"}),
+            "salary_range": TextInput(attrs={"class": "input-often-base", "placeholder": "請輸入薪資範圍"}),
+            "type": TextInput(attrs={"class": "input-often-base", "placeholder": "請輸入工作類型"}),
+            "description": Textarea(attrs={"class": "textarea-often-base", "placeholder": "請輸入職缺描述"}),
+            "location": Select(attrs={"class": "input-often-base"}),
+            "contact_info": Textarea(attrs={"class": "textarea-often-base", "placeholder": "請輸入電話或Email"}),
+            "tenure": NumberInput(attrs={"class": "input-often-base", "placeholder": "請輸入所要年資"}),
         }
 
         labels = {
