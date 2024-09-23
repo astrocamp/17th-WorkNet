@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import OuterRef, Subquery
+from django.db.models import Case, When, OuterRef, CharField, Subquery
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods, require_POST
 
@@ -53,17 +53,29 @@ def delete(request, id):
 
 @login_required
 def jobs(request):
-    job_title_subquery = Job.objects.filter(id=OuterRef("job_id")).values("title")[:1]
-    resume_file_subquery = Resume.objects.filter(id=OuterRef("resume_id")).values(
-        "file"
-    )[:1]
-    resume_subquery = Resume.objects.filter(userinfo__user_id=request.user.id).values(
-        "id"
+    job_title = Job.objects.filter(id=OuterRef("job_id")).values("title")[:1]
+    company_title = Job.objects.filter(id=OuterRef("job_id")).values("company__title")[
+        :1
+    ]
+    resume_file = Resume.objects.filter(id=OuterRef("resume_id")).values("file")[:1]
+    resume_name = Resume.objects.filter(id=OuterRef("resume_id")).values("name")[:1]
+    resume = Resume.objects.filter(userinfo__user_id=request.user.id).values("id")
+    job_resumes = (
+        Job_Resume.objects.filter(resume_id__in=resume)
+        .order_by("-created_at")
+        .annotate(
+            job_title=Subquery(job_title),
+            company_title=Subquery(company_title),
+            resume_file=Subquery(resume_file),
+            resume_name=Subquery(resume_name),
+            file_name=Case(
+                When(resume_name="", then=Subquery(resume_file)),
+                default="resume_name",
+                output_field=CharField(),
+            ),
+        )
     )
-    job_resumes = Job_Resume.objects.filter(resume_id__in=resume_subquery).annotate(
-        job_title=Subquery(job_title_subquery),
-        resume_file=Subquery(resume_file_subquery),
-    )
+
     return render(request, "resumes/job.html", {"job_resumes": job_resumes})
 
 

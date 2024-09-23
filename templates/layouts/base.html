@@ -12,7 +12,7 @@
   <body class="flex flex-col min-h-screen" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
     {% include "shared/navbar.html" %}
     {% include "shared/message.html" %}
-      <main>{% block content %}{% endblock %}</main>
+      <main class="flex flex-col flex-1">{% block content %}{% endblock %}</main>
     {% include "shared/footer.html" %}
   </body>
 </html>
