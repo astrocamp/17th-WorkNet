@@ -1,9 +1,10 @@
 {%extends "layouts/base.html"%}
-
   {% block content %}
-    <div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
-       <h1 class="text-3xl font-bold">喜愛的公司</h1>
-     </div>
+  <div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
+    <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">喜愛的公司</h1>
+    <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
+    <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
+</div>
      <div class="container p-5 pb-24 mx-auto">
       {% if favorites %}
         <ul class="mt-6 divide-y divide-slate-200">
