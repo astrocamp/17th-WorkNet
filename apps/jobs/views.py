@@ -148,6 +148,12 @@ def search_results(request):
         .order_by("created_at")
     )
 
+    applied_job_ids = []
+    if request.user.is_authenticated:
+        applied_job_ids = Job_Resume.objects.filter(
+            resume__userinfo__user=request.user
+        ).values_list("job_id", flat=True)
+
     page_obj = paginate_queryset(request, jobs, 10)
     all_tags = Tag.objects.all()
 
@@ -163,5 +169,6 @@ def search_results(request):
             "all_tags": all_tags,
             "search_term": search_term,
             "location": location_label,
+            "applied_job_ids": list(applied_job_ids),
         },
     )
