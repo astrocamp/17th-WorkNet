@@ -198,6 +198,7 @@ def post_new(request, id):
 
 def jobs_index(request, id):
     company = get_object_or_404(Company, id=id)
+
     jobs = Job.objects.filter(company=company).order_by("-id").select_related("company")
     jobs_with_permissions = [
         {
@@ -224,6 +225,7 @@ def jobs_index(request, id):
 
 
 @login_required
+@rule_required("can_new_job")
 def jobs_new(request, id):
     company = get_object_or_404(Company, id=id)
     form = JobForm(request.POST)
