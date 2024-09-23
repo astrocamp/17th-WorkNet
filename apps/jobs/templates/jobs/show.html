@@ -14,19 +14,24 @@
         <div class="box-border flex-1 pt-6 md:pt-0 lg:pt-0 md:pr-4 lg:pr-4">
           <div class="flex items-center justify-between">
             <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">{{ job.title }}</h2>
-            <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
-              {% csrf_token %}
-              <input type="hidden" name="job_id" value="{{ job.id }}">
-              {% if status == False and request.user.type == 1 %}
-                <button class="text-base rounded-full btn btn-secondary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28">
-                  應徵此職缺
-                </button>
-              {% endif %}
-            </form>
-        </div>
-        <div class="flex border-b border-[#cccccc] mt-4 mb-14"></div>
-
-
+              <div class="flex flex-col items-center justify-center gap-2 text-2xl md:items-start lg:items-start md:flex-row ">
+                {% if  request.user.is_authenticated and request.user.type == 1 %}
+                  <div class="flex gap-2 justify-center items-center text-2xl top-2.5 right-3 md:static lg:static ">
+                    {% include "shared/job_favorite.html" with favorited=favorited %}
+                  </div>
+                {% endif %}
+                <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
+                  {% csrf_token %}
+                  <input type="hidden" name="job_id" value="{{ job.id }}">
+                  {% if status == False and request.user.type == 1 %}
+                    <button class="text-base rounded-full btn btn-secondary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28">
+                      應徵此職缺
+                    </button>
+                  {% endif %}
+                </form>
+              </div>
+            </div>
+          <div class="flex border-b border-[#cccccc] mt-4 mb-14"></div>
         <div class="container p-5 pb-24 mx-auto">
           <div class="flex flex-col items-start gap-6 mb-10 md:flex-row lg:flex-row md:gap-12 lg:gap-12 md:items-start lg:items-center md:mb-14 lg:mb-14">
             <div class="flex-1">
@@ -34,35 +39,39 @@
 
 
                 <div class="flex w-full mb-4">
-                  <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">職缺描述</div>
+                  <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">職缺描述</div>
                   <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.description }}</div>
                 </div>
                 <div class="flex w-full md:w-full lg:w-calc-data">
-                  <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">工作地點</div>
+                  <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">工作地點</div>
                   <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.get_location_display }}</div>
                 </div>
                 <div class="flex w-full md:w-full lg:w-calc-data">
-                  <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">工作類型</div>
+                  <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">工作類型</div>
                   <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.type}}</div>
                 </div>
                 <div class="flex w-full md:w-full lg:w-calc-data">
-                  <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">聯絡方式</div>
+                  <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">聯絡方式</div>
                   <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.contact_info}}</div>
                 </div>
                 <div class="flex w-full md:w-full lg:w-calc-data">
-                  <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">聯絡方式</div>
+                  <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">聯絡方式</div>
                   <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.contact_info}}</div>
                 </div>
                 <div class="flex w-full md:w-full lg:w-calc-data">
-                  <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">薪資範圍</div>
+                  <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">薪資範圍</div>
                   <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.salary_range}}</div>
                 </div>
                 <div class="flex w-full md:w-full lg:w-calc-data">
-                  <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">年資</div>
+                  <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">年資</div>
                   <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.tenure}}年</div>
                 </div>
                 <div class="flex w-full md:w-full lg:w-calc-data">
-                  <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">所需技能</div>
+                  <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">發布時間</div>
+                  <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.created_at|date:"Y/m/d"}}</div>
+                </div>
+                <div class="flex w-full md:w-full lg:w-calc-data">
+                  <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">所需技能</div>
                   <section class="border-none tagify">
                     {% for tag in tags%}
                       <span class="tagify__tag "><div><span class="tagify__tag-text"><a href="{% url 'jobs:search_results' %}?q={{tag.name}}">{{ tag.name }}</a></span></div></span>
