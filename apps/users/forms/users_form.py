@@ -87,8 +87,7 @@ class UserInfoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field_name in self.fields:
-            if field_name != "birth":
-                self.fields[field_name].required = True
+            self.fields[field_name].required = True
 
         self.fields["nickname"].error_messages["required"] = "姓名不能為空。"
         self.fields["tel"].error_messages["required"] = "手機號碼不能為空。"
