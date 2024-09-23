@@ -35,6 +35,16 @@ class CustomUserCreationForm(UserCreationForm):
 
         return email
 
+    def clean_username(self):
+        username = self.cleaned_data.get("username")
+
+        if username is None:
+            raise ValidationError("帳號不能為空白。")
+
+        if User.objects.filter(username=username).exists():
+            raise ValidationError("該帳號已被註冊，請選擇其他帳號。")
+        return username
+
 
 class UserInfoForm(ModelForm):
 
