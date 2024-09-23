@@ -39,6 +39,7 @@ def index(request):
             "company": company,
             "favorited": company.is_favorited_by(request.user),
             "can_edit": rules.test_rule("can_edit_company", request.user, company.id),
+            "post_count": Post.objects.filter(company=company).count(),
         }
         for company in companies
     ]

@@ -7,3 +7,4 @@ class PostsConfig(AppConfig):
 
     def ready(self):
         import apps.posts.rules
+        import apps.posts.signals

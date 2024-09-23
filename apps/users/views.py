@@ -320,6 +320,7 @@ def get_popular_companies(user):
             "id": company.id,
             "title": company.title,
             "description": company.description,
+            "score": company.score,
             "post_count": Post.objects.filter(company=company).count(),
             "favorited": (
                 CompanyFavorite.objects.filter(company=company, user=user).exists()

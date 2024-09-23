@@ -20,10 +20,12 @@
           <div class="flex-1">
             <div class="flex flex-wrap gap-3 md:gap-5 lg:gap-5">
               <div class="w-full">
-                <div class="inline-flex items-center align-top bg-secondary rounded-full py-1 px-2.5">
-                  <i class="text-sm fa-solid fa-star text-warning md:text-md lg:text-md"></i>
-                  <span class="ml-1 text-sm font-bold text-white md:text-lg lg:text-lg">???</span>
-                </div>
+                {% if company.score > 0 %}
+                  <div class="inline-flex items-center align-top bg-secondary rounded-full py-1 px-2.5">
+                    <i class="fa-solid fa-star text-warning text-sm md:text-md lg:text-md"></i>
+                    <span class="ml-1 text-sm md:text-lg lg:text-lg font-bold text-white">{{ company.score }}</span>
+                  </div>
+                {% endif %}
               </div>
               <div class="flex w-full md:w-full lg:w-calc-data">
                 <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">負責人</div>
@@ -126,14 +128,14 @@
           <ul class="flex flex-col gap-6 md:gap-8 lg:gap-8">
             <!--card-->
             {% for post in posts %}
-              <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
-                <div class="flex flex-col gap-2 md:flex-row lg:flex-row md:gap-7 lg:gap-7">
-                  <h2 class="flex-auto text-xl font-semibold md:text-2xl lg:text-2xl"><a href="{% url 'posts:show' post.id %}">{{ post.title }}</a></h2>
+              <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 w-full box-border">
+                <div class="flex flex-col md:flex-row lg:flex-row gap-2 md:gap-7 lg:gap-7">
+                  <h2 class="font-semibold text-xl md:text-2xl lg:text-2xl flex-auto"><a href="{% url 'posts:show' post.id %}">{{ post.title }}</a></h2>
                   <div class="flex items-center">
                     <span class="self-center">{{ post.user }}</span>
                     <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
-                    <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
-                    <span class="ml-1 text-base font-light md:text-lg lg:text-lg">???</span>
+                    <i class="fa-solid fa-star text-warning text-base md:text-lg lg:text-lg"></i>
+                    <span class="text-base md:text-lg lg:text-lg font-light ml-1">{{ post.score }}</span>
                   </div>
                 </div>
                 <p class="mt-2 text-sm font-light text-black md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">{{ post.content }}</p>

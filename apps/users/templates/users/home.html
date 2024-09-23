@@ -122,9 +122,11 @@
                   <a href="{% url 'companies:show' company.id %}">{{ company.title }}</a>
                 </h2>
                 <div class="flex items-center mt-px">
-                  <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
-                  <span class="ml-2 text-base font-light md:text-xl lg:text-xl">???</span>
-                  <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
+                  {% if company.score > 0 %}
+                    <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
+                    <span class="ml-2 text-base font-light md:text-xl lg:text-xl">{{ company.score }}</span>
+                    <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
+                  {% endif %}
                   <span class="text-base font-light md:text-xl lg:text-xl">
                     <a href="{% url 'companies:post_index' company.id %}">{{ company.post_count }}個評論</a>
                   </span>
