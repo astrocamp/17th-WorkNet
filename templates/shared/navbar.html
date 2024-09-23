@@ -66,14 +66,15 @@
                 <h2 class="flex justify-between text-base text-white">
                   <div class="flex-1">
                     {% if request.user.type == 1 %}
-                      <i class="mr-1 fa-solid fa-user"></i>
-                    {% if request.user.userinfo.nickname %}
-                    {{ request.user.userinfo.nickname }}，您好
+                        <i class="mr-1 fa-solid fa-user"></i>
+                        {% if request.user.userinfo.nickname %}
+                            {{ request.user.userinfo.nickname }}，您好
+                        {% else %}
+                            {{ request.user }}，您好
+                        {% endif %}
                     {% else %}
-                    {% else %}
-                      <i class="mr-1 fa-solid fa-briefcase"></i>
-                    {% endif %}
-                    {{ request.user }}，您好
+                        <i class="mr-1 fa-solid fa-briefcase"></i>
+                        {{ request.user }}，您好
                     {% endif %}
                   </div>
                   <div><i class="ml-1 fa-solid fa-caret-down"></i></div>
