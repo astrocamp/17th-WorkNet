@@ -86,6 +86,7 @@ def show(request, id):
     location = query_params.get("location", [""])[0]
 
     status = False
+    favorited = False
 
     if request.user.is_authenticated and request.user.type == 1:
         try:
