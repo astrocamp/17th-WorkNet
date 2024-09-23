@@ -198,10 +198,13 @@ def post_new(request, id):
 
 def jobs_index(request, id):
     company = get_object_or_404(Company, id=id)
-    jobs = Job.objects.filter(company=company).order_by("-created_at")
+    jobs = (
+        Job.objects.filter(company=company)
+        .order_by("-created_at")
+        .select_related("company")
+    )
     jobs_with_permissions = [
-        {"job": job, "can_edit": rules.test_rule("can_edit_job", request.user, job.id)}
-        for job in jobs
+        {"job": job, "can_edit": True, "company": job.company} for job in jobs
     ]
     page_obj = paginate_queryset(request, jobs_with_permissions, 10)
 

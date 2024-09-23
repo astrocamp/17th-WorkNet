@@ -28,10 +28,12 @@ def index(request):
                 JobFavorite.objects.filter(job=job, user=request.user).exists()
                 if request.user.is_authenticated
                 else False
-            ),"company":job.company
-        } for job in jobs]
-  
-    
+            ),
+            "company": job.company,
+        }
+        for job in jobs
+    ]
+
     page_obj = paginate_queryset(request, jobs_with_permissions, 10)
     return render(request, "jobs/index.html", {"page_obj": page_obj})
 
