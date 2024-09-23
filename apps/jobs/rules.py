@@ -1,8 +1,9 @@
 import rules
 from django.shortcuts import get_object_or_404
 
-from .models import Job
 from apps.companies.models import Company
+
+from .models import Job
 
 
 @rules.predicate
