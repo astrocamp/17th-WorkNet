@@ -105,7 +105,4 @@ def edit(request, id):
     else:
         form = ResumeForm(instance=resume)
 
-    print("---")
-    print(Resume)
-    print("----")
     return render(request, "resumes/edit.html", {"form": form, "resume": resume})
