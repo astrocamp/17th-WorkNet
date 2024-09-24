@@ -16,6 +16,7 @@ class CompanyForm(ModelForm):
             "employees",
             "name",
             "email",
+            "images",
         ]
 
         widgets = {
