@@ -11,24 +11,24 @@
 
 <div class="flex-1 bg-[#eef0f0]">
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
+        <div class="flex flex-col w-full md:flex-row md:items-center md:justify-between mb-7">
+            <div class="flex items-center flex-1">
+                <div class="w-1.5 h-7 bg-blue-500 rounded-full"></div>
+                <div class="pl-2 text-2xl font-bold">
+                    {% if search_term %}
+                        {{ search_term }}
+                    {% endif %}
+                    {% if location %}
+                        {{ location }}
+                    {% endif %}
+                </div>
+            </div>
+            <div class="gap-5 mt-4 md:mt-0 md:pt-1">
+                共搜尋了 <span class="text-blue-500">{{ count }}</span> 筆資料
+            </div>
+        </div>
         <ul class="flex flex-wrap gap-5 md:gap-7 lg:gap-7">
             {% if page_obj %}
-                <div class="flex flex-col w-full md:flex-row md:items-center md:justify-between mb-7">
-                    <div class="flex items-center">
-                        <div class="w-1.5 h-10 bg-blue-500 rounded-full"></div>
-                        <div class="pl-2 text-2xl font-bold">
-                            {% if search_term %}
-                                {{ search_term }}
-                            {% endif %}
-                            {% if location %}
-                                {{ location }}
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="mt-4 md:mt-0">
-                        共搜尋了 <span class="text-blue-500">{{ count }}</span> 筆資料
-                    </div>
-                </div>
                 {% for job in page_obj %}
                     <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
                         <div class="flex items-center">
