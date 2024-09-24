@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('resumes', '0003_resume_name_resume_resumes_res_deleted_d99b05_idx'),
+        ("resumes", "0003_resume_name_resume_resumes_res_deleted_d99b05_idx"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='resume',
-            name='original_filename',
+            model_name="resume",
+            name="original_filename",
             field=models.CharField(blank=True, max_length=255),
         ),
     ]

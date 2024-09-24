@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<div class="flex overflow-hidden relative justify-center items-center h-44 text-center md:h-80 lg:h-80">
+<div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
     <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">修改履歷檔名</h1>
     <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
@@ -9,7 +9,7 @@
 <div class="flex-1 bg-[#eef0f0]">
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
         <div class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 w-full box-border flex flex-col gap-4">
-            <form method="POST" class="flex items-center gap-4 flex-col md:flex-row lg:flex-row">
+            <form method="POST" class="flex flex-col items-center gap-4 md:flex-row lg:flex-row">
                 {% csrf_token %}
                 {% if form.errors %}
                 <div class="mb-4 text-red-600">
@@ -20,9 +20,9 @@
                     </ul>
                 </div>
                 {% endif %}
-                <div class="flex items-center gap-4 flex-grow w-full md:w-auto lg:w-auto">
+                <div class="flex items-center flex-grow w-full gap-4 md:w-auto lg:w-auto">
                     <label for="id_name" class="text-xl font-semibold md:text-2xl lg:text-2xl whitespace-nowrap">檔名:</label>
-                    <input id="id_name" value="{{ form.name.value }}" class="input-often-base">
+                    <input type="text" name="original_filename" id="id_original_filename" value="{{ form.original_filename.value }}" class="input-often-base">
                 </div>
                 <div class="flex gap-2">
                     <button class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" type="submit">儲存變更</button>
@@ -30,6 +30,7 @@
                 </div>
             </form>
         </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

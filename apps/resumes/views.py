@@ -15,9 +15,6 @@ def index(request):
     resumes = Resume.objects.filter(userinfo=request.user.userinfo).order_by(
         "-uploaded_at"
     )
-    print("---")
-    print(resumes)
-    print("---")
     return render(request, "resumes/index.html", {"resumes": resumes})
 
 
@@ -104,7 +101,7 @@ def edit(request, id):
         form = ResumeForm(request.POST, instance=resume)
         if form.is_valid():
             form.save()
-            messages.success(request, "更新成功")
+            messages.success(request, "檔名更新成功")
             return redirect("resumes:index")
     else:
         form = ResumeForm(instance=resume)

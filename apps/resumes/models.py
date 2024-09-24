@@ -24,5 +24,7 @@ class Resume(SoftDeletetable, models.Model):
     def __str__(self):
         return f"{self.userinfo.user.username} - {self.file.name}"
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
+    fields = [
+        "original_filename",
+        "file",
+    ]
