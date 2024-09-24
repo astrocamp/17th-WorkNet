@@ -12,13 +12,14 @@
         {% if resumes %}
         <ul class="flex flex-wrap gap-5 md:gap-7 lg:gap-7">
             {% for resume in resumes %}
-            <li class="relative w-full p-6 bg-white border border-[#e7e8eb] rounded-xl md:rounded-3xl lg:rounded-3xl">
-                <div class="flex flex-col md:flex-row">
-                    <div class="box-border flex-1 pr-4">
-                        <a class="text-xl font-semibold md:text-2xl lg:text-2xl" href="{{ resume.file.url }}" target="_blank">{{ resume.file.name|cut:"resumes/" }}</a>
-                        <p class="mt-1 text-sm font-light text-gray-500 md:text-base lg:text-base">{{ resume.uploaded_at|date:"Y/m/d, g:i a" }}</p>
+                <li class="flex gap-2 p-5">
+                    <div class="flex-1">
+                        <a class="text-lg font-bold" href="{{ resume.file.url }}" target="_blank">{{ resume.original_filename|cut:"resumes/" }}</a>
+                        <p class="mt-1 text-sm font-light text-gray-400">
+                            <span>{{ resume.uploaded_at|date:"Y/m/d, g:i a" }}</span>
+                        </p>
                     </div>
-                    <div class="flex gap-2 justify-center mt-4 sm:mt-0 sm:justify-end">
+                    <div class="flex justify-center gap-2 mt-4 sm:mt-0 sm:justify-end">
                         <a class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{{ resume.file.url }}" target="_blank">預覽</a>
                         <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md" href="{% url 'resumes:edit' resume.id %}">
                             <i class="text-base fa-solid fa-pen lg:text-base"></i>
