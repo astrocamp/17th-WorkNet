@@ -1,6 +1,6 @@
 {% extends "layouts/base.html" %} {% block content %}
 {% load static %}
-<div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
+<div class="flex overflow-hidden relative justify-center items-center h-44 text-center md:h-80 lg:h-80">
   <h1 class="relative z-20 px-5 text-3xl font-bold text-white md:text-5xl lg:text-5xl">{{ company.title }}</h1>
   <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
   <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
@@ -9,20 +9,20 @@
   <div class="bg-[#eef0f0]">
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
       <div class="flex border-b border-[#cccccc]">
-        <span @click="activeTab = 'tab1'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab1' }" class="flex-auto block min-w-0 pb-5 text-base text-center cursor-pointer md:min-w-28 lg:min-w-52 md:text-lg lg:text-xl md:flex-none lg:flex-none">公司介紹</span>
-        <span @click="activeTab = 'tab2'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab2' }" class="flex-auto block min-w-0 pb-5 text-base text-center cursor-pointer md:min-w-28 lg:min-w-52 md:text-lg lg:text-xl md:flex-none lg:flex-none">公司評論</span>
+        <span @click="activeTab = 'tab1'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab1' }" class="block flex-auto pb-5 min-w-0 text-base text-center cursor-pointer md:min-w-28 lg:min-w-52 md:text-lg lg:text-xl md:flex-none lg:flex-none">公司介紹</span>
+        <span @click="activeTab = 'tab2'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab2' }" class="block flex-auto pb-5 min-w-0 text-base text-center cursor-pointer md:min-w-28 lg:min-w-52 md:text-lg lg:text-xl md:flex-none lg:flex-none">公司評論</span>
       </div>
       <div x-show="activeTab === 'tab1'">
-        <div class="flex flex-col items-start gap-6 mb-10 mt-14 md:flex-row lg:flex-row md:gap-12 lg:gap-12 md:items-start lg:items-center md:mb-14 lg:mb-14">
+        <div class="flex flex-col gap-6 items-start mt-14 mb-10 md:flex-row lg:flex-row md:gap-12 lg:gap-12 md:items-start lg:items-center md:mb-14 lg:mb-14">
           <div class="max-w-[200px] w-1/2 md:w-1/3 lg:w-1/4 aspect-square overflow-hidden rounded-3xl bg-gray-300 relative m-auto">
-            <img class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" src="{% static 'imgs/logo.png' %}">
+            <img class="absolute top-1/2 left-1/2 w-full transform -translate-x-1/2 -translate-y-1/2" src="{% static 'imgs/logo.png' %}">
           </div>
           <div class="flex-1">
             <div class="flex flex-wrap gap-3 md:gap-5 lg:gap-5">
               <div class="w-full">
-                <div class="inline-flex items-center align-top bg-secondary rounded-full py-1 px-2.5">
+                <div class="inline-flex items-center px-2.5 py-1 align-top rounded-full bg-secondary">
                   <i class="text-sm fa-solid fa-star text-warning md:text-md lg:text-md"></i>
-                  <span class="ml-1 text-sm font-bold text-white md:text-lg lg:text-lg">???</span>
+                  <span class="ml-1 text-sm font-bold text-white md:text-lg lg:text-lg">-</span>
                 </div>
               </div>
               <div class="flex w-full md:w-full lg:w-calc-data">
@@ -77,13 +77,13 @@
                     <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl"><a href="{% url 'jobs:show' job.id %}">{{ job.title }}</a></h2>
                   </div>
                   {% if  request.user.is_authenticated and request.user.type == 1 %}
-                    <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
+                    <div class="flex absolute top-2.5 right-3 gap-2 text-2xl md:lg:static lg:static">
                       {% include "shared/job_favorite.html" with favorited=job.favorited%}
                     </div>
                   {% endif %}
                 </div>
                 <p class="mt-2 text-sm font-light text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">{{ job.description }}</p>
-                <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
+                <div class="flex flex-wrap gap-1 mt-2 text-base font-light md:mt-4 lg:mt-4 md:gap-1.5 lg:gap-2.5">
                   <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{ job.type }}</span>
                   <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base">
                     <a href="{% url 'jobs:search_results' %}?location={{job.location}}">
@@ -92,10 +92,10 @@
                   </span>
                   <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{ job.salary }} / 月</span>
                 </div>
-                <div class="flex flex-col items-start justify-between gap-4 mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
+                <div class="flex flex-col gap-4 justify-between items-start mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
                   <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{ job.created_at|date:"Y/m/d" }}</div>
                   {% if request.user.type != 2 and not job.apply %}
-                  <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
+                  <div class="flex gap-2 w-full md:gap-4 lg:gap-4 lg:w-auto">
                       <form action="{% url 'users:apply_jobs' job.id %}" method="POST" class="flex flex-auto gap-2 md:gap-4 lg:gap-4">
                         {% csrf_token%}
                         <button class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">應徵</button>
@@ -115,7 +115,7 @@
 
       <div x-show="activeTab === 'tab2'">
         <div class="mb-10 md:mb-20 lg:mb-20">
-          <div class="flex justify-end gap-2 mb-4 mt-14 md:mb-7 lg:mb-7 lg:gap-5">
+          <div class="flex gap-2 justify-end mt-14 mb-4 md:mb-7 lg:mb-7 lg:gap-5">
             {% if  request.user.is_authenticated and request.user.type == 1 %}
               <a class="text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{% url 'companies:post_new' company.id %}"><i class="fa-solid fa-plus"></i> 新增評論</a>
             {% endif %}
@@ -137,9 +137,9 @@
                   </div>
                 </div>
                 <p class="mt-2 text-sm font-light text-black md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">{{ post.content }}</p>
-                <div class="flex flex-col items-start justify-between gap-4 mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
+                <div class="flex flex-col gap-4 justify-between items-start mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
                   <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{ post.created_at|date:"Y/m/d" }}</div>
-                  <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
+                  <div class="flex gap-2 w-full md:gap-4 lg:gap-4 lg:w-auto">
                     <a href="{% url 'posts:show' post.id %}" class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">詳細</a>
                     {% if post.can_edit %}
                       <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'posts:edit' post.id %}"><i class="text-base fa-solid fa-pen lg:text-base"></i></a>
@@ -165,7 +165,7 @@
         </div>
       </div>
 
-      <div class="flex justify-center gap-5">
+      <div class="flex gap-5 justify-center">
         <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" href="{% url 'companies:index' %}">返回列表</a>
       </div>
     </div>
