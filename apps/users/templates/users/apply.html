@@ -1,31 +1,40 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
-<div class="flex justify-center items-center mt-20 h-24 text-center bg-gray-100">
-  <h1 class="text-3xl font-bold">應徵工作</h1>
+<div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
+  <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">應徵工作</h1>
+  <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
+  <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
 
-<div class="container p-5 pb-24 mx-auto">
-  <div class="flex-1">
-    <h1>應徵的工作職稱：{{job.title}}</h1>
-    <h1>應徵的工作地點： {{job.location}}</h1>
-  </div>
-
-  <div class="flex gap-2">
-    <form action="{% url 'users:submit_jobs' job.id %}" method="POST">
-      {%csrf_token%}
-        <input type="hidden" name="job_id" value="{{ job.id }}">
-        <label for="resume">選擇履歷:</label>
-        <select name="resume_id" id="resume">
-          {% for resume in resumes %}
-          <option value="{{ resume.id }}">{{ resume.file }}</option>
-          {% endfor %}
-        </select>
-        <p class="mt-2 text-sm text-gray-500">* 只接受 PDF 格式的履歷</p>
-      <button class="text-white btn btn-error btn-sm" >提交申請</button>
-      <button class="text-white btn btn-error btn-sm" ><a href="{% url 'jobs:show' job.id %}">取消</a></button>
-    </form>
+<div class="flex-1 bg-[#eef0f0]">
+  <div class="container p-5 pb-24 mx-auto">
+    <div class="flex-1">
+      <h1>應徵的工作職稱：{{job.title}}</h1>
+      <h1>應徵的工作地點： {{job.location}}</h1>
+    </div>
+  
+    <div class="flex gap-2">
+      <form action="{% url 'users:submit_jobs' job.id %}" method="POST">
+        {%csrf_token%}
+          <input type="hidden" name="job_id" value="{{ job.id }}">
+          <label for="resume">選擇履歷:</label>
+          <select name="resume_id" id="resume">
+            {% for resume in resumes %}
+            <option value="{{ resume.id }}">
+              {% if resume.name %}
+                {{ resume.name|cut:"resumes/" }}
+              {% else %}
+                {{ resume.file|cut:"resumes/" }}
+              {% endif %}
+            </option>
+            {% endfor %}
+          </select>
+          <p class="mt-2 text-sm text-gray-500">* 只接受 PDF 格式的履歷</p>
+        <button class="text-white btn btn-error btn-sm" >提交申請</button>
+        <button class="text-white btn btn-error btn-sm" ><a href="{% url 'jobs:show' job.id %}">取消</a></button>
+      </form>
+    </div>
   </div>
 </div>
-
 {%endblock%}
