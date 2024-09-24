@@ -265,59 +265,26 @@ def company_application(request):
 
 def search_results(request):
     search_term = request.GET.get("q")
-    location = request.GET.get("location")
-    tags = request.GET.getlist("tags")
     search_filter = Q()
 
     if search_term:
-        tagged_items = TaggedItem.objects.filter(tag__name__icontains=search_term)
-        job_ids_with_tags = tagged_items.values_list("object_id", flat=True)
+        search_filter &= Q(title__icontains=search_term)
 
-        search_filter &= (
-            Q(title__icontains=search_term)
-            | Q(company__title__icontains=search_term)
-            | Q(location__icontains=search_term)
-            | Q(id__in=job_ids_with_tags)
-        )
-
-    if location:
-        search_filter &= Q(location__icontains=location)
-
-    if tags:
-        tagged_items = TaggedItem.objects.filter(tag__name__in=tags)
-        job_ids_with_tags = tagged_items.values_list("object_id", flat=True)
-        search_filter &= Q(id__in=job_ids_with_tags)
-
-    jobs = (
-        Job.objects.filter(search_filter)
-        .select_related("company")
-        .distinct()
-        .order_by("created_at")
-    )
-
-    applied_job_ids = []
-    if request.user.is_authenticated:
-        applied_job_ids = Job_Resume.objects.filter(
-            resume__userinfo__user=request.user
-        ).values_list("job_id", flat=True)
+    companies = Company.objects.filter(search_filter).distinct().order_by("created_at")
 
     current_page = request.GET.get("page", 1)
-    page_obj = paginate_queryset(request, jobs, 10)
-    all_tags = Tag.objects.all()
+    page_obj = paginate_queryset(request, companies, 10)
 
-    location_dict = dict(LOCATION_CHOICES)
-    location_label = location_dict.get(location)
+    print("---")
+    print(search_term)
+    print("---")
 
     return render(
         request,
         "companies/search_results.html",
         {
             "page_obj": page_obj,
-            "tags": tags,
-            "all_tags": all_tags,
             "search_term": search_term,
-            "location": location_label,
-            "applied_job_ids": list(applied_job_ids),
             "current_page": current_page,
         },
     )
