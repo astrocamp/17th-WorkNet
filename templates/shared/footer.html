@@ -7,6 +7,11 @@
       {% else %}
         <a class="text-base link link-hover" href="{% url 'jobs:index' %}">職缺</a>
       {% endif %}
+      {% if request.user.type == 2 %}
+        <a class="text-base link link-hover" href="{% url 'companies:post_index' request.user.company.id %}">評論</a>
+      {% else %}
+        <a class="text-base link link-hover" href="{% url 'posts:index' %}">評論</a>
+      {% endif %}
       <a href="{% url 'analytics:index' %}" class="text-base link link-hover">分析</a>
     </nav>
     <aside>

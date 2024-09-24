@@ -13,7 +13,11 @@ from .models import Comment, LikeLog, Post
 
 def index(request):
     posts = Post.objects.order_by("-created_at")
-    page_obj = paginate_queryset(request, posts, 10)
+    posts_with_permissions = [
+        {"post": post, "can_edit": rules.test_rule("can_edit_post", request.user, post)}
+        for post in posts
+    ]
+    page_obj = paginate_queryset(request, posts_with_permissions, 10)
     return render(request, "posts/index.html", {"page_obj": page_obj})
 
 
