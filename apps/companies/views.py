@@ -295,10 +295,6 @@ def search_results(request):
     current_page = request.GET.get("page", 1)
     page_obj = paginate_queryset(request, companies, 10)
 
-    print("---")
-    print(search_term)
-    print("---")
-
     return render(
         request,
         "companies/search_results.html",

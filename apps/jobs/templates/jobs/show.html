@@ -21,13 +21,17 @@
                   </div>
                 {% endif %}
                 <form action="{% url 'users:apply_jobs' job.id %}" method="POST">
-                  {% csrf_token %}
-                  <input type="hidden" name="job_id" value="{{ job.id }}">
-                  {% if status == False and request.user.type == 1 %}
-                    <button class="text-base rounded-full btn btn-secondary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28">
-                      應徵此職缺
-                    </button>
-                  {% endif %}
+                    {% csrf_token %}
+                    <input type="hidden" name="job_id" value="{{ job.id }}">
+                    {% if not request.user.is_authenticated %}
+                        <a type="button" href="{% url 'users:sign_in' %}?next={% url 'users:apply_jobs' job.id %}" class="text-base rounded-full btn btn-secondary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28">
+                            登入應徵
+                        </a>
+                    {% elif status == False and request.user.type == 1 %}
+                        <button class="text-base rounded-full btn btn-secondary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28">
+                            應徵此職缺
+                        </button>
+                    {% endif %}
                 </form>
               </div>
             </div>
