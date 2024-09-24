@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %}
 
 {% block content %}
-<div class="flex items-center justify-center h-24 mt-20 text-center bg-gray-100">
+<div class="flex justify-center items-center mt-20 h-24 text-center bg-gray-100">
   <h1 class="text-3xl font-bold">應徵工作</h1>
 </div>
 
@@ -21,6 +21,7 @@
           <option value="{{ resume.id }}">{{ resume.file }}</option>
           {% endfor %}
         </select>
+        <p class="mt-2 text-sm text-gray-500">* 只接受 PDF 格式的履歷</p>
       <button class="text-white btn btn-error btn-sm" >提交申請</button>
       <button class="text-white btn btn-error btn-sm" ><a href="{% url 'jobs:show' job.id %}">取消</a></button>
     </form>
