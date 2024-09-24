@@ -32,6 +32,7 @@ class Company(SoftDeletetable, models.Model):
         through="CompanyFavorite",
     )
     score = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
+    images = models.ImageField(upload_to="images/", null=True, blank=True)
 
     objects = SoftDeleteManager()
 
