@@ -271,6 +271,7 @@ def search_results(request):
         search_filter &= Q(title__icontains=search_term)
 
     companies = Company.objects.filter(search_filter).distinct().order_by("created_at")
+    count = companies.count()
 
     current_page = request.GET.get("page", 1)
     page_obj = paginate_queryset(request, companies, 10)
@@ -282,5 +283,6 @@ def search_results(request):
             "page_obj": page_obj,
             "search_term": search_term,
             "current_page": current_page,
+            "count": count,
         },
     )
