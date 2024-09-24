@@ -241,6 +241,10 @@ def favorites_delete(request, id):
 @login_required
 def apply_jobs(request, job_id):
     job = get_object_or_404(Job, id=job_id)
+
+    location_dict = dict(LOCATION_CHOICES)
+    job.location_label = location_dict.get(job.location)
+
     resumes = Resume.objects.filter(userinfo__user=request.user)
     return render(request, "users/apply.html", {"job": job, "resumes": resumes})
 
