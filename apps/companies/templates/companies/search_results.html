@@ -3,57 +3,65 @@
 {% load static %}
 <div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
     <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">
-        搜尋結果:
-        {% if search_term %}{{ search_term }}{% endif %}
+        搜尋結果
     </h1>
     <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
 
-<div class="bg-[#eef0f0]">
+<div class="flex-1 bg-[#eef0f0]">
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
         <ul class="flex flex-col gap-5 md:gap-7 lg:gap-7">
             {% if page_obj %}
-                {% for company in page_obj %}
-                    <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 w-full box-border">
-                        <div class="flex items-center">
-                            <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
-                                <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                            </div>
-                            <div class="flex-1 pl-3 pr-4 md:px-4 lg:px-4">
-                                <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">
-                                    <a href="{% url 'companies:show' company.id %}?q={{ search_term }}&page={{ page_obj.number }}">
-                                        {{ company.title }}
-                                    </a>
-                                </h2>
-                                <div class="flex items-center mt-1">
-                                    <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
-                                    <span class="ml-1 text-base font-light md:text-lg lg:text-lg">4.9</span>
-                                    <div class="w-px h-4 mx-2 bg-gray-300"></div>
-                                    <span class="text-base font-light md:text-lg lg:text-lg">20個評論</span>
+                <div class="flex flex-col w-full md:flex-row md:items-center md:justify-between mb-7">
+                    <div class="flex items-center">
+                        <div class="w-1.5 h-10 bg-blue-500 rounded-full"></div>
+                        <div class="pl-2 text-2xl font-bold">{% if search_term %}{{ search_term }}{% endif %}</div>
+                    </div>
+                    <div class="mt-4 md:mt-0">
+                        共搜尋了 <span class="text-blue-500">{{ count }}</span> 筆資料
+                    </div>
+                </div>
+                    {% for company in page_obj %}
+                        <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 w-full box-border">
+                            <div class="flex items-center">
+                                <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
+                                    <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                                </div>
+                                <div class="flex-1 pl-3 pr-4 md:px-4 lg:px-4">
+                                    <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">
+                                        <a href="{% url 'companies:show' company.id %}?q={{ search_term }}&page={{ page_obj.number }}">
+                                            {{ company.title }}
+                                        </a>
+                                    </h2>
+                                    <div class="flex items-center mt-1">
+                                        <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
+                                        <span class="ml-1 text-base font-light md:text-lg lg:text-lg">4.9</span>
+                                        <div class="w-px h-4 mx-2 bg-gray-300"></div>
+                                        <span class="text-base font-light md:text-lg lg:text-lg">20個評論</span>
+                                    </div>
+                                </div>
+                                <div class="flex gap-2 text-2xl absolute top-2.5 right-3">
+                                    {% if request.user.is_authenticated and request.user.type == 1 %}
+                                        {% include "companies/favorite.html" with company=company favorited=company.favorited only %}
+                                    {% endif %}
                                 </div>
                             </div>
-                            <div class="flex gap-2 text-2xl absolute top-2.5 right-3">
-                                {% if request.user.is_authenticated and request.user.type == 1 %}
-                                    {% include "companies/favorite.html" with company=company favorited=company.favorited only %}
-                                {% endif %}
+                            <div class="flex flex-col items-start justify-between gap-4 mt-4 lg:flex-row lg:items-center">
+                                <div class="flex-1 text-sm font-light text-black md:text-lg lg:text-lg line-clamp-2">
+                                    {{ company.description }}
+                                </div>
+                                <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
+                                    <a href="{% url 'companies:show' company.id %}" class="flex-auto btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:flex-none">詳細</a>
+                                    {% if company.can_edit %}
+                                        <a class="flex-auto btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'companies:edit' company.id %}">
+                                            <i class="text-base fa-solid fa-pen lg:text-base"></i>
+                                        </a>
+                                    {% endif %}
+                                </div>
                             </div>
-                        </div>
-                        <div class="flex flex-col items-start justify-between gap-4 mt-4 lg:flex-row lg:items-center">
-                            <div class="flex-1 text-sm font-light text-black md:text-lg lg:text-lg line-clamp-2">
-                                {{ company.description }}
-                            </div>
-                            <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
-                                <a href="{% url 'companies:show' company.id %}" class="flex-auto btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:flex-none">詳細</a>
-                                {% if company.can_edit %}
-                                    <a class="flex-auto btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'companies:edit' company.id %}">
-                                        <i class="text-base fa-solid fa-pen lg:text-base"></i>
-                                    </a>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </li>
-                {% endfor %}
+                        </li>
+                    {% endfor %}
             {% else %}
                 <p>沒有找到符合的公司。</p>
             {% endif %}

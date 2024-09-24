@@ -166,6 +166,8 @@ def search_results(request):
         .order_by("created_at")
     )
 
+    count = jobs.count()
+
     applied_job_ids = []
     if request.user.is_authenticated:
         applied_job_ids = Job_Resume.objects.filter(
@@ -190,5 +192,6 @@ def search_results(request):
             "location": location_label,
             "applied_job_ids": list(applied_job_ids),
             "current_page": current_page,
+            "count": count,
         },
     )
