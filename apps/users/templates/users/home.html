@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %}
 {% block content %}
   {% load static %}
-  <div class="relative h-dvh lg:h-[780px] w-full">
+  <div class="relative h-dvh w-full">
     <div class="relative z-10 w-full h-full bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-20 inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
     <div class="absolute z-20 inset-0 mx-auto flex flex-col justify-center px-5 text-white z-20 max-w-[1280px]">
@@ -35,16 +35,27 @@
         <a href="{% url 'jobs:search_results' %}?q=Javascript" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">JavaScript</a>
       </div>
     </div>
-    <div class="absolute inset-x-0 bottom-4 z-20 text-center text-white md:bottom-14 lg:bottom-14">
-      <div class="relative mx-auto w-5 h-8 rounded-full border border-white md:w-7 lg:w-7 md:h-11 lg:h-11 lg:border-2">
-        <div class="w-0.5 md:w-1 lg:w-1 h-2 md:h-4 lg:h-4 bg-white rounded-full absolute bottom-2 left-1/2 ml-[-1px] md:ml-[-2px] lg:ml-[-2px] animate-bounce"></div>
+    <div class="absolute inset-x-0 bottom-4 z-20 text-center text-white md:bottom-14 lg:bottom-14" x-data="{ scrollTo: () => {
+          const target = document.getElementById('target');
+          const offset = 100;
+          const elementPosition = target.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - offset;
+          window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+          });
+      }}">
+      <div @click="scrollTo()" class="inline-block cursor-pointer">
+        <div class="relative mx-auto w-5 h-8 rounded-full border border-white md:w-7 lg:w-7 md:h-11 lg:h-11 lg:border-2">
+          <div class="w-0.5 md:w-1 lg:w-1 h-2 md:h-4 lg:h-4 bg-white rounded-full absolute bottom-2 left-1/2 ml-[-1px] md:ml-[-2px] lg:ml-[-2px] animate-bounce"></div>
+        </div>
+        <div class="mt-2 text-xs font-light md:text-base lg:text-base">往下滑精彩不斷</div>
       </div>
-      <div class="mt-2 text-xs font-light md:text-base lg:text-base">往下滑精彩不斷</div>
     </div>
   </div>
 
   <!-- 熱門職缺 -->
-  <div class="px-5 py-10 md:py-16 lg:py-24">
+  <div class="px-5 py-10 md:py-16 lg:py-24" id="target">
     <div class="container mx-auto">
       <h2 class="mb-5 text-2xl font-bold lg:text-3xl lg:mb-9">熱門職缺</h2>
       <div class="flex flex-wrap gap-5 md:gap-7 lg:gap-7">
