@@ -11,6 +11,7 @@ class ResumeForm(forms.ModelForm):
         fields = [
             "file",
             "name",
+            "original_filename",
         ]
         widgets = {
             "file": FileInput(

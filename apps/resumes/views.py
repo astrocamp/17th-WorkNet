@@ -94,7 +94,6 @@ def jobs_delete(request, id):
 
 
 @login_required
-@require_http_methods(["GET", "POST"])
 def edit(request, id):
     resume = get_object_or_404(Resume, id=id)
     if request.method == "POST":
@@ -105,4 +104,8 @@ def edit(request, id):
             return redirect("resumes:index")
     else:
         form = ResumeForm(instance=resume)
+
+    print("---")
+    print(Resume)
+    print("----")
     return render(request, "resumes/edit.html", {"form": form, "resume": resume})
