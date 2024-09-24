@@ -21,6 +21,8 @@ from .models import Job, Job_Resume, JobFavorite
 def index(request):
     jobs = Job.objects.order_by("-id").select_related("company")
     company = []
+    locations = LOCATION_CHOICES
+
     if request.user.is_authenticated and request.user.type == 2:
         company = request.user.company
 
@@ -53,6 +55,7 @@ def index(request):
         {
             "page_obj": page_obj,
             "company": company,
+            "locations": locations,
         },
     )
 
