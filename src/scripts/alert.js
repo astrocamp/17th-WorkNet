@@ -16,7 +16,7 @@ export const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
     actions: "d-flex gap-3",
     confirmButton: "btn btn-primary",
-    cancelButton: "btn btn-error",
+    cancelButton: "btn btn-secondary",
   },
   buttonsStyling: false,
   showCancelButton: true,

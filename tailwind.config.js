@@ -45,7 +45,6 @@ module.exports = {
     themes: [
       {
         corporate: {
-          cancel: "#4F4F4F",
           primary: "#00336b",
           secondary: "#449dd1",
           neutral: "#000000",
