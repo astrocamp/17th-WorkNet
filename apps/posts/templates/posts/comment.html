@@ -2,9 +2,9 @@
 <li class="flex p-4 bg-gray-100 rounded-2xl">
     <div class="flex-1">
         {% if comment.user %}
-            <small class="font-bold text-slate-500">{{ comment.user }}</small>
+            <small class="font-bold">{{ comment.user }}</small>
         {% endif %}
-        <div class="markdown-body">{{ comment.content|convert_markdown|safe }}</div>
+        <div class="text-lg markdown-body">{{ comment.content|convert_markdown|safe }}</div>
         <small>{{ comment.created_at|date:"Y/m/d H:i" }}</small>
     </div>
     {% if comment.user == request.user %}
