@@ -7,17 +7,26 @@
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
 
-<!--search bar-->
 <div class="bg-[#eef0f0]">
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
         <div class="mb-6 md:mb-12 lg:mb-12">
-            <form action="#" method="GET" class="flex items-center md:items-center lg:items-center px-4 py-2 md:p-3 lg:p-3 gap-1 md:gap-4 lg:gap-4 w-full bg-white rounded-full border border-[#e7e8eb]">
+            <form action="{% url 'jobs:search_results' %}" method="GET" class="flex flex-col w-full gap-1 px-4 pt-2 pb-4 bg-white shadow-md rounded-xl md:flex-row lg:flex-row md:items-center lg:items-center md:p-3 lg:p-4 md:gap-4 lg:gap-4 md:rounded-full lg:rounded-full">
                 <div class="flex items-center flex-1">
-                  <div class="w-5 text-base text-center text-black md:w-7 lg:w-7 md:text-2xl lg:text-2xl"><i class="fa-solid fa-magnifying-glass"></i></div>
-                  <input type="text" name="q" placeholder="請輸入工作名稱或公司" class="w-full px-2 py-2 text-base text-gray-500 placeholder-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" />
+                <div class="w-5 text-base text-center text-black md:w-7 lg:w-7 md:text-2xl lg:text-2xl"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <input type="text" name="q" placeholder="請輸入工作名稱" class="w-full px-2 py-2 text-base text-gray-500 placeholder-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" value="{{ request.GET.q }}" />
                 </div>
-                <div>
-                  <button class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28">搜尋</button>
+                <div class="w-full h-px bg-gray-300 md:w-px lg:w-px md:h-8 lg:h-8"></div>
+                <div class="flex items-center flex-1">
+                <div class="w-5 text-base text-center text-black md:w-7 lg:w-7 md:text-2xl lg:text-2xl"><i class="fa-solid fa-location-dot"></i></div>
+                    <select name="location" class="w-full px-2 py-2 text-base text-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg">
+                        <option value="">請選擇地點</option>
+                        {% for value, label in locations %}
+                            <option value="{{ value }}" {% if request.GET.location == value %} selected {% endif %}>{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mt-2 md:m-0 lg:m-0">
+                    <button class="w-full btn btn-primary btn-sm md:btn-lg lg:btn-lg md:w-auto lg:w-auto md:min-w-28 lg:min-w-28">搜尋</button>
                 </div>
             </form>
         </div>
