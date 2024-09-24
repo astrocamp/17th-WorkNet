@@ -14,8 +14,9 @@ export const flashAlert = Swal.mixin({
 
 export const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
-    confirmButton: "btn btn-success",
-    cancelButton: "btn btn-secondary",
+    actions: "d-flex gap-3",
+    confirmButton: "btn btn-primary",
+    cancelButton: "btn btn-error",
   },
   buttonsStyling: false,
   showCancelButton: true,

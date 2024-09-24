@@ -22,8 +22,8 @@ module.exports = {
         sans: ["Noto Sans TC", "sans-serif"],
       },
       spacing: {
-        'calc-card': 'calc(50% - 14px)',
-        'calc-data': 'calc(50% - 10px)',
+        "calc-card": "calc(50% - 14px)",
+        "calc-data": "calc(50% - 10px)",
       },
       aspectRatio: {
         "8/3": "8 / 3",
@@ -45,6 +45,7 @@ module.exports = {
     themes: [
       {
         corporate: {
+          cancel: "#4F4F4F",
           primary: "#00336b",
           secondary: "#449dd1",
           neutral: "#000000",
