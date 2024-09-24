@@ -13,9 +13,7 @@
       <div class="flex relative items-center h-12 cursor-pointer group" x-data="{ open: false, isMobile: window.innerWidth < 1024 }"
       @resize.window="
               isMobile = window.innerWidth < 1024;
-              if (isMobile) { open = false; }
-              else { open = true; }"
-          x-init="open = !isMobile">
+              if (isMobile) { open = false; }">
         <div @click="open = !open">
           {% if unread_notifications_count > 0 %}
             <div class="flex justify-center items-center w-6 h-6 text-base bg-white rounded-full md:w-8 lg:w-8 md:h-8 lg:h-8 md:text-lg lg:text-lg">
@@ -27,7 +25,7 @@
             </div>
           {% endif%}
         </div>
-        <div x-show="open" class="fixed top-0 right-0 bottom-0 left-0 z-50 m-auto w-full text-center lg:w-48 lg:absolute lg:-translate-x-1/2 lg:top-12 lg:left-1/2 lg:right-auto lg:bottom-auto bg-primary lg:bg-transparent lg:hidden lg:group-hover:block">
+        <div :class="{ 'hidden': !open, 'block': open }" class="fixed top-0 right-0 bottom-0 left-0 z-50 m-auto w-full text-center lg:w-48 lg:absolute lg:-translate-x-1/2 lg:top-12 lg:left-1/2 lg:right-auto lg:bottom-auto bg-primary lg:bg-transparent hidden lg:group-hover:block">
           <div class="flex justify-end items-center h-16 md:h-28 lg:hidden">
             <div @click="open = false" class="relative mr-7 w-6 h-5 cursor-pointer md:w-8 md:h-7">
               <div class="absolute inset-0 m-auto w-full h-1 bg-white rounded-full rotate-45"></div>
