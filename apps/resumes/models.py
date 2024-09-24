@@ -23,8 +23,3 @@ class Resume(SoftDeletetable, models.Model):
 
     def __str__(self):
         return f"{self.userinfo.user.username} - {self.file.name}"
-
-    fields = [
-        "original_filename",
-        "file",
-    ]
