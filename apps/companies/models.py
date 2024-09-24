@@ -19,7 +19,7 @@ class Company(SoftDeletetable, models.Model):
     email = models.EmailField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(default=None, null=True)
+    deleted_at = models.DateTimeField(null=True)
     favorite = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
         related_name="company_favorite",

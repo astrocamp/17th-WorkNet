@@ -19,7 +19,7 @@ class Job(SoftDeletetable, models.Model):
     salary_range = models.TextField(null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(null=True, default=None)
+    deleted_at = models.DateTimeField(default=None)
     tenure = models.PositiveIntegerField()
     favorite = models.ManyToManyField(settings.AUTH_USER_MODEL, through="JobFavorite")
     resumes = models.ManyToManyField(Resume, through="Job_Resume")

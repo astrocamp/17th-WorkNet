@@ -10,7 +10,7 @@ class Post(SoftDeletetable, models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(default=None, null=True)
+    deleted_at = models.DateTimeField(null=True)
     like_cnt = models.IntegerField(default=0)
     dislike_cnt = models.IntegerField(default=0)
 
@@ -57,7 +57,7 @@ class Comment(SoftDeletetable, models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    deleted_at = models.DateTimeField(default=None, null=True)
+    deleted_at = models.DateTimeField(null=True)
 
     objects = SoftDeleteManager()
 
