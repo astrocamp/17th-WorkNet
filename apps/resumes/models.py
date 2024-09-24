@@ -12,6 +12,7 @@ class Resume(SoftDeletetable, models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
     deleted_at = models.DateTimeField(null=True, blank=True)
     name = models.CharField(max_length=255, blank=True)
+    original_filename = models.CharField(max_length=255, blank=True)
 
     objects = SoftDeleteManager()
 

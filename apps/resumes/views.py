@@ -15,6 +15,9 @@ def index(request):
     resumes = Resume.objects.filter(userinfo=request.user.userinfo).order_by(
         "-uploaded_at"
     )
+    print("---")
+    print(resumes)
+    print("---")
     return render(request, "resumes/index.html", {"resumes": resumes})
 
 
@@ -34,6 +37,8 @@ def upload(request):
         if form.is_valid():
             resume = form.save(commit=False)
             resume.userinfo = request.user.userinfo
+            uploaded_file = request.FILES.get("file")
+            resume.original_filename = uploaded_file.name
             resume.save()
             return redirect("resumes:index")
     else:
