@@ -1,5 +1,6 @@
 {% extends "layouts/base.html" %}
 {% block content %}
+{% load static %}
 <div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
     <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">
         搜尋結果:
@@ -9,27 +10,68 @@
     <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
-<div class="container p-5 pb-24 mx-auto">
 
-    <ul class="mt-6 divide-y divide-slate-200">
-        {% if page_obj %}
-        {% for job in page_obj %}
-        <li class="flex gap-2 p-5" id="job-{{ job.id }}">
-            <div class="flex-1">
-                <a class="text-xl font-medium" href="{% url 'jobs:show' job.id %}?q={{ search_term }}&location={{ location }}&page={{ page_obj.number }}">{{ job.title }}</a>
-                <p class="text-small">{{ job.company.title }}, {{ job.get_location_display }}</p>
-            </div>
-            <div class="flex gap-2">
-                {% if user.type == 1 and job.id not in applied_job_ids %}
-                    <a class="text-white btn btn-primary min-w-20" href="{% url 'users:apply_jobs' job.id %}">應徵</a>
-                {% endif %}
-            </div>
-        </li>
-        {% endfor %}
-        {% else %}
-        <p>沒有找到符合的工作。</p>
-        {% endif %}
-    </ul>
-    {% include 'shared/_pagination.html' %}
+<div class="bg-[#eef0f0]">
+    <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
+        <ul class="flex flex-wrap gap-5 md:gap-7 lg:gap-7">
+            {% if page_obj %}
+                {% for job in page_obj %}
+                    <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
+                        <div class="flex items-center">
+                            <div class="box-border flex-1 pr-4 md:pr-4 lg:pr-4">
+                                <a href="{% url 'jobs:show' job.id %}?q={{ search_term }}&location={{ location }}&page={{ page_obj.number }}">
+                                    <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">{{ job.title }}</h2>
+                                </a>
+                            </div>
+                            <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
+                                {% if  request.user.is_authenticated and request.user.type == 1 %}
+                                    <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
+                                        {% include "shared/job_favorite.html" with favorited=favorited %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <h3 class="text-sm font-light text-gray-600 mt-0.5 md:text-base lg:text-base line-clamp-2">
+                            from <a href="{% url 'companies:show' job.company_id %}">{{ job.company }}</a>
+                        </h3>
+                        <p class="mt-2 text-sm font-light text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">
+                            {{ job.description }}
+                        </p>
+                        <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
+                            <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{ job.type }}</span>
+                            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base">
+                                <i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i> {{ job.get_location_display }}
+                            </span>
+                            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base">
+                                <i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{ job.salary_range }} / 月
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between mt-6 md:mt-4 lg:mt-4">
+                            <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">
+                                {{ job.created_at|date:"Y/m/d" }}
+                            </div>
+                            <div class="flex items-center w-full gap-2 md:w-auto lg:w-auto">
+                                <a href="{% url 'jobs:show' job.id %}" class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">詳細</a>
+                                {% if job.can_edit %}
+                                    <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'jobs:edit' job.id %}">
+                                        <i class="text-base fa-solid fa-pen lg:text-base"></i>
+                                    </a>
+                                    <form method="POST" action="{% url 'jobs:delete' job.id %}" class="flex flex-auto gap-2 md:gap-4 lg:gap-4">
+                                        {% csrf_token %}
+                                        <button class="flex-auto text-base rounded-full btn btn-error btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none">
+                                            <i class="fa-solid fa-trash-can"></i>
+                                        </button>
+                                    </form>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            {% else %}
+                <p>沒有找到符合的工作。</p>
+            {% endif %}
+        </ul>
+        {% include 'shared/_pagination.html' %}
+    </div>
 </div>
 {% endblock %}

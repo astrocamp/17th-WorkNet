@@ -15,4 +15,5 @@ urlpatterns = [
     path("<int:id>/edit", views.edit, name="edit"),
     path("<int:id>/favorite", views.favorite_company, name="favorite"),
     path("application/", views.company_application, name="company_application"),
+    path("search/", views.search_results, name="search_results"),
 ]
