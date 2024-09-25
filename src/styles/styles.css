@@ -77,6 +77,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .backdrop-blur-5 {
+    backdrop-filter: blur(5px);
+  }
 }
 
 @keyframes bounce {

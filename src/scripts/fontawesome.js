@@ -23,6 +23,7 @@ import {
   faBell as farBell,
   faHeart as farHeart,
   faStar as farStar,
+  faCalendarDays as farCalendarDays,
 } from "@fortawesome/free-regular-svg-icons";
 
 library.add(
@@ -46,6 +47,7 @@ library.add(
   fasTrashCan,
   fasPlus,
   fasBriefcase,
+  farCalendarDays,
 );
 dom.i2svg();
 
