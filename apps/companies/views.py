@@ -222,6 +222,7 @@ def jobs_index(request, id):
     company = get_object_or_404(Company, id=id)
 
     jobs = Job.objects.filter(company=company).order_by("-id").select_related("company")
+
     jobs_with_permissions = [
         {
             "id": job.id,
@@ -245,7 +246,12 @@ def jobs_index(request, id):
 
     page_obj = paginate_queryset(request, jobs_with_permissions, 10)
     return render(
-        request, "jobs/index.html", {"page_obj": page_obj, "company": company}
+        request,
+        "jobs/index.html",
+        {
+            "page_obj": page_obj,
+            "company": company,
+        },
     )
 
 

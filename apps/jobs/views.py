@@ -27,6 +27,7 @@ def index(request):
         company = request.user.company
 
     jobs = Job.objects.order_by("-id")
+
     jobs_with_permissions = [
         {
             "id": job.id,
@@ -35,6 +36,7 @@ def index(request):
             "type": job.type,
             "created_at": job.created_at,
             "get_location_display": job.get_location_display,
+            "location": job.location,
             "salary_range": job.salary_range,
             "company": job.company.title,
             "company_id": job.company.id,
