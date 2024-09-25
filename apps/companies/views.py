@@ -61,6 +61,7 @@ def index(request):
 def new(request):
     company, _ = Company.objects.get_or_create(
         user_id=request.user.id,
+        title=request.user.username,
         defaults={
             "employees": 0,
         },
