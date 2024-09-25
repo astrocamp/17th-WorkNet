@@ -1,32 +1,35 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
+<div class="flex overflow-hidden relative justify-center items-center h-44 text-center md:h-80 lg:h-80">
     <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">修改履歷檔名</h1>
     <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
 
-
-<div class="container p-5 pb-24 mx-auto">
-    <form method="POST">
-        {% csrf_token %}
-        {% if form.errors %}
-        <div class="mb-4 text-red-600">
-            <ul>
-                {% for field, errors in form.errors.items %}
-                    <li>{{ field }}: {{ errors }}</li>
-                {% endfor %}
-            </ul>
+<div class="flex-1 bg-[#eef0f0]">
+    <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
+        <div class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 w-full box-border flex flex-col gap-4">
+            <form method="POST" class="flex items-center gap-4">
+                {% csrf_token %}
+                {% if form.errors %}
+                <div class="mb-4 text-red-600">
+                    <ul>
+                        {% for field, errors in form.errors.items %}
+                            <li>{{ field }}: {{ errors }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                <div class="flex items-center gap-4 flex-grow">
+                    <label for="id_name" class="text-xl font-semibold md:text-2xl lg:text-2xl whitespace-nowrap">檔名:</label>
+                    <input id="id_name" value="{{ form.name.value }}" class="input-often-base">
+                </div>
+                <div class="flex gap-2">
+                    <button class="text-base text-white rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md min-w-20 md:min-w-24 lg:min-w-24" type="submit">儲存變更</button>
+                    <a href="{% url 'resumes:index' %}"  class="text-base text-white rounded-full btn bg-gray-400 border-gray-400  btn-secondary btn-sm md:btn-md lg:btn-md min-w-20 md:min-w-24 lg:min-w-24">取消</a>
+                </div>
+            </form>
         </div>
-        {% endif %}
-        <div class="mt-4">
-            <label for="id_name">檔名:</label>
-            <input type="text" name="name" id="id_name" value="{{ form.name.value }}" class="w-full p-2 border rounded-md">
-        </div>
-        <div class="flex gap-4 mt-4">
-            <button class="text-white btn btn-primary min-w-20" type="submit">儲存變更</button>
-            <a href="{% url 'resumes:index' %}" class="text-white btn btn-secondary min-w-20">取消</a>
-        </div>
-    </form>
+    </div>
 </div>
 {% endblock %}
