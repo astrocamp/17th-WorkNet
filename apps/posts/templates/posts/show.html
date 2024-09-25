@@ -27,7 +27,6 @@
                 {% endif %}
             </div>
         </div>
-
         <div class="p-5 mt-2 bg-gray-100 rounded-lg">
             <div class="flex justify-between">
                 <div class="flex flex-col">
@@ -49,9 +48,7 @@
                 </div>
             </div>
         </div>
-
         <div class="py-4 text-xl markdown-body">{{ post.content|convert_markdown|safe }}</div><br>
-
         <section class="p-5 mt-2 text-xl rounded-2xl border border-gray-300">
             <h3 class="pb-5 mb-5 text-xl font-bold border-b border-gray-300">留言</h3>
             {% if comments %}
@@ -65,7 +62,6 @@
                     <li id="remove_no_comment" class="text-center text-gray-400">尚無回覆</li>
                 </ul>
             {% endif %}
-
             {% if user.is_authenticated %}
             <div class="mt-6">
                 <form
@@ -84,7 +80,6 @@
             <a class="text-white btn btn-secondary" href="{% url 'users:sign_in' %}?next={{ request.path }}">登入</a>
             {% endif %}
         </section>
-
         <div class="flex gap-5 justify-center">
             <span class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" onclick="history.back();">回到列表</span>
         </div>
