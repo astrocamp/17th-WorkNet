@@ -9,7 +9,7 @@
 <div class="flex-1 bg-[#eef0f0]">
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
         <div class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 w-full box-border flex flex-col gap-4">
-            <form method="POST" class="flex items-center gap-4">
+            <form method="POST" class="flex items-center gap-4 flex-col md:flex-row lg:flex-row">
                 {% csrf_token %}
                 {% if form.errors %}
                 <div class="mb-4 text-red-600">
@@ -20,13 +20,13 @@
                     </ul>
                 </div>
                 {% endif %}
-                <div class="flex items-center gap-4 flex-grow">
+                <div class="flex items-center gap-4 flex-grow w-full md:w-auto lg:w-auto">
                     <label for="id_name" class="text-xl font-semibold md:text-2xl lg:text-2xl whitespace-nowrap">檔名:</label>
                     <input id="id_name" value="{{ form.name.value }}" class="input-often-base">
                 </div>
                 <div class="flex gap-2">
-                    <button class="text-base text-white rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md min-w-20 md:min-w-24 lg:min-w-24" type="submit">儲存變更</button>
-                    <a href="{% url 'resumes:index' %}"  class="text-base text-white rounded-full btn bg-gray-400 border-gray-400  btn-secondary btn-sm md:btn-md lg:btn-md min-w-20 md:min-w-24 lg:min-w-24">取消</a>
+                    <button class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" type="submit">儲存變更</button>
+                    <a href="{% url 'resumes:index' %}"  class="flex-auto text-base rounded-full btn bg-[#cccccc] text-black border-[#cccccc] btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24">取消</a>
                 </div>
             </form>
         </div>
