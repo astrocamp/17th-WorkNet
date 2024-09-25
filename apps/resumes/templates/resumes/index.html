@@ -23,9 +23,9 @@
                         <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md" href="{% url 'resumes:edit' resume.id %}">
                             <i class="text-base fa-solid fa-pen lg:text-base"></i>
                         </a>
-                        <form action="{% url 'resumes:delete' resume.id %}" method="POST" class="flex-auto" x-data="confirm_msg" @submit.prevent="confirmDelete('確定要刪除這份履歷嗎？')">
+                        <form action="{% url 'resumes:delete' resume.id %}" method="POST" class="flex flex-auto gap-2 md:gap-4 lg:gap-4" x-data="confirm_msg" @submit.prevent="confirmDelete('確定要刪除這份履歷嗎？')">
                             {% csrf_token %}
-                            <button class="text-base rounded-full btn btn-error btn-sm md:btn-md lg:btn-md">
+                            <button class="flex-auto text-base rounded-full btn btn-error btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
                         </form>
@@ -46,7 +46,7 @@
             </a>
         </div>
 
-        <div class="p-4 mt-8 bg-gray-100 border border-gray-200 rounded-lg">
+        <div class="p-4 mt-8 bg-white rounded-lg">
             <h3 class="mb-2 text-lg font-semibold text-black">檔案限制：</h3>
             <ul class="text-black list-disc list-inside">
                 <li>只接受PDF檔案</li>
