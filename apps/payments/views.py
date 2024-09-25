@@ -23,8 +23,8 @@ dotenv.load_dotenv(os.path.join(BASE_DIR, ".env"))
 def request(request):
     if request.method == "POST":
         url = f"{os.getenv('LINE_SANDBOX_URL')}/request"
-        order_id = f"order_{str(uuid.uuid4())}"  # 生成一個長度為20的唯一訂單ID
-        package_id = f"package_{str(uuid.uuid4())}"  # 生成一個長度為20的唯一包裹ID
+        order_id = f"order_{str(uuid.uuid4())}"
+        package_id = f"package_{str(uuid.uuid4())}"
 
         payload = {
             "amount": 200,
@@ -47,14 +47,9 @@ def request(request):
         signature_uri = os.getenv("LINE_SIGNATURE_REQUEST_URI")
         headers = create_headers(payload, signature_uri)
         body = json.dumps(payload)
-        print("=====request=====")
-        print(headers)
-        print(body)
-        print(url)
+
         response = requests.post(url, headers=headers, data=body)
 
-        # print("-" * 10)
-        # print(body)
         if response.status_code == 200:
             data = response.json()
             if data["returnCode"] == "0000":
@@ -97,8 +92,7 @@ def create_headers(body, uri):
 
 
 def confirm(request):
-    print("======confirm========")
-    print(request.GET)
+
     transaction_id = request.GET.get("transactionId")
     order_id = request.GET.get("orderId")
 
@@ -114,10 +108,6 @@ def confirm(request):
 
     body = json.dumps(payload)
 
-    print(signature_uri)
-    print(headers)
-    print(url)
-    print(body)
     response = requests.post(url, headers=headers, data=body)
 
     data = response.json()
