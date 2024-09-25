@@ -3,7 +3,7 @@
         x-bind:class="{'text-red-500': !notification.read}"
         x-text="notification.message"
         x-bind:href="`/${notification.job_id}/notification/`"></a>
-    <span x-show="!notification.read" class="bg-error rounded-md text-white text-xs px-1">NEW</span>        
+    <span x-show="!notification.read" class="bg-error rounded-md text-white text-xs px-1">NEW</span>
 </template>
 
 <template x-if="notifications.length === 0" hidden>
