@@ -47,7 +47,7 @@
                         <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
                             {% if  request.user.is_authenticated and request.user.type == 1 %}
                                 <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-                                    {% include "shared/job_favorite.html" with favorited=favorited %}
+                                    {% include "shared/job_favorite.html" with favorited=job.favorited %}
                                 </div>
                             {% endif %}
                         </div>
