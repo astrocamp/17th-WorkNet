@@ -18,6 +18,7 @@ from lib.models.paginate import paginate_queryset
 from lib.models.rule_required import rule_required
 from lib.utils.models.decorators import company_required
 from lib.utils.models.defined import LOCATION_CHOICES, fetch_coordinates
+
 from .forms.companies_form import CompanyForm
 from .models import Company
 
@@ -80,7 +81,7 @@ def show(request, id):
         form = CompanyForm(request.POST, instance=company)
         if form.is_valid():
             form.save()
-            
+
             coord_x, coord_y = fetch_coordinates(company.address)
             if coord_x and coord_y:
                 company.latitude = coord_x
@@ -147,7 +148,12 @@ def show(request, id):
     return render(
         request,
         "companies/show.html",
-        {"company": company, "jobs": jobs_data, "posts": posts_data, "GOOGLE_MAPS_API_KEY": settings.GOOGLE_MAPS_API_KEY},
+        {
+            "company": company,
+            "jobs": jobs_data,
+            "posts": posts_data,
+            "GOOGLE_MAPS_API_KEY": settings.GOOGLE_MAPS_API_KEY,
+        },
     )
 
 
