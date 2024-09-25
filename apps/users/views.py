@@ -365,8 +365,8 @@ def fetch_notifications(request):
                 )
             )
             .order_by("unread_first", "-created_at")[:5]
-            .values("id", "message", "read", "job_id")
         )
+
         notifications_data = [
             {
                 "id": n.id,
