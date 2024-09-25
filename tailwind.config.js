@@ -30,6 +30,9 @@ module.exports = {
         "32/5": "32 / 5",
         "16/5": "16 / 5",
       },
+      backdropBlur: {
+        '5': 'blur(5px)',
+      },
       container: {
         screens: {
           sm: "100%",
@@ -39,6 +42,9 @@ module.exports = {
         },
       },
     },
+  },
+  variants: {
+    backdropBlur: ['responsive'],
   },
   plugins: [require("daisyui")],
   daisyui: {
