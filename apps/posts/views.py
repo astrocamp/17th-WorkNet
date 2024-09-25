@@ -23,7 +23,7 @@ def index(request):
 
 def show(request, id):
     post = get_object_or_404(Post, id=id)
-    comments = post.comments.order_by("-created_at")
+    comments = post.comments.order_by("created_at")
 
     is_author = rules.test_rule("can_edit_post", request.user, post)
 

@@ -66,7 +66,7 @@
             <div class="mt-6">
                 <form
                     hx-target="#comments"
-                    hx-swap="afterbegin"
+                    hx-swap="beforeend"
                     hx-confirm="確認送出留言？"
                     hx-on::after-request="this.reset();"
                     hx-post="{% url 'posts:show' post.id %}">
