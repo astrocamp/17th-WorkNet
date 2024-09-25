@@ -24,6 +24,8 @@ import {
   faHeart as farHeart,
   faStar as farStar,
   faCalendarDays as farCalendarDays,
+  faFileLines as farFileLines,
+  faEnvelope as farEnvelope,
 } from "@fortawesome/free-regular-svg-icons";
 
 library.add(
@@ -48,6 +50,8 @@ library.add(
   fasPlus,
   fasBriefcase,
   farCalendarDays,
+  farFileLines,
+  farEnvelope,
 );
 dom.i2svg();
 
