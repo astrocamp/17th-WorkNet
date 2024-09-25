@@ -6,20 +6,28 @@
   <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
   <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
-<div class="mx-auto mt-10 mb-10 shadow-xl card bg-base-100 w-96"> <!-- 在這裡添加 mb-10 -->
-  <figure class="px-10 pt-10">
-    <img src="{% static 'imgs/payment_thankyou.png' %}" alt="payment" class="rounded-xl" />
-  </figure>
-  <div class="items-center text-center card-body">
-    <h2 class="card-title">歡迎您</h2>
-    <p></p>
-    <div class="card-actions">
-      <form action="{% url 'payments:request' %}" method="POST">
-        {% csrf_token %}
-        <button class="btn btn-primary">點我贊助</button>
-      </form>
+
+<div class="flex flex-col gap-10 mx-auto mt-10 mb-10 md:flex-row">
+  <div class="flex flex-col items-center justify-center gap-10 mx-auto mt-10 mb-10 md:flex-row">
+    <div class="flex-shrink-0 shadow-xl card bg-base-100 w-96">
+      <figure class="px-10 pt-10">
+        <img src="{% static 'imgs/payment_thankyou.png' %}" alt="payment" class="rounded-xl" />
+      </figure>
+      <div class="items-center text-center card-body">
+        <div class="card-actions">
+          <form action="{% url 'payments:index' %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-primary">點我贊助</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center justify-center flex-1 max-w-xs text-center md:max-w-sm md:text-left">
+      <div class="text-center">
+        <h2>WorkNet成立於2024年夏秋之交，</br>由一群軟體工程師，</br>根據他們過去的面試經歷，</br>精心打造了一個結合真實公司評論與應徵功能的平台。</br>如果您認同我們的理念與願景，</br>歡迎贊助支持WorkNet，</br>讓我們一起推動工程師社群的成長！</h2>
+      </div>
     </div>
   </div>
 </div>
-</div>
+
 {% endblock %}

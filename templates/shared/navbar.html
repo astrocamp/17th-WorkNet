@@ -128,6 +128,9 @@
             <li>
               <a class="block font-medium py-4 border-b border-[#365f8c] lg:border-0" href="{% url 'analytics:index' %}">分析</a>
             </li>
+            <li>
+              <a class="block font-medium py-4 border-b border-[#365f8c] lg:border-0" href="{% url 'payments:index' %}">贊助</a>
+            </li>
           </ul>
         </div>
         {% if request.user.is_authenticated %}
