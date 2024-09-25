@@ -19,7 +19,7 @@
                         <p class="mt-1 text-sm font-light text-gray-500 md:text-base lg:text-base">{{ resume.uploaded_at|date:"Y/m/d, g:i a" }}</p>
                     </div>
                     <div class="flex gap-2 justify-center mt-4 sm:mt-0 sm:justify-end">
-                        <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{{ resume.file.url }}" target="_blank">預覽</a>
+                        <a class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{{ resume.file.url }}" target="_blank">預覽</a>
                         <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md" href="{% url 'resumes:edit' resume.id %}">
                             <i class="text-base fa-solid fa-pen lg:text-base"></i>
                         </a>
