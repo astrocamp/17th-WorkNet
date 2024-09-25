@@ -19,7 +19,6 @@ urlpatterns = [
         name="password_reset_done",
     ),
     path("favorites/", views.favorites_list, name="favorites_list"),
-    path("<int:id>/favorite", views.job_favorite, name="job_favorite"),
     path(
         "favorites/<int:id>/favorites_delete",
         views.favorites_delete,
