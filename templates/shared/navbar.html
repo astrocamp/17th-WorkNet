@@ -91,6 +91,8 @@
                     <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'users:favorites_company_list' %}">收藏的公司</a>
                   {% elif request.user.type == 2 %}
                     <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'companies:edit' request.user.company.id  %}">公司資料</a>
+                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'companies:jobs_index' request.user.company.id %}">公司職缺</a>
+                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'companies:post_index' request.user.company.id %}">公司評論</a>
                     <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'companies:company_application' %}">查看應徵</a>
                   {% endif %}
                 </div>
@@ -118,18 +120,10 @@
               <a class="block font-medium py-4 border-b border-[#365f8c] lg:border-0" href="{% url 'companies:index' %}">公司資訊</a>
             </li>
             <li>
-              {% if request.user.type == 2 %}
-                <a class="block font-medium py-4 border-b border-[#365f8c] lg:border-0" href="{% url 'companies:jobs_index' request.user.company.id %}">職缺</a>
-              {% else %}
-                <a class="block font-medium py-4 border-b border-[#365f8c] lg:border-0" href="{% url 'jobs:index' %}">職缺</a>
-              {% endif %}
+              <a class="block font-medium py-4 border-b border-[#365f8c] lg:border-0" href="{% url 'jobs:index' %}">職缺</a>
             </li>
             <li>
-              {% if request.user.type == 2 %}
-                <a class="block font-medium py-4 border-b border-[#365f8c] lg:border-0" href="{% url 'companies:post_index' request.user.company.id %}">評論</a>
-              {% else %}
-                <a class="block font-medium py-4 border-b border-[#365f8c] lg:border-0" href="{% url 'posts:index' %}">評論</a>
-              {% endif %}
+              <a class="block font-medium py-4 border-b border-[#365f8c] lg:border-0" href="{% url 'posts:index' %}">評論</a>
             </li>
             <li>
               <a class="block font-medium py-4 border-b border-[#365f8c] lg:border-0" href="{% url 'analytics:index' %}">分析</a>
