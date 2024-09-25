@@ -1,4 +1,5 @@
 from .models import Notification
+from django.db.models import Case, When, BooleanField, Value
 
 
 def notifications_processor(request):
@@ -11,8 +12,15 @@ def notifications_processor(request):
 
         notifications = (
             Notification.objects.filter(recipient=request.user)
-            .order_by("-read", "-created_at")[:5]
-            .values("message", "read", "job_id")
+            .annotate(
+                unread_first=Case(
+                    When(read=False, then=Value(0)),
+                    When(read=True, then=Value(1)),
+                    output_field=BooleanField(),
+                )
+            )
+            .order_by("unread_first", "-created_at")[:5]
+            .values("id", "message", "read", "job_id")
         )
     else:
         unread_notifications_count = 0

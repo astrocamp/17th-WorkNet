@@ -9,21 +9,18 @@
       </a>
     </div>
     {% if request.user.is_authenticated %}
-    <div class="absolute right-20 z-30 md:right-24 lg:right-32">
-      <div class="flex relative items-center h-12 cursor-pointer group" x-data="{ open: false, isMobile: window.innerWidth < 1024 }"
+    <div class="absolute right-20 z-30 md:right-24 lg:right-32"  x-data="notificationHandler({{ notifications|safe|lower }}, {{ unread|lower }})">
+      <div class="flex relative items-center h-12 group" x-data="{ open: false, isMobile: window.innerWidth < 1024 }"
       @resize.window="
               isMobile = window.innerWidth < 1024;
               if (isMobile) { open = false; }">
-        <div @click="open = !open">
-          {% if unread_notifications_count > 0 %}
-            <div class="flex justify-center items-center w-6 h-6 text-base bg-white rounded-full md:w-8 lg:w-8 md:h-8 lg:h-8 md:text-lg lg:text-lg">
-              <i class="text-error fas fa-bell"></i>
-            </div>
-          {% else %}
-            <div class="flex justify-center items-center w-6 h-6 text-base bg-white rounded-full md:w-8 lg:w-8 md:h-8 lg:h-8 md:text-lg lg:text-lg">
-              <i class="text-gray-600 far fa-bell"></i>
-            </div>
-          {% endif%}
+        <div @click="open = !open" class="cursor-pointer">
+          <div x-show="unread" class="flex justify-center items-center w-6 h-6 text-base bg-white rounded-full md:w-8 lg:w-8 md:h-8 lg:h-8 md:text-lg lg:text-lg">
+            <i class="text-error fas fa-bell"></i>
+          </div>
+          <div x-show="!unread" class="flex justify-center items-center w-6 h-6 text-base bg-white rounded-full md:w-8 lg:w-8 md:h-8 lg:h-8 md:text-lg lg:text-lg">
+            <i class="text-gray-600 far fa-bell"></i>
+          </div>
         </div>
         <div :class="{ 'hidden': !open, 'block': open }" class="fixed top-0 right-0 bottom-0 left-0 z-50 m-auto w-full text-center lg:w-48 lg:absolute lg:-translate-x-1/2 lg:top-12 lg:left-1/2 lg:right-auto lg:bottom-auto bg-primary lg:bg-transparent hidden lg:group-hover:block">
           <div class="flex justify-end items-center h-16 md:h-28 lg:hidden">
@@ -97,15 +94,6 @@
                     <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'companies:company_application' %}">查看應徵</a>
                   {% endif %}
                 </div>
-              </div>
-            </div>
-            <div class="relative flex items-center group" x-data="notificationHandler({{ notifications|safe|lower }}, {{ unread|lower }})">
-              <div class="mx-2 text-lg">
-                <i class="text-red-500 fas fa-bell" x-show="unread"></i>
-                <i class="text-white far fa-bell" x-show="!unread"></i>
-              </div>
-              <div class="hidden absolute top-12 left-1/2 p-3 text-center bg-white rounded-xl divide-y shadow-lg -translate-x-1/2 divide-slate-200 group-hover:block">
-                  {% include "shared/notify.html" %}
               </div>
             </div>
             <form action="{% url 'users:sign_out' %}" method="POST" class="hidden lg:block">

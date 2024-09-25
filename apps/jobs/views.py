@@ -80,7 +80,6 @@ def show(request, id):
     parsed_url = urlparse(previous_url)
     query_params = parse_qs(parsed_url.query)
 
-    backJobs = "resumes" not in referer_path
     is_search_result = "search" in referer_path
     search_query = query_params.get("q", [""])[0]
     location = query_params.get("location", [""])[0]
@@ -105,7 +104,6 @@ def show(request, id):
         "jobs/show.html",
         {
             "job": job,
-            "backJobs": backJobs,
             "tags": job.tags.all(),
             "status": status,
             "is_search_result": is_search_result,

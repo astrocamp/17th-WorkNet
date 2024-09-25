@@ -84,10 +84,8 @@
           <div class="flex justify-center gap-5">
             {% if is_search_result %}
               <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" href="{% url 'jobs:search_results' %}?q={{ search_query }}&location={{ location }}&page={{ request.GET.page }}">返回搜尋頁</a>
-            {% elif backJobs %}
-              <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" href="{% url 'jobs:index' %}">返回列表</a>
             {% else %}
-              <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" href="{% url 'resumes:jobs' %}">返回</a>
+              <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" onclick="history.back();">返回</a>
             {% endif %}
           </div>
         </div>
