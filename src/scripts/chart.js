@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tooltip: {
           callbacks: {
             label: function (tooltipItem) {
-              const value = tooltipItem.raw; // 取得職缺數量
+              const value = tooltipItem.raw;
               return ` ${value}個職缺`;
             },
           },
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tooltip: {
           callbacks: {
             label: function (tooltipItem) {
-              const value = tooltipItem.raw; // 取得職缺數量
+              const value = tooltipItem.raw;
               return ` ${value}個職缺`;
             },
           },
@@ -415,8 +415,9 @@ document.addEventListener("DOMContentLoaded", function () {
         tooltip: {
           callbacks: {
             label: function (tooltipItem) {
-              const value = tooltipItem.raw; // 取得職缺數量
-              return ` ${value}個職缺`;
+              const language = tooltipItem.dataset.label;
+              const value = tooltipItem.raw;
+              return ` ${language}： ${value}個職缺`;
             },
           },
           titleFont: {
