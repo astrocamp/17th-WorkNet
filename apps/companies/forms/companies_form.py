@@ -1,5 +1,14 @@
+from django.core.exceptions import ValidationError
 from django.forms import ModelForm
-from django.forms.widgets import EmailInput, NumberInput, Textarea, TextInput, URLInput
+from django.forms.widgets import (
+    EmailInput,
+    FileInput,
+    NumberInput,
+    Textarea,
+    TextInput,
+    URLInput,
+)
+from PIL import Image
 
 from apps.companies.models import Company
 
@@ -45,6 +54,7 @@ class CompanyForm(ModelForm):
             "email": EmailInput(
                 attrs={"class": "input-often-base", "placeholder": "請輸入email"}
             ),
+            "images": FileInput(attrs={"class": "input-often-base"}),
         }
 
         labels = {
@@ -56,4 +66,20 @@ class CompanyForm(ModelForm):
             "employees": "員工人數",
             "name": "負責人姓名",
             "email": "負責人Email",
+            "images": "上傳圖片",
         }
+
+    def clean_image(self):
+        image = self.cleaned_data.get("images")
+
+        if image.size > 50 * 1024:
+            raise ValidationError("檔案容量不能超過50KB")
+
+        try:
+            img = Image.open(image)
+            if img.width != 200 or img.height != 200:
+                raise ValidationError("圖片尺寸必須是200x200像素")
+        except Exception as e:
+            raise ValidationError("無效的圖片檔案")
+
+        return image

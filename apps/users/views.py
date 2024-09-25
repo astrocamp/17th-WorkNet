@@ -318,9 +318,15 @@ def get_popular_jobs(user):
             "apply": Job_Resume.objects.filter(
                 job=job, resume__in=user_resume
             ).exists(),
+            "images": (
+                f"https://{settings.AWS_S3_CUSTOM_DOMAIN}/{job.company.images}"
+                if job.company.images
+                else f"{settings.STATIC_URL}imgs/logo.png"
+            ),
         }
         for job in jobs
     ]
+    print(jobs_data)
     return jobs_data
 
 
@@ -337,6 +343,11 @@ def get_popular_companies(user):
                 CompanyFavorite.objects.filter(company=company, user=user).exists()
                 if user.is_authenticated
                 else False
+            ),
+            "images": (
+                f"https://{settings.AWS_S3_CUSTOM_DOMAIN}/{company.images}"
+                if company.images
+                else f"{settings.STATIC_URL}imgs/logo.png"
             ),
         }
         for company in companies

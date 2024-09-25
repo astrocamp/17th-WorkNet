@@ -28,7 +28,7 @@ from .models import Company
 def index(request):
     if request.method == "POST":
         company = get_object_or_404(Company, user=request.user)
-        form = CompanyForm(request.POST, instance=company)
+        form = CompanyForm(request.POST, request.FILES, instance=company)
 
         if form.is_valid():
             form.save()
@@ -68,7 +68,7 @@ def show(request, id):
     company = get_object_or_404(Company, id=id)
     if request.method == "POST":
         company = get_object_or_404(Company, id=id)
-        form = CompanyForm(request.POST, instance=company)
+        form = CompanyForm(request.POST, request.FILES, instance=company)
         if form.is_valid():
             form.save()
 
