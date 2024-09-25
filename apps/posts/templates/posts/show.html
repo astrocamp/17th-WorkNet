@@ -2,12 +2,16 @@
 {% load markdown %}
 {% block content %}
 <div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
-    <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">{{ post.title }}</h1>
+    <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">{{ post.company.title }}</h1>
     <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
-<div class="bg-[#eef0f0]">
+<div class="flex-1 bg-[#eef0f0]">
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
+        <div class="flex items-center mb-7">
+            <div class="w-1.5 h-7 bg-blue-500 rounded-full"></div>
+            <div class="pl-2 text-2xl font-bold">{{ post.title }}</div>
+        </div>
         <div class="px-5 space-y-4 bg-white py-7 rounded-xl md:rounded-3xl lg:rounded-3xl md:p-10 lg:p-10">
         <div class="flex items-start gap-2 pb-2 border-gray-300">
             <div>
