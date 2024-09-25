@@ -1,29 +1,45 @@
 {%extends "layouts/base.html"%}
-  {% block content %}
-  <div class="flex overflow-hidden relative justify-center items-center h-44 text-center md:h-80 lg:h-80">
+{% block content %}
+{% load static %}
+<div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
     <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">喜愛的公司</h1>
     <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
-     <div class="container p-5 pb-24 mx-auto">
-      {% if favorites %}
-        <ul class="mt-6 divide-y divide-slate-200">
-           {%  for favorite in favorites %}
-              <li class="flex gap-2 p-5">
-                <div class="flex-1">
-                  <a href="{% url 'companies:show' favorite.company.id %}">公司名稱：{{favorite.company.title}}</a>
+<div class="flex-1 bg-[#eef0f0]">
+  <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
+   {% if favorites %}
+     <ul class="flex flex-wrap gap-5 md:gap-7 lg:gap-7">
+        {%  for favorite in favorites %}
+           <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border flex gap-4">
+            <div class="flex items-center flex-1">
+              <div class="relative w-14 h-14 lg:w-20 lg:h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
+                  <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+              </div>
+              <div class="box-border flex-1 pl-3 md:pl-4 lg:pl-4">
+                <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl"><a href="{% url 'companies:show' favorite.company.id %}">{{favorite.company.title}}</a></h2>
+                <div class="flex flex-wrap items-center mt-px">
+                    {% if favorite.company.score > 0 %}
+                        <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
+                        <span class="ml-1 text-base font-light md:text-lg lg:text-lg">{{ favorite.company.score }}</span>
+                        <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
+                    {% endif %}
+                    <span class="text-base font-light md:text-lg lg:text-lg">{{ favorite.post_count }}個評論</span>
                 </div>
-                <div class="flex gap-2">
-                  <form action="{%  url 'users:favorite_company_delete' favorite.id %}" method="POST" >
-                    {% csrf_token %}
-                      <button class="text-white btn btn-error btn-sm">取消收藏</button>
-                  </form>
-                </div>
-              </li>
-            {% endfor %}
-          </ul>
-      {%else%}
-        <p>沒有收藏公司? <a a class="btn btn-primary" href="{% url 'companies:index' %}">趕快點我去尋找!!!</a></p>
-      {%endif%}
-     </div>
+              </div>
+             </div>
+             <div class="flex gap-2">
+               <form action="{%  url 'users:favorite_company_delete' favorite.id %}" method="POST" >
+                 {% csrf_token %}
+                   <button class="text-base rounded-full btn btn-error btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none"><i class="fa-solid fa-trash-can"></i></button>
+               </form>
+             </div>
+           </li>
+         {% endfor %}
+       </ul>
+   {%else%}
+     <p>沒有收藏公司? 趕快點我去<a a class="btn btn-primary" href="{% url 'companies:index' %}">趕快點我去尋找!!!</a></p>
+   {%endif%}
+  </div>
+</div>
   {% endblock%}
