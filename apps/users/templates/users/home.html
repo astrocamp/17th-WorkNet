@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %}
 {% block content %}
   {% load static %}
-  <div class="relative h-dvh w-full">
+  <div class="relative w-full h-dvh">
     <div class="relative z-10 w-full h-full bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-20 inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
     <div class="absolute z-20 inset-0 mx-auto flex flex-col justify-center px-5 text-white z-20 max-w-[1280px]">
@@ -29,11 +29,24 @@
         </div>
       </form>
       <div class="flex flex-wrap gap-1.5 mt-4 md:gap-5 lg:gap-5">
-        <a href="{% url 'jobs:search_results' %}?q=Python" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">Python</a>
-        <a href="{% url 'jobs:search_results' %}?q=PHP" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">PHP</a>
-        <a href="{% url 'jobs:search_results' %}?q=Ruby" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">Ruby</a>
-        <a href="{% url 'jobs:search_results' %}?q=Javascript" class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full">JavaScript</a>
-      </div>
+        <a href="{% url 'jobs:search_results' %}?q=Python"
+           class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full hover:bg-[#6d86a4] hover:text-white transition-all duration-300 ease-in-out">
+           Python
+        </a>
+        <a href="{% url 'jobs:search_results' %}?q=PHP"
+           class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full hover:bg-[#6d86a4] hover:text-white transition-all duration-300 ease-in-out">
+           PHP
+        </a>
+        <a href="{% url 'jobs:search_results' %}?q=Ruby"
+           class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full hover:bg-[#6d86a4] hover:text-white transition-all duration-300 ease-in-out">
+           Ruby
+        </a>
+        <a href="{% url 'jobs:search_results' %}?q=Javascript"
+           class="px-3 py-1 md:px-5 lg:px-5 md:py-2 lg:py-2 bg-white-20 text-sm md:text-base lg:text-base text-white font-light border-[#6d86a4] border rounded-full hover:bg-[#6d86a4] hover:text-white transition-all duration-300 ease-in-out">
+           JavaScript
+        </a>
+    </div>
+
     </div>
     <div class="absolute inset-x-0 bottom-4 z-20 text-center text-white md:bottom-14 lg:bottom-14" x-data="{ scrollTo: () => {
           const target = document.getElementById('target');
@@ -91,7 +104,7 @@
             </div>
             <div class="flex flex-col gap-4 justify-between items-start mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
               <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{ job.created_at|date:"Y/m/d" }}</div>
-              <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
+              <div class="flex gap-2 w-full md:gap-4 lg:gap-4 lg:w-auto">
                 {% if request.user.type != 2 and not job.apply %}
                   <form action="{% url 'users:apply_jobs' job.id %}" method="POST" class="flex flex-auto gap-2 md:gap-4 lg:gap-4">
                     {% csrf_token%}
@@ -142,7 +155,7 @@
               <div class="flex-1 text-sm font-light text-black md:text-lg lg:text-lg line-clamp-2">
                   {{ company.description }}
               </div>
-              <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
+              <div class="flex gap-2 w-full md:gap-4 lg:gap-4 lg:w-auto">
                 <button class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:min-w-24">
                   <a href="{% url 'companies:show' company.id %}">詳細</a>
                 </button>
