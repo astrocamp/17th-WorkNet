@@ -132,7 +132,7 @@
             {% for post in posts %}
               <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 w-full box-border">
                 <div class="flex flex-col gap-2 md:flex-row lg:flex-row md:gap-7 lg:gap-7">
-                  <h2 class="flex-auto text-xl font-semibold md:text-2xl lg:text-2xl"><a href="{% url 'posts:show' post.id %}">{{ post.title }}</a></h2>
+                  <h2 class="flex-auto text-xl font-semibold md:text-2xl lg:text-2xl hover:underline"><a href="{% url 'posts:show' post.id %}">{{ post.title }}</a></h2>
                   <div class="flex items-center">
                     <span class="self-center">{{ post.user }}</span>
                     <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
