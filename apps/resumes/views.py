@@ -78,6 +78,7 @@ def jobs(request):
 
     return render(request, "resumes/job.html", {"job_resumes": job_resumes})
 
+
 @login_required
 def jobs_delete(request, id):
     job_resume = get_object_or_404(Job_Resume, id=id)
