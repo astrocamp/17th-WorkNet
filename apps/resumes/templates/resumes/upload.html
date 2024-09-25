@@ -7,21 +7,30 @@
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
 
-
-<div class="container p-5 pb-24 mx-auto" x-data="{ loading: false }">
-    <form method="POST" action="{% url 'resumes:upload' %}" enctype="multipart/form-data" @submit="loading = true">
-        {% csrf_token %}
-        <div class="mt-4">
-            {{ form.file }}
-            {{ form.file.errors }}
+<div class="flex-1 bg-[#eef0f0]">
+    <div class="container p-5 pb-24 mx-auto" x-data="{ loading: false }">
+        <form method="POST" action="{% url 'resumes:upload' %}" enctype="multipart/form-data" @submit="loading = true">
+            {% csrf_token %}
+            <div class="mt-4">
+                {{ form.file }}
+                {{ form.file.errors }}
+            </div>
+            <div class="flex gap-4 mt-4">
+                <button class="px-4 py-2 text-white btn btn-primary min-w-20 text-xl">上傳</button>
+            </div>
+        </form>
+    
+        <div x-show="loading" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
+            <div class="loading loading-bars loading-lg text-primary"></div>
         </div>
-        <div class="flex gap-4 mt-4">
-            <button class="px-4 py-2 text-white btn btn-primary min-w-20" type="submit">上傳</button>
+        <div class="p-4 mt-8  bg-gray-100 border border-gray-200 rounded-lg">
+            <h3 class="mb-2 text-lg font-semibold text-black">檔案限制：</h3>
+            <ul class="text-black list-disc list-inside">
+                <li>只接受PDF檔案</li>
+                <li>檔案大小上限為 20MB</li>
+                <li>最多只能上傳 3 份履歷</li>
+            </ul>
         </div>
-    </form>
-
-    <div x-show="loading" class="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">
-        <div class="loading loading-bars loading-lg text-primary"></div>
     </div>
 </div>
 
