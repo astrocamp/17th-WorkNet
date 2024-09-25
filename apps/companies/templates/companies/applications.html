@@ -30,10 +30,10 @@
                             <td>{{ application.resume.userinfo.nickname }}</td>
                             <td class="text-center">{{ application.created_at|date:"Y/m/d" }}</td>
                             <td class="text-center">
-                                <a href="{{ application.resume.file.url }}" target="_blank" class="whitespace-nowrap text-secondary hover:underline "><i class="fa-regular fa-file-lines"></i> 查看履歷</a>
+                                <a href="{{ application.resume.file.url }}" target="_blank" class="whitespace-nowrap text-primary hover:underline "><i class="fa-regular fa-file-lines"></i> 查看履歷</a>
                             </td>
                             <td class="text-center">
-                                <a href="mailto:{{ application.resume.userinfo.user.email }}?subject=誠摯邀請您前來面試&body={{ application.resume.userinfo.nickname }}您好，%0A%0A我們非常榮幸收到了您的履歷，對於您的專業背景及經歷感到十分欣賞，因此我們誠摯地邀請您來參加面試。%0A%0A請您告知方便安排面試的時間，我們期待能與您當面交流，並深入了解您的專業經驗。%0A%0A謝謝，並祝一切順心、順利。%0A%0A{{application.job.company.title}}公司"  class="whitespace-nowrap text-secondary hover:underline"><i class="fa-regular fa-envelope"></i> 寄信聯絡</a>
+                                <a href="mailto:{{ application.resume.userinfo.user.email }}?subject=誠摯邀請您前來面試&body={{ application.resume.userinfo.nickname }}您好，%0A%0A我們非常榮幸收到了您的履歷，對於您的專業背景及經歷感到十分欣賞，因此我們誠摯地邀請您來參加面試。%0A%0A請您告知方便安排面試的時間，我們期待能與您當面交流，並深入了解您的專業經驗。%0A%0A謝謝，並祝一切順心、順利。%0A%0A{{application.job.company.title}}公司"  class="whitespace-nowrap text-primary hover:underline"><i class="fa-regular fa-envelope"></i> 寄信聯絡</a>
                             </td>
                         </tr>
                     {% endfor %}
