@@ -1,8 +1,8 @@
 {%extends "layouts/base.html"%}
-{% block content %}
-{% load static %}
-<div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
-    <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">喜愛的公司</h1>
+  {% block content %}
+  {% load static %}
+  <div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
+    <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">收藏的公司</h1>
     <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
@@ -13,7 +13,7 @@
         {%  for favorite in favorites %}
            <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border flex gap-4">
             <div class="flex items-center flex-1">
-              <div class="relative w-14 h-14 lg:w-20 lg:h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
+              <div class="relative mx-auto overflow-hidden bg-gray-200 rounded-full w-14 h-14 lg:w-20 lg:h-20 md:mx-0 lg:mx-0">
                   <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
               </div>
               <div class="box-border flex-1 pl-3 md:pl-4 lg:pl-4">
