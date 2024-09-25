@@ -15,6 +15,7 @@ from django.utils import timezone
 from django.views import View
 from django.views.decorators.http import require_POST
 from django.views.generic.base import TemplateView
+from django.db.models import Case, When, BooleanField, Value
 from social_core.exceptions import AuthCanceled
 from social_django.views import complete
 
@@ -354,9 +355,18 @@ def fetch_notifications(request):
             recipient=request.user,
             read=False,
         ).count()
-        notifications = Notification.objects.filter(recipient=request.user).order_by(
-            "read", "-created_at"
-        )[:5]
+        notifications = (
+            Notification.objects.filter(recipient=request.user)
+            .annotate(
+                unread_first=Case(
+                    When(read=False, then=Value(0)),
+                    When(read=True, then=Value(1)),
+                    output_field=BooleanField(),
+                )
+            )
+            .order_by("unread_first", "-created_at")[:5]
+            .values("id", "message", "read", "job_id")
+        )
         notifications_data = [
             {
                 "id": n.id,
@@ -366,6 +376,7 @@ def fetch_notifications(request):
             }
             for n in notifications
         ]
+
         return JsonResponse(
             {
                 "notifications": notifications_data,

@@ -1,5 +1,5 @@
 <template x-for="notification in notifications" hidden>
-    <a class="block py-4 px-2 lg:p-2 break-words text-base md:text-xl lg:text-base"
+    <a class="block py-4 px-2 lg:p-2 break-words text-base md:text-xl lg:text-base cursor-pointer"
         x-bind:class="{'text-red-500': !notification.read}"
         x-text="notification.message"
         x-bind:href="`/${notification.job_id}/notification/`"></a>
@@ -7,5 +7,5 @@
 </template>
 
 <template x-if="notifications.length === 0" hidden>
-    <p class="text-gray-500 mt-2 mb-2 mx-2.5 w-48 ">沒有通知</p>
+    <p class="text-gray-500 mt-2 mb-2 mx-2.5 text-center">沒有通知</p>
 </template>

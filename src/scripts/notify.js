@@ -15,6 +15,6 @@ Alpine.data("notificationHandler", (initialNotifications, initialUnread) => ({
 
       this.notifications = data.notifications;
       this.unread = data.unread;
-    }, 10000);
+    }, 3 * 60 * 1000);
   },
 }));
