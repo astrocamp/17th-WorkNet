@@ -1,5 +1,6 @@
+from django.db.models import BooleanField, Case, Value, When
+
 from .models import Notification
-from django.db.models import Case, When, BooleanField, Value
 
 
 def notifications_processor(request):

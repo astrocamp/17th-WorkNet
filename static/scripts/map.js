@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const infoWindow = new google.maps.InfoWindow({
-            content: `<h3>${company_title}</h3>`    
+            content: `<h3>${company_title}</h3>`
         });
 
         marker.addListener('click', () => {
