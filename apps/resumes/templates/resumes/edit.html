@@ -5,6 +5,7 @@
     <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
+
 <div class="flex-1 bg-[#eef0f0]">
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
         <div class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 w-full box-border flex flex-col gap-4">
@@ -19,8 +20,8 @@
                     </ul>
                 </div>
                 {% endif %}
-                <div class="flex items-center flex-grow w-full gap-4 md:w-auto lg:w-auto">
-                    <label for="id_name" class="text-xl font-semibold md:text-2xl lg:text-2xl whitespace-nowrap">檔名:</label>
+                <div class="flex items-center flex-1 flex-grow w-full gap-4 md:w-auto">
+                    <label for="id_original_filename" class="text-xl font-semibold md:text-2xl lg:text-2xl whitespace-nowrap">檔名:</label>
                     <input type="text" name="original_filename" id="id_original_filename" value="{{ form.original_filename.value }}" class="input-often-base">
                 </div>
                 <div class="flex gap-2">
@@ -29,7 +30,6 @@
                 </div>
             </form>
         </div>
-        {% endif %}
     </div>
 </div>
 {% endblock %}
