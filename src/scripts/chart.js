@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
       labels: jobTopLabels,
       datasets: [
         {
-          label: "Skills",
+          label: "程式語言",
           data: jobTopValues,
           backgroundColor: [
             "#FF6384",
@@ -72,6 +72,12 @@ document.addEventListener("DOMContentLoaded", function () {
           },
         },
         tooltip: {
+          callbacks: {
+            label: function (tooltipItem) {
+              const value = tooltipItem.raw; // 取得職缺數量
+              return ` ${value}個職缺`;
+            },
+          },
           titleFont: {
             size: 20,
           },
@@ -105,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
       labels: userTopLabels,
       datasets: [
         {
-          label: "Skills",
+          label: "程式語言",
           data: userTopValues,
           backgroundColor: [
             "#FF6384",
@@ -152,6 +158,12 @@ document.addEventListener("DOMContentLoaded", function () {
           },
         },
         tooltip: {
+          callbacks: {
+            label: function (tooltipItem) {
+              const value = tooltipItem.raw; // 取得職缺數量
+              return ` ${value}個職缺`;
+            },
+          },
           titleFont: {
             size: 20,
           },
@@ -177,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
       labels: salaryLabels,
       datasets: [
         {
-          label: "平均薪資",
+          label: "平均月薪",
           data: salaryValues,
           backgroundColor: "#36A2EB",
         },
@@ -244,7 +256,7 @@ document.addEventListener("DOMContentLoaded", function () {
       labels: tenureLabels,
       datasets: [
         {
-          label: "平均薪資",
+          label: "平均月薪",
           data: tenureValues,
           backgroundColor: "#FF9F40",
         },
@@ -323,6 +335,19 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("locationLanguageData").textContent
   );
 
+  const locationTotals = Object.keys(locationLanguageData).map((location) => {
+    const totalJobs = Object.values(locationLanguageData[location]).reduce(
+      (sum, count) => sum + count,
+      0
+    );
+    return { location, totalJobs };
+  });
+
+  const topFiveLocations = locationTotals
+    .sort((a, b) => b.totalJobs - a.totalJobs)
+    .slice(0, 5)
+    .map((item) => item.location);
+
   const locationLabels = Object.keys(locationLanguageData).map(
     (location) => locationMap[location] || location
   );
@@ -362,7 +387,7 @@ document.addEventListener("DOMContentLoaded", function () {
           ticks: {
             callback: function (value) {
               if (Number.isInteger(value)) {
-                return `${value} 個職缺`;
+                return `${value} `;
               }
               return null;
             },
@@ -388,9 +413,16 @@ document.addEventListener("DOMContentLoaded", function () {
           },
         },
         tooltip: {
+          callbacks: {
+            label: function (tooltipItem) {
+              const value = tooltipItem.raw; // 取得職缺數量
+              return ` ${value}個職缺`;
+            },
+          },
           titleFont: {
             size: 20,
           },
+
           bodyFont: {
             size: 20,
           },
