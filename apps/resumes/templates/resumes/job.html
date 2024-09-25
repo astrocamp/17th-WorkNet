@@ -27,7 +27,7 @@
                         <tr class="hover:bg-[#fffbe3] text-center text-base md:text-xl lg:text-xl font-light bg-white">
                             <td>{{ forloop.counter }}</td>
                             <td>{{ job_resume.company_title }}</td>
-                            <td><a class="text-secondary underline" href="{% url 'jobs:show' job_resume.job_id %}">{{ job_resume.job_title }}</a></td>
+                            <td><a class="text-primary underline" href="{% url 'jobs:show' job_resume.job_id %}">{{ job_resume.job_title }}</a></td>
                             <td>{{ job_resume.file_name }}</td>
                             <td class="text-center">{{ job_resume.created_at|date:"Y/m/d" }}</td>
                             <td>
