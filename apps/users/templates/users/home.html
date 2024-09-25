@@ -46,8 +46,6 @@
            JavaScript
         </a>
     </div>
-
-    </div>
     <div class="absolute inset-x-0 z-20 text-center text-white bottom-4 md:bottom-14 lg:bottom-14" x-data="{ scrollTo: () => {
           const target = document.getElementById('target');
           const offset = 100;
@@ -77,7 +75,7 @@
           <div class="relative border border-[#cccccc] rounded-xl md:rounded-3xl lg:rounded-3xl p-6 bg-white w-full md:w-calc-card lg:w-calc-card box-border">
             <div class="flex items-center">
               <div class="relative mx-auto overflow-hidden bg-gray-200 rounded-full w-14 h-14 md:w-20 md:h-20 lg:w-20 lg:h-20 md:mx-0 lg:mx-0">
-                <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                <img src="{{ job.images }}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
               </div>
               <div class="box-border flex-1 pl-3 pr-4 md:px-4 lg:px-4">
                 <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">
@@ -104,7 +102,7 @@
             </div>
             <div class="flex flex-col items-start justify-between gap-4 mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
               <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{ job.created_at|date:"Y/m/d" }}</div>
-              <div class="flex gap-2 w-full md:gap-4 lg:gap-4 lg:w-auto">
+              <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
                 {% if request.user.type != 2 and not job.apply %}
                   <form action="{% url 'users:apply_jobs' job.id %}" method="POST" class="flex flex-auto gap-2 md:gap-4 lg:gap-4">
                     {% csrf_token%}
@@ -128,7 +126,7 @@
           <div class="box-border relative w-full p-6 bg-white rounded-xl md:rounded-3xl lg:rounded-3xl shadow-custom-light md:w-calc-card lg:w-calc-card">
             <div class="flex items-center">
               <div class="relative mx-auto overflow-hidden bg-gray-200 rounded-full w-14 h-14 md:w-20 md:h-20 lg:w-20 lg:h-20 md:mx-0 lg:mx-0">
-                <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                <img src="{{ company.images }}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
               </div>
               <div class="box-border flex-1 pl-3 pr-4 md:px-4 lg:px-4">
                 <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">
@@ -155,7 +153,7 @@
               <div class="flex-1 text-sm font-light text-black md:text-lg lg:text-lg line-clamp-2">
                   {{ company.description }}
               </div>
-              <div class="flex gap-2 w-full md:gap-4 lg:gap-4 lg:w-auto">
+              <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
                 <button class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:min-w-24">
                   <a href="{% url 'companies:show' company.id %}">詳細</a>
                 </button>

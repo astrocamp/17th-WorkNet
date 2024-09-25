@@ -1,15 +1,15 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<div class="flex overflow-hidden relative justify-center items-center h-44 text-center md:h-80 lg:h-80">
+<div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
   <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">新增公司欄位</h1>
   <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
   <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
 <div class="bg-[#eef0f0]">
   <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
-    <div class="px-5 py-7 bg-white rounded-xl md:rounded-3xl lg:rounded-3xl md:p-10 lg:p-10">
+    <div class="px-5 bg-white py-7 rounded-xl md:rounded-3xl lg:rounded-3xl md:p-10 lg:p-10">
       <div class="mb-5 text-lg text-error">* 為必填項目</div>
-      <form method="POST" action="{% url 'companies:index' %}">
+      <form method="POST" action="{% url 'companies:index' %}" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="flex flex-wrap gap-3 mb-10 md:gap-5 lg:gap-5 md:mb-16 lg:mb-16">
           {% for field in form %}
@@ -18,6 +18,13 @@
                 <div class="text-sm md:text-base lg:text-base text-primary">{{ field.label }} <span class="text-error">*</span></div>
                 <div class="">{{ field }}</div>
                 <div class="text-xl text-error">{{ field.errors }}</div>
+              </div>
+            {% elif field.name == 'images' %}
+              <div class="w-full md:w-calc-data lg:w-calc-data">
+                <div class="text-sm md:text-base lg:text-base text-primary">{{ field.label }} <span class="text-error">*</span></div>
+                <div class="">{{ field }}</div>
+                <div class="text-xl text-error">{{ field.errors }}</div>
+                <div class="text-error">※ 圖片尺寸請上傳200 x 200像素，檔案容量不大於50kb</div>
               </div>
             {% else %}
               <div class="w-full md:w-calc-data lg:w-calc-data">
@@ -28,7 +35,7 @@
             {% endif %}
           {% endfor %}
         </div>
-        <div class="flex gap-5 justify-center">
+        <div class="flex justify-center gap-5">
           <button class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28">新增</button>
         </div>
       </form>
