@@ -182,20 +182,6 @@ def login_redirect(request):
     else:
         return redirect("companies:index")
 
-
-@login_redirect_next
-def favorite(request, id):
-    job = get_object_or_404(Job, pk=id)
-    user = request.user
-
-    if JobFavorite.objects.filter(user=user, job=job).exists():
-        JobFavorite.objects.filter(user=user, job=job).delete()
-        return redirect("jobs:index")
-    else:
-        JobFavorite.objects.create(user=user, job=job, favorited_at=timezone.now())
-        return redirect("jobs:index")
-
-
 @login_redirect_next
 def job_favorite(request, job_id):
     job = get_object_or_404(Job, pk=job_id)
