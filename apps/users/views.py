@@ -274,7 +274,16 @@ def submit_jobs(request, job_id):
 def favorite_company_list(request):
     user = request.user
     favorites = user.favorite_companies.order_by("-favorited_at")
-    return render(request, "users/favorite_company.html", {"favorites": favorites})
+    favorites_data = [
+        {
+            "id": favorite.id,
+            "company": favorite.company,
+            "post_count": Post.objects.filter(company_id=favorite.company.id).count(),
+        }
+        for favorite in favorites
+    ]
+
+    return render(request, "users/favorite_company.html", {"favorites": favorites_data})
 
 
 @login_required

@@ -5,26 +5,32 @@
     <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
-<div class="container p-5 pb-24 mx-auto">
-    {% if favorites %}
-        <ul class="mt-6 divide-y divide-slate-200">
-            {% for favorite in favorites %}
-                <li class="flex gap-2 p-5">
-                    <div class="flex-1">
-                        <a href="{% url 'jobs:show' favorite.job.id %}">職缺名稱: {{ favorite.job.title }}</a>
-                        <p>工作地點: {{ favorite.job.get_location_display }}</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <form method="POST" action="{% url 'users:favorites_delete' favorite.id %}">
-                            {% csrf_token %}
-                            <button class="text-white btn btn-error btn-sm">取消收藏</button>
-                        </form>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>沒有收藏職缺? <a class="btn btn-primary" href="{% url 'jobs:index' %}">趕快點我去尋找!!!</a></p>
-    {% endif %}
+
+<div class="flex-1 bg-[#eef0f0]">
+    <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
+        {% if favorites %}
+            <ul class="flex flex-wrap gap-5 md:gap-7 lg:gap-7">
+                {% for favorite in favorites %}
+                    <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border flex gap-4">
+                        <div class="flex-1">
+                            <a class="text-xl font-semibold md:text-2xl lg:text-2xl" href="{% url 'jobs:show' favorite.job.id %}">{{ favorite.job.title }}</a>
+                            <div class="flex flex-wrap gap-2 items-center mt-2">
+                                <span class="text-gray-600 text-sm font-light">from <a href="{% url 'companies:show' favorite.job.company_id %}">{{favorite.job.company.title}}</a></span>
+                                <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base font-light"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i> {{ favorite.job.get_location_display }}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <form method="POST" action="{% url 'users:favorites_delete' favorite.id %}">
+                                {% csrf_token %}
+                                <button class="text-base rounded-full btn btn-error btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none"><i class="fa-solid fa-trash-can"></i></button>
+                            </form>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>沒有收藏職缺? <a class="btn btn-primary" href="{% url 'jobs:index' %}">趕快點我去尋找!!!</a></p>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
