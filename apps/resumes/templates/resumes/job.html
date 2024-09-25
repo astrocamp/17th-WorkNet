@@ -8,12 +8,12 @@
 
 <div class="flex-1 bg-[#eef0f0]">
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
-        <p>你總共有 {{ job_resumes|length }} 次應徵紀錄。</p>
+        <p class="text-base md:text-xl lg:text-xl font-light">你總共有 <span class="text-secondary font-bold">{{ job_resumes|length }}</span> 次應徵紀錄。</p>
         {% if job_resumes %}
         <div class="overflow-x-auto mt-5">
-            <table class="table">
+            <table class="table overflow-hidden">
                 <thead>
-                    <tr class="text-center text-base">
+                    <tr class="text-center text-base md:text-xl lg:text-xl bg-primary text-white">
                         <th></th>
                         <th>公司</th>
                         <th>職缺</th>
@@ -24,16 +24,16 @@
                 </thead>
                 <tbody>
                     {% for job_resume in job_resumes %}
-                        <tr class="hover cursor-pointer" onclick="window.location.href= '{% url 'jobs:show' job_resume.job_id %}';" >
-                            <th>{{ forloop.counter }}</th>
+                        <tr class="hover:bg-[#fffbe3] text-center text-base md:text-xl lg:text-xl font-light bg-white">
+                            <td>{{ forloop.counter }}</td>
                             <td>{{ job_resume.company_title }}</td>
-                            <td>{{ job_resume.job_title }}</td>
+                            <td><a class="text-secondary underline" href="{% url 'jobs:show' job_resume.job_id %}">{{ job_resume.job_title }}</a></td>
                             <td>{{ job_resume.file_name }}</td>
                             <td class="text-center">{{ job_resume.created_at|date:"Y/m/d" }}</td>
                             <td>
                                 <form action="{% url 'resumes:jobs_delete' job_resume.id %}" method="post">
                                     {% csrf_token %}
-                                    <button class="text-red-500">取消應徵</button>
+                                    <button class="text-error"><i class="fa-solid fa-trash-can"></i></button>
                                 </form>
                             </td>
                         </tr>
