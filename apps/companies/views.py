@@ -302,6 +302,11 @@ def search_results(request):
                 else False
             ),
             "post_count": Post.objects.filter(company=company).count(),
+            "images": (
+                f"https://{settings.AWS_S3_CUSTOM_DOMAIN}/{company.images}"
+                if company.images
+                else f"{settings.STATIC_URL}imgs/logo.png"
+            ),
         }
         for company in companies
     ]

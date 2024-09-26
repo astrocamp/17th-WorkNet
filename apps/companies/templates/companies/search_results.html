@@ -26,11 +26,11 @@
                     <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 w-full box-border">
                         <div class="flex items-center">
                             <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
-                                <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                                <img src="{{ company.images }}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                             </div>
                             <div class="flex-1 pl-3 pr-4 md:px-4 lg:px-4">
                                 <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">
-                                    <a href="{% url 'companies:show' company.id %}?q={{ search_term }}&page={{ page_obj.number }}">
+                                    <a href="{% url 'companies:show' company.id %}?q={{ search_term }}&page={{ page_obj.number }}" class="hover:underline">
                                         {{ company.title }}
                                     </a>
                                 </h2>
