@@ -1,13 +1,57 @@
 {% extends "layouts/base.html" %}
 {% block content %}
-<h1>我的評論</h1>
-
-{% for post in posts %}
-    <li>
-      <strong>{{ post.title }}</strong> - Score: {{ post.score }}
-    </li>
-  {% empty %}
-    <p>No posts found.</p>
-{% endfor %}
-
+{% load static %}
+<div class="flex overflow-hidden relative justify-center items-center h-44 text-center md:h-80 lg:h-80">
+  <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">我的評論</h1>
+  <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
+  <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
+</div>
+<div class="flex-1 bg-[#eef0f0]">
+  <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
+    <ul class="flex flex-col gap-6 md:gap-8 lg:gap-8">
+      {% if page_obj %}
+        {% for post in page_obj %}
+          <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 w-full box-border">
+            <div class="flex flex-col gap-2 md:flex-row lg:flex-row md:gap-7 lg:gap-7">
+              <h2 class="flex-auto text-xl font-semibold md:text-2xl lg:text-2xl hover:underline"><a href="{% url 'posts:show' id=post.id %}">{{ post.title }}</a></h2>
+              <div class="flex items-center">
+                <span class="self-center">{{ post.user.userinfo.nickname|default:post.user.username }}</span>
+                <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
+                <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
+                <span class="ml-1 text-base font-light md:text-lg lg:text-lg">{{ post.score }}</span>
+              </div>
+            </div>
+            <p class="text-sm font-light text-gray-600 md:text-base lg:text-base"><a href="{% url 'companies:show' post.company_id %}" class="hover:underline"><i class="fa-solid fa-briefcase"></i> {{ post.company.title }}</a></p>
+            <p class="mt-2 text-base font-light text-black md:mt-4 lg:mt-4 md:text-lg lg:text-lg line-clamp-2">{{ post.content }}</p>
+            <div class="flex flex-col gap-4 justify-between items-start mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
+              <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{ post.created_at|date:"Y/m/d" }}</div>
+              <div class="flex gap-2 w-full md:gap-4 lg:gap-4 lg:w-auto">
+                <a href="{% url 'posts:show' id=post.id %}" class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">詳細</a>
+                <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'posts:edit' id=post.id %}"><i class="text-base fa-solid fa-pen lg:text-base"></i></a>
+                <form
+                  class="flex flex-auto gap-2 md:gap-4 lg:gap-4"
+                  action="{% url 'posts:delete' id=post.id %}"
+                  method="POST"
+                  hx-post="{% url 'posts:delete' id=post.id %}"
+                  hx-confirm="確認刪除？"
+                  hx-target="body"
+                >
+                  {% csrf_token %}
+                  <button class="flex-auto text-base rounded-full btn btn-error btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" type="submit"><i class="fa-solid fa-trash-can"></i></button>
+                </form>
+            </div>
+          </li>
+        {% endfor %}
+      {% else %}
+        <li class="flex flex-col items-center w-full">
+            <img src="{% static 'imgs/no_data.gif' %}" alt="沒資料" class="max-w-[200px]">
+            <p>尚無評論</p>
+        </li>
+      {% endif %}
+    </ul>
+    {% if page_obj %}
+      {% include 'shared/_pagination.html' %}
+    {% endif %}
+  </div>
+</div>
 {% endblock %}
