@@ -1,19 +1,20 @@
-<div id="container" x-data="reactions_post">
-    <button hx-post="{% url 'posts:reaction' post.id %}"  hx-vals='{"type": "like"}' hx-swap="outerHTML" hx-target="#container">
-        {% if is_like %}
-            <i class="fas fa-thumbs-up fa-2xl" style="color: #449dd1;"></i>
-        {% else %}
-            <i class="far fa-thumbs-up fa-2xl" style="color: #449dd1;"></i>
-        {% endif %}
-        &nbsp;{{post.like_cnt}}&nbsp;
-    </button>&nbsp;
-
-    <button hx-post="{% url 'posts:reaction' post.id %}"  hx-params="{'type': 'dislike'}" hx-swap="outerHTML" hx-target="#container">
-        {% if is_dislike %}
-            <i class="fas fa-thumbs-down fa-2xl" style="color: #BB342F;"></i>
-        {% else %}
-            <i class="far fa-thumbs-down fa-2xl" style="color: #BB342F;"></i>
-        {% endif %}
-        &nbsp;{{post.dislike_cnt}}&nbsp;
-    </button>
+<div id="container" class="w-full" x-data="reactions_post">
+    <div class="flex gap-2 md:block lg:block">
+        <button hx-post="{% url 'posts:reaction' post.id %}"  hx-vals='{"type": "like"}' hx-swap="outerHTML" hx-target="#container">
+            {% if is_like %}
+                <i class="fas fa-thumbs-up fa-xl" style="color: #449dd1;"></i>
+            {% else %}
+                <i class="far fa-thumbs-up fa-xl" style="color: #449dd1;"></i>
+            {% endif %}
+            &nbsp;{{post.like_cnt}}&nbsp;
+        </button>
+        <button hx-post="{% url 'posts:reaction' post.id %}"  hx-params="{'type': 'dislike'}" hx-swap="outerHTML" hx-target="#container">
+            {% if is_dislike %}
+                <i class="fas fa-thumbs-down fa-xl" style="color: #BB342F;"></i>
+            {% else %}
+                <i class="far fa-thumbs-down fa-xl" style="color: #BB342F;"></i>
+            {% endif %}
+            &nbsp;{{post.dislike_cnt}}&nbsp;
+        </button>
+    </div>
 </div>

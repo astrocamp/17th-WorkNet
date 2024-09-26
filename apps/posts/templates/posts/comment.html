@@ -1,18 +1,18 @@
 {% load markdown %}
-<li class="flex p-4 bg-gray-100 rounded-2xl">
+<li class="flex items-start p-4 bg-gray-100 rounded-2xl">
     <div class="flex-1">
         {% if comment.user %}
-            <small class="font-bold">{{ comment.user.userinfo.nickname|default:comment.user }}</small>
+            <div class="font-bold text-sm mb-1">{{ comment.user.userinfo.nickname|default:comment.user }}</div>
         {% endif %}
         <div class="text-lg markdown-body">{{ comment.content|convert_markdown|safe }}</div>
-        <small>{{ comment.created_at|date:"Y/m/d H:i" }}</small>
+        <div class="text-xs md:text-base lg:text-base font-light text-gray-600 pt-3">{{ comment.created_at|date:"Y/m/d H:i" }}</div>
     </div>
     {% if comment.user == request.user %}
-        <button class="text-white btn btn-error btn-sm"
+        <button class="text-error w-[18px]"
                 hx-post="{% url 'posts:comment_delete' comment.id %}"
                 hx-confirm="確認刪除？"
                 hx-target="body"
-                hx-swap="outerHTML">刪除留言</button>
+                hx-swap="outerHTML"><i class="fa-solid fa-trash-can"></i></button>
     {% endif %}
 </li>
 

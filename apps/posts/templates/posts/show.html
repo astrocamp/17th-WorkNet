@@ -8,81 +8,79 @@
 </div>
 <div class="flex-1 bg-[#eef0f0]">
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
-        <div class="flex items-center mb-7">
-            <div class="w-1.5 h-7 bg-blue-500 rounded-full"></div>
-            <div class="pl-2 text-2xl font-bold">{{ post.title }}</div>
-        </div>
         <div class="px-5 space-y-4 bg-white py-7 rounded-xl md:rounded-3xl lg:rounded-3xl md:p-10 lg:p-10">
-        <div class="flex items-start gap-2 pb-2 border-gray-300">
-            <div>
-                <i class="pt-2 fas fa-user-circle fa-2xl"></i>
-            </div>
-            <div>
-                <div class="text-2xl">{{ post.user.userinfo.nickname|default:post.user.username }}</div>
-                <div class="text-xs font-light">{{ post.created_at|date:"Y/m/d H:i" }}</div>
-            </div>
-            <div class="flex gap-2 items-center ml-auto">
-                {% if is_author %}
-                <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28 btn-secondary" href="{% url 'posts:edit' post.id %}">編輯評論</a>
-                {% endif %}
-            </div>
-        </div>
-        <div class="p-5 mt-2 bg-gray-100 rounded-lg">
-            <div class="flex justify-between">
-                <div class="flex flex-col">
-                    <span class="text-sm font-semibold text-gray-600">整體評分</span>
-                    <div class="flex mt-2">
-                        {% with stars=5 %}
-                            {% for i in "01234" %}
-                                {% if forloop.counter <= post.score %}
-                                    <i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i>
-                                {% else %}
-                                    <i class="fa-regular fa-star fa-xl" style="color: #FFD43B;"></i>
-                                {% endif %}
-                            {% endfor %}
-                        {% endwith %}
+            <div class="flex items-center gap-2 pb-2 border-gray-300">
+                <div class="flex-1">
+                    <div class="text-xl md:text-2xl lg:text-2xl mb-2 font-semibold">{{ post.title }}</div>
+                    <div class="flex items-center gap-2">
+                        <div class="text-sm md:text-base lg:text-base flex items-center gap-1 text-primary"><i class="fas fa-user-circle fa-2xl text-base md:text-lg lg:text-lg"></i> {{ post.user.userinfo.nickname|default:post.user.username }}</div>
+                        <div class="text-sm md:text-base lg:text-base font-light text-gray-600">{{ post.created_at|date:"Y/m/d H:i" }}</div>
                     </div>
                 </div>
-                <div class="flex items-center">
-                    {% include "posts/like.html" with post=post %}
+                <div class="flex gap-2 items-center">
+                    {% if is_author %}
+                    <a class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28 btn-secondary" href="{% url 'posts:edit' post.id %}">編輯評論</a>
+                    {% endif %}
                 </div>
             </div>
-        </div>
-        <div class="py-4 text-xl markdown-body">{{ post.content|convert_markdown|safe }}</div><br>
-        <section class="p-5 mt-2 text-xl rounded-2xl border border-gray-300">
-            <h3 class="pb-5 mb-5 text-xl font-bold border-b border-gray-300">留言</h3>
-            {% if comments %}
-                <ul id="comments" class="space-y-4 text-xl">
-                    {% for comment in comments %}
-                        {% include 'posts/comment.html' with comment=comment request=request only %}
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <ul id="comments" class="space-y-4">
-                    <li id="remove_no_comment" class="text-center text-gray-400">尚無回覆</li>
-                </ul>
-            {% endif %}
-            {% if user.is_authenticated %}
-            <div class="mt-6">
-                <form
-                    hx-target="#comments"
-                    hx-swap="beforeend"
-                    hx-confirm="確認送出留言？"
-                    hx-on::after-request="this.reset();"
-                    hx-post="{% url 'posts:show' post.id %}">
-                    {% csrf_token %}
-                    {{ comment_form.as_p }}
-                    <button  class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" type="submit">確定</button>
-                </form>
+            <div class="p-5 mt-2 bg-gray-100 rounded-lg">
+                <div class="flex justify-between flex-col md:flex-row lg:flex-row">
+                    <div class="flex flex-col">
+                        <span class="text-sm font-semibold text-gray-600">整體評分</span>
+                        <div class="flex mt-2">
+                            {% with stars=5 %}
+                                {% for i in "01234" %}
+                                    {% if forloop.counter <= post.score %}
+                                        <i class="fa-solid fa-star fa-xl" style="color: #FFD43B;"></i>
+                                    {% else %}
+                                        <i class="fa-regular fa-star fa-xl" style="color: #FFD43B;"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endwith %}
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center mt-4 md:mt-0 lg:mt-0 md:pl-8 lg:pl-8 md:border-l lg:border-l border-[#cccccc]">
+                        {% include "posts/like.html" with post=post %}
+                    </div>
+                </div>
             </div>
-            {% else %}
-            <p class="text-red-500">登入後即可一起討論！</p>
-            <a class="text-white btn btn-secondary" href="{% url 'users:sign_in' %}?next={{ request.path }}">登入</a>
-            {% endif %}
-        </section>
-        <div class="flex gap-5 justify-center">
-            <span class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" onclick="history.back();">回到列表</span>
-        </div>
+            <div class="text-base md:text-lg lg:text-lg markdown-body py-5">{{ post.content|convert_markdown|safe }}</div><br>
+            <section class="mt-2 text-xl rounded-xl md:rounded-3xl lg:rounded-3xl border border-primary overflow-hidden">
+                <h3 class="p-4 md:p-6 lg:p-6 mb-6 text-base md:text-xl lg:text-xl font-bold bg-primary text-white">留言</h3>
+                {% if comments %}
+                    <ul id="comments" class="space-y-4 text-xl px-6">
+                        {% for comment in comments %}
+                            {% include 'posts/comment.html' with comment=comment request=request only %}
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <ul id="comments" class="space-y-4">
+                        <li id="remove_no_comment" class="text-center text-gray-400 py-5 mx-6 bg-gray-100 rounded-2xl text-base">尚無回覆</li>
+                    </ul>
+                {% endif %}
+                {% if user.is_authenticated %}
+                    <div class="mt-10 mx-6 mb-6 border-t border-[#d1d5db]">
+                        <form
+                            hx-target="#comments"
+                            hx-swap="beforeend"
+                            hx-confirm="確認送出留言？"
+                            hx-on::after-request="this.reset();"
+                            hx-post="{% url 'posts:show' post.id %}">
+                            {% csrf_token %}
+                            {{ comment_form.as_p }}
+                            <div class="flex justify-end pt-5"><button class="w-full md:w-auto lg:w-auto btn btn-primary btn-sm text-sm" type="submit">送出留言</button></div>
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="mt-10 mx-6 mb-6">
+                        <p class="text-error text-center md:text-left lg:text-left text-base md:text-lg lg:text-lg">登入後即可一起討論！</p>
+                        <div class="flex pt-5"><a class="btn-secondary w-full md:w-auto lg:w-auto btn btn-sm text-sm" href="{% url 'users:sign_in' %}?next={{ request.path }}">登入</a></div>
+                    </div>
+                {% endif %}
+            </section>
+            <div class="flex gap-5 justify-center pt-5">
+                <span class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" onclick="history.back();">回到列表</span>
+            </div>
         </div>
     </div>
 </div>
