@@ -5,7 +5,7 @@
   <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
   <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
-<div class="bg-[#eef0f0]">
+<div class="flex-1 bg-[#eef0f0]">
   <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
     <div class="px-5 bg-white py-7 rounded-xl md:rounded-3xl lg:rounded-3xl md:p-10 lg:p-10">
       <div class="mb-5 text-lg text-error">* 為必填項目</div>
@@ -16,7 +16,7 @@
             {% if field.name == 'description' %}
               <div class="w-full">
                 <div class="text-sm md:text-base lg:text-base text-primary">{{ field.label }} <span class="text-error">*</span></div>
-                <div class="">{{ field }}</div>
+                <div>{{ field }}</div>
                 <div class="text-xl text-error">{{ field.errors }}</div>
               </div>
             {% elif field.name == 'images' %}
@@ -29,7 +29,7 @@
             {% else %}
               <div class="w-full md:w-calc-data lg:w-calc-data">
                 <div class="text-sm md:text-base lg:text-base text-primary">{{ field.label }} <span class="text-error">*</span></div>
-                <div class="">{{ field }}</div>
+                <div>{{ field }}</div>
                 <div class="text-xl text-error">{{ field.errors }}</div>
               </div>
             {% endif %}

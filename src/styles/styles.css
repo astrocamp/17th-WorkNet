@@ -41,6 +41,10 @@
   @apply box-border w-full py-4 text-base border-0 border-b border-gray-300 rounded-none resize-none input md:text-xl lg:text-xl min-h-28;
 }
 
+.textarea-often-base:focus{
+  @apply outline-0 border-secondary
+}
+
 .no-style {
   @apply bg-transparent border-transparent shadow-none;
 }

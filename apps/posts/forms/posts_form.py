@@ -13,14 +13,14 @@ class PostForm(forms.ModelForm):
             "score",
         ]
         widgets = {
-            "title": TextInput(attrs={"class": "mt-1 input-often-base"}),
+            "title": TextInput(attrs={"class": "input-often-base"}),
             "content": Textarea(
                 attrs={
-                    "class": "mt-1 textarea-often-base",
+                    "class": "textarea-often-base",
                     "style": "height: 280px; width: 100%;",
                 }
             ),
-            "score": Select(attrs={"class": "mt-1 input-often-base"}),
+            "score": Select(attrs={"class": "input-often-base"}),
         }
         labels = {
             "title": "標題",
