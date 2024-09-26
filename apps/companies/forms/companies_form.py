@@ -1,13 +1,8 @@
+import os
+
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
-from django.forms.widgets import (
-    EmailInput,
-    FileInput,
-    NumberInput,
-    Textarea,
-    TextInput,
-    URLInput,
-)
+from django.forms.widgets import EmailInput, FileInput, NumberInput, Textarea, TextInput, URLInput
 from PIL import Image
 
 from apps.companies.models import Company
@@ -69,17 +64,32 @@ class CompanyForm(ModelForm):
             "images": "上傳圖片",
         }
 
-    def clean_image(self):
+        error_messages = {
+            "images": {
+                "invalid_image": "請上傳有效的圖片檔案。您上傳的檔案不是圖片或圖片已損壞。",
+            }
+        }
+
+    def clean_images(self):
         image = self.cleaned_data.get("images")
 
-        if image.size > 50 * 1024:
-            raise ValidationError("檔案容量不能超過50KB")
+        if not image:
+            return image
+
+        if image.size > 2 * 1024 * 1024:
+            raise ValidationError("檔案大小不能超過2MB")
+
+        valid_extensions = ["jpg", "jpeg", "png", "bmp", "webp"]
+        ext = os.path.splitext(image.name)[1][1:].lower()
+        if ext not in valid_extensions:
+            raise ValidationError(
+                f"不支援的檔案格式，僅接受以下格式: {', '.join(valid_extensions)}"
+            )
 
         try:
             img = Image.open(image)
-            if img.width != 200 or img.height != 200:
-                raise ValidationError("圖片尺寸必須是200x200像素")
+            img.verify()
         except Exception as e:
-            raise ValidationError("無效的圖片檔案")
+            raise ValidationError("無效的圖片檔案或檔案損壞")
 
         return image
