@@ -2,7 +2,14 @@ import os
 
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
-from django.forms.widgets import EmailInput, FileInput, NumberInput, Textarea, TextInput, URLInput
+from django.forms.widgets import (
+    EmailInput,
+    FileInput,
+    NumberInput,
+    Textarea,
+    TextInput,
+    URLInput,
+)
 from PIL import Image
 
 from apps.companies.models import Company
