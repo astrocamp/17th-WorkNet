@@ -34,7 +34,7 @@
                         <div class="flex items-center">
                             <div class="box-border flex-1 pr-4 md:pr-4 lg:pr-4">
                                 <a href="{% url 'jobs:show' job.id %}?q={{ search_term }}&location={{ location }}&page={{ page_obj.number }}">
-                                    <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">{{ job.title }}</h2>
+                                    <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl hover:underline">{{ job.title }}</h2>
                                 </a>
                             </div>
                             <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                         <h3 class="text-sm font-light text-gray-600 mt-0.5 md:text-base lg:text-base line-clamp-2">
-                            <a href="{% url 'companies:show' job.company_id %}"><i class="fa-solid fa-briefcase"></i> {{ job.company }}</a>
+                            <a href="{% url 'companies:show' job.company_id %}" class="hover:underline"><i class="fa-solid fa-briefcase"></i> {{ job.company }}</a>
                         </h3>
                         <p class="mt-2 text-sm font-light text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">
                             {{ job.description }}
