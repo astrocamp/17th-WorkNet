@@ -6,7 +6,6 @@ app_name = "companies"
 
 urlpatterns = [
     path("", views.index, name="index"),
-    path("new", views.new, name="new"),
     path("<int:id>/posts/", views.post_index, name="post_index"),
     path("<int:id>/new/", views.post_new, name="post_new"),
     path("<int:id>/jobs", views.jobs_index, name="jobs_index"),
