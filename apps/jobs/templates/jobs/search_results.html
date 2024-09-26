@@ -40,13 +40,13 @@
                             <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
                                 {% if  request.user.is_authenticated and request.user.type == 1 %}
                                     <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
-                                        {% include "shared/job_favorite.html" with favorited=favorited %}
+                                        {% include "shared/job_favorite.html" with favorited=job.favorited %}
                                     </div>
                                 {% endif %}
                             </div>
                         </div>
                         <h3 class="text-sm font-light text-gray-600 mt-0.5 md:text-base lg:text-base line-clamp-2">
-                            <a href="{% url 'companies:show' job.company_id %}">{{ job.company.title }}</a>
+                            <a href="{% url 'companies:show' job.company_id %}">{{ job.company }}</a>
                         </h3>
                         <p class="mt-2 text-sm font-light text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">
                             {{ job.description }}
@@ -80,7 +80,7 @@
                     </li>
                 {% endfor %}
             {% else %}
-                <li class="flex flex-col w-full items-center">
+                <li class="flex flex-col items-center w-full">
                     <img src="{% static 'imgs/no_data.gif' %}" alt="沒資料" class="max-w-[200px]">
                     <p>沒有找到符合的工作</p>
                 </li>
