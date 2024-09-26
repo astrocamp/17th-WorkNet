@@ -50,9 +50,9 @@
                                 {% endif %}
                             </div>
                         </div>
-                        <p class="text-sm font-light text-gray-600 md:text-base lg:text-base"><a href="{% url 'companies:show' job.company_id %}"><i class="fa-solid fa-briefcase"></i> {{job.company}}</a></p>
+                        <p class="text-sm font-light text-gray-600 md:text-base lg:text-base"><a href="{% url 'companies:show' job.company_id %}" class="hover:underline"><i class="fa-solid fa-briefcase"></i> {{job.company}}</a></p>
                         <p class="mt-2 text-base font-light text-gray-600 md:mt-4 lg:mt-4 md:text-lg lg:text-lg line-clamp-2">{{job.description}}</p>
-                        <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
+                        <div class="flex flex-wrap gap-1 mt-2 text-base font-light md:mt-4 lg:mt-4 md:gap-1.5 lg:gap-2.5">
                             <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{job.type}}</span>
                             <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><a href="{% url 'jobs:search_results' %}?location={{job.location}}"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i>{{job.get_location_display}}</a></span>
                             <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{job.salary_range}} / 月</span>
@@ -73,7 +73,7 @@
                     </li>
                 {% endfor %}
             {% else %}
-                <li class="flex flex-col w-full items-center">
+                <li class="flex flex-col items-center w-full">
                     <img src="{% static 'imgs/no_data.gif' %}" alt="沒資料" class="max-w-[200px]">
                     <p>尚無職缺</p>
                 </li>
