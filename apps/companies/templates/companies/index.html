@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %}
 {% block content %}
 {% load static %}
-<div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
+<div class="flex overflow-hidden relative justify-center items-center h-44 text-center md:h-80 lg:h-80">
     <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">公司列表</h1>
     <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
@@ -11,9 +11,9 @@
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
         <div class="mb-6 md:mb-12 lg:mb-12">
             <form action="{% url 'companies:search_results' %}" method="GET" class="flex items-center md:items-center lg:items-center px-4 py-2 md:p-3 lg:p-3 gap-1 md:gap-4 lg:gap-4 w-full bg-white rounded-full border border-[#e7e8eb]">
-                <div class="flex items-center flex-1">
+                <div class="flex flex-1 items-center">
                   <div class="w-5 text-base text-center text-black md:w-7 lg:w-7 md:text-2xl lg:text-2xl"><i class="fa-solid fa-magnifying-glass"></i></div>
-                  <input type="text" name="q" placeholder="請輸入公司" class="w-full px-2 py-2 text-base text-gray-500 placeholder-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" value="{{ request.GET.q }}" />
+                  <input type="text" name="q" placeholder="請輸入公司" class="px-2 py-2 w-full text-base placeholder-gray-500 text-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" value="{{ request.GET.q }}" />
                 </div>
                 <div>
                   <button class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28">搜尋</button>
@@ -25,17 +25,21 @@
                 <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
                     <div class="flex items-center">
                         <div class="overflow-hidden relative mx-auto w-20 h-20 bg-gray-200 rounded-full md:mx-0 lg:mx-0">
-                            <a href="{% url 'companies:show' item.company.id %}"><img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute top-1/2 left-1/2 w-full transform -translate-x-1/2 -translate-y-1/2"></a>
+                            <a href="{% url 'companies:show' item.company.id %}">
+                            <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute top-1/2 left-1/2 w-full transition-opacity duration-300 ease-in-out transform -translate-x-1/2 -translate-y-1/2 hover:opacity-50">
+                            </a>
                         </div>
                         <div class="box-border flex-1 pr-4 pl-3 md:px-4 lg:px-4">
-                            <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl"><a href="{% url 'companies:show' item.company.id %}">{{ item.company.title }}</a></h2>
+                            <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl"><a href="{% url 'companies:show' item.company.id %}"class="hover:underline">{{ item.company.title }}</a></h2>
                             <div class="flex items-center mt-px">
                                 {% if item.company.score > 0 %}
                                     <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
                                     <span class="ml-1 text-base font-light md:text-lg lg:text-lg">{{ item.company.score }}</span>
                                     <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
                                 {% endif %}
-                                <span class="text-base font-light md:text-lg lg:text-lg">{{ item.post_count }}個評論</span>
+                                <span class="text-base font-light md:text-lg lg:text-lg">
+                                    <a href="{% url 'companies:post_index' item.company.id %}" class="hover:underline">{{ item.post_count }}個評論</a>
+                                    </span>
                             </div>
                         </div>
                         <div class="flex absolute top-2.5 right-3 gap-2 text-2xl md:lg:static lg:static">
