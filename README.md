@@ -16,11 +16,11 @@
 
 ## 安裝環境
 
-1. `git clone https://github.com/astrocamp/17th-WorkNet.git` （將專案複製到本地）
-2. `cd 17th-WorkNet` (進入專案目錄)
-3. `poetry install` (安裝 Poetry 相關套件)
-4. `npm install` (安裝 npm 相關套件)
-5. 建立`.env` (設定環境變數)
+1. `git clone https://github.com/astrocamp/17th-WorkNet.git`(將專案複製到本地)
+2. `cd 17th-WorkNet`(進入專案目錄)
+3. `poetry install`(安裝 Poetry 相關套件)
+4. `npm install`(安裝 npm 相關套件)
+5. 建立`.env`(設定環境變數)
 
 ## 執行環境
 
@@ -66,11 +66,12 @@
   - 會員&留言關聯
 - 吳菁菁 [GitHub](https://github.com/kait-wu)
   - Heroku 部署
-  - 履歷上傳(AWS S3)
+  - 履歷、圖片上傳(AWS S3)
   - 評論功能
   - 搜尋功能
   - 公司&評論關聯
 - 古佳翰 [GitHub](https://github.com/Gujiahan)
+  - Google Map 串接
   - 收藏職缺功能
   - 公司查看應徵履歷功能
   - 登入後轉址原頁面
