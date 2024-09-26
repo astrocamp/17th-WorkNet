@@ -31,9 +31,9 @@ def request(request):
             "packages": [
                 {
                     "id": package_id,
-                    "name": "Premium",
+                    "name": "贊助WorkNet",
                     "amount": 200,
-                    "products": [{"name": "Premium", "quantity": 1, "price": 200}],
+                    "products": [{"name": "贊助WorkNet", "quantity": 1, "price": 200}],
                 }
             ],
             "redirectUrls": {
