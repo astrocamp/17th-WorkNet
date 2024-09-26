@@ -21,10 +21,10 @@
               </div>
             {% elif field.name == 'images' %}
               <div class="w-full md:w-calc-data lg:w-calc-data">
-                <div class="text-sm md:text-base lg:text-base text-primary">{{ field.label }} <span class="text-error">*</span></div>
+                <div class="text-sm md:text-base lg:text-base text-primary">{{ field.label }} </div>
                 <div class="">{{ field }}</div>
                 <div class="text-xl text-error">{{ field.errors }}</div>
-                <div class="text-error">※ 圖片尺寸請上傳200 x 200像素，檔案容量不大於50kb</div>
+                <div class="text-error">※ 圖片尺寸請上傳200 x 200像素，檔案容量不大於2MB</div>
               </div>
             {% else %}
               <div class="w-full md:w-calc-data lg:w-calc-data">
