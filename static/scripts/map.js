@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    
+
     if (typeof google === 'object' && typeof google.maps === 'object') {
         initializeMap();
     } else {

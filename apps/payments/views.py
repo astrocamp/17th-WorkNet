@@ -12,7 +12,6 @@ from django.shortcuts import redirect, render
 
 from lib.utils.models.decorators import login_redirect_next
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 dotenv.load_dotenv(os.path.join(BASE_DIR, ".env"))
 
