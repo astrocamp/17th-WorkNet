@@ -9,13 +9,11 @@
   <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
   <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
-
 <div class="flex-1 bg-[#eef0f0]">
   <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
     {% if company and request.user.type != 2 %}
       <div class="flex justify-end mb-4 md:mb-7 lg:mb-7"><a class="text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{% url 'companies:post_new' company.id %}"><i class="fa-solid fa-plus"></i> 撰寫評論</a></div>
     {% endif %}
-
     <ul class="flex flex-col gap-6 md:gap-8 lg:gap-8">
       {% for item in page_obj %}
       <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 w-full box-border">

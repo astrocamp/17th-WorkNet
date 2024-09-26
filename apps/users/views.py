@@ -18,6 +18,7 @@ from django.views.generic.base import TemplateView
 from social_core.exceptions import AuthCanceled
 from social_django.views import complete
 
+from apps.companies.forms.companies_form import CompanyForm
 from apps.companies.models import Company, CompanyFavorite
 from apps.jobs.models import Job, Job_Resume, JobFavorite
 from apps.posts.models import Post
@@ -28,7 +29,6 @@ from lib.utils.models.defined import LOCATION_CHOICES
 
 from .forms import CustomUserCreationForm, UserInfoForm
 from .forms.users_form import PasswordResetForm
-from apps.companies.forms.companies_form import CompanyForm
 from .models import Notification, User, UserInfo
 
 
@@ -190,6 +190,7 @@ def login_redirect(request):
         return redirect("users:info")
     else:
         return redirect("companies:index")
+
 
 @login_redirect_next
 def job_favorite(request, job_id):
