@@ -9,9 +9,16 @@
 <div x-data="{ activeTab: 'tab1' }">
   <div class="flex-1 bg-[#eef0f0]">
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
-      <div class="flex border-b border-[#cccccc]">
-        <span @click="activeTab = 'tab1'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab1' }" class="flex-auto block min-w-0 pb-5 text-base text-center cursor-pointer md:min-w-28 lg:min-w-52 md:text-lg lg:text-xl md:flex-none lg:flex-none">公司介紹</span>
-        <span @click="activeTab = 'tab2'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab2' }" class="flex-auto block min-w-0 pb-5 text-base text-center cursor-pointer md:min-w-28 lg:min-w-52 md:text-lg lg:text-xl md:flex-none lg:flex-none">公司評論</span>
+      <div class="flex justify-between border-b border-[#cccccc]">
+        <div class="flex gap-2">
+          <span @click="activeTab = 'tab1'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab1' }" class="flex-auto inline-block min-w-0 pb-5 text-base text-center cursor-pointer md:min-w-28 lg:min-w-52 md:text-lg lg:text-xl md:flex-none lg:flex-none">公司介紹</span>
+          <span @click="activeTab = 'tab2'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab2' }" class="flex-auto inline-block min-w-0 pb-5 text-base text-center cursor-pointer md:min-w-28 lg:min-w-52 md:text-lg lg:text-xl md:flex-none lg:flex-none">公司評論</span>
+        </div>
+        {% if company == request.user.company %}
+          <div>
+            <a href="{% url 'companies:edit' request.user.company.id  %}" class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20  lg:min-w-24 lg:flex-none">編輯</a>
+          </div>
+        {% endif %}
       </div>
       <div x-show="activeTab === 'tab1'">
         <div class="flex flex-col items-start gap-6 mb-10 mt-14 md:flex-row lg:flex-row md:gap-12 lg:gap-12 md:items-start lg:items-center md:mb-14 lg:mb-14">

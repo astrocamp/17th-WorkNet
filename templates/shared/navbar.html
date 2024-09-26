@@ -91,7 +91,7 @@
                     <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'users:favorites_list' %}">收藏的職缺</a>
                     <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'users:favorites_company_list' %}">收藏的公司</a>
                   {% elif request.user.type == 2 %}
-                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'companies:edit' request.user.company.id  %}">公司資料</a>
+                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'companies:show' request.user.company.id  %}">公司資料</a>
                     <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'companies:jobs_index' request.user.company.id %}">公司職缺</a>
                     <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'companies:post_index' request.user.company.id %}">公司評論</a>
                     <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'companies:company_application' %}">查看應徵</a>
