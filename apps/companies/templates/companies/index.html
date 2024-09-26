@@ -38,9 +38,7 @@
                                     <span class="ml-1 text-base font-light md:text-lg lg:text-lg">{{ item.company.score }}</span>
                                     <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
                                 {% endif %}
-                                <span class="text-base font-light md:text-lg lg:text-lg">
-                                    <a href="{% url 'companies:post_index' item.company.id %}" class="hover:underline">{{ item.post_count }}個評論</a>
-                                    </span>
+                                <span class="text-sm font-light text-gray-600 md:text-base lg:text-base">{{ item.post_count }}個評論</span>
                             </div>
                         </div>
                         <div class="flex absolute top-2.5 right-3 gap-2 text-2xl md:lg:static lg:static">
@@ -49,8 +47,8 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="flex flex-col items-start justify-between gap-4 mt-4 lg:flex-row lg:items-center">
-                        <div class="flex-1 text-sm font-light text-black md:text-lg lg:text-lg line-clamp-2">
+                    <div class="flex flex-col gap-4 justify-between items-start mt-4 lg:flex-row lg:items-center">
+                        <div class="flex-1 text-base font-light text-black md:text-lg lg:text-lg line-clamp-2">
                             {{ item.company.description }}
                         </div>
                         <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
