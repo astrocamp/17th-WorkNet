@@ -28,7 +28,7 @@ from .models import Company, CompanyFavorite
 def index(request):
     if request.method == "POST":
         company = get_object_or_404(Company, user=request.user)
-        form = CompanyForm(request.POST, request.FILES, instance=company)
+        form = CompanyForm(request.POST, instance=company)
 
         if form.is_valid():
             form.save()
@@ -49,6 +49,11 @@ def index(request):
             "favorited": company.is_favorited_by(request.user),
             "can_edit": rules.test_rule("can_edit_company", request.user, company.id),
             "post_count": Post.objects.filter(company=company).count(),
+            "images": (
+                f"https://{settings.AWS_S3_CUSTOM_DOMAIN}/{company.images}"
+                if company.images
+                else f"{settings.STATIC_URL}imgs/logo.png"
+            ),
         }
         for company in companies
     ]
