@@ -35,10 +35,12 @@
                                     </a>
                                 </h2>
                                 <div class="flex items-center mt-1">
+                                    {% if  company.score > 0 %}
                                     <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
-                                    <span class="ml-1 text-base font-light md:text-lg lg:text-lg">4.9</span>
-                                    <div class="w-px h-4 mx-2 bg-gray-300"></div>
-                                    <span class="text-base font-light md:text-lg lg:text-lg">20個評論</span>
+                                    <span class="ml-1 text-base font-light md:text-lg lg:text-lg">{{ company.score }}</span>
+                                    <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
+                                    {% endif %}
+                                    <span class="text-base font-light md:text-lg lg:text-lg">{{ company.post_count }}個評論</span>
                                 </div>
                             </div>
                             <div class="flex gap-2 text-2xl absolute top-2.5 right-3">
@@ -63,7 +65,7 @@
                     </li>
                 {% endfor %}
             {% else %}
-                <li class="flex flex-col w-full items-center">
+                <li class="flex flex-col items-center w-full">
                     <img src="{% static 'imgs/no_data.gif' %}" alt="沒資料" class="max-w-[200px]">
                     <p>沒有找到符合的公司</p>
                 </li>
