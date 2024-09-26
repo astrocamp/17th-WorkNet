@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // 檢查 google 是否定義
+    
     if (typeof google === 'object' && typeof google.maps === 'object') {
         initializeMap();
     } else {
