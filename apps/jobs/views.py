@@ -151,7 +151,7 @@ def search_results(request):
 
         search_filter &= (
             Q(title__icontains=search_term)
-            | Q(company__title__iexact=search_term)
+            | Q(company__title__icontains=search_term)
             | Q(location__icontains=search_term)
             | Q(id__in=job_ids_with_tags)
         )
