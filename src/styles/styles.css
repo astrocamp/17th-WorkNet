@@ -1,6 +1,5 @@
 @import "./github-markdown.css";
 @import "./tags.css";
-/*這段未成功import*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
