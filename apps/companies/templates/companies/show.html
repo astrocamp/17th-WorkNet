@@ -91,7 +91,7 @@
                     </div>
                   {% endif %}
                 </div>
-                <p class="mt-2 text-sm font-light text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">{{ job.description }}</p>
+                <p class="mt-2 text-base font-light text-gray-600 md:mt-4 lg:mt-4 md:text-lg lg:text-lg line-clamp-2">{{ job.description }}</p>
                 <div class="flex flex-wrap gap-1 mt-2 text-base font-light md:mt-4 lg:mt-4 md:gap-1.5 lg:gap-2.5">
                   <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{ job.type }}</span>
                   <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base">
@@ -143,8 +143,8 @@
                     <span class="ml-1 text-base font-light md:text-lg lg:text-lg">{{ post.score }}</span>
                   </div>
                 </div>
-                <p class="mt-2 text-sm font-light text-black md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">{{ post.content }}</p>
-                <div class="flex flex-col items-start justify-between gap-4 mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
+                <p class="mt-2 text-base font-light text-black md:mt-4 lg:mt-4 md:text-lg lg:text-lg line-clamp-2">{{ post.content }}</p>
+                <div class="flex flex-col gap-4 justify-between items-start mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
                   <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{ post.created_at|date:"Y/m/d" }}</div>
                   <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
                     <a href="{% url 'posts:show' post.id %}" class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">詳細</a>

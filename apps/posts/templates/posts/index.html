@@ -27,10 +27,10 @@
           </div>
         </div>
         {% if not company %}
-          <h3 class="mt-0.5 text-sm font-light text-gray-600 md:text-base lg:text-base line-clamp-2"><a href="{% url 'companies:show' item.post.company_id %}">{{item.post.company.title}}</a></h3>
+          <p class="text-sm font-light text-gray-600 md:text-base lg:text-base"><a href="{% url 'companies:show' item.post.company_id %}"><i class="fa-solid fa-briefcase"></i> {{item.post.company.title}}</a></p>
         {% endif %}
-        <p class="mt-2 text-sm font-light text-black md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">{{ item.post.content }}</p>
-        <div class="flex flex-col gap-4 justify-between items-start mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
+        <p class="mt-2 text-base font-light text-black md:mt-4 lg:mt-4 md:text-lg lg:text-lg line-clamp-2">{{ item.post.content }}</p>
+        <div class="flex flex-col items-start justify-between gap-4 mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
           <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{ item.post.created_at|date:"Y/m/d" }}</div>
           <div class="flex gap-2 w-full md:gap-4 lg:gap-4 lg:w-auto">
             <a href="{% url 'posts:show' id=item.post.id %}" class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">詳細</a>
