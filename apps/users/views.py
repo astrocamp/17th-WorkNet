@@ -182,6 +182,7 @@ def login_redirect(request):
     else:
         return redirect("companies:index")
 
+
 @login_redirect_next
 def job_favorite(request, job_id):
     job = get_object_or_404(Job, pk=job_id)
