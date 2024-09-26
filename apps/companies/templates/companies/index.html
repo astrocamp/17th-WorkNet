@@ -24,11 +24,8 @@
                 <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
                     <div class="flex items-center">
                         <div class="relative w-20 h-20 mx-auto overflow-hidden bg-gray-200 rounded-full md:mx-0 lg:mx-0">
-                            {% if item.company.images %}
-                                <img src="{{ item.company.images.url }}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                            {% else %}
-                                <img src="{% static 'imgs/logo.png' %}" alt="預設公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-                            {% endif %}
+                            <a href="{% url 'companies:show' item.company.id %}"><img src="{{ item.images }}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                            </a>
                         </div>
                         <div class="box-border flex-1 pl-3 pr-4 md:px-4 lg:px-4">
                             <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl"><a href="{% url 'companies:show' item.company.id %}"class="hover:underline">{{ item.company.title }}</a></h2>
@@ -47,7 +44,7 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="flex flex-col gap-4 justify-between items-start mt-4 lg:flex-row lg:items-center">
+                    <div class="flex flex-col items-start justify-between gap-4 mt-4 lg:flex-row lg:items-center">
                         <div class="flex-1 text-base font-light text-black md:text-lg lg:text-lg line-clamp-2">
                             {{ item.company.description }}
                         </div>
