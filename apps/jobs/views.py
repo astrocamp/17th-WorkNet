@@ -28,6 +28,8 @@ def index(request):
 
     jobs = Job.objects.order_by("-id")
 
+    job_form = JobForm()
+
     jobs_with_permissions = [
         {
             "id": job.id,
@@ -58,6 +60,7 @@ def index(request):
             "page_obj": page_obj,
             "company": company,
             "locations": locations,
+            "job_form": job_form,
         },
     )
 
@@ -148,13 +151,13 @@ def search_results(request):
 
         search_filter &= (
             Q(title__icontains=search_term)
-            | Q(company__title__icontains=search_term)
+            | Q(company__title__iexact=search_term)
             | Q(location__icontains=search_term)
             | Q(id__in=job_ids_with_tags)
         )
 
     if location:
-        search_filter &= Q(location__icontains=location)
+        search_filter &= Q(location=location)
 
     if tags:
         tagged_items = TaggedItem.objects.filter(tag__name__in=tags)
@@ -165,7 +168,7 @@ def search_results(request):
         Job.objects.filter(search_filter)
         .select_related("company")
         .distinct()
-        .order_by("created_at")
+        .order_by("-created_at")
     )
 
     count = jobs.count()

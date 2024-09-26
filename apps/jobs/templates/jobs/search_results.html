@@ -46,16 +46,14 @@
                             </div>
                         </div>
                         <h3 class="text-sm font-light text-gray-600 mt-0.5 md:text-base lg:text-base line-clamp-2">
-                            from <a href="{% url 'companies:show' job.company_id %}">{{ job.company }}</a>
+                            <a href="{% url 'companies:show' job.company_id %}">{{ job.company.name }}</a>
                         </h3>
                         <p class="mt-2 text-sm font-light text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">
                             {{ job.description }}
                         </p>
                         <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
                             <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{ job.type }}</span>
-                            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base">
-                                <i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i> {{ job.get_location_display }}
-                            </span>
+                            <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><a href="{% url 'jobs:search_results' %}?location={{job.location}}"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i>{{job.get_location_display}}</a></span>
                             <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base">
                                 <i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{ job.salary_range }} / 月
                             </span>
