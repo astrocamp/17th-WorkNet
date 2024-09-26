@@ -28,7 +28,7 @@
 
 ## 技術使用
 
-- 前端：daisyUI, TailwindCSS, Alpinejs, HTMX
+- 前端：daisyUI, TailwindCSS, Alpine.js, HTMX
 - 後端：Python, Django
 - 資料庫：PostgreSQL
 - 版本控制：Git
