@@ -292,6 +292,7 @@ def search_results(request):
             "id": company.id,
             "title": company.title,
             "description": company.description,
+            "score": company.score,
             "can_edit": rules.test_rule("can_edit_company", request.user, company.id),
             "favorited": (
                 CompanyFavorite.objects.filter(
@@ -300,6 +301,7 @@ def search_results(request):
                 if request.user.is_authenticated
                 else False
             ),
+            "post_count": Post.objects.filter(company=company).count(),
         }
         for company in companies
     ]
