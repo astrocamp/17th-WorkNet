@@ -11,8 +11,8 @@
   <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
     <div class="relative rounded-xl md:rounded-3xl lg:rounded-3xl border border-[#e7e8eb] p-6 lg:pb-12 lg:pt-6 lg:px-12 bg-white w-full list-none">
           <div class="flex flex-col md:flex-row lg:flex-row gap-4 items-center justify-between pb-4 lg:py-6 mb-2 bg-white bg-opacity-50 backdrop-blur-5 border-b border-[#cccccc] md:sticky lg:sticky md:top-32 lg:top-32">
-            <h2 class="w-full md:w-auto lg:w-auto text-xl font-semibold md:text-2xl lg:text-2xl flex-1">{{ job.title }}</h2>
-            <div class="hidden md:flex lg:flex items-center justify-center gap-2 md:gap-5 lg:gap-5 text-2xl flex-row">
+            <h2 class="flex-1 w-full text-xl font-semibold md:w-auto lg:w-auto md:text-2xl lg:text-2xl">{{ job.title }}</h2>
+            <div class="flex-row items-center justify-center hidden gap-2 text-2xl md:flex lg:flex md:gap-5 lg:gap-5">
                 {% if  request.user.is_authenticated and request.user.type == 1 %}
                   <div class="flex gap-2 justify-center items-center text-2xl top-2.5 right-3 md:static lg:static ">
                     {% include "shared/job_favorite.html" with favorited=favorited %}
@@ -35,42 +35,34 @@
          </div>
          <div class="mb-10 text-left md:text-right lg:text-right text-sm text-[#aaaaaa]"><i class="fa-regular fa-calendar-days"></i> 發布時間：{{ job.created_at|date:"Y/m/d"}}</div>
          <div>
-          <div class="flex flex-col items-start gap-6 mb-5 md:mb-10  lg:mb-10 md:flex-row lg:flex-row md:gap-12 lg:gap-12 md:items-start lg:items-center md:mb-14 lg:mb-14">
+          <div class="flex flex-col items-start gap-6 mb-5 md:mb-10 lg:mb-10 md:flex-row lg:flex-row md:gap-12 lg:gap-12 md:items-start lg:items-center md:mb-14 lg:mb-14">
             <div class="flex-1">
               <div class="flex flex-wrap gap-3 md:gap-5 lg:gap-5">
-                <div class="flex w-full mb-4 gap-2 flex-col md:flex-row lg:flex-row">
+                <div class="flex flex-col w-full gap-2 mb-4 md:flex-row lg:flex-row">
                   <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">職缺描述</div>
                   <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.description }}</div>
                 </div>
-                <div class="flex w-full md:w-full lg:w-calc-data mb-4 md:mb-0 lg:mb-0 gap-2 flex-col md:flex-row lg:flex-row">
+                <div class="flex flex-col w-full gap-2 mb-4 md:w-full lg:w-calc-data md:mb-0 lg:mb-0 md:flex-row lg:flex-row">
                   <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">工作地點</div>
                   <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.get_location_display }}</div>
                 </div>
-                <div class="flex w-full md:w-full lg:w-calc-data mb-4 md:mb-0 lg:mb-0 gap-2 flex-col md:flex-row lg:flex-row">
+                <div class="flex flex-col w-full gap-2 mb-4 md:w-full lg:w-calc-data md:mb-0 lg:mb-0 md:flex-row lg:flex-row">
                   <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">工作類型</div>
                   <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.type}}</div>
                 </div>
-                <div class="flex w-full md:w-full lg:w-calc-data mb-4 md:mb-0 lg:mb-0 gap-2 flex-col md:flex-row lg:flex-row">
+                <div class="flex flex-col w-full gap-2 mb-4 md:w-full lg:w-calc-data md:mb-0 lg:mb-0 md:flex-row lg:flex-row">
                   <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">聯絡方式</div>
                   <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.contact_info}}</div>
                 </div>
-                <div class="flex w-full md:w-full lg:w-calc-data mb-4 md:mb-0 lg:mb-0 gap-2 flex-col md:flex-row lg:flex-row">
-                  <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">聯絡方式</div>
-                  <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.contact_info}}</div>
-                </div>
-                <div class="flex w-full md:w-full lg:w-calc-data mb-4 md:mb-0 lg:mb-0 gap-2 flex-col md:flex-row lg:flex-row">
+                <div class="flex flex-col w-full gap-2 mb-4 md:w-full lg:w-calc-data md:mb-0 lg:mb-0 md:flex-row lg:flex-row">
                   <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">薪資範圍</div>
-                  <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.salary_range}}</div>
+                  <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.salary_range}} 元/月</div>
                 </div>
-                <div class="flex w-full md:w-full lg:w-calc-data mb-4 md:mb-0 lg:mb-0 gap-2 flex-col md:flex-row lg:flex-row">
+                <div class="flex flex-col w-full gap-2 mb-4 md:w-full lg:w-calc-data md:mb-0 lg:mb-0 md:flex-row lg:flex-row">
                   <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">年資</div>
                   <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.tenure}}年</div>
                 </div>
-                <div class="flex w-full md:w-full lg:w-calc-data mb-4 md:mb-0 lg:mb-0 gap-2 flex-col md:flex-row lg:flex-row">
-                  <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">發布時間</div>
-                  <div class="flex-auto text-base font-light break-all md:text-xl lg:text-xl">{{ job.created_at|date:"Y/m/d"}}</div>
-                </div>
-                <div class="flex w-full mb-4 md:mb-0 lg:mb-0 gap-2 flex-col md:flex-row lg:flex-row">
+                <div class="flex flex-col w-full gap-2 mb-4 md:mb-0 lg:mb-0 md:flex-row lg:flex-row">
                   <div class="font-bold text-primary min-w-24 md:text-xl lg:text-xl">所需技能</div>
                   <section class="border-none tagify">
                     {% for tag in tags%}
@@ -83,7 +75,7 @@
           </div>
           <div class="flex gap-4 fixed bottom-0 left-0 right-0 p-4 flex z-30 bg-white border-t border-[#cccccc] md:hidden lg:hidden">
               {% if  request.user.is_authenticated and request.user.type == 1 %}
-                <div class="flex gap-2 justify-center items-center text-2xl">
+                <div class="flex items-center justify-center gap-2 text-2xl">
                   {% include "shared/job_favorite.html" with favorited=favorited %}
                 </div>
               {% endif %}
@@ -91,7 +83,7 @@
                 {% csrf_token %}
                   <input type="hidden" name="job_id" value="{{ job.id }}">
                 {% if status == False and request.user.type == 1 %}
-                  <button class="text-base rounded-full btn btn-secondary btn-sm md:btn-lg lg:btn-lg w-full">
+                  <button class="w-full text-base rounded-full btn btn-secondary btn-sm md:btn-lg lg:btn-lg">
                     應徵此職缺
                   </button>
                 {% endif %}
