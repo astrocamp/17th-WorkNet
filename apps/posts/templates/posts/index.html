@@ -50,27 +50,6 @@
                     <button class="flex-auto text-base rounded-full btn btn-error btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" type="submit"><i class="fa-solid fa-trash-can"></i></button>
                   </form>
                 {% endif %}
-                <p class="mt-2 text-sm font-light text-black md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">{{ item.post.content }}</p>
-                <div class="flex flex-col items-start justify-between gap-4 mt-6 lg:flex-row lg:items-center md:mt-4 lg:mt-4">
-                  <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{ item.post.created_at|date:"Y/m/d" }}</div>
-                  <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
-                    <a href="{% url 'posts:show' id=item.post.id %}" class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">詳細</a>
-                    {% if item.can_edit %}
-                      <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'posts:edit' id=item.post.id %}"><i class="text-base fa-solid fa-pen lg:text-base"></i></a>
-                      <form
-                        class="flex flex-auto gap-2 md:gap-4 lg:gap-4"
-                        action="{% url 'posts:delete' id=item.post.id %}"
-                        method="POST"
-                        hx-post="{% url 'posts:delete' id=item.post.id %}"
-                        hx-confirm="確認刪除？"
-                        hx-target="body"
-                      >
-                        {% csrf_token %}
-                        <button class="flex-auto text-base rounded-full btn btn-error btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" type="submit"><i class="fa-solid fa-trash-can"></i></button>
-                      </form>
-                    {% endif %}
-                  </div>
-                </div>
             </div>
           </li>
         {% endfor %}
