@@ -4,46 +4,46 @@
 
 <script src="{% static 'src/scripts/chart.js' %}" type="module"></script>
 <div class="flex overflow-hidden relative justify-center items-center h-44 text-center md:h-80 lg:h-80">
-    <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">分析</h1>
+    <h1 class="relative z-20 text-4xl font-bold text-white md:text-6xl lg:text-5xl">分析</h1>
     <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
-    <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[hsla(202,61%,54%,1)] to-[rgba(0,51,107,0.9)]"></div>
-</div>
+    <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
+  </div>
 <div x-data="{ showLanguages: true, showSalaries: false, showLocations: false }" class="flex flex-col gap-6 justify-center items-center my-10">
-    <div class="flex justify-center gap-5 my-6 w-full">
-        <button @click="showLanguages = true; showSalaries = false; showLocations = false" :class="showLanguages ? 'bg-white text-primary' : 'text-white bg-primary'" class="px-4 py-2 border border-primary rounded-full hover:bg-white hover:text-primary hover:border hover:border-primary">熱門語言</button>
-        <button @click="showLanguages = false; showSalaries = true; showLocations = false" :class="showSalaries ? 'bg-white text-primary' : 'text-white bg-primary'" class="px-4 py-2  border border-primary  rounded-full hover:bg-white hover:text-primary hover:border hover:border-primary">薪資分析</button>
-        <button @click="showLanguages = false; showSalaries = false; showLocations = true" :class="showLocations ? 'bg-white text-primary' : 'text-white bg-primary'" class="px-4 py-2 border border-primary rounded-full hover:bg-white hover:text-primary hover:border hover:border-primary">地區分析</button>
+    <div class="flex gap-5 justify-center my-6 w-full">
+        <button @click="showLanguages = true; showSalaries = false; showLocations = false" :class="showLanguages ? 'bg-white text-primary' : 'text-white bg-primary'" class="px-4 py-2 rounded-full border border-primary hover:bg-white hover:text-primary hover:border hover:border-primary">熱門語言</button>
+        <button @click="showLanguages = false; showSalaries = true; showLocations = false" :class="showSalaries ? 'bg-white text-primary' : 'text-white bg-primary'" class="px-4 py-2 rounded-full border border-primary hover:bg-white hover:text-primary hover:border hover:border-primary">薪資分析</button>
+        <button @click="showLanguages = false; showSalaries = false; showLocations = true" :class="showLocations ? 'bg-white text-primary' : 'text-white bg-primary'" class="px-4 py-2 rounded-full border border-primary hover:bg-white hover:text-primary hover:border hover:border-primary">地區分析</button>
     </div>
-    <div x-show="showLanguages" class="flex flex-col gap-5  px-5 justify-center items-center w-full lg:flex-row lg:item-start">
-        <div class="flex flex-1 flex-col justify-center items-center">
+    <div x-show="showLanguages" class="flex flex-col gap-5 justify-center items-center px-5 w-full lg:flex-row lg:item-start">
+        <div class="flex flex-col flex-1 justify-center items-center">
             <h2 class="mb-5 text-2xl font-bold">企業喜愛的程式語言</h2>
             <div class="w-full lg:w-3/4">
                 <canvas id="jobSkillPieChart"></canvas>
             </div>
         </div>
-        <div class="flex flex-1 flex-col justify-center items-center">
+        <div class="flex flex-col flex-1 justify-center items-center">
             <h2 class="mb-5 text-2xl font-bold">使用者喜愛的程式語言</h2>
             <div class="w-full lg:w-3/4">
                 <canvas id="userSkillPieChart"></canvas>
             </div>
         </div>
     </div>
-    <div x-show="showSalaries" class="flex flex-col gap-5  px-5 justify-center items-center w-full lg:flex-row lg:item-start">
-        <div class="flex flex-1 w-full flex-col justify-center md:items-center">
-            <h2 class="mb-5 text-2xl text-center font-bold">程式語言與薪資分析</h2>
+    <div x-show="showSalaries" class="flex flex-col gap-5 justify-center items-center px-5 w-full lg:flex-row lg:item-start">
+        <div class="flex flex-col flex-1 justify-center w-full md:items-center">
+            <h2 class="mb-5 text-2xl font-bold text-center">程式語言與薪資分析</h2>
             <div class="flex justify-center w-full lg:w-3/4">
                 <canvas id="salaryChart"></canvas>
             </div>
         </div>
-        <div class="flex flex-1 w-full  flex-col justify-center md:items-center">
-            <h2 class="mb-5 text-2xl text-center font-bold">年資與薪資分析</h2>
+        <div class="flex flex-col flex-1 justify-center w-full md:items-center">
+            <h2 class="mb-5 text-2xl font-bold text-center">年資與薪資分析</h2>
             <div class="flex justify-center w-full lg:w-3/4">
                 <canvas id="tenureSalaryChart"></canvas>
             </div>
         </div>
     </div>
-    <div x-show="showLocations" class="flex flex-col gap-5  px-5 justify-center items-center w-full lg:flex-row lg:item-start">
-        <div class="flex flex-1 flex-col w-full justify-center items-center">
+    <div x-show="showLocations" class="flex flex-col gap-5 justify-center items-center px-5 w-full lg:flex-row lg:item-start">
+        <div class="flex flex-col flex-1 justify-center items-center w-full">
             <h2 class="mb-5 text-2xl font-bold">地區與程式語言需求分析</h2>
             <div class="flex justify-center w-full lg:w-3/5">
                 <canvas id="locationLanguageChart"></canvas>

@@ -51,8 +51,7 @@ SECRET_KEY = os.getenv("APP_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = is_dev()
 
-
-NGROK_HOSTS = "7779-2001-b400-e35d-b4aa-800b-444b-89ce-bc7b.ngrok-free.app"
+NGROK_HOSTS = os.getenv("NGROK_HOSTS")
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost", NGROK_HOSTS, "worknet.herokuapp.com"]
 AUTH_USER_MODEL = "users.User"

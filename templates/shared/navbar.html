@@ -84,16 +84,16 @@
                 </div>
                 <div class="w-auto p-3 lg:bg-white rounded-xl divide-y divide-[#365f8c] lg:divide-slate-200 lg:shadow-lg">
                   {% if request.user.type == 1 %}
-                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'users:info' %}">會員資料</a>
-                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'resumes:index' %}">我的履歷</a>
-                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'resumes:jobs' %}">應徵紀錄</a>
-                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'users:favorites_list' %}">收藏的職缺</a>
-                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'users:favorites_company_list' %}">收藏的公司</a>
+                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'users:info' %}">會員資料</a>
+                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'resumes:index' %}">我的履歷</a>
+                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'resumes:jobs' %}">應徵紀錄</a>
+                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'users:favorites_list' %}">收藏的職缺</a>
+                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'users:favorites_company_list' %}">收藏的公司</a>
                   {% elif request.user.type == 2 %}
-                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'companies:edit' request.user.company.id  %}">公司資料</a>
-                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'companies:jobs_index' request.user.company.id %}">公司職缺</a>
-                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'companies:post_index' request.user.company.id %}">公司評論</a>
-                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black" href="{% url 'companies:company_application' %}">查看應徵</a>
+                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'companies:edit' request.user.company.id  %}">公司資料</a>
+                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'companies:jobs_index' request.user.company.id %}">公司職缺</a>
+                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'companies:post_index' request.user.company.id %}">公司評論</a>
+                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'companies:company_application' %}">查看應徵</a>
                   {% endif %}
                 </div>
               </div>
