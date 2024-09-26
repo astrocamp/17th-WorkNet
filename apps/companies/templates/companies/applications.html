@@ -1,4 +1,5 @@
 {% extends 'layouts/base.html' %}
+{% load static %}
 {% block content %}
 <div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
     <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">應徵記錄</h1>
@@ -41,7 +42,10 @@
             </table>
         </div>
         {% else %}
-            <div class="py-5 text-center"><p>該職缺尚無應徵</p></div>
+            <div class="flex flex-col items-center">
+                <img src="{% static 'imgs/no_data.gif' %}" alt="沒資料" class="max-w-[200px]">
+                <p>該職缺尚無應徵</p>
+            </div>
         {% endif %}
     </div>
 </div>
