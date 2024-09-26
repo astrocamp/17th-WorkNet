@@ -1,25 +1,25 @@
 <div class="mt-10 md:mt-20 lg:mt-20">
-    <div class="flex justify-center gap-2">
+    <div class="flex gap-2 justify-center">
         {% if page_obj.has_previous %}
-            <a class="flex items-center justify-center w-10 h-10 rounded-lg bg-secondary"
+            <a class="flex justify-center items-center w-10 h-10 rounded-lg bg-secondary"
                 href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}">
                 <div class="w-0.5 h-4 bg-white"></div>
-                <div class="w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-white"></div>
+                <div class="w-0 h-0 border-t-8 border-r-8 border-b-8 border-transparent border-r-white"></div>
             </a>
-            <a class="flex items-center justify-center w-10 h-10 rounded-lg bg-secondary"
+            <a class="flex justify-center items-center w-10 h-10 rounded-lg bg-secondary"
                 href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}">
-                <div class="w-0 h-0 border-t-8 border-b-8 border-r-8 border-transparent border-r-white"></div>
+                <div class="w-0 h-0 border-t-8 border-r-8 border-b-8 border-transparent border-r-white"></div>
             </a>
         {% endif %}
 
-        <span class="flex items-center justify-center w-16 h-10 text-xl bg-white rounded-lg">{{ page_obj.number }}</span>
+        <span class="flex justify-center items-center w-16 h-10 text-xl bg-white rounded-lg">{{ page_obj.number }}</span>
 
         {% if page_obj.has_next %}
-            <a class="flex items-center justify-center w-10 h-10 rounded-lg bg-secondary"
+            <a class="flex justify-center items-center w-10 h-10 rounded-lg bg-secondary"
                 href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}">
                 <div class="w-0 h-0 border-t-8 border-b-8 border-l-8 border-transparent border-l-white"></div>
             </a>
-            <a class="flex items-center justify-center w-10 h-10 rounded-lg bg-secondary"
+            <a class="flex justify-center items-center w-10 h-10 rounded-lg bg-secondary"
                 href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.location %}&location={{ request.GET.location }}{% endif %}">
                 <div class="w-0 h-0 border-t-8 border-b-8 border-l-8 border-transparent border-l-white"></div>
                 <div class="w-0.5 h-4 bg-white"></div>
