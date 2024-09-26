@@ -36,8 +36,8 @@ def request(request):
                 }
             ],
             "redirectUrls": {
-                "confirmUrl": f"http://{os.getenv('HOSTNAME')}/payments/confirm",
-                "cancelUrl": f"http://{os.getenv('HOSTNAME')}/payments/cancel",
+                "confirmUrl": f"{os.getenv('HOSTNAME')}payments/confirm",
+                "cancelUrl": f"{os.getenv('HOSTNAME')}payments/cancel",
             },
         }
 
