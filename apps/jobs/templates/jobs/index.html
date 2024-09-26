@@ -1,7 +1,7 @@
 {% extends "layouts/base.html" %}
 {% block content %}
 {% load static %}
-<div class="relative flex items-center justify-center overflow-hidden text-center h-44 md:h-80 lg:h-80">
+<div class="flex overflow-hidden relative justify-center items-center h-44 text-center md:h-80 lg:h-80">
     <h1 class="relative z-20 text-3xl font-bold text-white md:text-5xl lg:text-5xl">職缺列表</h1>
     <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
@@ -10,15 +10,15 @@
 <div class="bg-[#eef0f0]">
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
         <div class="mb-6 md:mb-12 lg:mb-12">
-            <form action="{% url 'jobs:search_results' %}" method="GET" class="flex flex-col w-full gap-1 px-4 pt-2 pb-4 bg-white shadow-md rounded-xl md:flex-row lg:flex-row md:items-center lg:items-center md:p-3 lg:p-4 md:gap-4 lg:gap-4 md:rounded-full lg:rounded-full">
-                <div class="flex items-center flex-1">
+            <form action="{% url 'jobs:search_results' %}" method="GET" class="flex flex-col gap-1 px-4 pt-2 pb-4 w-full bg-white rounded-xl shadow-md md:flex-row lg:flex-row md:items-center lg:items-center md:p-3 lg:p-4 md:gap-4 lg:gap-4 md:rounded-full lg:rounded-full">
+                <div class="flex flex-1 items-center">
                 <div class="w-5 text-base text-center text-black md:w-7 lg:w-7 md:text-2xl lg:text-2xl"><i class="fa-solid fa-magnifying-glass"></i></div>
-                    <input type="text" name="q" placeholder="請輸入工作名稱" class="w-full px-2 py-2 text-base text-gray-500 placeholder-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" value="{{ request.GET.q }}" />
+                    <input type="text" name="q" placeholder="請輸入工作名稱" class="px-2 py-2 w-full text-base placeholder-gray-500 text-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg" value="{{ request.GET.q }}" />
                 </div>
                 <div class="w-full h-px bg-gray-300 md:w-px lg:w-px md:h-8 lg:h-8"></div>
-                <div class="flex items-center flex-1">
+                <div class="flex flex-1 items-center">
                 <div class="w-5 text-base text-center text-black md:w-7 lg:w-7 md:text-2xl lg:text-2xl"><i class="fa-solid fa-location-dot"></i></div>
-                    <select name="location" class="w-full px-2 py-2 text-base text-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg">
+                    <select name="location" class="px-2 py-2 w-full text-base text-gray-500 bg-transparent border-transparent outline-none md:text-lg lg:text-lg">
                         <option value="">請選擇地點</option>
                         {% for value, label in locations %}
                             <option value="{{ value }}" {% if request.GET.location == value %} selected {% endif %}>{{ label }}</option>
@@ -36,32 +36,31 @@
                 <a class="text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24" href="{% url 'companies:jobs_new' request.user.company.id %}"><i class="fa-solid fa-plus"></i> 新增職缺</a>
             </div>
         {% endif %}
-
         <ul class="flex flex-wrap gap-5 md:gap-7 lg:gap-7">
             {% for job in page_obj %}
                 <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border">
                     <div class="flex items-center">
                         <div class="box-border flex-1 pr-4 md:pr-4 lg:pr-4">
-                            <a href="{% url 'jobs:show' job.id %}"><h2 class="text-xl font-semibold md:text-2xl lg:text-2xl">{{job.title}}</h2></a>
+                            <a href="{% url 'jobs:show' job.id %}"><h2 class="text-xl font-semibold md:text-2xl lg:text-2xl hover:underline">{{job.title}}</h2></a>
                         </div>
-                        <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
+                        <div class="flex absolute top-2.5 right-3 gap-2 text-2xl md:lg:static lg:static">
                             {% if  request.user.is_authenticated and request.user.type == 1 %}
-                                <div class="flex gap-2 text-2xl absolute top-2.5 right-3 md:lg:static lg:static">
+                                <div class="flex absolute top-2.5 right-3 gap-2 text-2xl md:lg:static lg:static">
                                     {% include "shared/job_favorite.html" with favorited=job.favorited %}
                                 </div>
                             {% endif %}
                         </div>
                     </div>
-                    <h3 class="text-sm font-light text-gray-600 mt-0.5 md:text-base lg:text-base line-clamp-2"><a href="{% url 'companies:show' job.company_id %}">{{job.company}}</a></h3>
+                    <h3 class="mt-0.5 text-sm font-light text-gray-600 md:text-base lg:text-base line-clamp-2"><a href="{% url 'companies:show' job.company_id %}" class="hover:underline">{{job.company}}</a></h3>
                     <p class="mt-2 text-sm font-light text-gray-600 md:mt-4 lg:mt-4 md:text-base lg:text-base line-clamp-2">{{job.description}}</p>
-                    <div class="mt-2 md:mt-4 lg:mt-4 flex flex-wrap gap-1 md:gap-1.5 lg:gap-2.5 text-base font-light">
+                    <div class="flex flex-wrap gap-1 mt-2 text-base font-light md:mt-4 lg:mt-4 md:gap-1.5 lg:gap-2.5">
                         <span class="bg-[#fff7c7] px-2 md:px-3 lg:px-3 py-1 rounded-full text-black text-sm md:text-base lg:text-base">{{job.type}}</span>
                         <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><a href="{% url 'jobs:search_results' %}?location={{job.location}}"><i class="text-xs fa-solid fa-location-dot md:text-sm lg:text-sm"></i>{{job.get_location_display}}</a></span>
                         <span class="bg-[#e5eaf0] px-2 md:px-3 lg:px-3 py-1 rounded-full text-primary text-sm md:text-base lg:text-base"><i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{job.salary_range}} / 月</span>
                     </div>
-                    <div class="flex flex-col items-start justify-between gap-4 mt-4 lg:flex-row lg:items-center">
+                    <div class="flex flex-col gap-4 justify-between items-start mt-4 lg:flex-row lg:items-center">
                         <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">{{job.created_at|date:"Y/m/d"}}</div>
-                        <div class="flex w-full gap-2 md:gap-4 lg:gap-4 lg:w-auto">
+                        <div class="flex gap-2 w-full md:gap-4 lg:gap-4 lg:w-auto">
                             <a href="{% url 'jobs:show' job.id %}" class="flex-auto text-base rounded-full btn btn-primary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl min-w-20 md:min-w-24 lg:min-w-24 lg:flex-none">詳細</a>
                             {% if job.can_edit %}
                                 <a class="flex-auto text-base rounded-full btn btn-secondary btn-sm md:btn-md lg:btn-md md:text-xl lg:text-xl lg:flex-none" href="{% url 'jobs:edit' job.id %}"><i class="text-base fa-solid fa-pen lg:text-base"></i></a>
