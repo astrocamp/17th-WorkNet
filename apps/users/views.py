@@ -1,4 +1,5 @@
 import json
+import rules
 import random
 import string
 
@@ -23,6 +24,7 @@ from apps.companies.models import Company, CompanyFavorite
 from apps.jobs.models import Job, Job_Resume, JobFavorite
 from apps.posts.models import Post
 from apps.resumes.models import Resume
+from lib.models.paginate import paginate_queryset
 from lib.models.rule_required import rule_required
 from lib.utils.models.decorators import login_redirect_next
 from lib.utils.models.defined import LOCATION_CHOICES
@@ -147,6 +149,13 @@ def info(request):
     return render(
         request, "users/info.html", {"form": form, "info": info, "tags": tags}
     )
+
+
+@rule_required("user_can_view")
+def posts_list(request):
+    posts = Post.objects.filter(user=request.user).order_by("-created_at")
+    page_obj = paginate_queryset(request, posts, 10)
+    return render(request, "users/record.html", {"page_obj": page_obj})
 
 
 def social_save_profile(backend, user, response, *args, **kwargs):

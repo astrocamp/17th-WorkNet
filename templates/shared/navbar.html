@@ -85,6 +85,7 @@
                 <div class="w-auto p-3 lg:bg-white rounded-xl divide-y divide-[#365f8c] lg:divide-slate-200 lg:shadow-lg">
                   {% if request.user.type == 1 %}
                     <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'users:info' %}">會員資料</a>
+                    <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'users:posts_list' %}">我的評論</a>
                     <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'resumes:index' %}">我的履歷</a>
                     <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'resumes:jobs' %}">應徵紀錄</a>
                     <a class="block px-2.5 py-2 text-white whitespace-nowrap md:py-4 lg:px-2.5 lg:py-2 md:text-xl lg:text-base lg:text-black hover:bg-gray-200" href="{% url 'users:favorites_list' %}">收藏的職缺</a>
