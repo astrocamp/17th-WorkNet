@@ -28,6 +28,7 @@ from lib.utils.models.defined import LOCATION_CHOICES
 
 from .forms import CustomUserCreationForm, UserInfoForm
 from .forms.users_form import PasswordResetForm
+from apps.companies.forms.companies_form import CompanyForm
 from .models import Notification, User, UserInfo
 
 
@@ -45,7 +46,15 @@ def index(request):
                 if user.type == 1:
                     return redirect("users:info")
                 else:
-                    return redirect("companies:new")
+                    company, _ = Company.objects.get_or_create(
+                        user_id=request.user.id,
+                        title=request.user.username,
+                        defaults={
+                            "employees": 0,
+                        },
+                    )
+                    form = CompanyForm(instance=company)
+                    return redirect(reverse("companies:edit", args=[user.company.id]))
             else:
                 messages.error(request, "登入失敗")
                 return redirect("users:sign_in")

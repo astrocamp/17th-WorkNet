@@ -57,19 +57,6 @@ def index(request):
     return render(request, "companies/index.html", {"page_obj": page_obj})
 
 
-@rule_required("can_new_company")
-def new(request):
-    company, _ = Company.objects.get_or_create(
-        user_id=request.user.id,
-        title=request.user.username,
-        defaults={
-            "employees": 0,
-        },
-    )
-    form = CompanyForm(instance=company)
-    return render(request, "companies/new.html", {"form": form})
-
-
 @rule_required("can_edit_company")
 def edit(request, id):
     company = get_object_or_404(Company, id=id)
