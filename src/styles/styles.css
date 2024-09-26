@@ -1,5 +1,6 @@
 @import "./github-markdown.css";
-@import "./tags.css"; /*這段未成功import*/
+@import "./tags.css";
+/*這段未成功import*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,36 +9,36 @@
   @apply font-sans;
 }
 
-.footer{
+.footer {
   @apply gap-8
 }
 
 .btn {
-  @apply rounded-full text-white ;
+  @apply text-white rounded-full;
 }
 
-.btn-lg{
+.btn-lg {
   @apply min-h-14 h-14 text-xl
 }
 
-.btn-md{
+.btn-md {
   @apply min-h-12 h-12 text-xl
 }
 
-.btn-sm{
+.btn-sm {
   @apply min-h-8 h-8 text-base
 }
 
 .input-often-base {
-  @apply box-border w-full border-0 border-b border-gray-300 input rounded-none text-base md:text-xl lg:text-xl;
+  @apply box-border w-full text-base border-0 border-b border-gray-300 rounded-none input md:text-xl lg:text-xl;
 }
 
-.input-often-base:focus{
+.input-often-base:focus {
   @apply outline-0 border-secondary
 }
 
 .textarea-often-base {
-  @apply box-border w-full py-4 border-0 border-b border-gray-300 resize-none input rounded-none text-base md:text-xl lg:text-xl min-h-28;
+  @apply box-border w-full py-4 text-base border-0 border-b border-gray-300 rounded-none resize-none input md:text-xl lg:text-xl min-h-28;
 }
 
 .no-style {
@@ -77,19 +78,28 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+
   .backdrop-blur-5 {
     backdrop-filter: blur(5px);
   }
 }
 
 @keyframes bounce {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }
 }
+
 .animate-bounce {
   animation: bounce 2s infinite;
+}
+
+[x-cloak] {
+  @apply hidden !important;
 }
