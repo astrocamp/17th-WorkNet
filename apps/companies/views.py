@@ -284,7 +284,7 @@ def search_results(request):
     if search_term:
         search_filter &= Q(title__icontains=search_term)
 
-    companies = Company.objects.filter(search_filter).distinct().order_by("created_at")
+    companies = Company.objects.filter(search_filter).distinct().order_by("-created_at")
     count = companies.count()
 
     current_page = request.GET.get("page", 1)
