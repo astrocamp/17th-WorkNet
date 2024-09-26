@@ -5,13 +5,33 @@
     <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
     <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
-<div class="container p-5 pb-24 mx-auto">
-  <form method="post" action="{% url 'posts:edit' post.id %}">
-    {% csrf_token %}
-    {% for field in form %}
-    <div class="mt-4">{{ field.label }} {{ field }} {{ field.errors }}</div>
-    {% endfor %}
-    <div class="mt-4"><button class="text-white btn btn-primary min-w-20">確認修改</button></div>
-  </form>
+<div class="flex-1 bg-[#eef0f0]">
+  <div class="container px-5 pt-10 pb-16 lg:pt-20 lg:pb-24 mx-auto">
+    <div class="bg-white rounded-xl  md:rounded-3xl  lg:rounded-3xl px-5 py-7 md:p-10 lg:p-10">
+      <form method="post" action="{% url 'posts:edit' post.id %}">
+        {% csrf_token %}
+        <div class="flex flex-wrap gap-3 mb-10 md:gap-5 lg:gap-5 md:mb-16 lg:mb-16">
+            <div class="w-full">
+                <div class="text-sm md:text-base lg:text-base text-primary">{{ form.title.label }} <span class="text-error">*</span></div>
+                <div>{{ form.title }} </div>
+                <div class="text-xl text-error">{{ form.title.errors }}</div>
+            </div>
+            <div class="w-full">
+                <div class="text-sm md:text-base lg:text-base text-primary">{{ form.content.label }} <span class="text-error">*</span></div>
+                <div>{{ form.content }} </div>
+                <div class="text-xl text-error">{{ form.content.errors }}</div>
+            </div>
+            <div class="w-full">
+                <div class="text-sm md:text-base lg:text-base text-primary">{{ form.score.label }} <span class="text-error">*</span></div>
+                <div>{{ form.score }} </div>
+                <div class="text-xl text-error">{{ form.score.errors }}</div>
+            </div>
+        </div>
+        <div class="flex gap-5 justify-center">
+          <button class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28">確認修改</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
 {% endblock %}
