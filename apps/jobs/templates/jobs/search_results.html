@@ -82,10 +82,15 @@
                     </li>
                 {% endfor %}
             {% else %}
-                <p>沒有找到符合的工作。</p>
+                <li class="flex flex-col w-full items-center">
+                    <img src="{% static 'imgs/no_data.gif' %}" alt="沒資料" class="max-w-[200px]">
+                    <p>沒有找到符合的工作</p>
+                </li>
             {% endif %}
         </ul>
-        {% include 'shared/_pagination.html' %}
+        {% if page_obj %}
+            {% include 'shared/_pagination.html' %}
+        {% endif %}
     </div>
 </div>
 {% endblock %}
