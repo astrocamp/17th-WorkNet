@@ -22,7 +22,7 @@ from lib.utils.models.decorators import company_required
 from lib.utils.models.defined import LOCATION_CHOICES, fetch_coordinates
 
 from .forms.companies_form import CompanyForm
-from .models import Company
+from .models import Company, CompanyFavorite
 
 
 def index(request):
@@ -287,8 +287,25 @@ def search_results(request):
     companies = Company.objects.filter(search_filter).distinct().order_by("-created_at")
     count = companies.count()
 
+    companies_data = [
+        {
+            "id": company.id,
+            "title": company.title,
+            "description": company.description,
+            "can_edit": rules.test_rule("can_edit_company", request.user, company.id),
+            "favorited": (
+                CompanyFavorite.objects.filter(
+                    company=company, user=request.user
+                ).exists()
+                if request.user.is_authenticated
+                else False
+            ),
+        }
+        for company in companies
+    ]
+
     current_page = request.GET.get("page", 1)
-    page_obj = paginate_queryset(request, companies, 10)
+    page_obj = paginate_queryset(request, companies_data, 10)
 
     return render(
         request,

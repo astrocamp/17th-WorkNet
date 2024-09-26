@@ -326,7 +326,6 @@ def get_popular_jobs(user):
         }
         for job in jobs
     ]
-    print(jobs_data)
     return jobs_data
 
 

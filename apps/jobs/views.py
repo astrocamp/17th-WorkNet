@@ -173,6 +173,28 @@ def search_results(request):
 
     count = jobs.count()
 
+    jobs_with_permissions = [
+        {
+            "id": job.id,
+            "title": job.title,
+            "description": job.description,
+            "type": job.type,
+            "created_at": job.created_at,
+            "get_location_display": job.get_location_display,
+            "location": job.location,
+            "salary_range": job.salary_range,
+            "company": job.company.title,
+            "company_id": job.company.id,
+            "can_edit": rules.test_rule("can_edit_job", request.user, job.id),
+            "favorited": (
+                JobFavorite.objects.filter(job=job, user=request.user).exists()
+                if request.user.is_authenticated
+                else False
+            ),
+        }
+        for job in jobs
+    ]
+
     applied_job_ids = []
     if request.user.is_authenticated:
         applied_job_ids = Job_Resume.objects.filter(
@@ -180,7 +202,7 @@ def search_results(request):
         ).values_list("job_id", flat=True)
 
     current_page = request.GET.get("page", 1)
-    page_obj = paginate_queryset(request, jobs, 10)
+    page_obj = paginate_queryset(request, jobs_with_permissions, 10)
     all_tags = Tag.objects.all()
 
     location_dict = dict(LOCATION_CHOICES)
