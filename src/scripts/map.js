@@ -1,14 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
     const initializeMap = () => {
         const mapElement = document.getElementById('map');
-        const errorElement = document.getElementById('map-error');
         const coord_x = parseFloat(mapElement.getAttribute('data-latitude'));
         const coord_y = parseFloat(mapElement.getAttribute('data-longitude'));
         const company_title = mapElement.getAttribute('data-company-title');
         
         if (isNaN(coord_x) || isNaN(coord_y)) {
             mapElement.style.display = 'none';
-            errorElement.style.display = 'block';
             return;
         }
 
