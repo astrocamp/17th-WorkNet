@@ -284,6 +284,11 @@ def favorite_company_list(request):
             "id": favorite.id,
             "company": favorite.company,
             "post_count": Post.objects.filter(company_id=favorite.company.id).count(),
+            "images": (
+                f"https://{settings.AWS_S3_CUSTOM_DOMAIN}/{favorite.company.images}"  # 使用favorite.company
+                if favorite.company.images
+                else f"{settings.STATIC_URL}imgs/logo.png"
+            ),
         }
         for favorite in favorites
     ]
