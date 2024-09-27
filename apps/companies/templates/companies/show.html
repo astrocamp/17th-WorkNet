@@ -42,7 +42,7 @@
                 </div>
                 <div class="text-2xl">
                   {% if request.user.is_authenticated and request.user.type == 1 %}
-                      {%include "companies/favorite.html" with company=company favorited=favorited only %}
+                      {%include "companies/favorite.html" with company=company favorited=company.favorited only %}
                   {% endif %}
                 </div>
               </div>

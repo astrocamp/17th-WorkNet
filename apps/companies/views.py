@@ -140,6 +140,12 @@ def show(request, id):
         for job in jobs
     ]
 
+    company.favorited = (
+        CompanyFavorite.objects.filter(company=company, user=request.user).exists()
+        if request.user.is_authenticated
+        else False
+    )
+
     return render(
         request,
         "companies/show.html",
