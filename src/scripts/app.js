@@ -8,5 +8,6 @@ import "./chart.js";
 import "./notify.js";
 import "./date.js";
 import "./referrer.js";
+import "./map.js";
 
 Alpine.start();
