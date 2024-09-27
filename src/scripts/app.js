@@ -7,5 +7,6 @@ import "./tagInput.js";
 import "./chart.js";
 import "./notify.js";
 import "./date.js";
+import "./referrer.js";
 
 Alpine.start();
