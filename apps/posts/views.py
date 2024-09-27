@@ -35,7 +35,6 @@ def show(request, id):
             comment.user = request.user
             comment.save()
 
-            messages.success(request, "新增成功")
             return render(
                 request,
                 "posts/comment.html",

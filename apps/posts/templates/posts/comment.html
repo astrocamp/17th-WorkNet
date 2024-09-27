@@ -1,11 +1,11 @@
 {% load markdown %}
-<li class="flex items-start p-4 bg-gray-100 rounded-2xl">
+<li x-data="delete_icon" class="flex items-start p-4 bg-gray-100 rounded-2xl">
     <div class="flex-1">
         {% if comment.user %}
-            <div class="font-bold text-sm mb-1">{{ comment.user.userinfo.nickname|default:comment.user }}</div>
+            <div class="mb-1 text-sm font-bold">{{ comment.user.userinfo.nickname|default:comment.user }}</div>
         {% endif %}
         <div class="text-lg markdown-body">{{ comment.content|convert_markdown|safe }}</div>
-        <div class="text-xs md:text-base lg:text-base font-light text-gray-600 pt-3">{{ comment.created_at|date:"Y/m/d H:i" }}</div>
+        <div class="pt-3 text-xs font-light text-gray-600 md:text-base lg:text-base">{{ comment.created_at|date:"Y/m/d H:i" }}</div>
     </div>
     {% if comment.user == request.user %}
         <button class="text-error w-[18px]"

@@ -74,3 +74,9 @@ Alpine.data("job_favorite", () => ({
     dom.i2svg();
   },
 }));
+
+Alpine.data("delete_icon", () => ({
+  init() {
+    dom.i2svg();
+  },
+}));
