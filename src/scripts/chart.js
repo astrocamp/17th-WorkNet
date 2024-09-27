@@ -63,6 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
             },
           },
           tooltip: {
+            callbacks: {
+              label: function (tooltipItem) {
+                const value = tooltipItem.raw;
+                return ` ${value}個職缺`;
+              },
+            },
             titleFont: {
               size: 20,
             },
@@ -138,6 +144,12 @@ document.addEventListener("DOMContentLoaded", function () {
             },
           },
           tooltip: {
+            callbacks: {
+              label: function (tooltipItem) {
+                const value = tooltipItem.raw;
+                return ` ${value}個職缺`;
+              },
+            },
             titleFont: {
               size: 20,
             },
@@ -164,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
         labels: salaryLabels,
         datasets: [
           {
-            label: "平均薪資",
+            label: "平均月薪",
             data: salaryValues,
             backgroundColor: "#36A2EB",
           },
@@ -232,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
         labels: tenureLabels,
         datasets: [
           {
-            label: "平均薪資",
+            label: "平均月薪",
             data: tenureValues,
             backgroundColor: "#FF9F40",
           },
@@ -380,6 +392,13 @@ document.addEventListener("DOMContentLoaded", function () {
             },
           },
           tooltip: {
+            callbacks: {
+              label: function (tooltipItem) {
+                const language = tooltipItem.dataset.label;
+                const value = tooltipItem.raw;
+                return ` ${language}：${value}個職缺`;
+              },
+            },
             titleFont: {
               size: 20,
             },
