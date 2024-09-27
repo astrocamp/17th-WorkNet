@@ -54,8 +54,8 @@
                         {% endfor %}
                     </ul>
                 {% else %}
-                    <ul id="comments" class="space-y-4">
-                        <li id="remove_no_comment" class="text-center text-gray-400 py-5 mx-6 bg-gray-100 rounded-2xl text-base">尚無回覆</li>
+                    <ul id="comments" class="space-y-4 px-6">
+                        <li id="remove_no_comment" class="text-center text-gray-400 py-5 bg-gray-100 rounded-2xl text-base">尚無回覆</li>
                     </ul>
                 {% endif %}
                 {% if user.is_authenticated %}
