@@ -58,8 +58,8 @@
                                 <i class="text-xs fa-solid fa-sack-dollar md:text-sm lg:text-sm"></i> ${{ job.salary_range }} / 月
                             </span>
                         </div>
-                        <div class="flex items-center justify-between mt-6 md:mt-4 lg:mt-4">
-                            <div class="text-xs font-light text-gray-500 md:text-base lg:text-base">
+                        <div class="flex flex-col items-center justify-between mt-6 md:mt-4 lg:mt-4 md:flex-row gap-3">
+                            <div class="self-start text-xs font-light text-gray-500 md:text-base lg:text-base">
                                 {{ job.created_at|date:"Y/m/d" }}
                             </div>
                             <div class="flex items-center w-full gap-2 md:w-auto lg:w-auto">
