@@ -77,8 +77,8 @@
                     </div>
                 {% endif %}
             </section>
-            <div class="flex justify-center gap-5 pt-5">
-                <span class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" onclick="history.back();">回到列表</span>
+            <div class="flex justify-center gap-5 pt-5" x-data="post_referrer">
+                <span class="btn btn-primary btn-sm md:btn-lg lg:btn-lg md:min-w-28 lg:min-w-28" @click="checkReferrer()">回到列表</span>
             </div>
         </div>
     </div>
