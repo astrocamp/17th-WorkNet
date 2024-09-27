@@ -217,6 +217,7 @@ def search_results(request):
             "all_tags": all_tags,
             "search_term": search_term,
             "location": location_label,
+            "locations": LOCATION_CHOICES,
             "applied_job_ids": list(applied_job_ids),
             "current_page": current_page,
             "count": count,
