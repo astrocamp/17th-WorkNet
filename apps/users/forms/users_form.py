@@ -80,7 +80,7 @@ class UserInfoForm(ModelForm):
             ),
             "location": Select(attrs={"class": "mt-1 input-often-base"}),
             "birth": DateInput(
-                attrs={"type": "date", "class": "mt-1 input-often-base"}
+                attrs={"type": "text", "class": "mt-1 input-often-base"}
             ),
         }
 
