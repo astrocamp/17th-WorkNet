@@ -1,5 +1,6 @@
 @import "./github-markdown.css";
 @import "./tags.css";
+@import './air-datepicker.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
