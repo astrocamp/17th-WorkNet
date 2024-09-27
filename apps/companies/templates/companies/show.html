@@ -31,13 +31,20 @@
           </div>
           <div class="flex-1">
             <div class="flex flex-wrap gap-3 md:gap-5 lg:gap-5">
-              <div class="w-full">
-                {% if company.score > 0 %}
-                  <div class="inline-flex items-center px-2.5 py-1 align-top rounded-full bg-secondary">
-                    <i class="text-sm fa-solid fa-star text-warning md:text-md lg:text-md"></i>
-                    <span class="ml-1 text-sm font-bold text-white md:text-lg lg:text-lg">{{ company.score }}</span>
-                  </div>
-                {% endif %}
+              <div class="w-full flex justify-between">
+                <div>
+                  {% if company.score > 0 %}
+                    <div class="inline-flex items-center px-2.5 py-1 align-top rounded-full bg-secondary">
+                      <i class="text-sm fa-solid fa-star text-warning md:text-md lg:text-md"></i>
+                      <span class="ml-1 text-sm font-bold text-white md:text-lg lg:text-lg">{{ company.score }}</span>
+                    </div>
+                  {% endif %}
+                </div>
+                <div class="text-2xl">
+                  {% if request.user.is_authenticated and request.user.type == 1 %}
+                      {%include "companies/favorite.html" with company=company favorited=favorited only %}
+                  {% endif %}
+                </div>
               </div>
               <div class="flex w-full md:w-full lg:w-calc-data">
                 <div class="text-base font-bold min-w-24 md:text-xl lg:text-xl">負責人</div>
