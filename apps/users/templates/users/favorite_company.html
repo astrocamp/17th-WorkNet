@@ -15,17 +15,23 @@
            <li class="relative rounded-xl md:rounded-3xl lg:rounded-3xl bg-white border border-[#e7e8eb] p-6 bg-white w-full box-border flex gap-4">
             <div class="flex items-center flex-1">
               <div class="relative mx-auto overflow-hidden bg-gray-200 rounded-full w-14 h-14 lg:w-20 lg:h-20 md:mx-0 lg:mx-0">
-                  <img src="{% static 'imgs/logo.png' %}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                  <a href="{% url 'companies:show' favorite.company.id %}">
+                      <img src="{{ favorite.images }}" alt="公司圖標" class="absolute w-full transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 hover:opacity-50">
+                  </a>
               </div>
               <div class="box-border flex-1 pl-3 md:pl-4 lg:pl-4">
-                <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl"><a href="{% url 'companies:show' favorite.company.id %}">{{favorite.company.title}}</a></h2>
+                <h2 class="text-xl font-semibold md:text-2xl lg:text-2xl hover:underline"><a href="{% url 'companies:show' favorite.company.id %}">{{favorite.company.title}}</a></h2>
                 <div class="flex flex-wrap items-center mt-px">
                     {% if favorite.company.score > 0 %}
                         <i class="text-base fa-solid fa-star text-warning md:text-lg lg:text-lg"></i>
                         <span class="ml-1 text-base font-light md:text-lg lg:text-lg">{{ favorite.company.score }}</span>
                         <div class="w-px h-4 bg-[#cccccc] mx-2"></div>
                     {% endif %}
-                    <span class="text-base font-light md:text-lg lg:text-lg">{{ favorite.post_count }}個評論</span>
+                    <span>
+                        <a href="{% url 'companies:post_index' favorite.company.id %}" class="text-sm font-light text-gray-600 md:text-base lg:text-base hover:underline">
+                            {{ favorite.post_count }}個評論
+                        </a>
+                    </span>
                 </div>
               </div>
              </div>
