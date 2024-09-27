@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function () {
             callbacks: {
               label: function (tooltipItem) {
                 const value = tooltipItem.raw;
-                return ` ${value}個職缺`;
+                return ` ${value}個企業職缺`;
               },
             },
             titleFont: {
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
             callbacks: {
               label: function (tooltipItem) {
                 const value = tooltipItem.raw;
-                return ` ${value}個職缺`;
+                return ` ${value}個使用者喜愛`;
               },
             },
             titleFont: {
