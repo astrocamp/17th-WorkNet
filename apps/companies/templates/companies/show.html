@@ -6,13 +6,13 @@
   <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
   <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>
-<div x-data="{ activeTab: 'tab1' }">
-  <div class="flex-1 bg-[#eef0f0]">
+<div x-data="{ activeTab: 'tab1' }" class="flex-1 bg-[#eef0f0]">
+  <div>
     <div class="container px-5 pt-10 pb-16 mx-auto lg:pt-20 lg:pb-24">
       <div class="flex justify-between border-b border-[#cccccc]">
         <div class="flex gap-2">
-          <span @click="activeTab = 'tab1'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab1' }" class="flex-auto inline-block min-w-0 pb-5 text-base text-center cursor-pointer md:min-w-28 lg:min-w-52 md:text-lg lg:text-xl md:flex-none lg:flex-none">公司介紹</span>
-          <span @click="activeTab = 'tab2'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab2' }" class="flex-auto inline-block min-w-0 pb-5 text-base text-center cursor-pointer md:min-w-28 lg:min-w-52 md:text-lg lg:text-xl md:flex-none lg:flex-none">公司評論</span>
+          <span @click="activeTab = 'tab1'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab1' }" class="flex-auto inline-block min-w-0 pb-5 px-2 text-base text-center cursor-pointer md:min-w-28 lg:min-w-52 md:text-lg lg:text-xl md:flex-none lg:flex-none">公司介紹</span>
+          <span @click="activeTab = 'tab2'" :class="{ 'border-secondary border-b-4 text-secondary font-bold': activeTab === 'tab2' }" class="flex-auto inline-block min-w-0 pb-5 px-2 text-base text-center cursor-pointer md:min-w-28 lg:min-w-52 md:text-lg lg:text-xl md:flex-none lg:flex-none">公司評論</span>
         </div>
         {% if company == request.user.company %}
           <div>
