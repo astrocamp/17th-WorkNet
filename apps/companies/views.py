@@ -34,10 +34,6 @@ def index(request):
             form.save()
 
             coord_x, coord_y = fetch_coordinates(company.address)
-<<<<<<< HEAD
-
-=======
->>>>>>> 090bf39 (refactor: delete test code)
             if coord_x and coord_y:
                 company.latitude = coord_x
                 company.longitude = coord_y
