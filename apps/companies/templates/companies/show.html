@@ -74,9 +74,11 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col">
-          <h2 class="pb-5 text-base font-bold min-w-24 md:text-xl lg:text-xl">公司位置</h2>
-          <div id="map" class="w-full aspect-16/5 md:aspect-32/5 lg:aspect-32/5" data-latitude="{{ company.latitude }}" data-longitude="{{ company.longitude }}" data-company-title="{{ company.title }}"></div>
+        <div x-data="{ show_map: {{ company.show_map|lower }} }">
+          <div x-show="show_map" class="flex flex-col">
+            <h2 class="pb-5 text-base font-bold min-w-24 md:text-xl lg:text-xl">公司位置</h2>
+            <div id="map" class="w-full aspect-16/5 md:aspect-32/5 lg:aspect-32/5" data-latitude="{{ company.latitude }}" data-longitude="{{ company.longitude }}" data-company-title="{{ company.title }}"></div>
+          </div>
         </div>
         <div class="py-5 mb-10 text-base font-light md:text-xl lg:text-xl md:mb-20 lg:mb-20">
           <div class="leading-loose">{{ company.description }}</div>

@@ -139,6 +139,9 @@ def show(request, id):
         }
         for job in jobs
     ]
+    company.show_map = False
+    if company.latitude and company.longitude:
+        company.show_map = True
 
     company.favorited = (
         CompanyFavorite.objects.filter(company=company, user=request.user).exists()
