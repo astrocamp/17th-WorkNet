@@ -16,8 +16,12 @@ migrate:
 routes:
 	poetry run python manage.py show_urls
 
+show:
+	poetry run python manage.py showmigrations
+
 lint:
 	poetry run pre-commit run --all-files
 
 commit:
 	poetry run cz commit
+
