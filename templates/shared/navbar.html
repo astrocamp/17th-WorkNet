@@ -14,7 +14,7 @@
       @resize.window="
               isMobile = window.innerWidth < 1024;
               if (isMobile) { open = false; }">
-        <div @click="open = !open" class="cursor-pointer">
+        <div  @click="isMobile && (open = !open)" class="cursor-pointer">
           <div x-show="unread" class="flex justify-center items-center w-6 h-6 text-base bg-white rounded-full md:w-8 lg:w-8 md:h-8 lg:h-8 md:text-lg lg:text-lg">
             <i class="text-error fas fa-bell"></i>
           </div>
