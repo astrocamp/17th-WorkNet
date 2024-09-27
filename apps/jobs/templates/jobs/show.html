@@ -2,7 +2,11 @@
 {% block content %}
 {% load static %}
 <div class="flex overflow-hidden relative justify-center items-center h-44 text-center md:h-80 lg:h-80">
-  <h1 class="relative z-20 px-5 text-3xl font-bold text-white md:text-5xl lg:text-5xl">{{ job.company.title }}</h1>
+  <a href="{% url 'companies:show' job.company.id %}">
+    <h1 class="relative z-20 px-5 text-3xl font-bold text-white md:text-5xl lg:text-5xl">
+      {{ job.company.title }}<i class="fa-solid fa-link text-xl mx-1 lg:text-3xl hover:opacity-70"></i>
+    </h1>
+  </a>
   <div class="absolute inset-0 z-10 m-auto bg-fixed bg-center bg-cover bg-banner-img"></div>
   <div class="absolute z-10 m-auto inset-0 bg-gradient-to-b from-[rgba(68,157,209,0.9)] to-[rgba(0,51,107,0.9)]"></div>
 </div>

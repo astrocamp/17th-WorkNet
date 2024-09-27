@@ -16,6 +16,7 @@ import {
   faUserCircle as fasUserCircle,
   faTrashCan as fasTrashCan,
   faPlus as fasPlus,
+  faLink as fasLink,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faThumbsDown as farThumbsDown,
@@ -52,6 +53,7 @@ library.add(
   farCalendarDays,
   farFileLines,
   farEnvelope,
+  fasLink
 );
 dom.i2svg();
 
