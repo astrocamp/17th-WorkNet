@@ -25,14 +25,14 @@
         <form action="{% url 'users:submit_jobs' job.id %}" method="POST" class="w-full">
           {%csrf_token%}
             <input type="hidden" name="job_id" value="{{ job.id }}" />
-            <div class="font-bold text-primary min-w-24 inline-block md:text-xl lg:text-xl">選擇履歷</div>
-            <select name="resume_id" id="resume" class="flex-auto text-base font-light break-all md:text-xl lg:text-xl inline">
+            <div class="inline-block font-bold text-primary min-w-24 md:text-xl lg:text-xl">選擇履歷</div>
+            <select name="resume_id" id="resume" class="flex-auto inline text-base font-light break-all md:text-xl lg:text-xl">
               {% for resume in resumes %}
               <option value="{{ resume.id }}">
                 {% if resume.name %}
                   {{ resume.name|cut:"resumes/" }}
                 {% else %}
-                  {{ resume.file|cut:"resumes/" }}
+                  {{ resume.original_filename|cut:"resumes/" }}
                 {% endif %}
               </option>
               {% endfor %}
@@ -40,7 +40,7 @@
             <p class="mt-2 text-sm text-gray-500">* 只接受 PDF 格式的履歷</p>
             <div class="mt-6 text-right">
               <button class="text-white btn btn-error btn-sm" ><a href="{% url 'jobs:show' job.id %}">取消</a></button>
-              <button class="text-white btn btn-error btn-sm ml-2" >提交申請</button>
+              <button class="ml-2 text-white btn btn-error btn-sm" >提交申請</button>
             </div>
         </form>
       </div>
