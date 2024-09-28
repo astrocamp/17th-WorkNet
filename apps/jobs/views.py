@@ -6,6 +6,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
+from django.contrib.contenttypes.models import ContentType
 from taggit.models import Tag, TaggedItem
 
 from apps.resumes.models import Resume
@@ -144,9 +145,12 @@ def search_results(request):
     location = request.GET.get("location")
     tags = request.GET.getlist("tags")
     search_filter = Q()
+    job_content_type = ContentType.objects.get_for_model(Job)
 
     if search_term:
-        tagged_items = TaggedItem.objects.filter(tag__name__icontains=search_term)
+        tagged_items = TaggedItem.objects.filter(
+            tag__name__icontains=search_term, content_type=job_content_type
+        )
         job_ids_with_tags = tagged_items.values_list("object_id", flat=True)
 
         search_filter &= (
@@ -160,7 +164,9 @@ def search_results(request):
         search_filter &= Q(location=location)
 
     if tags:
-        tagged_items = TaggedItem.objects.filter(tag__name__in=tags)
+        tagged_items = TaggedItem.objects.filter(
+            tag__name__in=tags, content_type=job_content_type
+        )
         job_ids_with_tags = tagged_items.values_list("object_id", flat=True)
         search_filter &= Q(id__in=job_ids_with_tags)
 
