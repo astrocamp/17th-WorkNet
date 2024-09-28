@@ -59,7 +59,9 @@ def jobs(request):
     company_title = Job.objects.filter(id=OuterRef("job_id")).values("company__title")[
         :1
     ]
-    resume_file = Resume.objects.filter(id=OuterRef("resume_id")).values("file")[:1]
+    resume_file = Resume.objects.filter(id=OuterRef("resume_id")).values(
+        "original_filename"
+    )[:1]
     resume_name = Resume.objects.filter(id=OuterRef("resume_id")).values("name")[:1]
     resume = Resume.objects.filter(userinfo__user_id=request.user.id).values("id")
     job_resumes = (
