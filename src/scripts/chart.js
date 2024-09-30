@@ -196,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
           x: {
             ticks: {
               font: {
-                size: 20,
+                size: 10,
               },
             },
           },
