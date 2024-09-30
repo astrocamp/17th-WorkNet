@@ -406,6 +406,9 @@ document.addEventListener("DOMContentLoaded", function () {
               size: 20,
             },
           },
+          datalabels: {
+            display: false,
+          },
         },
       },
     });

@@ -3,10 +3,10 @@ from urllib.parse import parse_qs, urlparse
 
 import rules
 from django.contrib import messages
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
-from django.contrib.contenttypes.models import ContentType
 from taggit.models import Tag, TaggedItem
 
 from apps.resumes.models import Resume
