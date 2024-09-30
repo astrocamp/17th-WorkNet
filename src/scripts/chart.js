@@ -166,8 +166,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const salaryElement = document.getElementById("averageSalaryData");
   if (salaryElement) {
     const salaryData = JSON.parse(salaryElement.textContent);
-    const salaryLabels = Object.keys(salaryData);
-    const salaryValues = Object.values(salaryData);
+    const salaryLabels = Object.keys(salaryData).slice(0, 10);
+    const salaryValues = Object.values(salaryData).slice(0, 10);
 
     const salaryCtx = document.getElementById("salaryChart").getContext("2d");
     const salaryChart = new Chart(salaryCtx, {
