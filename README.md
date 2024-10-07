@@ -3,16 +3,26 @@
 ![WorkNet Home](static/imgs/home.jpg)
 
 <p align="center">
-  <img src="static/imgs/logo_backend.png" alt="WorkNet Logo"/>
+  <img src="static/imgs/logo.png" alt="WorkNet Logo"/>
 </p>
 
-### WorkNet 助你求職風雨無阻
+<h3 align="center"> 
+  WorkNet 助你求職風雨無阻
+</h3>
 
-專案網址：https://www.worknet.live/
+<p align="center">
+<img src="static/imgs/QRCode.png" alt="WorkNet QRCode" width="15%"/>
+</p>
 
-介紹影片：https://www.youtube.com/watch?v=hMIgF5R4Mv4
+<h3 align="center">
+  掃描 QR Code，輕鬆分享公司資訊，快速申請理想職缺！
+</h3>
 
-介紹簡報：https://docs.google.com/presentation/d/1EY320eMV4_nVNOFEEplc_uCFrty2QN2rkABRQu-bug0/edit?usp=sharing
+<p align="center">
+  <a href="https://www.worknet.live/" target="_blank">專案網址</a>
+  <a href="https://www.youtube.com/watch?v=hMIgF5R4Mv4" target="_blank">介紹影片</a>
+  <a href="https://docs.google.com/presentation/d/1EY320eMV4_nVNOFEEplc_uCFrty2QN2rkABRQu-bug0/edit?usp=sharing" target="_blank">介紹簡報</a>
+</p>
 
 ## 簡介
 
