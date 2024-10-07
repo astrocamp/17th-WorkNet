@@ -1,9 +1,9 @@
-<p align="center">
-  <img src="static/imgs/logo_backend.png" alt="WorkNet logo"/>
-</p>
+# WorkNet
+
+![WorkNet Home](static/imgs/home.jpg)
 
 <p align="center">
-  <img src="static/imgs/home.jpg" alt="WorkNet home"/>
+  <img src="static/imgs/logo_backend.png" alt="WorkNet Logo"/>
 </p>
 
 ### WorkNet 助你求職風雨無阻
@@ -31,7 +31,7 @@ WorkNet 是一個求職平台，並可讓使用者瀏覽面試經歷與工作心
 3. 公司評論與評分：使用者可對公司進行評分並留下評論，分享工作經驗。
 4. 接收面試邀約：使用者可接收來自公司的面試邀約。
 
-<img src="static/imgs/upload.png" alt="WorkNet upload" width="50%"/>
+<img src="static/imgs/upload.png" alt="WorkNet Upload" width="50%"/>
 
 ### 公司功能：
 
@@ -40,7 +40,7 @@ WorkNet 是一個求職平台，並可讓使用者瀏覽面試經歷與工作心
 3. 發送面試邀約：公司可向符合條件的應徵者發送面試邀約。
 4. 公司資訊顯示 Google 地圖：公司資料中包含 Google Maps，讓使用者查看公司位置。
 
-<img src="static/imgs/map.png" alt="WorkNet map" width="50%"/>
+<img src="static/imgs/map.png" alt="WorkNet Map" width="50%"/>
 
 ### 評論功能：
 
@@ -48,7 +48,7 @@ WorkNet 是一個求職平台，並可讓使用者瀏覽面試經歷與工作心
 2. 評分機制：使用者可以為公司給予分數，評分項目包括工作環境、薪資待遇、公司文化等。
 3. 留言互動：使用者可以針對其他人的評論進行回應或給予反饋（如：按讚或反對）。
 
-<img src="static/imgs/post.png" alt="WorkNet post" width="50%"/>
+<img src="static/imgs/post.png" alt="WorkNet Post" width="50%"/>
 
 ### 分析功能：
 
@@ -59,14 +59,14 @@ WorkNet 是一個求職平台，並可讓使用者瀏覽面試經歷與工作心
 3. 年資分析：顯示各程式語言對應的平均年資。
 4. 地區職缺分析：顯示每種程式語言在不同地區的職缺數量。
 
-<img src="static/imgs/analytics.png" alt="WorkNet analytics" width="50%"/>
+<img src="static/imgs/analytics.png" alt="WorkNet Analytics" width="50%"/>
 
 ### 金流贊助功能：
 
 1. 使用者贊助：使用者可以通過網站向特定公司或項目進行贊助，支持他們的發展。
 2. 安全支付系統：整合安全的金流系統，保障贊助交易的安全性與隱私。
 
-<img src="static/imgs/payment.png" alt="WorkNet payment" width="50%"/>
+<img src="static/imgs/payment.png" alt="WorkNet Payment" width="50%"/>
 
 ### 額外功能：
 
