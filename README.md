@@ -13,7 +13,7 @@
 </h3>
 
 <p align="center">
-<img src="static/imgs/QRCode.png" alt="WorkNet QRCode" width="15%"/>
+<img src="static/imgs/QRCode.png" alt="WorkNet QRCode" width="25%"/>
 </p>
 
 <h3 align="center">
