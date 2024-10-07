@@ -1,4 +1,6 @@
-# WorkNet
+<h1 align="center">
+  WorkNet
+</h1>
 
 ![WorkNet Home](static/imgs/home.jpg)
 
