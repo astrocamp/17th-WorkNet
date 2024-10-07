@@ -1,18 +1,76 @@
-# WorkNet
+<p align="center">
+  <img src="static/imgs/logo_backend.png" alt="WorkNet logo"/>
+</p>
 
-![WorkNet Logo](static/imgs/logo.png)
+<p align="center">
+  <img src="static/imgs/home.jpg" alt="WorkNet home"/>
+</p>
 
 ### WorkNet 助你求職風雨無阻
 
 專案網址：https://www.worknet.live/
 
+介紹影片：https://www.youtube.com/watch?v=hMIgF5R4Mv4
+
+介紹簡報：https://docs.google.com/presentation/d/1EY320eMV4_nVNOFEEplc_uCFrty2QN2rkABRQu-bug0/edit?usp=sharing
+
 ## 簡介
 
-### WorkNet 讓使用者瀏覽面試經歷與工作心得，了解公司環境與文化。
+WorkNet 是一個求職平台，並可讓使用者瀏覽面試經歷與工作心得，了解公司環境與文化。
 
-#### 使用者可以上傳履歷，應徵職缺，並與其他會員留言互動，分享面試技巧和工作經驗，打造一個真實的求職社群，幫助大家在職涯中做出更明智的決策。
+使用者可以上傳履歷並投遞應徵職缺，並與其他會員留言互動，分享面試技巧和工作經驗，打造一個真實的求職社群，幫助大家在職涯中做出更明智的決策。
 
-![WorkNet Home](static/imgs/home.jpg)
+公司方可以新增職缺跟管理職缺，接收投遞履歷並發送面試邀約。
+
+## 功能說明
+
+### 使用者功能：
+
+1. 選擇程式語言：使用者可選擇自己熟悉或正在使用的程式語言。
+2. 上傳與投遞履歷：使用者可上傳履歷並將其投遞至感興趣的職缺。
+3. 公司評論與評分：使用者可對公司進行評分並留下評論，分享工作經驗。
+4. 接收面試邀約：使用者可接收來自公司的面試邀約。
+
+<img src="static/imgs/upload.png" alt="WorkNet upload" width="50%"/>
+
+### 公司功能：
+
+1. 建立職缺：公司可依照需求及程式語言發佈職缺，招募符合條件的工程師。
+2. 接收與管理投遞履歷：公司可接收投遞的履歷並進行篩選與管理。
+3. 發送面試邀約：公司可向符合條件的應徵者發送面試邀約。
+4. 公司資訊顯示 Google 地圖：公司資料中包含 Google Maps，讓使用者查看公司位置。
+
+<img src="static/imgs/map.png" alt="WorkNet map" width="50%"/>
+
+### 評論功能：
+
+1. 公司評論：使用者可以針對各公司進行獨立的評價，並留下文字評論，支援 Markdown 語法。
+2. 評分機制：使用者可以為公司給予分數，評分項目包括工作環境、薪資待遇、公司文化等。
+3. 留言互動：使用者可以針對其他人的評論進行回應或給予反饋（如：按讚或反對）。
+
+<img src="static/imgs/post.png" alt="WorkNet post" width="50%"/>
+
+### 分析功能：
+
+1. 程式語言分析：
+   - 依照使用者數量分析各程式語言的使用情況。
+   - 依照職缺數量分析各程式語言的需求。
+2. 平均薪資分析：依據不同程式語言顯示平均薪資資訊。
+3. 年資分析：顯示各程式語言對應的平均年資。
+4. 地區職缺分析：顯示每種程式語言在不同地區的職缺數量。
+
+<img src="static/imgs/analytics.png" alt="WorkNet analytics" width="50%"/>
+
+### 金流贊助功能：
+
+1. 使用者贊助：使用者可以通過網站向特定公司或項目進行贊助，支持他們的發展。
+2. 安全支付系統：整合安全的金流系統，保障贊助交易的安全性與隱私。
+
+<img src="static/imgs/payment.png" alt="WorkNet payment" width="50%"/>
+
+### 額外功能：
+
+- 簡易的使用者介面切換：依據使用者或公司身份切換前後端介面。
 
 ## 安裝環境
 
